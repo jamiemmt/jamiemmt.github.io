@@ -1,0 +1,88 @@
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+    
+    
+      <style type="text/css">
+        div {
+        position : absolute;
+        top      : 0;
+        width    : 1060px;
+        height   : 4000px;
+        overflow   : hidden;
+        overflow-x : hidden;
+        overflow-y : hidden;
+    }
+    #top {
+        overflow : hidden;
+        left     : 0;
+        width : 512px;
+        height : 4000px;
+	overflow   : hidden;
+        overflow-x : hidden;
+        overflow-y : hidden;
+       position : absolute;
+	}
+	iframe::-webkit-scrollbar {
+	display: none; 
+	}
+	#bottom {
+	overflow : hidden;
+        left       : 560px;
+        width : 512px;
+        height : 4000px;
+        overflow   : hidden;
+        overflow-x : hidden;
+        overflow-y : hidden;
+	position : absolute;
+    }
+	iframe::-webkit-scrollbar {
+	display: none; 
+	}
+	iframe {
+	overflow : hidden;
+	position : absolute;
+        }
+
+
+	#cnn {
+        width : 1060px;
+        height : 4770px;
+        -moz-transform: scale(.7);
+        -moz-transform-origin: 0 0;
+        -o-transform: scale(.7);
+        -o-transform-origin: 0 0;
+        -webkit-transform: scale(.7);
+        -webkit-transform-origin: 0 0;
+	-webkit-overflow-scrolling: auto;
+
+	}        
+	#fox {
+	width : 1060px;
+        height : 6749px;
+        -moz-transform: scale(.7);
+        -moz-transform-origin: 0 0;
+        -o-transform: scale(.7);
+        -o-transform-origin: 0 0;
+        -webkit-transform: scale(.7);
+        -webkit-transform-origin: 0 0;
+	-webkit-overflow-scrolling: auto;
+        }
+      </style>
+    
+      <title>Example of two independently scrolling pdfs</title>
+    
+    </head>
+    <body>
+      <div id="top">
+        <div>
+        <p><iframe id="cnn" src="https://dl.dropboxusercontent.com/u/34143925/cnn.pdf#toolbar=0&amp;navpanes=0&amp;scrollbar=0" style="overflow: hidden;"></iframe></p></div>
+        </div>
+      <div id="bottom">
+        <div>
+        <p><iframe id ="fox" src="https://dl.dropboxusercontent.com/u/34143925/fox.pdf#toolbar=0&amp;navpanes=0&amp;scrollbar=0" style="overflow: hidden;" ></iframe></p></div>
+        </div>
+    </body>
+    </html>
+

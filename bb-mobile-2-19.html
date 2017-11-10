@@ -1,0 +1,88 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="googlebot" content="noindex, nofollow">
+
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.7.1.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/normalize.css">
+  
+    <link rel="stylesheet" type="text/css" href="/css/result-light.css">
+
+  <style type="text/css">
+    div {
+    position : absolute;
+    top      : 0;
+    width    : 454px;
+    height   : 2000px;
+}
+#top {
+    overflow : hidden;
+    left     : 0;
+    width : 454px;
+    height : 2000px
+}
+#bottom {
+    left       : 460px;
+    width : 454px;
+    height : 2000px;
+    overflow   : auto;
+    overflow-x : hidden;
+    overflow-y : auto;
+}
+
+    iframe {
+    width : 1024px;
+    height : 4000px;
+    position : absolute;
+    -moz-transform: scale(.45);
+    -moz-transform-origin: 0 0;
+    -o-transform: scale(.45);
+    -o-transform-origin: 0 0;
+    -webkit-transform: scale(.45);
+    -webkit-transform-origin: 0 0;
+    }
+  </style>
+
+  <title></title>
+
+  
+
+<script type='text/javascript'>//<![CDATA[
+$(window).load(function(){
+$('#bottom').on('scroll', function () {
+    $('#top').scrollTop($(this).scrollTop());
+});
+});//]]> 
+
+</script>
+
+  
+</head>
+
+<body>
+  <div id="top">
+    <div>
+    <p><iframe src="https://dl.dropboxusercontent.com/u/34143925/cnn.pdf#toolbar=0&amp;navpanes=0&amp;scrollbar=0&amp;zoom=80" style="overflow: hidden;" scrolling="no"></iframe></p></div>
+    </div>
+  <div id="bottom">
+    <div>
+    <p><iframe src="https://dl.dropboxusercontent.com/u/34143925/cnn.pdf#toolbar=0&amp;navpanes=0&amp;scrollbar=0&amp;zoom=80&amp;view=Fit" style="overflow: hidden;" scrolling="no" ></iframe></p></div>
+    </div>
+  
+  <script>
+  // tell the embed parent frame the height of the content
+  if (window.parent && window.parent.parent){
+    window.parent.parent.postMessage(["resultsFrame", {
+      height: document.body.getBoundingClientRect().height,
+      slug: "None"
+    }], "*")
+  }
+</script>
+
+</body>
+
+</html>
+

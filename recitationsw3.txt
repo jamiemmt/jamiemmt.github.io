@@ -1,0 +1,17 @@
+Part 1:
+
+Compile Code (I will write a note and send to you guys)
+Safe Add (I believe that Ryan said he'd do this?)
+Matrix Transpose (we probably won't get to this)
+Go over Quiz (I should email Guna about doing this in class)
+Prototypes and Libs
+test-image-util.c0 (I will write a simple main function)
+imagediff explain
+
+
+Part 2:
+
+Search 
+... 
+
+To be Continued
