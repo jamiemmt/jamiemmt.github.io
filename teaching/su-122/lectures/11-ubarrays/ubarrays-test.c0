@@ -1,0 +1,28 @@
+/* Unbounded arrays
+ * 15-122 Principles of Imperative Computation, Spring 2011
+ * Frank Pfenning
+ */
+
+#use <conio>
+#use <string>
+
+int main () {
+  uba L = uba_new(3);
+  addend(L, "0"); assert(uba_size(L) == 1);
+  addend(L, "1"); assert(uba_size(L) == 2);
+  addend(L, "2"); assert(uba_size(L) == 3);
+  addend(L, "3"); assert(uba_size(L) == 4);
+  remend(L);      assert(uba_size(L) == 3);
+  assert(string_equal(uba_get(L, 0), "0"));
+  assert(string_equal(uba_get(L, 1), "1"));
+  assert(string_equal(uba_get(L, 2), "2"));
+  remend(L);      assert(uba_size(L) == 2);
+  remend(L);      assert(uba_size(L) == 1);
+  remend(L);      assert(uba_size(L) == 0);
+  L = uba_new(1);
+  addend(L, "0"); assert(uba_size(L) == 1);
+  remend(L); assert(uba_size(L) == 0);
+
+  print("All tests passed!\n");
+  return 0;
+}

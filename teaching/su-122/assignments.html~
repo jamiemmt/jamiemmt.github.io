@@ -1,0 +1,369 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+     "http://www.w3.org/TR/REC-html40/loose.dtd">
+<HTML>
+<HEAD>
+<TITLE>15-122 Principles of Imperative Computation / Assignments</TITLE>
+<!-- Changed by: Jamie Morgenstern, 15-May-2012 -->
+<META name="description" content="Principles of Imperative Computation; Assignments">
+<META name="keywords" content="Principles of Imperative Computation">
+<LINK REL="stylesheet" HREF="course.css" TYPE="text/css">
+</HEAD>
+<BODY MARGINWIDTH=0 MARGINHEIGHT=0>
+<TABLE WIDTH="100%" BORDER=0 CELLSPACING=0 CELLPADDING=10>
+<TR>
+<TD CLASS="sidebar">&nbsp;</TD>
+<TD CLASS="main">&nbsp;</TD>
+<TD CLASS="main">&nbsp;</TD>
+</TR>
+<TR>
+<TD CLASS="sidebar" VALIGN="top">
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=2>
+  <TR><TD CLASS="menu"><A HREF="index.html">Home</A></TD></TR>
+  <TR><TD CLASS="menu"><A HREF="schedule.html">Schedule</A></TD></TR>
+  <TR><TD CLASS="menu"><B CLASS="here">Assignments</B></TD></TR>
+  <TR><TD CLASS="menu"><A HREF="resources.html">Resources</A></TD></TR>
+  <TR><TD>&nbsp;</TD></TR>
+  <TR><TD CLASS="menu"><A HREF="http://www.cmu.edu/blackboard">Blackboard</A></TD></TR>
+  <TR><TD>&nbsp;</TD></TR>
+  <TR><TD CLASS="menu"><A HREF="http://piazza.com/class_profile#summer2012/15122">Piazza</A> for Bboard</TD></TR>
+  <TR><TD>&nbsp;</TD></TR>
+  <TR><TD CLASS="menu" ALIGN="left">jamiemmt@cs</TD></TR>
+  <TR><TD CLASS="menu" ALIGN="left"><A HREF="http://www.cs.cmu.edu/~jamiemmt/">Jamie&nbsp;Morgenstern</A></TD></TR>
+</TABLE>
+</TD>
+<TD CLASS="main">&nbsp;</TD>
+<TD CLASS="main" VALIGN="top">
+<H1>
+  15-122 Principles of Imperative Computation <BR>
+  Assignments
+</H1>
+
+<P>
+  The written and programming assignments are the heart of this course
+  and account for 45% of your grade.  Much of what you learn in this
+  course will be through completing these assignments.  They must be
+  done individually. If you download an assignment before it's "out"
+  date, please be aware that the assignment may be modified between
+  when you download it and the draft which we mean to release.
+
+</P>
+
+<H3>Assignment Schedule</H3>
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=1>
+<TR>
+  <TH> &nbsp;&nbsp;&nbsp; </TH>
+  <TH> Out </TH>
+  <TH> Points </TH>
+  <TH> Assignment </TH>
+  <TH COLSPAN=2> Due </TH>
+  <TH> </TH>
+</TR>
+<TR>
+  <TD COLSPAN=8> <HR SIZE=1 NOSHADE> </TD>
+</TR>
+<!-- Assignment 0 -->
+<TR>
+  <TH> Asst 0 </TH>
+  <TD> Mon May 21 </TD>
+  <TD ALIGN="right"> 0 </TD>
+  <TD> <A HREF="assignments/15-122-hw0.pdf">Getting Started</A> </TD>
+  <TD> &nbsp; </TD> <TD> &nbsp; <STRONG>Wed May 23 at start of lecture</STRONG>  </TD>
+  <TD> </TD>
+</TR>
+<TR>
+  <TD> </TD>
+  <TD> </TD>
+  <TD> </TD>
+  <TD> </TD>
+  <TD> &nbsp; </TD> <TD> &nbsp;  </TD>
+  <TD> </TD>
+</TR>
+
+<!-- Assignment 1 -->
+<TR>
+  <TH> Asst 1 </TH>
+  <TD> Thu May 24 </TD>
+  <TD ALIGN="right"> 50 </TD>
+  <TD> <A HREF="assignments/theory1.pdf">Assignment 1 Theory</A></TD>
+  <TD> &nbsp; Written </TD> <TD> &nbsp; <STRONG>Mon May 28 at start of lecture</STRONG> </TD>
+  <TD> </TD>
+</TR>
+<TR>
+  <TD> </TD>
+  <TD> </TD>
+  <TD> </TD>
+  <TD><A HREF="assignments/prog1.pdf"> Writeup</A>   <A HREF="assignments/hw1-starter-updated.zip"> UPDATED Starter Code</A>
+    <A HREF="assignments/carnegie-rotate-fixed.png">fixed image</A></TD>
+  <TD> &nbsp; Programming </TD> <TD> &nbsp; <STRONG>Monday May 28 11:59pm</STRONG> </TD>
+  <TD> </TD>
+</TR>
+
+<!-- Assignment 2 -->
+<TR>
+  <TH> Asst 2 </TH>
+  <TD>Mon May 28 </TD>
+  <TD ALIGN="right"> 50 </TD>
+  <TD> <A HREF="assignments/theory2.pdf">Assignment 2 Theory</A></TD>
+  <TD> &nbsp; Written </TD> <TD> &nbsp; <STRONG>Thu May 31 at start of lecture</STRONG> </TD>
+  <TD> </TD>
+</TR>
+<TR>
+  <TD> </TD>
+  <TD> </TD>
+  <TD> </TD>
+  <TD> <A HREF="assignments/prog2.pdf"> Writeup</A> <A HREF="assignments/hw2-starter-updated.zip"> Starter Code</A></TD>
+  <TD> &nbsp; Programming </TD> <TD> &nbsp; <STRONG>Thu May 31 11:59pm</STRONG> </TD>
+  <TD> </TD>
+</TR>
+
+<!-- Assignment 3 -->
+<TR>
+  <TH> Asst 3 </TH>
+  <TD> Thu May 31 </TD>
+  <TD ALIGN="right"> 50 </TD>
+  <TD> <A HREF="assignments/theory3.pdf">Assignment 3 Theory</A></TD>
+  <TD> &nbsp; Written </TD> <TD> &nbsp; <STRONG>Thur June 7 at start of lecture</STRONG> </TD>
+  <TD> </TD>
+</TR>
+<TR>
+  <TD> </TD>
+  <TD> </TD>
+  <TD> </TD>
+  <TD> <A HREF="assignments/prog3.pdf"> Writeup</A>   <A HREF="assignments/hw3-updated.zip"> Starter Code</A></TD>
+  <TD> &nbsp; Programming </TD> <TD> &nbsp; <STRONG> Thur June 7 11:59pm</STRONG> </TD>
+  <TD> </TD>
+</TR>
+
+<!-- Assignment 4 -->
+<TR>
+  <TH> Asst 4 </TH>
+  <TD> Wed June 6 </TD>
+  <TD ALIGN="right"> 50 </TD>
+  <TD> <A HREF="assignments/theory4.pdf">Assignment 4 Theory</A>,</A> <A HREF="assignments/theory4.tex"> LaTex</A></TD>
+  <TD> &nbsp; Written </TD> <TD> &nbsp; <STRONG>Tues June 12 at start of lecture</STRONG> </TD>
+  <TD> </TD>
+</TR>
+<TR>
+  <TD> </TD>
+  <TD> </TD>
+  <TD> </TD>
+  <TD> <A HREF="assignments/prog4.pdf"> Writeup</A>   <A HREF="assignments/hw4-starter.zip"> Starter Code</A></TD>
+  <TD> &nbsp; Programming </TD> <TD> &nbsp; <STRONG>Tues June 12 11:59pm</STRONG> </TD>
+  <TD> </TD>
+</TR>
+
+<!-- Assignment 5 -->
+<TR>
+  <TH> Asst 5 </TH>
+  <TD> Mon June 11 </TD>
+  <TD ALIGN="right"> 50 </TD>
+  <TD> <A HREF="assignments/theory5.pdf">Assignment 5 Theory,</A> <A HREF="assignments/theory5.tex"> LaTex</A></TD>
+  <TD> &nbsp; Written </TD> <TD> &nbsp; <STRONG>Thu June 14 at start of lecture</STRONG> </TD>
+  <TD> </TD>
+</TR>
+<TR>
+  <TD> </TD>
+  <TD> </TD>
+  <TD> </TD>
+  <TD> <A HREF="assignments/prog5.pdf"> Writeup</A>   <A HREF="assignments/hw5-starter.zip"> Starter Code</A></TD>
+  <TD> &nbsp; Programming </TD> <TD> &nbsp; <STRONG>Fri June 15 11:59pm</STRONG> </TD>
+  <TD> </TD>
+</TR>
+
+<!-- Assignment 6 -->
+<TR>
+  <TH> Asst 6 </TH>
+  <TD> Thu June 14 </TD>
+  <TD ALIGN="right"> 50 </TD>
+  <TD> <A HREF="assignments/theory6.pdf">Assignment 6 Theory</A></TD>
+  <TD> &nbsp; Written </TD> <TD> &nbsp; <STRONG> Mon June 18 at start of lecture</STRONG> </TD>
+  <TD> </TD>
+</TR>
+<TR>
+  <TD> </TD>
+  <TD> </TD>
+  <TD> </TD>
+  <TD> <A HREF="assignments/prog6.pdf"> Writeup</A>   <A HREF="assignments/hw6-starter.zip"> Starter Code</A></TD>
+  <TD> &nbsp; Programming </TD> <TD> &nbsp; <STRONG>Mon June 18 11:59pm</STRONG> </TD>
+  <TD> </TD>
+</TR>
+
+
+<!-- Assignment 7 -->
+<TR>
+  <TH> Asst 7 </TH>
+  <TD> Mon June 18 </TD>
+  <TD ALIGN="right"> 50 </TD>
+  <TD> <A HREF="assignments/theory7.pdf">Assignment 7 Theory</A></TD>
+  <TD> &nbsp; Written </TD> <TD> &nbsp; <STRONG>Fri June 22 at start of lecture</STRONG> </TD>
+  <TD> </TD>
+</TR>
+<TR>
+  <TD> </TD>
+  <TD> </TD>
+  <TD> </TD>
+  <TD> <A HREF="prog7.pdf"> Writeup</A>   <A HREF="assignments/hw7-starter.zip"> Starter Code</A></TD>
+  <TD> &nbsp; Programming </TD> <TD> &nbsp; <STRONG>Fri June 22 11:59pm</STRONG> </TD>
+  <TD> </TD>
+</TR>
+
+<!-- Assignment 8 -->
+<TR>
+  <TH> Asst 8 </TH>
+  <TD> Thu June 21 </TD>
+  <TD ALIGN="right"> 100 </TD>
+  <TD> <A HREF="assignments/theory8.pdf">Assignment 8 Theory</A></TD>
+  <TD> &nbsp; Written </TD> <TD> &nbsp; <STRONG>none</STRONG> </TD>
+  <TD> </TD>
+</TR>
+<TR>
+  <TD> </TD>
+  <TD> </TD>
+  <TD> </TD>
+  <TD> <A HREF="prog8.pdf"> Writeup</A>   <A HREF="assignments/hw8-starter.zip"> Starter Code</A></TD>
+  <TD> &nbsp; Programming </TD> <TD> &nbsp; <STRONG>Thur June 28 at 11:59pm</STRONG> </TD>
+  <TD> </TD>
+</TR>
+
+
+
+
+
+<TR>
+  <TD COLSPAN=8> <HR SIZE=1 NOSHADE> </TD>
+</TR>
+
+
+
+</TABLE>
+
+<H3><A NAME="policies">Collaboration and Academic Integrity</A></H3>
+
+<P>
+  The university policies and procedures on academic integrity will
+be applied rigorously.
+</P>
+
+<P>
+  The value of your degree depends on the academic integrity of
+yourself and your peers in each of your classes. It is expected that,
+unless otherwise instructed, the work you submit as your own will be
+your own work and not someone else's work or a collaboration between
+yourself and other(s). </P>
+
+<P>Please read the <A
+ HREF="http://www.cmu.edu/policies/documents/Cheating.html">University
+Policy on Cheating and Plagiarism</A> carefully to understand the
+penalties associated with academic dishonesty at CMU. In this class,
+cheating/copying/plagiarism means copying all or part of a program or
+homework solution from another student or unauthorized source such as
+the Internet, knowingly giving such information to another student, or
+giving or receiving unauthorized information during an examination. In
+general, <STRONG>each solution you submit (quiz, written assignment,
+programming assignment, midterm or final exam) must be your own
+work</STRONG>. In the event that you use information written by
+another person in your solution, you must cite the source of this
+information (and receive prior permission if unsure whether this is
+permitted).</P>
+
+<P>Your course instructor reserves the right to determine an
+appropriate penalty based on the violation of academic dishonesty that
+occurs. <STRONG>Violations of the university policy can result in
+severe penalties including failing this course and possible expulsion
+from Carnegie Mellon University.</STRONG> If you have any questions
+about this policy and any work you are doing in the course, please
+feel free to contact your instructor for help.
+</P>
+
+<P>
+  We will be using the <A HREF="http://theory.stanford.edu/~aiken/moss">Moss</A>
+system to detect software plagiarism.
+</P>
+
+<P>
+  It is not considered cheating to clarify vague points in the
+assignments, lectures, lecture notes, or to give help or receive help
+in using the computer systems, compilers, debuggers, profilers, or
+other facilities.
+</P>
+
+<H3>Due Dates and Late Days</H3>
+
+<P>
+  All handins of written assignments are on paper
+at the beginning of lecture (9:00am) on the due date.
+Assignments handed in after this time will receive
+no credit.  There are no late days or partial credit
+for late written assignments.
+</P>
+
+<P>
+  All handins of programming assignments are electronic via hand-in
+scripts on the university's linux systems.  You may submit
+programs multiple times until they are due without penalty,
+but only your final hand-in will be graded.
+</P>
+
+<P>
+All programming assignments are due at 11:59pm on the specified due date.
+<STRONG> There are no late days for the summer version of this course</STRONG>.
+</P>
+
+<P>
+  Exceptions to the policies above will be granted only in
+exceptional circumstances and must be discussed with and approved
+by the course instructor <STRONG>in advance</STRONG>.
+</P>
+
+<H3>Grading</H3>
+
+<P>
+  Grading criteria are stated separately with each assignment.
+</P>
+
+<P>
+  Grading for written assignments is based on the correctness of the
+answer and the presentation of your reasoning.  Strive for clarity and
+conciseness, but show how you arrived at the answer.  If you cannot
+solve a problem, explaining your approach and why you failed is
+encouraged.  Such answers will be given partial credit.
+</P>
+
+<P>
+  The most important criterion for programming assignments is always
+correctness. Buggy code is useless, and is likely to get a low score.
+It is important that your code be readable and well-organized. This
+includes proper use of contracts, invariants, and clear comments.
+</P>
+
+<P>
+  Grades are based primarily on the total score for the class out of
+1000 points. There are no predetermined cut-offs, but 900 and above is
+guaranteed to be an A, 800 and above a B, etc. The teaching staff will
+decide on grade boundaries at the end of the year. We will use
+intangibles, such as participation in class and recitation for those
+close to grade boundaries.
+</P>
+
+<HR>
+<P CLASS="bottom" ALIGN="center">
+  [ <A HREF="index.html">Home</A>
+  | <A HREF="schedule.html">Schedule</A>
+  | <B CLASS="here">Assignments</B>
+  | <A HREF="resources.html">Resources</A>
+  ] <BR>
+  [ 
+    <A HREF="http://www.cmu.edu/blackboard">Blackboard</A>
+  | <A HREF="http://piazza.com/class_profile#summer2012/15122">Piazza</A> 
+  ]
+</P>
+<P CLASS="bottom">
+  jamiemmt@cs <BR>
+  <A HREF="http://www.cs.cmu.edu/~jamiemmt/">Jamie&nbsp;Morgenstern</A>
+</P>
+</TD>
+</TR>
+</TABLE>
+</BODY>
+</HTML>

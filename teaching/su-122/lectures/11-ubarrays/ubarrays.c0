@@ -1,0 +1,125 @@
+/* Unbounded arrays
+ * 15-122 Principles of Imperative Computation, Spring 2011
+ * Frank Pfenning
+ */
+
+typedef string elem;
+
+/* Unbounded arrays of elems */
+
+/* Interface */
+struct ubarray;
+typedef struct ubarray* uba;
+uba uba_new(int initial_limit)	          /* create new unbounded array L */
+//@requires initial_limit > 0;
+  ;
+
+int uba_size(uba L)			  /* current size of L */
+//@ensures \result >= 0;
+  ;
+
+elem uba_get(uba L, int index)	          /* "L[index]" */
+//@requires 0 <= index && index < uba_size(L);
+  ;
+
+void uba_set(uba L, int index, elem e)   /* "L[index] = e" */
+//@requires 0 <= index && index < uba_size(L);
+  ;
+
+void addend(uba L, elem e);		  /* add e at the end of L */
+
+elem remend(uba L)			  /* remove last element in L */
+//@requires uba_size(L) > 0;
+  ;
+
+/* Implementation */
+struct ubarray {
+  int limit;			/* limit > 0 */
+  int size;			/* 0 <= size && size <= limit */
+  elem[] A;			/* \length(A) == limit */
+};
+
+bool is_uba (uba L)
+//@requires L->limit == \length(L->A);
+{
+  return L->limit > 0 && 0 <= L->size && L->size <= L->limit;
+}
+
+uba uba_new (int initial_limit)
+//@requires initial_limit > 0;
+//@ensures is_uba(\result);
+{
+  assert(initial_limit > 0);
+  uba L = alloc(struct ubarray);
+  L->limit = initial_limit;
+  L->size = 0;
+  L->A = alloc_array(elem, L->limit);
+  return L;
+}
+
+int uba_size(uba L)
+//@requires is_uba(L);
+//@ensures \result == L->size;
+{
+  return L->size;
+}
+
+/* uba_resize(L, new_limit) resizes L to new_limit */
+/* copies old values between 0 and L->size to new array */
+void uba_resize(uba L, int new_limit)
+//@requires is_uba(L);
+//@requires new_limit > L->size;
+//@ensures is_uba(L);
+//@ensures L->limit == new_limit && L->size == \old(L->size);
+//@ensures L->size < L->limit;
+{
+  elem[] B = alloc_array(elem, new_limit);
+  for (int i = 0; i < L->size; i++)
+    //@loop_invariant 0 <= i && i <= L->size;
+    {
+      B[i] = L->A[i];
+    }
+  L->limit = new_limit;
+  /* L->size remains unchanged */
+  L->A = B;
+  return;
+}
+
+elem uba_get(uba L, int index)
+//@requires is_uba(L);
+{
+  assert(0 <= index && index < L->size);
+  return L->A[index];
+}
+
+void uba_set(uba L, int index, elem e)
+//@requires is_uba(L);
+{
+  assert(0 <= index && index < L->size);
+  L->A[index] = e;
+  return;
+}
+
+void addend(uba L, elem e)
+//@requires is_uba(L);
+//@ensures is_uba(L);
+{
+  if (L->size == L->limit)
+    uba_resize(L, 2*L->limit);
+  L->A[L->size] = e;
+  L->size++;
+  return;
+}
+
+elem remend(uba L)
+//@requires is_uba(L);
+//@requires L->size > 0;  /* always check dynamically */
+//@ensures is_uba(L);
+{
+  assert(L->size > 0);
+  if (L->size <= L->limit/4)
+    uba_resize(L, L->limit/2);
+  L->size--;
+  elem e = L->A[L->size];
+  return e;
+}

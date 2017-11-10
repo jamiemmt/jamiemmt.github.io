@@ -1,0 +1,9 @@
+#use <conio>
+#use <string>
+
+path_stack find_path(string start,string end,string[] dictionary,int dict_length)
+{
+  // loop invariants and assertions
+	return NULL;
+}
+ 

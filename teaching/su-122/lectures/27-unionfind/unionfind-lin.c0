@@ -1,0 +1,107 @@
+/* Union-Find
+ * 15-122 Principles of Imperative Computation, Spring 2011
+ * Frank Pfenning
+ *
+ * IMPORTANT
+ * This version, written in lecture, does not guarantee to
+ * pick the representative of the larger class and the representative
+ * of a union.  See unionfind-log.c0.
+ */
+
+/*************/
+/* Interface */
+/*************/
+
+typedef struct ufs* ufs;
+
+ufs singletons(int n)
+//@requires n >= 0;
+  ;
+bool ufs_elem(ufs eqs, int i);
+int find(ufs eqs, int i)
+//@requires ufs_elem(eqs, i);
+//@ensures ufs_elem(eqs, \result);
+  ;
+void union(ufs eqs, int i, int k)
+//@requires ufs_elem(eqs, i) && ufs_elem(eqs, k);
+  ;
+
+/******************/
+/* Implementation */
+/******************/
+
+struct ufs {
+  int size;
+  int[] A;			/* \length(A) == size */
+};
+
+/* ufs_elem(eqs, i) if i is a valid element in eqs */
+bool ufs_elem(ufs eqs, int i) {
+  if (eqs == NULL) return false;
+  if (!(0 <= i && i < eqs->size)) return false;
+  return true;
+}
+
+/* ufs_rep(eqs, i) if i is the representative of an equivalence class */
+bool ufs_rep(ufs eqs, int i)
+//@requires ufs_elem(eqs, i);
+{
+  return (eqs->A)[i] == i;
+}
+
+bool is_ufs (ufs eqs) {
+  if (eqs == NULL) return false;
+  if (!(eqs->size >= 0)) return false;
+  //@assert eqs->size == \length(eqs->A);
+  int[] A = eqs->A;
+  for (int i = 0; i < eqs->size; i++)
+    if (!(ufs_elem(eqs, A[i]))) return false;
+  return true;
+}
+
+/* singletons(n) returns an eqs where each node
+ * [0..n) is in its own equivalence class
+ */
+ufs singletons (int n)
+//@requires 0 <= n;
+//@ensures is_ufs(\result);
+{
+  ufs eqs = alloc(struct ufs);
+  int[] A = alloc_array(int, n);
+  for (int i = 0; i < n; i++)
+    A[i] = i;
+  eqs->size = n;
+  eqs->A = A;
+  return eqs;
+}
+
+/* find(eqs, i) finds the representative of the
+ * equivalence class of i
+ */
+int find (ufs eqs, int i)
+//@requires is_ufs(eqs);
+//@ensures is_ufs(eqs) && ufs_rep(eqs, \result);
+{
+  int j = i;
+  int[] A = eqs->A;
+  while (A[j] != j)
+    //@loop_invariant 0 <= j && j < eqs->size;
+    j = A[j];
+  //@assert ufs_rep(eqs, j);
+  A[i] = j;			/* weak path compression */
+  /* strong compression would redirect all intermediate notes to j */
+  return j;
+}
+
+/* union(eqs, i, k) takes the union of equivalence
+ * classes of i and k
+ */
+void union (ufs eqs, int i, int k)
+//@requires is_ufs(eqs);
+//@ensures is_ufs(eqs);
+{
+  int irep = find(eqs, i);
+  int krep = find(eqs, k);
+  (eqs->A)[irep] = krep;	/* should point smaller to larger */
+  return;
+}

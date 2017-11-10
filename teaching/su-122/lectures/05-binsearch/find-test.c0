@@ -1,0 +1,50 @@
+/* Testing linear and binary search
+ * Frank Pfenning, Fall 2010
+ */
+
+#use <conio>
+#use "rand.h0"
+#use "rand.c0"
+
+int abs (int n)
+//@requires n > (1<<31); /* overflow: -INT_MIN = INT_MIN < 0 */
+//@ensures \result >= 0;
+{
+  return n >= 0 ? n : -n;
+}
+
+int main () {
+  int seed = 0x8badf00d;
+  rand_t gen = init_rand(seed);
+  int n = (1<<15)-1;		/* size of array */
+  int num_tests = 1000;		/* number of tests to run */
+  int[] A = alloc_array(int, n);
+  int i; int j;
+
+  print("Testing search with "); printint(n); print(" elements, ");
+  printint(num_tests); print(" times\n");
+
+  /* generated sorted array */
+  A[0] = 0;
+  for (i = 0; i < n-1; i++) {
+    int dx = abs(rand(gen) % (((1<<31)-1)/n));
+    if (abs(rand(gen) % 8) != 0) dx = 0;  // create some duplicates
+    A[i+1] = A[i]+dx;
+  }
+
+  /* check it is sorted */
+  assert(is_sorted(A, n));
+
+  /* testing search */
+  for (i = 0; i < num_tests; i++) {
+    j = abs(rand(gen) % n);
+    assert(A[linsearch(A[j], A, n)] == A[j]);
+  }
+  for (i = 0; i < num_tests; i++) {
+    int x = rand(gen);
+    assert(is_in(x, A, n) || linsearch(x, A, n) == -1);
+  }
+  println("find passed");
+  println("Passed all tests!");
+  return 0;
+}

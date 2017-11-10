@@ -1,0 +1,15 @@
+/* Unbounded arrays
+ * 15-122 Principles of Imperative Computation, Spring 2011
+ * Frank Pfenning
+ */
+
+int main () {
+  int n = 1 << 23;
+  uba L = uba_new(n);
+  for (int i = 0; i < n; i++)
+    addend(L, "a");
+  for (int i = 0; i < n; i++)
+    remend(L);
+  assert(uba_size(L) == 0);
+  return 0;
+}

@@ -1,0 +1,193 @@
+<HTML>
+<TITLE>
+15-122 Principles of Imperative Computation - Recitation
+</TITLE>
+<BODY>
+<H1>15-122 Principles of Imperative Computation<BR>
+Recitation 1 - Wed Jan 12
+</H1>
+<P>
+<a href="#navigating">Navigating your account in Linux</a><br>
+<a href="#editing">Editing your program</a><br>
+<a href="#compiling">Compiling your program</a><br>
+<a href="#running">Running your program</a><br>
+<a href="#ssh">Accessing your Andrew files using ssh</a><br>
+<a href="#exercise">Exercise</a>
+<P>
+<a name="navigating">
+<H2>Navigating your account in Linux</H2>
+<P>
+Open up a Terminal window to access the Linux command prompt. (Unlike
+typical graphical interfaces for operating systems, here you are entering 
+commands directly to the OS and can change hundreds of options to give 
+finer control of what you're doing.) On the Linux machines in the computer 
+labs in Gates (rooms 5205, 5201, and 3000), you can access a Terminal 
+window using the Applications --&gt; Accessories menus.
+<P>
+In the Gates computer labs, your terminal window will give you a prompt 
+and you will be in your home directory in your Andrew account. Type 
+<TT>ls</TT> (to list files) to see what files and directories are there. 
+Back in the day, we used to call folders "directories". To move to another 
+directory, use the <TT>cd</TT> command (for "change directory"):
+<P>
+<TT>cd private</TT>
+<P>
+<B>ACADEMIC INTEGRITY NOTE: You should store your program files inside the 
+<TT>private</TT> 
+directory (or a subdirectory inside this directory) since this 
+directory is automatically set to prevent viewing by other users. Remember 
+that you should protect your code from being viewed by other students as 
+part of the academic integrity policy for this course.</B>
+<P>
+Since you will write a number of programs for this course, it pays to make 
+a subdirectory inside the <TT>private</TT> directory. Once you <TT>cd</TT>
+into the <TT>private</TT> directory, make a new directory named 15122:
+<P>
+<TT>mkdir 15122</TT>
+<P>
+Now go into this directory using <TT>cd</TT> again:
+<P>
+<TT>cd 15122</TT>
+<P>
+To go back up one directory if you need to, use this command:
+<P>
+<TT>cd ..</TT>
+<P>
+You can go up two directories and down another directory (e.g. public) 
+like this:
+<P>
+<TT>cd ../../public</TT>
+<P>
+If you ever get lost while you change from one directory to another, you 
+can use <TT>pwd</TT> to find your present working directory. Or if you 
+want to go back to your home directory, simple type:
+<P>
+<TT>cd</TT>
+<P>
+You can also access any directory from your home directory using the shell 
+variable <TT>$HOME</TT> or the "tilde" character <TT>~</TT>. For example, you
+can get to your 15122 directory from any directory on Andrew by typing this:
+<P>
+<TT>cd $HOME/private/15122</TT>
+<P>
+or this:
+<P>
+<TT>cd ~/private/15122</TT>
+<P>
+<B>LOGGING OUT: 
+Remember that you must log out from the computer in the Gates lab. Closing 
+the terminal window is not enough! To log out, go to the System menu
+and choose Log Out. You don't want others accessing your account if you 
+leave yourself logged in.
+</B>
+<P>
+<B>COURTESY NOTE: In the Gates labs, if you don't use your lab computer 
+for a set period of time, the screen saver will launch and you can't 
+access the terminal unless you type your password in. Some students have 
+left the computer this way so they can "reserve" the machine for 
+themselves later. If we find a machine in screen saver mode and no user 
+at that terminal, we will automatically log you out so you may lose work 
+if you're not careful. Please be considerate of others and don't lock the 
+terminal.</B>
+<P>
+<B>FOR MORE INFORMATION:</B>
+<P>
+<a href="http://www.cmu.edu/computing/doc/unix/index.html">Computing Services - Unix Help Page</a>
+<P>
+<a name="editing">
+
+<H2>Setting up Your Account for C0 mode and running the compiler and Editing your program</H2>
+<P>
+You can use any editor you wish to write and edit your programs but we 
+highly recommend you try out emacs since this editor can do much more than 
+just help you edit your code (as you will see).
+<P>
+To set up emacs for your Andrew account, you will need to create a 
+configuration file 
+named <TT>.emacs</TT> in your home directory. 
+Run the following <TT>configure</TT>
+command located in the course directory and redirect the output into
+the <TT>.emacs</TT> file:<P>
+<PRE>
+/afs/andrew/course/15/122/c0-mode/configure > ~/.emacs
+</PRE>
+<P>
+When you want to edit a program now, you can enter emacs specifying the 
+file name you want to edit. You should be in the directory where the file 
+is or should be (to keep things simple for now). For example, to open the 
+file test.c0 in emacs, you'd go to the directory where this file should be
+stored and enter:
+<P>
+<TT>emacs test.c0</TT>
+<P>
+If the file exists, it will be loaded into the emacs editor. If the file 
+does not exist, you will get a blank editor to start typing in the code.
+The configuration file <TT>.emacs</TT> you edited earlier will add color 
+coding to your c0 programs. Keywords will show up in one color, variables 
+in another, etc. This will make it easier to edit your program code.
+<P>
+<B>FOR MORE INFORMATION:</B>
+<P>
+<a href="http://www.linuxhelp.net/guides/emacs">LinuxHelp.next Emacs Help</a>
+<P>
+<a name="compiling">
+
+<P>
+Before you compile programs, you should update your path in your 
+Andrew account so the system can find the C0 compiler without you having to 
+explicitly give the full path to the compiler's location.
+<P>
+To update your path, use emacs to edit the file <TT>.cshrc</TT> found in 
+your home directory when you log in:
+<P>
+<TT>emacs .cshrc</TT>
+<P>
+Add the following line at the end of your <TT>.cshrc</TT> file exactly as 
+shown:
+<P>
+<TT>setenv PATH ${PATH}:/afs/andrew/course/15/122/bin</TT>
+<P>
+Save the file and exit emacs. For this time only, you can have the system 
+run this resource file immediately by entering the following at the Linux 
+prompt in your terminal window:
+<P>
+<TT>source .cshrc</TT>
+<P>
+(When you log in next time, this file is "sourced" automatically.) If you 
+use a different shell than csh, you will need to adjust your path 
+accordingly. See your TA or CA if you need more help.
+<P>
+
+<a name="#ssh">
+<H2>Accessing your Andrew files using ssh</H2>
+<P>
+You can always access your Andrew files on the Andrew Linux server in the 
+Gates labs (rooms 5205, 5201, and 3000) when the labs have no classes 
+scheduled. In addition, you can access your files via <TT>ssh</TT> in 
+several ways. <TT>ssh</TT> (secure shell) a protocol for securely logging
+into remote servers like the Andrew system.
+<P>
+<I>Windows machines</I>: Download a free ssh client like PuTTY. When you 
+log in, specify the server <TT>linux.andrew.cmu.edu</TT>.
+<P>
+In the Windows clusters on campus, you should run X-Win32 first and
+then use an SSH client like SSH Tectia-Terminal to log in to
+<TT>linux.andrew.cmu.edu</TT>. By having the X-Win32 program running,
+all "windows" that you open up when logged into andrew (e.g. when you
+run emacs) will appear on your local Windows console. 
+<P>
+<I>Mac and Linux machines</I>: Open up a terminal window and run this 
+command:
+<P>
+<TT>ssh -X -l yourusername linux.andrew.cmu.edu</TT>
+<P>
+and enter your password when prompted to log in. (Your machine might ask 
+if you want to add the server to a list of known hosts; if so, answer 
+yes.)
+<P>
+<a name="exercise">
+
+<I>written by Tom Cortina, 1/12/11</I>
+
+</BODY>
+</HTML>

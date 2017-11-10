@@ -1,0 +1,45 @@
+/* Linked lists
+ * 15-122 Principles of Imperative Programming, Fall 2010
+ * Frank Pfenning
+ */
+
+// type elem must be defined
+
+struct list {
+  elem data;
+  struct list* next;
+};
+
+typedef struct list* list;
+
+bool is_segment(list start, list end)
+{ list p = start;
+  while (p != end) {
+    if (p == NULL) return false;
+    p = p->next;
+  }
+  return true;
+}
+
+int seg_length(list start, list end)
+//@requires is_segment(start, end);
+{ list p = start; int len = 0;
+  while (p != end)
+    //@loop_invariant is_segment(p, end);
+    { len++; p = p->next; }
+  return len;
+}
+
+bool is_circular(list l)
+{ if (l == NULL) return false;
+  { list L1 = l;
+    list L2 = l->next;
+    while (L1 != L2)
+      //@loop_invariant is_segment(L1, L2);
+      { if (L2 == NULL || L2->next == NULL) return false;
+	L1 = L1->next;
+	L2 = L2->next->next;
+      }
+    return true;
+  }
+}

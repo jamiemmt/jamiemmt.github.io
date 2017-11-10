@@ -1,0 +1,20 @@
+/* Binary search interface
+ * 15-122 Principle of Imperative Computation, Spring 2010
+ * Frank Pfenning
+ */
+
+bool is_sorted(int[] A, int n)
+//@requires 0 <= n && n <= \length(A);
+;
+
+bool is_in(int x, int[] A, int n)
+//@requires 0 <= n && n <= \length(A);
+;
+
+int binsearch(int x, int[] A, int n)
+//@requires 0 <= n && n <= \length(A);
+//@requires is_sorted(A, n);
+/*@ensures (-1 == \result && !is_in(x, A, n))
+        || ((0 <= \result && \result < n) && A[\result] == x);
+  @*/
+;

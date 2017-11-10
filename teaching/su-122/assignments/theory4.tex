@@ -1,0 +1,254 @@
+\documentclass[12pt]{exam}
+\usepackage{amsmath}
+\usepackage[left=1in, right=1in, top=1in, bottom=1in]{geometry}
+\usepackage{graphicx}
+
+\newcommand\Cnought{C$_0$}
+\newcommand\modulo{\ \texttt{\%}\ }
+\newcommand\lshift{\ \texttt{<<}\ }
+\newcommand\rshift{\ \texttt{>>}\ }
+\newcommand\cgeq{\ \texttt{>=}\ }
+
+\newcommand{\answerbox}[1]{
+\begin{framed}
+\hspace{5.65in}
+\vspace{#1}
+\end{framed}}
+
+
+\pagestyle{head}
+
+\headrule \header{\textbf{15-122 Assignment 4}}{}{\textbf{Page
+\thepage\ of \numpages}}
+
+\pointsinmargin \printanswers
+
+\setlength\answerlinelength{2in} \setlength\answerskip{0.3in}
+
+\begin{document}
+\addpoints
+\begin{center}
+\textbf{\large{15-122 : Principles of Imperative Computation
+ \\ \vspace{0.2in} Summer 1 2012
+\\  \vspace{0.2in} Assignment 4
+}}
+
+ \vspace{0.2in}
+ (\large{Theory Part})
+
+ \vspace{0.2in}
+
+ \large{Due: Monday, June 11, 2012 in class}
+\end{center}
+
+\vspace{0.5in}
+
+\hbox to \textwidth{Name:\enspace\hrulefill}
+
+
+\vspace{0.2in}
+
+\hbox to \textwidth{Andrew ID:\enspace\hrulefill}
+
+\vspace{0.2in}
+
+\hbox to \textwidth{Recitation:\enspace\hrulefill}
+
+
+
+% End title box
+\vspace{0.5in}
+
+\noindent The written portion of this week’s homework will give you some practice working
+with amortized analysis, memory management, hashtables, and recursion. You can either type up your solutions or write them
+\textit{neatly} by hand in the spaces provided. You should submit your work in class on the
+due date just before lecture or recitation begins. Please remember to \textit{staple}
+your written homework before submission.
+\vspace{0.2in}
+
+
+\begin{center}
+\gradetable[v][questions]
+\end{center}
+
+
+\newpage
+\begin{questions}
+
+\newpage
+\question{\textbf{ Hash Tables.}}
+
+
+
+ In Java, strings are hashed using the following function:
+ \[
+ (s[0]*31^{n-1} + s[1]*31^{n-2} + ... + s[n-2]*31^1 + s[n-1]*31^0)
+ \ \texttt{\%}\  m
+ \]
+ where $s[i]$ is the ASCII code for the $i$th character of string $s$, $n$ is the length of the string, and $m$ is the hash table size.
+
+\begin{parts}
+\part[2] If 15122 strings were stored in a hash table of size 4401, what would the
+ load factor of the table be?
+ \begin{solution}
+\vspace{1.5in}
+\end{solution}
+
+\part[2] Using the hash function above with a table size of 4401,
+ give an example of two strings that would ``collide'' and would be
+ stored in the same chain. Show your work. (Think of short strings please!)
+\begin{solution}
+\vspace{3in}
+\end{solution}
+\end{parts}
+
+
+\newpage
+\question[2]{\textbf{ Invariant of Hashtables.}}
+In lecture, we wrote a hash table specification function, \verb"is_ht", to
+check that a given \verb"ht" is actually a hash table.
+\begin{verbatim}
+    bool is_ht(ht H)
+    {
+        if (H == NULL) return false;
+        if (!(H->size > 0)) return false;
+        return true;
+    }
+\end{verbatim}
+This specification function is incomplete. Extend \verb"is_ht" from above, implementing code to check that every element of a chain in the table hashes to the index of that chain.
+\begin{solution}
+\vspace{5in}
+\end{solution}
+
+
+ \newpage
+ \question{\textbf{Amortized Analysis.}}
+
+ \begin{parts}
+
+   \part[2]There are $n$ ECE students who want to get into the
+   Gates-Hillman building after 6pm. Unfortunately 122 TAs control the
+   building and charge a toll for entrance. The toll policy is the
+   following: the $i$-th student is charged $k^2$ when $i \equiv 0
+   \bmod{k}$, or zero otherwise. What is the amortized cost {\it per
+     student} for entering the building? Assume that $n > k$. Explain
+   your answer.
+\begin{solution}
+\vspace{4in}
+\end{solution}
+
+
+\newpage
+\part[2]Let us recall that when we analyze the amortized cost we are
+averaging the running time of an algorithm over a \textit{worst-case}
+sequence of executions. In this task you don't need to compute the
+amortized cost but rather provide an example of such sequence.
+
+Consider a linked list of items, where searching for $k$-th element
+takes $O(k)$ cost (this is the cost of traversing the list from the
+head to the $k$th location in the list).  We shall use $n$ to denote
+the number of items in the list. Our goal is to find a simple rule for
+updating the list (by performing exchanges) that will make the total
+cost of a sequence of $n$ operations as small as possible. Famous Fred
+Hacker suggests the following rule: after accessing an item in the
+list, exchange it with the immediately preceding item. He claims that
+such technique will improve the amortized cost of single searching to
+$O(1)$. To prove him wrong, you need to create a counterexample,
+namely, find a sequence of $n$ search operations such that the
+amortized cost of a single search (under Hacker's rule) will be
+linear. Explain your answer.
+
+
+\begin{solution}
+\vspace{4in}
+\end{solution}
+
+\end{parts}
+
+\newpage
+ \question{\textbf{Memory Management.}}
+
+Consider the following two implementations of a stack. The first implementation uses a linked list to create the stack data structure
+\begin{verbatim}
+    struct list_stack {
+      struct list_node* top;
+      struct list_node* bottom;
+    };
+
+    struct list_node {
+      char data;
+      struct list_node* next;
+    };
+\end{verbatim}
+and the second implementation uses an unbounded array:
+\begin{verbatim}
+    struct uba_stack {
+        struct ubarray* top;
+    };
+
+    struct ubarray {
+      int limit;        /* limit > 0 */
+      int size;         /* 0 <= size && size <= limit */
+      char[] elems;     /* \length(elems) == limit */
+    };
+\end{verbatim}
+
+Recall that in \Cnought{},
+\begin{itemize}
+\item a \verb"char" is represented using 8 bits
+\item a pointer is represented using 64 bits
+\item an \verb"int" is represented using 32 bits
+\end{itemize}
+An array of characters of size $n$ takes
+exactly $8n + 64$ bits, where $8n$ is for the characters and $32$ bits each are for two
+\verb"int"s: one to record the length of the array and one to record the
+size of its elements.
+
+The size of a struct is the sum of the sizes of its elements.
+
+
+Consider a program that uses a stack of characters and can
+allocate only 1 MB ($2^{20}$ bytes, or $8 \times 2^{20}$ bits) of memory
+for this stack. Answer the questions below.
+
+\newpage
+\begin{parts}
+\part[3] What is the maximum number of characters that can be stored
+using a \verb"list_stack"? Show your work.
+
+\begin{solution}
+\vspace{3in}
+\end{solution}
+
+\part[3] What is the maximum number of characters that can be stored
+using a \verb"uba_stack"? Show your work.
+
+\begin{solution}
+\vspace{3in}
+\end{solution}
+
+\end{parts}
+
+
+
+
+\newpage
+\question[4]{\textbf{Recursion.}}  Recursive functions can be used to construct data structures of recursive type, like linked lists.  For the following exercise, you assume a linked list defined by
+\begin{verbatim}
+   typedef struct list_node* list;
+   struct list_node {
+     int data;
+     list next;
+   };
+\end{verbatim}
+Write a recursive function \verb"deleteAll" matching the following specification:
+\begin{verbatim}
+   list deleteAll(int key, list start, list end)
+\end{verbatim}
+The function deletes all occurrences of \verb"key" in the given linked list between \verb"start" and \verb"end" nodes inclusively. If deletion cannot be performed (e.g., the item to delete is not in the list), it should leave the list unchanged.
+\begin{solution}
+\vspace{4.4in}
+\end{solution}
+
+\end{questions}
+\end{document}

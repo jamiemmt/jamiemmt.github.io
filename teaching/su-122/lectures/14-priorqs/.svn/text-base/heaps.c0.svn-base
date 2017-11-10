@@ -1,0 +1,121 @@
+/* Priority queues, implemented as heaps
+ * 15-122 Principles of Imperative Computation, Fall 2010
+ * Frank Pfenning
+ */
+
+typedef struct heap* heap;
+heap heap_new(int limit);	/* create new heap of size limit */
+bool heap_empty(heap H);	/* is H empty? */
+void heap_insert(heap H, int x); /* insert x into H */
+int heap_min(heap H);		/* find minimum */
+int heap_delmin(heap H);	/* delete minimum */
+
+struct heap {
+  int limit;
+  int next;
+  int[] heap;
+};
+
+bool is_heap(heap H)
+//@requires H != NULL && \length(H->heap) == H->limit;
+{ int i;
+  if (!(1 <= H->next && H->next <= H->limit)) return false;
+  for (i = 2; i < H->next; i++)
+    if (H->heap[i/2] > H->heap[i]) return false;
+  return true;
+}
+
+heap heap_new(int limit)
+//@ensures is_heap(\result) && heap_empty(\result);
+{
+  heap H = alloc(struct heap);
+  int[] heap = alloc_array(int, limit);
+  H->limit = limit;
+  H->next = 1;
+  H->heap = heap;
+  return H;
+}
+
+bool heap_empty(heap H) 
+//@requires is_heap(H);
+{
+  return (H->next == 1);
+}
+
+bool heap_full(heap H)
+//@requires is_heap(H);
+{
+  return (H->next == H->limit);
+}
+
+void swap(int[] A, int i, int j)
+//@requires 0 <= i && i < \length(A);
+//@requires 0 <= j && j < \length(A);
+{ int temp = A[i];
+  A[i] = A[j];
+  A[j] = temp;
+}
+
+void sift_up(heap H, int n)
+// H is a heap, except possibly at n, which may be smaller than parent
+//@requires 1 <= n && n < H->next;
+//@ensures is_heap(H);
+{ int i = n;
+  while (i > 1) {
+    if (H->heap[i] < H->heap[i/2]) {
+      swap(H->heap, i, i/2);
+      i = i/2;
+    } else {
+      return;
+    }
+  }
+}
+
+void heap_insert(heap H, int x)
+//@requires is_heap(H) && !heap_full(H);
+//@ensures is_heap(H);
+{ assert(!heap_full(H), "cannot insert into full heap");
+  { int n = H->next;
+    H->heap[n] = x;
+    H->next++;
+    sift_up(H, n);
+  }
+}
+
+void sift_down(heap H, int i)
+// H is heap, except possibly at i which may be larger than a child
+//@requires 1 <= i && i < H->next;
+//@ensures is_heap(H);
+{ int n = H->next;
+  int[] h = H->heap;
+  int left = 2*i;
+  int right = left+1;
+  while (left < n)
+    //@loop_invariant 1 <= i && i < n;
+    { if (h[i] <= h[left] && (right >= n || h[i] <= h[right]))
+	return;
+      if (right >= n || h[left] < h[right]) {
+	swap(h, i, left);
+	i = left;
+      } else {
+	//@assert right < n && h[right] <= h[left];
+	swap(h, i, right);
+	i = right;
+      }
+      left = 2*i;
+      right = left+1;
+    }
+}
+
+int heap_delmin(heap H)
+//@requires is_heap(H) && !heap_empty(H);
+//@ensures is_heap(H);
+{ assert(!heap_empty(H), "cannot delete from empty heap");
+  { int n = H->next;
+    int min = H->heap[1];
+    H->heap[1] = H->heap[n-1];
+    H->next = n-1;
+    if (H->next > 1) sift_down(H, 1);
+    return min;
+  }
+}

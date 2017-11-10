@@ -1,0 +1,227 @@
+<HTML>
+<TITLE>
+15-122 Principles of Imperative Computation - Recitation
+</TITLE>
+<BODY>
+<H1>15-122 Principles of Imperative Computation<BR>
+Recitation 5 - Wed Jan 26
+</H1>
+<P>
+<a href="#issorted">Reviewing is_sorted</a><br>
+<a href="#isin">Reviewing is_in</a><br>
+<a href="#linsearch">Analyzing linear search</a><br>
+<P>
+<a name="issorted">
+<H2>Reviewing is_sorted</H2>
+<P>
+The function <TT>is_sorted</TT> is what we call a <I>specification function</I>. 
+This function isn't meant to be run on its own to solve a problem. Instead
+it's typically used in an annotation for another function to check for
+correctness when we need it. For example, when we do linear search on a 
+sorted array, how do we know that the array is sorted when the function
+starts? We can call this specification function to check it for us, but
+only if we're doing dynamic runtime testing using the <TT>-d</TT> option.
+<P>
+The following function returns true if the first n elements of the array A
+are sorted in non-decreasing order (i.e. for any element, the next element 
+is either the same or increasing). It returns false otherwise.
+When we talked about an array being
+sorted, we will usually mean this unless we specify otherwise.
+<P>
+<PRE>
+bool is_sorted(int[] A, int n)
+//@requires 0 <= n && n <= \length(A);
+{
+    for (int i = 0; i < n-1; i++)
+    //@loop_invariant n == 0 || (0 <= i && i <= n-1);
+    {
+        if (!(A[i] <= A[i+1])) return false;
+    }
+    return true;
+}
+</PRE>
+<P>
+Some points to consider:
+<P>
+<BLOCKQUOTE>
+Remember that the loop invariant must include the value of the loop 
+variable i when the loop condition is tested the last time (i.e. when
+the loop is about to terminate.	
+<P>
+In this case, since n could be 0, we need to explicitly test for this
+otherwise the rest of the invariant would be false and the code would
+cause an annotation failure.  In this case, the order that we test
+the two separate conditions for <TT>n</TT> and <TT>i</TT> does not 
+matter, even with short-circuit evaluation. But we tend to write the
+special case first (<TT>n == 0</TT>) and then the general case next.
+<P>
+The <TT>return</TT> statement in C0 returns immediately from the 
+function, even if additional statements follow it.  So if we find
+a pair of adjacent array values that are not in the correct order,
+we don't need to check the rest of the array since the array can't 
+possibly be sorted, so we immediately return false. If we get through
+the whole loop without returning false, then when we exit, we return
+true.
+<P>
+Since this is being treated as a specification function, we generally
+do not write postconditions for this function.
+</BLOCKQUOTE>
+<P>
+
+<a name="isin">
+<H2>Reviewing is_in</H2>
+<P>
+The function <TT>is_in</TT> is also a specification function, to be used
+to test assertions in other functions. Effectively, this function is the
+simplest form of a linear search which assumes nothing about the order
+of the data. 
+<P>
+The following function returns true if the integer <TT>x</TT> is in 
+the integer array <TT>A</TT> in one of the first <TT>n</TT> positions;
+false otherwise.
+<P>
+<PRE>
+bool is_in(int x, int[] A, int n)
+//@requires 0 <= n && n <= \length(A);
+{
+    for (int i = 0; i < n; i++)
+    //@loop_invariant 0 <= i && i <= n;
+    {
+        if (A[i] == x) return true;
+    }
+    return false;
+}
+</PRE>
+<P>
+Some points to consider:
+<P>
+<BLOCKQUOTE>
+In this function, the loop invariant can have <TT>i</TT> going up to <TT>n</TT>
+since we may have to examine every element of the array up to position 
+<TT>n-1</TT>.
+<P>
+Note that we don't have to check for <TT>n == 0</TT> in this loop invariant.
+(Why?)
+<P>
+Whenever you write an <TT>if</TT> statement, you don't need to have an
+<TT>else</TT> statement with it. You only need an <TT>else</TT> statement
+if you need to do something if the condition is not true. So PLEASE do NOT
+write things like this:
+<P>
+<PRE>
+  if (A[i] == x) return true;
+  else x = x;                      // OUCH, THIS HURTS MY HEAD!
+
+  if (!(A[i] == x)) i = i + 0;     // AGONY! AGONY!
+  else return true; 
+</PRE>
+</BLOCKQUOTE>
+<P>
+In these two specification functions, the variable <TT>i</TT> is defined
+locally for the loop only since we declare it in the <TT>for</TT> construct.
+We cannot access <TT>i</TT> once the loop terminates. If  you need to 
+access <TT>i</TT> for some reason after the loop terminates, declare the
+variable <TT>i</TT> as an <TT>int</TT> before you get to the loop, and then 
+just write <TT>for (i = 0; ...etc</TT> to start your loop.
+<P>
+
+<P>
+<a name="linsearch">
+<H2>Linear Search: Reasoning with Invariants (Again)</H2>
+<P>
+Let's take another loop at linear search, assuming that the array we're
+given is already sorted:
+<P>
+<PRE>
+int linsearch(int x, int[] A, int n)
+//@requires 0 <= n && n <= \length(A);
+//@requires is_sorted(A,n);
+{   
+    for (int i = 0; i < n && A[i] <= x; i++)
+    //@loop_invariant 0 <= i && i <= n;
+    //@loop_invariant i == 0 || A[i-1] < x;
+    {
+        if (A[i] == x) return i;
+    }
+    return -1;
+}
+</PRE>
+<P>
+This function returns the index of the first occurrence of <TT>x</TT> in 
+the first <TT>n</TT> elements of the array <TT>A</TT>, or -1 if not found.
+<P>
+Let's look at the second loop invariant more carefully. First, it uses a
+programming technique called <I>short-circuit evaluation</I> (or sometimes
+called <I>lazy evaluation</I>) where the second condition is evaluated
+at runtime only if necessary. In this example, if i is equal to 0, then the
+invariant is true so there is no need to test the second condition. In fact,
+this is desired since A[i-1] will yield an array index out of bounds
+exception when i equals 0. In general, if we have the condition A || B, if
+A is true, B is not evaluated. If we have the condition A && B, if A is
+false, B is not evaluated. So be careful, in programming languages that
+provide short-circuit evaluation, A || B does not always yield the same
+result as B || A. The order does matter sometimes, and we will take
+advantage of this sometimes.
+<P>
+Now let's look at the invariant:
+<P>
+<PRE>
+i == 0 || A[i-1] < x
+</PRE>
+<P>
+If this condition is true at the start of a loop iteration, is it true
+at the end of an iteration?
+<P>
+When we test the
+loop condition the first time, the invariant holds trivially. After the each
+iteration is complete, i' = i + 1, so we wish to show that
+<P>
+<PRE>
+A[i'-1] < x ==> A[i+1-1] < x ==> A[i] < x
+</PRE>
+(Note: i==0 is only relevant for the
+start of the first iteration, otherwise i==0 is false and we need to test the
+2nd condition.)
+<P>
+The loop iteration starts with A[i] <= x and to get to the end of the iteration
+(without returning from the function), A[i] != x. Thus, A[i] < x.
+<P>
+Now, let's determine appropriate postconditions for this function based
+on what we know about the preconditions and the loop invariants.
+<P>
+First, we know that the result that gets returned is either -1 or an
+integer between 0 and n-1 inclusive. So we can write:
+<P>
+<PRE>
+//@ensures -1 <= \result && \result < n;
+</PRE>
+<P>
+Next, we know that if the 
+returned result is -1, then the value stored in <TT>x</TT>
+is not in the array in the first <TT>n</TT> positions.
+If the returned result is in the range 0 to n-1 inclusive,
+then we know that this is the first occurrence of <TT>x</TT>, so
+<TT>x</TT> cannot be in positions 0 through <TT>\result - 1</TT>.
+Thus, for our next postcondition, we have to satisfy one of the two
+conditions above, so we can write:
+<P>
+<PRE>
+  /*@ensures (\result == -1 && !is_in(x,A,n)) 
+             || (A[\result] == x && !is_in(x,A,\result));  
+    @*/
+</PRE>
+<P>
+Note the special syntax for an annotation that takes up more than one line.
+(Why did we choose to use one more line here and not just write the entire
+precondition in one line?)
+<P>
+<I>Exercise</I>: Rewrite the postcondition above so that it doesn't
+call <TT>is_in</TT> if <TT>A[\result] == x</TT>. Does this improve
+the code? Why or why not?
+<P>
+
+<HR>
+<I>written by Tom Cortina, 1/27/11</I>
+
+</BODY>
+</HTML>

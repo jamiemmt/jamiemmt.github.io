@@ -1,0 +1,572 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+     "http://www.w3.org/TR/REC-html40/loose.dtd">
+<HTML>
+<HEAD>
+<TITLE>15-122 Principles of Imperative Computation / Schedule</TITLE>
+<!-- Changed by: Jamie Morgenstern, 19-Mar-2011 -->
+<META name="description" content="Principles of Imperative Computation; Schedule">
+<META name="keywords" content="Principles of Imperative Computation">
+<LINK REL="stylesheet" HREF="course.css" TYPE="text/css">
+</HEAD>
+<BODY MARGINWIDTH=0 MARGINHEIGHT=0>
+<TABLE WIDTH="100%" BORDER=0 CELLSPACING=0 CELLPADDING=10>
+<TR>
+<TD CLASS="sidebar">&nbsp;</TD>
+<TD CLASS="main">&nbsp;</TD>
+<TD CLASS="main">&nbsp;</TD>
+</TR>
+<TR>
+<TD CLASS="sidebar" VALIGN="top">
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=2>
+  <TR><TD CLASS="menu"><A HREF="index.html">Home</A></TD></TR>
+  <TR><TD CLASS="menu"><B CLASS="here">Schedule</B></TD></TR>
+  <TR><TD CLASS="menu"><A HREF="assignments.html">Assignments</A></TD></TR>
+  <TR><TD CLASS="menu"><A HREF="resources.html">Resources</A></TD></TR>
+  <TR><TD>&nbsp;</TD></TR>
+  <TR><TD CLASS="menu"><A HREF="http://www.cmu.edu/blackboard">Blackboard</A></TD></TR>
+  <TR><TD>&nbsp;</TD></TR>
+  <TR><TD CLASS="menu"><A HREF="http://piazza.com/class_profile#summer2012/15122">Piazza</A> for Bboard</TD></TR>
+  <TR><TD>&nbsp;</TD></TR>
+  <TR><TD CLASS="menu" ALIGN="left">jamiemmt@cs</TD></TR>
+  <TR><TD CLASS="menu" ALIGN="left"><A HREF="http://www.cs.cmu.edu/~jamiemmt/">Jamie&nbsp;Morgenstern</A></TD></TR>
+</TABLE>
+</TD>
+
+<TD CLASS="main">&nbsp;</TD>
+<TD CLASS="main" VALIGN="top">
+<H1>  15-122 Principles of Imperative Computation <BR>
+  Schedule
+</H1>
+
+ <P> The schedule is subject to change throughout the semester. </P> 
+
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=1>
+<TR> 
+  <TH COLSPAN=3> Date </TH>
+  <TH> &nbsp; Lecture or <BR> &nbsp; Recitation </TH>
+  <TH> &nbsp; Reading </TH>
+  <TH> &nbsp; Code </TH>
+  <TH> &nbsp; Assignment </TH>
+</TR>
+<TR>
+  <TD COLSPAN=7> <HR SIZE=1 NOSHADE> </TD>
+</TR> 
+<TR>
+
+  <TD> Mon </TD> <TD> May </TD> <TD ALIGN="right"> 21 </TD>
+  <TD> &nbsp; <A HREF="lectures/01-overview.html">Overview and Contracts</A> </TD>
+  <TD> &nbsp; <A HREF="lectures/01-overview.pdf">overview.pdf</A> , <A HREF="lectures/01-contracts.pdf">01-contracts.pdf</A> </TD>
+  <TD> &nbsp; <A HREF="lectures/01-overview/">code</A> </TD>
+  <TD> &nbsp; <A HREF="assignments.html">Asst 0</A> out </TD>
+  <TD> &nbsp; </TD>
+</TR> 
+<TR>
+
+  <TD CLASS="sidebar"> Mon </TD> <TD CLASS="sidebar"> May </TD> <TD CLASS="sidebar" ALIGN="right"> 21 </TD>
+  <TD CLASS="sidebar"> &nbsp; <A HREF="recitations/recitation01.html">Recitation*: Linux Crash Course and C0 on Andrew</A> </TD>
+  <TD CLASS="sidebar"> &nbsp; <A HREF="recitations/05-21.pdf"> Partial slides <A> </TD>
+  <TD CLASS="sidebar"> &nbsp; </TD>
+  <TD CLASS="sidebar"> &nbsp; *Location same as recitation. Highly recommended for doing HW0 </TD>
+</TR>
+<TR>
+
+  <TD> Tues </TD> <TD> May </TD> <TD ALIGN="right"> 22 </TD>
+  <TD> &nbsp; <A HREF="lectures/02-ints.html">Ints</A> </TD>
+  <TD> &nbsp; <A HREF="lectures/02-ints.pdf">02-ints.pdf</A> </TD>
+  <TD> &nbsp; <A HREF="lectures/02-ints/">code</A> </TD>
+  <TD> &nbsp; </TD>
+</TR>
+<TR>
+  <TD CLASS="sidebar"> Tue </TD> <TD CLASS="sidebar"> May </TD> <TD CLASS="sidebar" ALIGN="right"> 22 </TD>
+  <TD CLASS="sidebar"> &nbsp; <A HREF="recitations/recitation02.html">Recitation: Reasoning with Loop Invariants</A> </TD>
+  <TD CLASS="sidebar"> &nbsp; </TD>
+  <TD CLASS="sidebar"> &nbsp; </TD>
+  <TD CLASS="sidebar"> &nbsp; </TD>
+</TR>
+<TR>
+
+  <TD> Wed </TD> <TD> May </TD> <TD ALIGN="right"> 23 </TD>
+  <TD> &nbsp; <A HREF="lectures/03-arrays.html">Arrays</A> </TD>
+  <TD> &nbsp; <A HREF="lectures/03-arrays.pdf">03-arrays.pdf</A> </TD>
+  <TD> &nbsp; <EM>none</EM> </TD>
+  <TD> &nbsp; <Strong>Asst 0 due</Strong> </TD>
+</TR>
+
+<TR>
+
+  <TD CLASS="sidebar"> Wed </TD> <TD CLASS="sidebar"> May </TD> <TD CLASS="sidebar" ALIGN="right"> 23 </TD>
+  <TD CLASS="sidebar"> &nbsp; <A HREF="recitations/recitation03.html">Recitation: Remove Red, C0 Operators</A></TD>
+  <TD CLASS="sidebar"> &nbsp; <A HREF="recitations/05-23.pdf"> Partial slides <A>  </TD>
+  <TD CLASS="sidebar"> &nbsp; </TD>
+  <TD CLASS="sidebar"> &nbsp; </TD>
+</TR>
+<TR>
+
+  <TD> Thu </TD> <TD> May </TD> <TD ALIGN="right"> 24 </TD>
+  <TD> &nbsp; <A HREF="lectures/04-linsearch.html">Linear Search</A> </TD>
+  <TD> &nbsp; <A HREF="lectures/04-linsearch.pdf">04-linsearch.pdf</A> </TD>
+  <TD> &nbsp; <A HREF="lectures/04-linsearch/">code</A> </TD>
+  <TD> &nbsp; <A HREF="assignments.html">Asst 1</A> out </TD>
+  <TD> &nbsp; </TD>
+</TR>
+<TR>
+
+  <TD CLASS="sidebar"> Thu </TD> <TD CLASS="sidebar"> May </TD> <TD CLASS="sidebar" ALIGN="right"> 24 </TD>
+  <TD CLASS="sidebar"> &nbsp; <A HREF="recitations/recitation04.html">Recitation: Shift Operators, More Invariants</A></TD>
+  <TD CLASS="sidebar"> &nbsp; </TD>
+  <TD CLASS="sidebar"> &nbsp; </TD>
+  <TD CLASS="sidebar"> &nbsp; <STRONG>Quiz 1</STRONG> </TD>
+</TR>
+<TR> 
+
+
+<TR>
+  <!-- Lecture 6 -->
+  <TD> Friday </TD> <TD> May </TD> <TD ALIGN="right"> 25 </TD>
+  <TD> &nbsp; <A HREF="lectures/05-binsearch.html">Binary Search</A></TD>
+  <TD> &nbsp; <A HREF="lectures/05-binsearch.pdf">05-binsearch.pdf</A> </TD>
+  <TD> &nbsp; <A HREF="lectures/05-binsearch/">code</A> </TD>
+  <TD> &nbsp; </TD>
+</TR>
+
+<TR>
+  <!-- Lecture 19 -->
+  <TD> </TD><TD></TD><TD></TD>
+  <TD> &nbsp; <A HREF="lectures/19-testing.html">Testing</A> </TD>
+  <TD> &nbsp; <A HREF="lectures/19-testing.pdf">19-testing.pdf</A>  </TD>
+  <TD> &nbsp; <A HREF="lectures/19-testing/">code</A> </TD>
+  <TD> &nbsp;   </TD>
+</TR>
+
+<TR>
+  <TD COLSPAN=7> <HR SIZE=1 NOSHADE> </TD>
+</TR>
+
+
+<TR>
+
+  <TD> Monday </TD> <TD> May </TD> <TD ALIGN="right"> 28 </TD>
+  <TD> &nbsp; Memorial Day </TD>
+  <TD> &nbsp;  </TD>
+  <TD> &nbsp;  </TD>
+  <TD> &nbsp; <STRONG>Asst 1 due</STRONG>, </TD>
+</TR>
+<TR>
+
+  <TD> &nbsp; </TD>
+  <TD> &nbsp;</TD>
+  <TD> &nbsp;   </TD>
+  <TD> &nbsp; </TD>
+  <TD> &nbsp; </TD>
+  <TD> &nbsp; </TD>
+  <TD> &nbsp;     <A HREF="assignments.html">Asst 2</A> out </TD>
+</TR>
+
+<TR>
+  <!-- Lecture 6 -->
+  <TD> Tues </TD> <TD> May </TD> <TD ALIGN="right"> 29 </TD>
+  <TD> &nbsp; <A HREF="lectures/05-binsearch.html">Binary Search wrapup</A></TD>
+  <TD> &nbsp; <A HREF="lectures/05-binsearch.pdf">05-binsearch.pdf</A> </TD>
+  <TD> &nbsp; <A HREF="lectures/05-binsearch/">code</A> </TD>
+  <TD> &nbsp; </TD>
+</TR>
+
+<TR>
+  <!-- Lecture 7 -->
+  <TD> </TD> <TD> </TD> <TD ALIGN="right">  </TD>
+  <TD> &nbsp; <A HREF="lectures/06-sorting.html">Sorting</A> </TD>
+  <TD> &nbsp; <A HREF="lectures/06-sorting.pdf">06-sorting.pdf</A> </TD>
+  <TD> &nbsp; <A HREF="lectures/06-sorting/">code</A> </TD>
+  <TD> &nbsp; </TD>
+</TR>
+
+<TR>
+  <!-- Recitation 5 -->
+  <TD CLASS="sidebar"> Tue </TD> <TD CLASS="sidebar"> May </TD> <TD CLASS="sidebar" ALIGN="right"> 29 </TD>
+  <TD CLASS="sidebar"> &nbsp; <A HREF="recitations/recitation05.html">Recitation: Linear Search</A> and <A HREF="recitations/recitation06.html" >Binary Search</A></TD>
+  <TD CLASS="sidebar"> &nbsp; </TD>
+  <TD CLASS="sidebar"> &nbsp; </TD>
+  <TD CLASS="sidebar"> &nbsp; <STRONG>Quiz 2</STRONG> </TD>
+</TR>
+
+
+
+<TR>
+  <!-- Lecture 19 -->
+  <TD> Wed </TD> <TD> May </TD> <TD ALIGN="right"> 30 </TD>
+  <TD> &nbsp;  <A HREF="lectures/07-bigo.html">
+  Asymptotic Complexity</A> </TD>
+  <TD> &nbsp; <A HREF="lectures/07-bigo.pdf">07-bigo.pdf</A>   </TD>
+  <TD> &nbsp;  None </TD>
+  <TD> &nbsp;  </TD>
+</TR>
+<TR>
+  <!-- Recitation 8 -->
+  <TD CLASS="sidebar"> Wed </TD> <TD CLASS="sidebar"> May </TD> <TD CLASS="sidebar" ALIGN="right"> 30 </TD>
+  <TD CLASS="sidebar"> &nbsp;</TD>
+  <TD CLASS="sidebar"> &nbsp; </TD>
+  <TD CLASS="sidebar"> &nbsp; </TD>
+  <TD CLASS="sidebar"> &nbsp; </TD>
+</TR>
+
+
+<TR>
+  <!-- Lecture 19 -->
+  <TD> Thur </TD> <TD> May </TD> <TD ALIGN="right"> 31 </TD>
+  <TD> &nbsp;  <A HREF="lectures/08-qsort.html"> Quicksort </A> </TD>
+  <TD> &nbsp;  <A HREF="lectures/08-qsort.pdf">08-qsort.pdf</A>  </TD>
+  <TD> &nbsp;  <A HREF="lectures/08-qsort/">code</A> </TD>
+  <TD> &nbsp;   <STRONG>Asst 2 due</STRONG>, <BR>&nbsp;  <A HREF="assignments.html">Asst 3</A> out</TD>
+</TR>
+<TR>
+TR>
+  <!-- Recitation 8 -->
+  <TD CLASS="sidebar"> Thur </TD> <TD CLASS="sidebar"> May </TD> <TD CLASS="sidebar" ALIGN="right"> 30 </TD>
+  <TD CLASS="sidebar"> &nbsp; <A HREF="recitations/quicksort.pdf">Recitation: Quicksort Invariants (pdf)</a></TD>
+  <TD CLASS="sidebar"> &nbsp; </TD>
+  <TD CLASS="sidebar"> &nbsp; </TD>
+  <TD CLASS="sidebar"> &nbsp; </TD>
+</TR>
+
+<TR>
+  <TD> Fri </TD> <TD> June </TD> <TD ALIGN="right"> 1 </TD>
+  <TD> &nbsp; <STRONG>Midterm 1</STRONG> </TD>
+  <TD> &nbsp; <A HREF="misc/mt1.pdf">mt1.pdf</A> </TD>
+  <TD> &nbsp; <A HREF="misc/mt1-sol.pdf">sample solution</A> </TD>
+  <TD> &nbsp; </TD>
+</TR>
+
+
+
+<TR>
+  <TD COLSPAN=7> <HR SIZE=1 NOSHADE> </TD>
+</TR>
+
+<TR>
+  <!-- Lecture 9 -->
+  <TD> Mon </TD> <TD> June </TD> <TD ALIGN="right"> 4 </TD>
+  <TD> &nbsp; <A HREF="lectures/09-layout.html">Memory Layout</A> </TD>
+  <TD> &nbsp; <A HREF="lectures/09-layout.pdf">09-layout.pdf</A> </TD>
+  <TD> &nbsp; None </TD>
+
+</TR>
+
+
+<TR>
+  <!-- Lecture 10 -->
+  <TD> Tue </TD> <TD>  June </TD> <TD ALIGN="right"> 5 </TD>
+  <TD> &nbsp; <A HREF="lectures/10-queues.html">Queues</A> </TD>
+  <TD> &nbsp; <A HREF="lectures/10-queues.pdf">10-queues.pdf</A> </TD>
+  <TD> &nbsp; <A HREF="lectures/10-queues/">code</A> </TD>
+  <TD> &nbsp; </TD>
+</TR>
+
+<TR>
+  <!-- Recitation 10 -->
+  <TD CLASS="sidebar"> Tue </TD> <TD CLASS="sidebar"> June </TD> <TD CLASS="sidebar" ALIGN="right"> 5 </TD>
+  <TD CLASS="sidebar"> &nbsp; </TD>
+  <TD CLASS="sidebar"> &nbsp; </TD>
+  <TD CLASS="sidebar"> &nbsp; </TD>
+  <TD CLASS="sidebar"> &nbsp; <STRONG>Quiz 3</STRONG> </TD>
+</TR>
+
+<TR>
+  <!-- Lecture 11 -->
+  <TD> Wed </TD> <TD> June </TD> <TD ALIGN="right"> 6 </TD>
+  <TD> &nbsp; <A HREF="lectures/11-stacks.html">Stacks</A> </TD>
+  <TD> &nbsp;  <A HREF="lectures/11-stacks.pdf">11-stacks.pdf</A> </TD>
+  <TD> &nbsp; <A HREF="lectures/11-stacks/">code</A> </TD>
+  <TD> &nbsp; <STRONG>Asst 3 due</STRONG>, <BR> &nbsp;     <A HREF="assignments.html">Asst 4</A> out  </TD>
+</TR>
+
+
+
+<TR>
+  <!-- Recitation 10 -->
+  <TD CLASS="sidebar"> Wed </TD> <TD CLASS="sidebar"> June </TD> <TD CLASS="sidebar" ALIGN="right"> 6 </TD>
+  <TD CLASS="sidebar"> &nbsp; </TD>
+  <TD CLASS="sidebar"> &nbsp; </TD>
+  <TD CLASS="sidebar"> &nbsp; </TD>
+  <TD CLASS="sidebar"> &nbsp; </TD>
+</TR>
+<TR>
+  <!-- Lecture 12 -->
+  <TD> Thu </TD> <TD> June </TD> <TD ALIGN="right"> 7 </TD>
+  <TD> &nbsp; <A HREF="lectures/12-ubarrays.html">Unbounded Arrays</A> </TD>
+  <TD> &nbsp; <A HREF="lectures/12-ubarrays.pdf">12-ubarrays.pdf</A> </TD>
+  <TD> &nbsp; <A HREF="lectures/12-ubarrays/">code</A> </TD>
+  <TD> &nbsp; </TD>
+</TR>
+
+<TR>
+  <!-- Recitation 11 -->
+  <TD CLASS="sidebar"> Thu </TD> <TD CLASS="sidebar"> June </TD> <TD CLASS="sidebar" ALIGN="right"> 7 </TD>
+  <TD CLASS="sidebar"> &nbsp; </TD>
+  <TD CLASS="sidebar"> &nbsp; </TD>
+  <TD CLASS="sidebar"> &nbsp; </TD>
+  <TD CLASS="sidebar"> &nbsp; </TD>
+</TR>
+
+<TR>
+  <!-- Lecture 13 -->
+  <TD> Fri </TD> <TD> June </TD> <TD ALIGN="right"> 8 </TD>
+  <TD> &nbsp; <A HREF="lectures/13-hashtables.html">Hash Tables</A> </TD>
+  <TD> &nbsp; <A HREF="lectures/13-hashtables.pdf">13-hashtables.pdf</A> </TD>
+  <TD> &nbsp; <A HREF="lectures/14-interfaces/">code</A> (Lec.14) </TD>
+  <TD> &nbsp;  </TD>
+</TR>
+
+<TR>
+  <TD COLSPAN=7> <HR SIZE=1 NOSHADE> </TD>
+</TR>
+
+<TR>
+  <!-- Lecture 14 -->
+  <TD> Mon </TD> <TD> June </TD> <TD ALIGN="right"> 11 </TD>
+  <TD> &nbsp; <A HREF="lectures/14-interfaces.html">Interfaces</A> </TD>
+  <TD> &nbsp; <A HREF="lectures/14-interfaces.pdf">14-interfaces.pdf</A> </TD>
+  <TD> &nbsp; <A HREF="lectures/14-interfaces/">code</A> </TD>
+  <TD> &nbsp;  <STRONG>Asst 4 due</STRONG>,<BR> &nbsp; <A HREF="assignments.html">Asst 5</A> out </TD>
+</TR>
+<TR>
+  <!-- Lecture 15 -->
+  <TD> Tue </TD> <TD> June </TD> <TD ALIGN="right"> 12 </TD>
+  <TD> &nbsp; <A HREF="lectures/15-priorqs.html">Priority Queues</A> </TD>
+  <TD> &nbsp; <A HREF="lectures/15-priorqs.pdf">15-priorqs.pdf</A> </TD>
+  <TD> &nbsp; <A HREF="lectures/16-resinvs/">code</A> (Lec.16) </TD>
+  <TD> &nbsp;   </TD>
+</TR>
+
+<TR>
+  <!-- Recitation 12 -->
+  <TD CLASS="sidebar"> Tue </TD> <TD CLASS="sidebar"> June </TD> <TD CLASS="sidebar" ALIGN="right"> 12 </TD>
+  <TD CLASS="sidebar"> &nbsp; </TD>
+  <TD CLASS="sidebar"> &nbsp; </TD>
+  <TD CLASS="sidebar"> &nbsp; </TD>
+  <TD CLASS="sidebar"> &nbsp; <STRONG>Quiz 4</STRONG>  </TD>
+</TR>
+
+<TR>
+  <!-- Lecture 16 -->
+  <TD> Wed </TD> <TD> June </TD> <TD ALIGN="right"> 13 </TD>
+  <TD> &nbsp; <A HREF="lectures/16-resinvs.html">Restoring Invariants</A> </TD>
+  <TD> &nbsp; <A HREF="lectures/16-resinvs.pdf">16-resinvs.pdf</A> </TD>
+  <TD> &nbsp; <A HREF="lectures/16-resinvs/">code</A> </TD>
+  <TD> &nbsp;</TD>
+</TR>
+
+<TR>
+  <!-- Recitation 13 -->
+  <TD CLASS="sidebar"> Wed </TD> <TD CLASS="sidebar"> June </TD> <TD CLASS="sidebar" ALIGN="right"> 13 </TD>
+  <TD CLASS="sidebar"> &nbsp; </TD>
+  <TD CLASS="sidebar"> &nbsp; </TD>
+  <TD CLASS="sidebar"> &nbsp; </TD>
+  <TD CLASS="sidebar"> &nbsp;  </TD>
+</TR>
+
+<TR>
+  <!-- Lecture 17 -->
+  <TD> Thur </TD> <TD> June </TD> <TD ALIGN="right"> 14 </TD>
+  <TD> &nbsp; <A HREF="lectures/17-bst.html">Binary Search Trees</A> </TD>
+  <TD> &nbsp; <A HREF="lectures/17-bst.pdf">17-bst.pdf</A> </TD>
+  <TD> &nbsp; <A HREF="lectures/17-bst/">code</A> </TD>
+  <TD> &nbsp; <STRONG>Asst 5 due</STRONG>, <BR> &nbsp;
+    <A HREF="assignments.html">Asst 6</A> out </TD>
+</TR>
+
+<TR>
+  <!-- Recitation 14 -->
+  <TD CLASS="sidebar"> Thur </TD> <TD CLASS="sidebar"> June </TD> <TD CLASS="sidebar" ALIGN="right"> 14 </TD>
+  <TD CLASS="sidebar"> &nbsp; </TD>
+  <TD CLASS="sidebar"> &nbsp; </TD>
+  <TD CLASS="sidebar"> &nbsp; </TD>
+  <TD CLASS="sidebar"> &nbsp; </TD>
+</TR>
+
+<TR>
+  <!-- Midterm 2 -->
+  <TD> Fri </TD> <TD> June </TD> <TD ALIGN="right"> 15 </TD>
+  <TD> &nbsp; <STRONG>Midterm 2</STRONG> </TD>
+  <TD> &nbsp; <A HREF="misc/mt2.pdf">mt2.pdf</A> </TD>
+  <TD> &nbsp; <A HREF="misc/mt2-sol.pdf">sample solution</A> </TD>
+  <TD> &nbsp;  </TD>
+</TR>
+
+
+
+<TR>
+  <TD COLSPAN=7> <HR SIZE=1 NOSHADE> </TD>
+</TR>
+
+<TR>
+  <!-- Lecture 18 -->
+  <TD> Mon </TD> <TD> June </TD> <TD ALIGN="right"> 18 </TD>
+  <TD> &nbsp; <A HREF="lectures/18-avl.html">AVL Trees</A> </TD>
+  <TD> &nbsp; <A HREF="lectures/18-avl.pdf">18-avl.pdf</A> </TD>
+  <TD> &nbsp; <A HREF="lectures/18-avl/">code</A> </TD>
+  <TD> &nbsp; <STRONG>Asst 6 due</STRONG>, <BR> &nbsp; <A HREF="assignments.html">Asst 7</A> out </TD>
+</TR>
+
+<TR>
+  <!-- Lecture 20 -->
+  <TD> Tue </TD> <TD> June </TD> <TD ALIGN="right"> 19 </TD>
+  <TD> &nbsp; <A HREF="lectures/20-poly.html">Polymorphism</A> </TD>
+  <TD> &nbsp; <A HREF="lectures/20-poly.pdf">20-poly.pdf</A> </TD>
+  <TD> &nbsp; <A HREF="lectures/20-poly/">code</A> </TD>
+
+</TR>
+
+<TR>
+  <!-- Recitation 18 -->
+  <TD CLASS="sidebar"> Tue </TD> <TD CLASS="sidebar"> June </TD> <TD CLASS="sidebar" ALIGN="right"> 19 </TD>
+  <TD CLASS="sidebar"> &nbsp; </TD>
+  <TD CLASS="sidebar"> &nbsp; </TD>
+  <TD CLASS="sidebar"> &nbsp; </TD>
+  <TD CLASS="sidebar"> &nbsp; <STRONG>Quiz 6</STRONG> </TD>
+</TR>
+<TR>
+  <!-- Lecture 21 -->
+  <TD> Wed </TD> <TD> June </TD> <TD ALIGN="right"> 20 </TD>
+  <TD> &nbsp; <A HREF="lectures/21-mem.html">Memory Management</A> </TD>
+  <TD> &nbsp; <A HREF="lectures/21-mem.pdf">21-mem.pdf</A> </TD>
+  <TD> &nbsp; <A HREF="lectures/21-mem/">code</A> </TD>
+  <TD> &nbsp; </TD>
+</TR>
+
+<TR>
+  <!-- Recitation 10 -->
+  <TD CLASS="sidebar"> Wed </TD> <TD CLASS="sidebar"> June </TD> <TD CLASS="sidebar" ALIGN="right"> 20 </TD>
+  <TD CLASS="sidebar"> &nbsp; </TD>
+  <TD CLASS="sidebar"> &nbsp; </TD>
+  <TD CLASS="sidebar"> &nbsp; </TD>
+  <TD CLASS="sidebar"> &nbsp;  </TD>
+</TR>
+
+<TR>
+  <!-- Lecture 22 -->
+  <TD> Thu </TD> <TD> June </TD> <TD ALIGN="right"> 21 </TD>
+  <TD> &nbsp; <A HREF="lectures/22-generic.html">Generic Data
+    Structures</A> </TD>
+  <TD> &nbsp; <A HREF="lectures/22-generic.pdf">22-generic.pdf</A> </TD>
+  <TD> &nbsp; <A HREF="lectures/22-generic/">code</A> </TD>
+  <TD> &nbsp; <a href="assignments.html">Asst 8</a> out </TD>
+</TR>
+<TR>
+  <!-- Recitation 23 -->
+  <TD CLASS="sidebar"> Thu </TD> <TD CLASS="sidebar"> June </TD> <TD CLASS="sidebar" ALIGN="right"> 21 </TD>
+  <TD CLASS="sidebar"> &nbsp; </TD>
+  <TD CLASS="sidebar"> &nbsp; </TD>
+  <TD CLASS="sidebar"> &nbsp; </TD>
+  <TD CLASS="sidebar"> &nbsp;  </TD>
+</TR>
+
+<TR>
+  <!-- Lecture 23 -->
+  <TD> Fri </TD> <TD> June </TD> <TD ALIGN="right"> 22 </TD>
+  <TD> &nbsp; <A HREF="lectures/23-c0vm.html">Function pointers and the Virtual Machines</A> </TD>
+  <TD> &nbsp; <A HREF="lectures/23-c0vm.pdf">23-c0vm.pdf</A> </TD>
+  <TD> &nbsp; <A HREF="lectures/23-c0vm/">code</A> </TD>
+  <TD> &nbsp; <STRONG> Asst 7 due </STRONG> </TD>
+</TR>
+
+<TR>
+  <TD COLSPAN=7> <HR SIZE=1 NOSHADE> </TD>
+</TR>
+
+<TR>
+  <!-- Lecture 23 -->
+  <TD> Mon </TD> <TD> June </TD> <TD ALIGN="right"> 25 </TD>
+  <TD> &nbsp; <A HREF="lectures/23-c0vm.html">Virtual Machines</A> </TD>
+  <TD> &nbsp; <A HREF="lectures/23-c0vm.pdf">23-c0vm.pdf</A> </TD>
+  <TD> &nbsp; <A HREF="lectures/23-c0vm/">code</A> </TD>
+  <TD> &nbsp;  </TD>
+</TR>
+
+<TR>
+  <!-- Lecture 24 -->
+  <TD> Tues </TD> <TD> June </TD> <TD ALIGN="right"> 26 </TD>
+  <TD> &nbsp; <A HREF="lectures/24-tries.html">Tries</A> </TD>
+  <TD> &nbsp; <A HREF="lectures/24-tries.pdf">24-tries.pdf</A> </TD>
+  <TD> &nbsp; <A HREF="lectures/24-tries/">code</A> </TD>
+  <TD> &nbsp; </TD>
+</TR>
+
+<TR>
+  <!-- Recitation 24 -->
+  <TD CLASS="sidebar"> Tue </TD> <TD CLASS="sidebar"> June </TD> <TD CLASS="sidebar" ALIGN="right"> 26 </TD>
+  <TD CLASS="sidebar"> &nbsp; </TD>
+  <TD CLASS="sidebar"> &nbsp; </TD>
+  <TD CLASS="sidebar"> &nbsp; </TD>
+  <TD CLASS="sidebar"> &nbsp; <STRONG>Quiz 7</STRONG> </TD>
+</TR>
+
+<TR>
+  <!-- Lecture 26 -->
+  <TD> Wed </TD> <TD> June </TD> <TD ALIGN="right"> 27 </TD>
+  <TD> &nbsp; <A HREF="lectures/26-spanning.html">Spanning Trees</A> </TD>
+  <TD> &nbsp; <A HREF="lectures/26-spanning.pdf">26-spanning.pdf</A> </TD>
+  <TD> &nbsp; <EM>none</EM> </TD>
+  <TD> &nbsp; </TD>
+</TR>
+
+<TR>
+  <!-- Recitation 25 -->
+  <TD CLASS="sidebar"> Wed </TD> <TD CLASS="sidebar"> June </TD> <TD CLASS="sidebar" ALIGN="right"> 27 </TD>
+  <TD CLASS="sidebar"> &nbsp; </TD>
+  <TD CLASS="sidebar"> &nbsp; </TD>
+  <TD CLASS="sidebar"> &nbsp; </TD>
+  <TD CLASS="sidebar"> &nbsp;  </TD>
+</TR>
+
+<TR>
+  <!-- Lecture 27 -->
+  <TD> Thu </TD> <TD> June </TD> <TD ALIGN="right"> 28 </TD>
+  <TD> &nbsp; <A HREF="lectures/27-unionfind.html">Union-Find</A> </TD>
+  <TD> &nbsp; <A HREF="lectures/27-unionfind.pdf">27-unionfind.pdf</A>
+  </TD>
+  <TD> &nbsp; <A HREF="lectures/27-unionfind/">code</A> </TD>
+  <TD> &nbsp; </TD>
+</TR>
+
+<TR>
+  <!-- Recitation 26 -->
+  <TD CLASS="sidebar"> Thur </TD> <TD CLASS="sidebar"> June </TD> <TD CLASS="sidebar" ALIGN="right"> 28 </TD>
+  <TD CLASS="sidebar"> &nbsp; </TD>
+  <TD CLASS="sidebar"> &nbsp; </TD>
+  <TD CLASS="sidebar"> &nbsp; </TD>
+  <TD CLASS="sidebar"> &nbsp;<STRONG> Asst 8 due </STRONG>  </TD>
+</TR>
+
+<TR>
+  <TD> Fri </TD> <TD> June </TD> <TD ALIGN="right"> <B>29</B> </TD>
+  <TD COLSPAN=2> &nbsp; <STRONG>Final</STRONG> 1:00pm-4:00pm, UC McConomy </TD>
+  <!-- <TD> &nbsp; </TD> -->
+  <TD> &nbsp; </TD>
+  <TD> &nbsp;  </TD>
+</TR>
+<TR>
+  <TD COLSPAN=7> <HR SIZE=1 NOSHADE> </TD>
+</TR>
+</TABLE>
+
+<HR>
+<P CLASS="bottom" ALIGN="center">
+  [ <A HREF="index.html">Home</A>
+  | <B CLASS="here">Schedule</B>
+  | <A HREF="assignments.html">Assignments</A>
+  | <A HREF="resources.html">Resources</A>
+  ] <BR>
+  [ 
+    <A HREF="http://www.cmu.edu/blackboard">Blackboard</A>
+  | academic.cs.15-122
+  ]
+</P>
+<P CLASS="bottom">
+  jamiemmt@cs <BR>
+  <A HREF="http://www.cs.cmu.edu/~jamiemmt/">Jamie&nbsp;Morgenstern</A>
+</P>
+</TD>
+</TR>
+</TABLE>
+</BODY>
+</HTML>

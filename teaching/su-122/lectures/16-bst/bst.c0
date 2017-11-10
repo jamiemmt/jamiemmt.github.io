@@ -1,0 +1,142 @@
+/* Binary search tree without balancing
+ * 15-122 Principles of Imperative Computation, Spring 2011
+ * Frank Pfenning
+ */
+
+#use <string>
+
+/* Client-side implementation */
+
+/* elements */
+struct wcount {
+  string word;			/* key */
+  int count;			/* data = wordcount */
+};
+typedef struct wcount* wcount;
+
+/* key comparison */
+int compare(string s1, string s2) {
+  return string_compare(s1,s2);
+}
+
+/* extracting keys from elements */
+string elem_key(wcount wc)
+//@requires wc != NULL;
+{
+  return wc->word;
+}
+
+/* Client-side interface declarations */
+typedef string key;
+typedef struct wcount* elem;	/* NULL must be an elem */
+key elem_key(elem e);
+int compare(key k1, key k2);
+
+/* Library-side interface declarations */
+typedef struct bst* bst;
+bst bst_new();
+void bst_insert(bst B, elem e)  /* replace if elem with same key as x in B */
+//@requires e != NULL;
+  ;
+elem bst_search(bst B, key k);  /* return NULL if not in tree */
+
+/* Implementation */
+struct tree {
+  elem data;
+  struct tree* left;
+  struct tree* right;
+};
+typedef struct tree* tree;
+
+struct bst {
+  tree root;
+};
+
+/* is_ordered(T, lower, upper) checks if all elements in T
+ * are strictly in the interval (elem_key(lower),elem_key(kupper)).
+ * lower = NULL represents -infinity; upper = NULL represents +infinity
+ */
+bool is_ordered(tree T, elem lower, elem upper) {
+  if (T == NULL) return true;
+  if (T->data == NULL) return false;
+  key k = elem_key(T->data);
+  if (!(lower == NULL || compare(elem_key(lower),k) < 0))
+    return false;
+  if (!(upper == NULL || compare(k,elem_key(upper)) < 0))
+    return false;
+  return is_ordered(T->left, lower, T->data)
+    && is_ordered(T->right, T->data, upper);
+}
+
+bool is_ordtree(tree T) {
+  /* initially, we have no bounds - pass in NULL */
+  return is_ordered(T, NULL, NULL);
+}
+
+bool is_bst(bst B) {
+  if (B == NULL) return false;
+  return is_ordtree(B->root);
+}
+
+bst bst_new()
+//@ensures is_bst(\result);
+{
+  bst B = alloc(struct bst);
+  B->root = NULL;
+  return B;
+}
+
+elem tree_search(tree T, key k)
+//@requires is_ordtree(T);
+//@ensures \result == NULL || compare(elem_key(\result), k) == 0;
+{
+  if (T == NULL) return NULL;
+  int r = compare(k, elem_key(T->data));
+  if (r == 0)
+    return T->data;
+  else if (r < 0)
+    return tree_search(T->left, k);
+  else //@assert r > 0;
+    return tree_search(T->right, k);
+}
+
+elem bst_search(bst B, key k)
+//@requires is_bst(B);
+//@ensures \result == NULL || compare(elem_key(\result), k) == 0;
+{
+  return tree_search(B->root, k);
+}
+
+/* tree_insert(T, e) returns the modified tree
+ * this avoids some complications in case T = NULL
+ */
+tree tree_insert(tree T, elem e)
+//@requires is_ordtree(T);
+//@ensures is_ordtree(\result);
+{
+  assert(e != NULL);		/* cannot insert NULL element */
+  if (T == NULL) {
+    /* create new node and return it */
+    T = alloc(struct tree);
+    T->data = e;
+    T->left = NULL; T->right = NULL;
+    return T;
+  }
+  int r = compare(elem_key(e), elem_key(T->data));
+  if (r == 0)
+    T->data = e;		/* modify in place */
+  else if (r < 0)
+    T->left = tree_insert(T->left, e);
+  else //@assert r > 0;
+    T->right = tree_insert(T->right, e);
+  return T;
+}
+
+void bst_insert(bst B, elem e)
+//@requires is_bst(B);
+//@ensures is_bst(B);
+{
+  assert(e != NULL);		/* cannot insert NULL element */
+  B->root = tree_insert(B->root, e);
+  return;
+}

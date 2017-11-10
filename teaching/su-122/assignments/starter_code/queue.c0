@@ -1,0 +1,63 @@
+/* Linked lists and queues
+ * 15-122 Principles of Imperative Computation, Fall 2010
+ * Frank Pfenning
+ */
+
+/* Interface to queues */
+
+typedef struct queue* queue;
+
+bool queue_empty(queue Q);/* O(1) */
+queue queue_new();/* O(1) */
+void enq(queue Q, elem e);/* O(1) */
+elem deq(queue Q);/* O(1) */
+
+/* Implementation of queues */
+
+struct queue {
+  list front;
+  list back;
+};
+
+bool is_queue(queue Q) {
+  return Q->front != NULL && Q->back != NULL
+    && is_segment(Q->front, Q->back);
+}
+
+bool queue_empty(queue Q)
+//@requires is_queue(Q);
+{
+  return Q->front == Q->back;
+}
+
+queue queue_new()
+//@ensures is_queue(\result);
+//@ensures queue_empty(\result);
+{
+  queue Q = alloc(struct queue);
+  list l = alloc(struct list);
+  Q->front = l;
+  Q->back = l;
+  return Q;
+}
+
+void enq(queue Q, elem e)
+//@requires is_queue(Q);
+//@ensures is_queue(Q);
+{
+  list l = alloc(struct list);
+  Q->back->data = e;
+  Q->back->next = l;
+  Q->back = l;
+}
+
+elem deq(queue Q)
+//@requires is_queue(Q);
+//@requires !queue_empty(Q);
+//@ensures is_queue(Q);
+{ //assert(!queue_empty(Q), "cannot deq from empty queue");
+  { elem e = Q->front->data;
+    Q->front = Q->front->next;
+    return e;
+  }
+}

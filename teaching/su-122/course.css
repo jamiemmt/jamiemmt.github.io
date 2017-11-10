@@ -1,0 +1,30 @@
+/* Standard style sheet for courses -fp */
+/* Override default to more readable sans-serif font */
+/* Base color: blue, base font: sans-serif */
+BODY, H1, H2, H3, H4, P, UL, OL, DL, LI, DT, DD, TH, TD, 
+I, B, EM, STRONG
+  { font-family: sans-serif; }
+A:link { color: #000000; }        /* new link, black */
+A:visited { color:#8B0D00; }     /* visited link, violet */
+A:hover { color: #CC9900; }       /* hover, gold */
+A:active { color: #FF0000; }      /* active, red */
+UL { padding-top: 1ex; padding-bottom: 1ex; }
+LI.wide { padding-top: 0.5ex; padding-bottom: 0.5ex; }
+TH { vertical-align: top; }
+TD { vertical-align: top; padding-left: 0.4ex; padding-right: 0.4ex; }
+TD.sidebar { background: #7BB295; } /* sidebar, left */
+TD.main { background: #95B9C7; }   /* main body, right */
+TD.small { font-size: small; }     /* small (subnodes) */
+TD.menu { font-size: small; }
+TD.submenu { font-size: x-small }
+TD.lecture { padding-left: 1em; }
+TD.planned { color: #BFBFBF; padding-left: 1em; }     /* planned lectures */
+TD.recitation { background: #BFBFBF; } /* recitation lines */
+TD.break { background: #BFBFBF; }  /* break days */
+DT { padding: 1ex 0ex; }           /* definition term */
+/* DT:first-child { padding: 0ex 0ex; } */           /* first definition term */
+/* DT.first { padding: 0ex 0ex; } */                 /* first definition term */
+P.bottom { font-size: small; }                 /* navigation bar, bottom */
+B.here { font-weight: bold; color: black; }  /* current node, black */
+PRE, TT, CODE { font-family: monospace; } /* font-size: large; */
+                                   /* fixed width fonts */
