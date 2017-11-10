@@ -1,0 +1,178 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Jamie Morgenstern's Homepage</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="style-drop.css">
+		<link rel="stylesheet" href="mystyle.css">
+</head>
+<body>
+	<label for="show-menu" class="show-menu">Show Menu</label>
+	<input type="checkbox" id="show-menu" role="button">
+	<ul id="menu">
+		<li><a href="#">Home</a></li>
+		<li>
+			<a href="#">Teaching &#65516;</a>
+			<ul class="hidden">
+				<li><a href="teaching/su-122/index.html"> Principles of Imperative Computation (Su 2012)</a></li>
+<!--				<li><a href="#">What We Do</a></li>-->
+			</ul>
+		</li>
+		<li><a href="#pubs">Publications</a></li>
+		<li>
+			<a href="workshops.html">Workshops/Tutorials &#65516;</a>
+			<ul class="hidden">
+			  <li><a href="workshops.html#agtds-ec">AGT + Data Science, EC 2016</a></li>
+			  <li><a href="workshops.html#dagstuhl">Dagstuhl 2017</a></li>
+			</ul>
+		</li>
+		<li><a href="#service">Service</a></li>
+<!--		<li><a href="#">Contact</a></li>-->
+	</ul>
+
+
+
+
+<div style="height:80px"></div>	
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-23385241-2', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+<div id="top">
+<div class="myphoto">&nbsp;</div>
+
+
+<div class="hello"><strong> Jamie Morgenstern</strong><br>
+  <!--</font>
+<font face="helvetica, ariel, 'sans serif'">--><br>
+  <a href="http://www.warrencenter.upenn.edu">Warren Center</a> Postdoctoral Fellow in the <a href="http://www.cis.upenn.edu">Computer Science Department</a><br>
+  <a href="http://www.upenn.edu">University of Pennsylvania</a><br>
+Office: 321 Levine Hall<br>
+<p> Email: 'jamiemor' at 'cis' dot 'upenn' dot 'edu' </p>
+<p>
+<hr >
+<p>
+	</div>
+</div>
+<!--<font face="palatino, helvetica, ariel, 'sans serif'">-->
+
+<div class="main-text">
+  I am a Warren Center postdoc in computer science and economics at
+the University of Pennsylvania, and am fortunate to be hosted
+by <a href="http://cis.upenn.edu/~mkearns">Michael
+Kearns</a>, <a href="http://cis.upenn.edu/~aaroth">Aaron Roth</a>,
+and <a href="https://sites.google.com/site/quaerereverum9/">Rakesh
+Vohra</a>. I recently completed my PhD working
+with <a href="http://www.cs.cmu.edu/~avrim">Avrim Blum</a>
+at <a href="http://www.cmu.edu">Carnegie Mellon University</a>. My
+research interests lie at the intersection of machine learning and
+economics; I spend a lot of my time thinking about machine learning
+for mechanism design, algorithmic game theory, privacy, and
+approximation algorithms. To see my CV, click <a href="cv.pdf"
+onClick="ga('send', 'event', { eventCategory: 'Download', eventAction:
+'cv', eventLabel: 'cv'});">here</a>.
+
+
+
+<h2 id="news"> News </h2> I'm very excited to announce that I will be joining
+the School of Computer Science at Georgia Tech in January 2018. I'll
+be spending Fall 2017 at Microsoft Research New York.
+
+<h2 id="service">Service </h2>
+
+In 2017, I'm serving on the PC
+for WWW, <a href="http://www.fatml.org/">FAT/ML</a>, <a href="http://netecon17.seas.wustl.edu/"> NetEcon</a>, <a href="https://2017.icml.cc/"> ICML</a>,
+and <a href="http://sigecom.org/ec17/">EC</a>.
+<h2>Funding</h2> I have been fortunate to be supported by the Simons
+Award for Graduate Students in Theoretical Computer Science
+(2014-2016), an NSF GFRP fellowship, as well as the Microsoft Research
+Graduate Women's Scholarship.
+
+
+<!--<h2> Working papers </h2>-->
+
+
+      <h2> Thesis </h2>
+
+      <p><b><a href="thesis-draft.pdf">Ph.D</a>, Market Algorithms: Incentives, Learning, and Privacy (Defended May 2015)</b><br> <a href="thesis-old.pdf">Original CMU Tech Report</a> (Not updated for typos)<br/> <p> 
+
+
+<h2 id="pubs">Publications </h2>
+<link rel="stylesheet" href="table-color.css">
+  <table class="t2" >
+
+<tbody>
+
+      <tr><th>ICML 2017</th><td> Fair Learning in Markovian Environments. </td><td>  Shahin Jabbari, Matthew Joseph, Michael Kearns, Jamie Morgenstern, and Aaron Roth.</td><td></td></tr>
+
+  <tr><th>EC 2017</th><td>Fairness Incentives for Myopic Agents. </td><td>  Sampath Kannan, Michael Kearns, Jamie Morgenstern, Mallesh Pai, Aaron Roth, Rakesh Vohra, and Zhiwei Steven Wu.</td><td><a href="http://arxiv.org/abs/1705.02321">arxiv</a></td></tr>
+  
+    <tr><th>WINE 2016</th><td> Strategic Network Formation with Attack and Immunization </td><td>  Sanjeev Goyal, Shahin Jabbari, Michael Kearns, Sanjeev Khanna, Jamie Morgenstern.</td><td><a href="https://arxiv.org/abs/1511.05196">arxiv</a></td></tr>
+
+    <tr><th>NIPS 2016</th><td> Fairness in Learning: Classic and Contextual Bandits. </td><td>  Matthew Joseph, Michael Kearns, Jamie Morgenstern, and Aaron Roth.</td><td><a href="http://arxiv.org/abs/1605.07139">arxiv</a></td></tr>
+    
+  <tr><th>EC 2016</th><td><a href="papers/simple-complements.pdf">Simple Mechanisms for Agents with Complements</a> </td><td> Michal Feldman, Ophir Friedler, Jamie Morgenstern, Guy Reiner</td><td><a href="http://arxiv.org/abs/1603.07939">arxiv</a></td></tr>
+  
+  <tr><th>COLT 2016</th><td><a href="papers/multi-nips.pdf">Learning Simple Auctions</a> </td><td> Jamie Morgenstern, Tim Roughgarden</td><td><a href="http://arxiv.org/abs/1604.03171">arxiv</a></td></tr>
+
+  
+  <tr><th>STOC 2016</th><td><a href="papers/pricing-long.pdf">Do Prices Coordinate Markets?</a> <a href="papers/pricing-short.pdf">(short version)</a></td><td>Justin Hsu, Jamie Morgenstern, Ryan Rogers, Aaron Roth, Rakesh Vohra</td><td><a href="http://arxiv.org/abs/1511.00925">arxiv</a></td></tr>
+
+
+<tr><th>NIPS 2015</th>
+ <td><a href="papers/auction-pseudo.pdf" style="display:block;">The Pseudo-Dimension of Nearly Optimal Auctions </a><p style="color:red;">Selected for a spotlight presentation,<!-- along with 16.7% of accepted papers and --> along with 3.6% of submissions.</p></td>
+  <td>Jamie Morgenstern and Tim Roughgarden</td><td><a href="http://arxiv.org/abs/1506.03684">arxiv</a></td></tr>
+
+<tr><th>EC 2015</th><td><a href="papers/private-ttc.pdf">Private Pareto-Optimal Exchange</a></td><td>Sampath Kannan, Jamie Morgenstern, Ryan Rogers, and Aaron Roth</td><td><a href="http://arxiv.org/abs/1407.2641">arxiv</a></td></tr>
+
+<tr><th>EC 2015</th><td><a href="papers/simple-strategies.pdf">Simple Auctions with Simple Strategies</a></td><td>Nikhil Devanur, Jamie Morgenstern, Vasilis Syrgkanis, S. Matthew Weinberg</td><td></td></tr>
+
+
+<tr><th>EC 2015</th><td><a href="papers/opaque-transactions.pdf">Learning What's Going On: Reconstruction Preferences and Priorities from Opaque Transactions</a></td><td>Avrim Blum, Yishay Mansour, Jamie Morgenstern</td><td><a href="http://arxiv.org/abs/1408.6575">arxiv</a></td></tr>
+
+
+<tr><th>IJCAI 2015</th><td><a href="papers/impartial-review.pdf">Impartial Peer Review</a></td><td>David Kurokawa, Omer Lev, Jamie Morgenstern, Ariel Procaccia</td><td></td></tr>
+
+<tr><th>SODA 2015</th><td><a href="papers/school-truth.pdf">Approximately Stable, School Optimal, and Student-Truthful Many-to-One Matchings (via Differential Privacy)</a></td><td>Sampath Kannan, Jamie Morgenstern, Aaron Roth, Steven Wu</td><td><a href="http://arxiv.org/abs/1407.2640">arxiv</a></td></tr>
+
+
+<tr><th>AAAI 2015</th><td>Learning Valuation Distributions from Partial Observation</td><td>Avrim Blum, Yishay Mansour, Jamie Morgenstern</td><td><a href="http://arxiv.org/abs/1407.2855">arxiv</a></td></tr>
+
+<tr><th>ITCS 2015</th><td><a href="papers/privacy-seq.pdf">Privacy-preserving Public Information in Sequential Games</a></td><td>Avrim Blum, Jamie Morgenstern, Ankit Sharma, Adam Smith</td><td><a href="http://arxiv.org/abs/1402.4488">arxiv</a></td></tr>
+
+
+<tr><th>AAAI 2013</th><td><a href="papers/aaai-13.pdf">How Bad is Selfish Voting?</a></td><td>Simina Br&acirc;nzei, Ioannis Caragiannis, Jamie Morgenstern, Ariel D. Procaccia</td><td></td></tr>
+
+
+<tr><th> COSN 2013</th><td> Hierarchical community decomposition via oblivious routing techniques </td><td>William Sean Kennedy, Jamie Morgenstern, Gordon Wilfong, Lisa Zhang</td><td></td></tr>
+
+
+<tr><th>APPROX 2012</th><td><a href="papers/approx-12.pdf">Additive Approximation for Near-Perfect Phylogeny Construction</a></td><td>Pranjal Awasthi, Avrim Blum, Jamie Morgenstern, Or Sheffet</td><td></td></tr>
+
+
+<tr><th>AAAI 2012</th><td><a href="papers/aaai-12.pdf">On Maxsum Fair Cake Divisions</a></td><td>Steven J. Brams, Michal Feldman, John K. Lai, Jamie Morgenstern, Ariel D. Procaccia</td><td></td></tr>
+
+
+
+<tr><th>STM 2011</th><td><a href="papers/stm11-lpfcs-preproc.pdf">A proof-carrying File system with Revocable and Use-once Certificates</a> (Conference on Security and Trust Management)</td><td>Jamie Morgenstern, Deepak Garg, Frank Pfenning</td><td></td></tr>
+
+
+<tr><th>ICFP 2010</th><td><a href="papers/ml10sectyp.pdf">Security-typed Programming Within Dependently Typed Programming</a></td><td>Jamie Morgenstern, Dan Licata</td><td></td></tr>
+
+</tbody>
+</table>
+
+</div>
+
+
+</body>
+</html>
