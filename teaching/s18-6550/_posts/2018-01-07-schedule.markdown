@@ -1,0 +1,160 @@
+---
+title: Tentative Schedule for Spring 6550
+layout: post
+---
+
+
+<head>
+  
+  <script type="text/javascript" src="/js/lib/dummy.js"></script>
+  <link rel="stylesheet" type="text/css" href="/css/result-light.css">
+       <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+       <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/marked/0.2.9/marked.min.js"></script>
+    
+  <style type="text/css">
+    body {
+    max-width: 400ex;
+    margin: 0em auto;
+}
+table {
+    width: 40000%;
+}
+textarea {
+    width:400%;
+    max-width:400%;
+    min-height: 0em;
+    padding: .5em;
+    border: #ccc solid 1px;
+    border-radius: 5px;
+    font-family: Lucida Console, monospace;
+    background-color: rgba(128,128,128,.1);
+    color: rgba(0,0,0,.5);}
+  </style>
+
+      
+
+
+
+
+<script type='text/javascript'>//<![CDATA[
+var VanillaRunOnDomReady = function() {
+marked.setOptions({
+  gfm: true,
+  tables: true,
+  breaks: false,
+  pedantic: false,
+  sanitize: true,
+  smartLists: true,
+  smartypants: false,
+  langPrefix: 'lang-'
+});
+var result = document.getElementById('result');
+var code = document.getElementById('code');
+
+code.onchange = function(){
+    result.innerHTML = marked(code.value);
+    
+    var o = [];
+    code.value.match(/^(\|([^\|]-+[^\|])+)(.*)$/gim).forEach(function(t,tn){
+        o[tn] = [];
+        o[tn]['rw'] = 0;
+        t.match(/\|([^\|]-+[^\|])?/gim).forEach(function(c,cn,tc){
+            o[tn]['rw'] += o[tn][cn] = c.length;
+        });
+        o[tn].forEach(function(cw,cn){
+            !cw*1||(o[tn][cn] = Math.round(100 / o[tn]['rw'] * o[tn][cn]) + '%');
+        });
+        delete o[tn]['rw'];
+        o[tn].length--;
+    });
+    
+    [].forEach.call(document.getElementsByTagName('table'),function(rt,rtn){
+      rt.setAttribute('class','table');
+      [].forEach.call(rt.children[0].children[0].children,function(rtr,rtrn){
+          console.log(rtr);
+            rtr.style.width = o[rtn][rtrn];
+      });
+    });
+    console.log('Cell sizes of each table:',o);
+}
+
+code.onchange();
+}
+
+var alreadyrunflag = 0;
+
+if (document.addEventListener)
+    document.addEventListener("DOMContentLoaded", function(){
+        alreadyrunflag=1; 
+        VanillaRunOnDomReady();
+    }, false);
+else if (document.all && !window.opera) {
+    document.write('<script type="text/javascript" id="contentloadtag" defer="defer" src="javascript:void(0)"><\/script>');
+    var contentloadtag = document.getElementById("contentloadtag")
+    contentloadtag.onreadystatechange=function(){
+        if (this.readyState=="complete"){
+            alreadyrunflag=1;
+            VanillaRunOnDomReady();
+        }
+    }
+}
+
+window.onload = function(){
+  setTimeout("if (!alreadyrunflag){VanillaRunOnDomReady}", 0);
+}//]]> 
+
+</script>
+</head>
+
+
+
+  <div class="container">
+<textarea id="code" style="display:none;"  width="800%">
+|------------|----------|-----------------
+
+</textarea>
+<div id="result" style="display:none;"></div>
+</div>  
+
+
+
+| Date        | Subject           | Notes  | References |
+|------------ |------------- | ----- | ------- |
+|   1/8 <br> Monday      |  Course Policies, Procedures <br>  **Probability Basics** ||
+|  1/10 <br> Wednesday     |  Deterministic MST algorithms | | |
+|    1/15 <br> Monday  (MLK Day) | No class | ||
+|     1/17 <br> Wednesday  |    Randomized MSTs     |    ||
+|     1/22 <br> Monday  |  Shortest Paths   |    ||
+|  1/24 <br> Wednesday      |   Low-stretch Trees | | |
+|  1/29 <br> Monday      |   Matchings in General Graphs: combinatorial algorithms    |    |||
+1/31 <br> Wednesday      |    Matchings in General Graphs: linear programming | | |
+|  2/5 <br> Monday      |  Max-Weight Matchings in Graphs: A Pricing algorithm.   |    ||
+|  2/7 <br> Wednesday      |   Matchings in Graphs: Algebraic Algorithms | | |
+|  2/12 <br> Monday      |  Smoothed Analysis    |    ||
+|  2/14 <br> Wednesday      |    Online Learning and the Multiplicative Weights Framework  | | |
+|  2/19 <br> Monday      | Applications of MW: zero-sum-games, solving LPs   |    ||
+|  2/21 <br> Wednesday      |Applications of MW: max-flows using electrical flows.  | | |
+|  2/26 <br> Monday      |     Gradient Descent. Yet another low-regret algorithm   |    ||
+|  2/28 <br> Wednesday      |    Mirror Descent: generalizing MW and GD.  | | |
+|  3/5 <br> Monday      | The Ellipsoid Algorithm: an overview | ||
+|  3/7 <br> Wednesday      | Ellipsoid wrap-up. Interior-point Methods: an overview | | |
+|  3/12 <br> Monday      | Concentration of Measure: "Chernoff-Hoeffding" Bounds.      |    |||
+3/14 <br> Wednesday      |   Dimension Reduction: JL and related topics | | |
+|  3/19 <br> Monday      |   Spring break! | | |
+|  3/21 <br> Wednesday      | Spring break!      |    ||
+|  3/26 <br> Monday      | Streaming I: Computing Frequency Moments and JL    |    ||
+|  3/28 <br> Wednesday      |   Dimension Reduction: Singular Value Decompositions      |    ||
+|  4/2 <br> Monday      |  Online Algorithms: Rent-or-Buy and Paging, Online Primal-Dual  | | |
+|  4/4 <br> Wednesday      |  Approximation Algorithms     |    ||
+|  4/9 <br> Monday      |  Matroids and Matroid Intersection     |    ||
+|    4/11 <br> Wednesday   | Submodularity  | | |
+|   4/16 <br> Monday    | Fixed-Parameter Tractable Algorithms       |    ||
+|  4/18 <br> Wednesday      | Final Project Presentations | | |
+|  4/20 <br> Monday      |       Final Project Presentations| ||
+|  4/25 <br> Wednesday      | Reading period  | | |
+|  4/30 <br> Monday      |       |    ||
+| 5/2 <br> Wednesday <br> Final exam slot 2:50-5:40 pm      | Final Project Presentations  | | |
+
+
+
+<!--$$\frac{1}{x}$$ Does this work?-->
