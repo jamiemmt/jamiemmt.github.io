@@ -120,9 +120,8 @@ window.onload = function(){
 
 | Date        | Subject           | Notes  | References |
 |------------ |------------- | ----- | ------- |
-|   1/8 <br> Monday      |  CLASS CANCELLED ||
-
-|  1/10 <br> Wednesday     |  Course Policies, Procedures <br>  **Probability Basics** | <a href ="/teaching/s18-6550/notes/notes-lec1-probability.pdf">  My notes</a>|
+|   1/8 <br> Monday      |  CLASS CANCELLED |||
+|  1/10 <br> Wednesday     |  Course Policies, Procedures <br>  **Probability Basics** | <a href ="/teaching/s18-6550/notes/notes-lec1-probability.pdf">  My notes</a>||
 |    1/15 <br> Monday  (MLK Day) | No class | ||
 |     1/17 <br> Wednesday  | CLASS CANCELLED || |
 |     1/22 <br> Monday  |     Deterministic MST algorithms |<a href ="/teaching/s18-6550/notes/notes-lec2-mst.pdf">  My notes</a> | | 
