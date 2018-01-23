@@ -124,33 +124,33 @@ window.onload = function(){
 
 |  1/10 <br> Wednesday     |  Course Policies, Procedures <br>  **Probability Basics** ||
 |    1/15 <br> Monday  (MLK Day) | No class | ||
-|     1/17 <br> Wednesday  | Deterministic MST algorithms | | |
-|     1/22 <br> Monday  |      Randomized MSTs     |    ||
-|  1/24 <br> Wednesday      |   Shortest Paths   |    ||
-|  1/29 <br> Monday      |   Low-stretch Trees | | |
-1/31 <br> Wednesday      |    Matchings in General Graphs: combinatorial algorithms    |    |||
-|  2/5 <br> Monday      |  Matchings in General Graphs: linear programming | | |
-|  2/7 <br> Wednesday      |   Max-Weight Matchings in Graphs: A Pricing algorithm.   |    ||
-|  2/12 <br> Monday      |  Matchings in Graphs: Algebraic Algorithms | | |
-|  2/14 <br> Wednesday      |    Smoothed Analysis    |    ||
-|  2/19 <br> Monday      | Online Learning and the Multiplicative Weights Framework  | | |
-|  2/21 <br> Wednesday      |Applications of MW: zero-sum-games, solving LPs   |    ||
-|  2/26 <br> Monday      |     Applications of MW: max-flows using electrical flows.  | | |
-|  2/28 <br> Wednesday      |    Gradient Descent. Yet another low-regret algorithm   |    ||
-|  3/5 <br> Monday      | Mirror Descent: generalizing MW and GD.  | | |
-|  3/7 <br> Wednesday      | The Ellipsoid Algorithm: an overview | ||
-|  3/12 <br> Monday      | Ellipsoid wrap-up. Interior-point Methods: an overview | | |
-3/14 <br> Wednesday      |   Concentration of Measure: "Chernoff-Hoeffding" Bounds.      |    |||
+|     1/17 <br> Wednesday  | CLASS CANCELLED || |
+|     1/22 <br> Monday  |     Deterministic MST algorithms | | | 
+|  1/24 <br> Wednesday      | Randomized MSTs     |    ||
+|  1/29 <br> Monday      |    Shortest Paths   |    ||
+1/31 <br> Wednesday      |   Low-stretch Trees | | |
+|  2/5 <br> Monday      |    Matchings in General Graphs: combinatorial algorithms    |    |||
+|  2/7 <br> Wednesday      |  Matchings in General Graphs: linear programming | | |
+|  2/12 <br> Monday      |   Max-Weight Matchings in Graphs: A Pricing algorithm.   |    ||
+|  2/14 <br> Wednesday      |  Matchings in Graphs: Algebraic Algorithms | | |
+|  2/19 <br> Monday      |    Smoothed Analysis    |    ||
+|  2/21 <br> Wednesday      |AOnline Learning and the Multiplicative Weights Framework  | | |
+|  2/26 <br> Monday      | pplications of MW: zero-sum-games, solving LPs   |    ||
+|  2/28 <br> Wednesday      |     Applications of MW: max-flows using electrical flows.  | | |
+|  3/5 <br> Monday      |    Gradient Descent. Yet another low-regret algorithm   |    ||
+|  3/7 <br> Wednesday      | Mirror Descent: generalizing MW and GD.  | | |
+|  3/12 <br> Monday      | The Ellipsoid Algorithm: an overview | ||
+3/14 <br> Wednesday      | Ellipsoid wrap-up. Interior-point Methods: an overview | | |
 |  3/19 <br> Monday      |   Spring break! | | |
 |  3/21 <br> Wednesday      | Spring break!      |    ||
-|  3/26 <br> Monday      | Dimension Reduction: JL and related topics | | |
-|  3/28 <br> Wednesday      |   Streaming I: Computing Frequency Moments and JL    |    ||
-|  4/2 <br> Monday      |  Dimension Reduction: Singular Value Decompositions      |    ||
-|  4/4 <br> Wednesday      |  Online Algorithms: Rent-or-Buy and Paging, Online Primal-Dual  | | |
-|  4/9 <br> Monday      |  Approximation Algorithms     |    ||
-|    4/11 <br> Wednesday   | Matroids and Matroid Intersection     |    ||
-|   4/16 <br> Monday    | Submodularity  | | |
-|  4/18 <br> Wednesday      | Fixed-Parameter Tractable Algorithms       <br> OR <br> Final Project Presentations | | |
+|  3/26 <br> Monday      |   Concentration of Measure: "Chernoff-Hoeffding" Bounds.      |    ||| 
+|  3/28 <br> Wednesday      | Dimension Reduction: JL and related topics | | |
+|  4/2 <br> Monday      |   Streaming I: Computing Frequency Moments and JL    |    ||
+|  4/4 <br> Wednesday      |  Dimension Reduction: Singular Value Decompositions      |    ||
+|  4/9 <br> Monday      |  Online Algorithms: Rent-or-Buy and Paging, Online Primal-Dual  | | |
+|    4/11 <br> Wednesday   |  Approximation Algorithms     |    ||
+|   4/16 <br> Monday    | Matroids and Matroid Intersection     |    ||
+|  4/18 <br> Wednesday      Submodularity  <br>OR Fixed-Parameter Tractable Algorithms       <br> OR <br> Final Project Presentations | | |
 |  4/20 <br> Monday      |       Final Project Presentations| ||
 |  4/25 <br> Wednesday      | Reading period  | | |
 |  4/30 <br> Monday      |       |    ||
