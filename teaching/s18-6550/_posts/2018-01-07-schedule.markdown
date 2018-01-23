@@ -119,7 +119,7 @@ window.onload = function(){
 
 
 | Date        | Subject           | Notes  | References |
-|------------ |------------- | ----- | ------- |
+|------------ |------------- |------------- |------------- |
 |   1/8 <br> Monday      |  CLASS CANCELLED |||
 |  1/10 <br> Wednesday     |  Course Policies, Procedures <br>  **Probability Basics** | <a href ="/teaching/s18-6550/notes/notes-lec1-probability.pdf">  My notes</a>||
 |    1/15 <br> Monday  (MLK Day) | No class | ||
