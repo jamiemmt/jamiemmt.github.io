@@ -150,7 +150,7 @@ window.onload = function(){
 |  4/9 <br> Monday      |  Online Algorithms: Rent-or-Buy and Paging, Online Primal-Dual  | | |
 |    4/11 <br> Wednesday   |  Approximation Algorithms     |    ||
 |   4/16 <br> Monday    | Matroids and Matroid Intersection     |    ||
-|  4/18 <br> Wednesday      Submodularity  <br>OR Fixed-Parameter Tractable Algorithms       <br> OR <br> Final Project Presentations | | |
+|  4/18 <br> Wednesday |      Submodularity  <br>OR Fixed-Parameter Tractable Algorithms       <br> OR <br> Final Project Presentations | | |
 |  4/20 <br> Monday      |       Final Project Presentations| ||
 |  4/25 <br> Wednesday      | Reading period  | | |
 |  4/30 <br> Monday      |       |    ||
