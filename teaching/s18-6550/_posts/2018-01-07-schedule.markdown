@@ -7,15 +7,7 @@ layout: post
 <head>
 
 
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-  tex2jax: {
-    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
-    inlineMath: [['$','$']]
-  }
-});
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML'></script>
 
   <script type="text/javascript" src="/js/lib/dummy.js"></script>
   <link rel="stylesheet" type="text/css" href="/css/result-light.css">
