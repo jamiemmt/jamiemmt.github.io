@@ -37,4 +37,12 @@ arcs $A'\subseteq A$ such that for every $v\in V$:
 So, an arborescence contains a directed path from every vertex to the
 root $r$. A <b> minimum-cost $r$-arborescence</b> is just an
 $r$-arborescence that has the smallest weight according to a weight
-function $w : A \to \mathbb{R}$.
+function $w : A \to \mathbb{R}$. Note that running a depth-first
+search from the root on the reversed set of arcs in $G$ makes it easy
+to check if it contains an $r$-arborescence.
+
+
+We'd like to find a (fast) algorithm for computing minimum-weight
+arborescences. The MST problem had lots of nice properties, and it's
+natural to ask if some of those extend to this problem as well. In
+particular, the
