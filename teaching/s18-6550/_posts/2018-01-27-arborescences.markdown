@@ -52,6 +52,7 @@ the min-weight arc into the connected component containing $r$ in each
 round. However, that won't necessarily result in an optimal
 arborescence.
 
+```latex {cmd=true hide=true}
 \documentclass{standalone}
 \usepackage{tikz}
 \begin{document}
