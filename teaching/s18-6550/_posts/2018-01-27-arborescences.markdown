@@ -15,6 +15,9 @@ MathJax.Hub.Config({
 
        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/marked/0.2.9/marked.min.js"></script>
 
+<script src="mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad:true});</script>
+
 </head>
 
 
@@ -52,10 +55,9 @@ the min-weight arc into the connected component containing $r$ in each
 round. However, that won't necessarily result in an optimal
 arborescence.
 
-```latex {cmd=true hide=true}
-\documentclass{standalone}
-\usepackage{tikz}
-\begin{document}
-\begin{tikzpicture}
-\end{tikzpicture}
-\end{document}'''
+<div class="mermaid">
+graph LR
+      A --- B
+      B-->C[fa:fa-ban forbidden]
+      B-->D(fa:fa-spinner);
+</div>
