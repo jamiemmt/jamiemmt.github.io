@@ -14,7 +14,7 @@ layout: post
     
   <style type="text/css">
     body {
-    max-width: 200ex;
+    max-width: 400ex;
     margin: 0em auto;
 }
 table {
