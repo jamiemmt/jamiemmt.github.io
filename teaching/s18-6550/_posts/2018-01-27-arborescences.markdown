@@ -50,4 +50,5 @@ remove certain edges from a graph when constructing a MST; greedy
 algorithms generally work for the MST problem. For the min-cost
 $r$-arborescence problem, an analogous greedy building up would add
 the min-weight arc into the connected component containing $r$ in each
-round. However, that won't necessarily be the optimal 
+round. However, that won't necessarily result in an optimal
+arborescence
