@@ -26,7 +26,7 @@ pairs, which are called <b> arcs </b> , a graph $G = (V, A)$ now
 containing vertices $V$ and arcs or directed edges $A$. Suppose some
 specific vertex $r\in V$ is denoted as the root of $G$.
 
-<b> Definition 1 < /b> <i> <b> $r$ <.b>- arborescence</i> Given a
+<b> Definition 1 </b> <i> <b> $r$ </b>- arborescence</i> Given a
 graph $G = (V, A)$ with root $r$, and $r$-arborescence is a set of
 arcs $A'\subseteq A$ such that for every $v\in V$:
 
