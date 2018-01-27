@@ -16,7 +16,7 @@ layout: post
 This post describes the generalization of computing minimum spanning
 trees on undirected graphs to the setting of directed graphs. In this
 setting, we refer to edges as ordered pairs rather than unordered
-pairs, which are called <b> arcs <b> , a graph $G = (V, A)$ now
+pairs, which are called <b> arcs </b> , a graph $G = (V, A)$ now
 containing vertices $V$ and arcs or directed edges $A$. Suppose some
 specific vertex $r\in V$ is denoted as the root of $G$.
 
