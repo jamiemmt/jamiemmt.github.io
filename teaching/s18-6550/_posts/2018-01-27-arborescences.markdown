@@ -51,4 +51,11 @@ algorithms generally work for the MST problem. For the min-cost
 $r$-arborescence problem, an analogous greedy building up would add
 the min-weight arc into the connected component containing $r$ in each
 round. However, that won't necessarily result in an optimal
-arborescence
+arborescence.
+
+\documentclass{standalone}
+\usepackage{tikz}
+\begin{document}
+\begin{tikzpicture}
+\end{tikzpicture}
+\end{document}
