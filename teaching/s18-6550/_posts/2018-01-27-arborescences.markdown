@@ -1,3 +1,12 @@
+<head>
+
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML'></script>
+
+       <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/marked/0.2.9/marked.min.js"></script>
+
+</head>
+
 ---
 title: Moving From Undirected to Directed Graphs, MSTs to Arborescences
 layout: post
