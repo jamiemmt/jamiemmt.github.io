@@ -18,6 +18,14 @@ MathJax.Hub.Config({
 <script src="https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js"></script>
 <script>mermaid.initialize({startOnLoad:true});</script>
 
+
+  <style type="text/css">
+    body {
+    max-width: 400ex;
+    margin: 0em auto;
+}
+</style>
+
 </head>
 
 
