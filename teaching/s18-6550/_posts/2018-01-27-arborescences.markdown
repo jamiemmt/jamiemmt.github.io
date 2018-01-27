@@ -21,7 +21,7 @@ MathJax.Hub.Config({
 
   <style type="text/css">
     body {
-    max-width: 200ex;
+    max-width: 140ex;
     margin: 0em auto;
 }
 </style>
