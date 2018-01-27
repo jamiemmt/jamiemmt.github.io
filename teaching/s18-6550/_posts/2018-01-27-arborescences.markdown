@@ -1,3 +1,11 @@
+
+
+---
+title: Moving From Undirected to Directed Graphs, MSTs to Arborescences
+layout: post
+---
+
+
 <head>
 
 
@@ -6,14 +14,6 @@
        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/marked/0.2.9/marked.min.js"></script>
 
 </head>
-
----
-title: Moving From Undirected to Directed Graphs, MSTs to Arborescences
-layout: post
----
-
-
-
 
 This post describes the generalization of computing minimum spanning
 trees on undirected graphs to the setting of directed graphs. In this
