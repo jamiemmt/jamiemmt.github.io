@@ -15,7 +15,7 @@ MathJax.Hub.Config({
 
        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/marked/0.2.9/marked.min.js"></script>
 
-<script src="mermaid.min.js"></script>
+<script src="https://unpkg.com/mermaid@7.1.2/src/mermaid.js"></script>
 <script>mermaid.initialize({startOnLoad:true});</script>
 
 </head>
