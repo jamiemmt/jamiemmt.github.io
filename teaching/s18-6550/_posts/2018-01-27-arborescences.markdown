@@ -22,5 +22,8 @@ specific vertex $r\in V$ is denoted as the root of $G$.
 
 <b> Definition 1 < /b> <i> <b> $r$ <.b>- arborescence</i> Given a
 graph $G = (V, A)$ with root $r$, and $r$-arborescence is a set of
-arcs $A'\subseteq A$ such that
+arcs $A'\subseteq A$ such that for every $v\in V$:
+
+* There is some $(v, v') \in A'$
+* There is a directed path from $v$ to $r$ using only arcs in $A'$.
 
