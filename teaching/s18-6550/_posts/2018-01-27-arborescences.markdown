@@ -61,11 +61,28 @@ algorithms generally work for the MST problem. For the min-cost
 $r$-arborescence problem, an analogous greedy building up would add
 the min-weight arc into the connected component containing $r$ in each
 round. However, that won't necessarily result in an optimal
-arborescence.
+arborescence:
 
 <div class="mermaid">
 graph LR
-      a --> r
-      b-->r
-      a-->b;
+r
+C --3-->r
+C --1-->A
+A -- 4 --> r
 </div>
+
+since a greedy approach would take $(C, r)$ and then need to take both
+$(c, a)$ and $(a,r)$ to complete the arborescence, at which point the
+arc $(a,r)$ would be unnecessary. This example shows more generally
+that basic greedy approaches to this problem won't work.
+
+The algorithm that solves this problem is therefore more sophisticated
+than in the undirected case. Chu-Liu [CL65], Edmonds [Edm67], and Bock
+[Boc71] discovered this algorithm independently. We will follow Karp’s
+description of Edmonds' algorithm.
+
+The "boundary" edges of a vertex is usually denoted by $\partial(v)$ (or
+\partial(A)$); the set of edges leaving a vertex is denoted
+$\partial^+(v)$, and the edges entering a vertex is denoted
+$\partial^-(v)$. This notation is overloaded to also denote the set of
+edges entering or leaving a <i> set </i> of vertices as well.
