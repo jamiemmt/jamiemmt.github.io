@@ -107,13 +107,6 @@ window.onload = function(){
 </script>
 </head>
 
-<p>
-  When \(a \ne 0\), there are two solutions to \(ax^2 + bx + c = 0\) and they are
-  $$x = {-b \pm \sqrt{b^2-4ac} \over 2a}.$$
-</p>
-
-
-  <div class="container">
 <textarea id="code" style="display:none;"  width="800%">
 |------------|----------|-----------------
 
@@ -159,7 +152,3 @@ window.onload = function(){
 |  4/25 <br> Wednesday      | Reading period  | | |
 |  4/30 <br> Monday      |       |    ||
 | 5/2 <br> Wednesday <br> Final exam slot 2:50-5:40 pm      | Final Project Presentations  | | |
-
-
-
-$$\frac{1}{x}$$ Does this work?
