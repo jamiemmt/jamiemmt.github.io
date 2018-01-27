@@ -4,33 +4,9 @@ layout: post
 ---
 
 
-<head>
-  
-  <script type="text/javascript" src="/js/lib/dummy.js"></script>
-  <link rel="stylesheet" type="text/css" href="/css/result-light.css">
-       <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
-       <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/marked/0.2.9/marked.min.js"></script>
-    
-  <style type="text/css">
-    body {
-    max-width: 400ex;
-    margin: 0em auto;
-}
-table {
-    width: 200%;
-}
-textarea {
-    width:200%;
-    max-width:200%;
-    min-height: 0em;
-    padding: .5em;
-    border: #ccc solid 1px;
-    border-radius: 5px;
-    font-family: Lucida Console, monospace;
-    background-color: rgba(128,128,128,.1);
-    color: rgba(0,0,0,.5);}
-  </style>
 
 
-This post refers to the 
+This post describes the generalization of computing minimum spanning
+trees on undirected graphs to the setting of directed graphs. In this
+setting, we refer to edges as \emph{directed} rather than
       
