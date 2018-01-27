@@ -45,4 +45,9 @@ to check if it contains an $r$-arborescence.
 We'd like to find a (fast) algorithm for computing minimum-weight
 arborescences. The MST problem had lots of nice properties, and it's
 natural to ask if some of those extend to this problem as well. In
-particular, the
+particular, the cut and cycle rules mean one can greedily add and
+remove certain edges from a graph when constructing a MST; greedy
+algorithms generally work for the MST problem. For the min-cost
+$r$-arborescence problem, an analogous greedy building up would add
+the min-weight arc into the connected component containing $r$ in each
+round. However, that won't necessarily be the optimal 
