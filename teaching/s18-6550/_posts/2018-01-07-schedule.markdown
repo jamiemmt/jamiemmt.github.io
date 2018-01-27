@@ -9,9 +9,6 @@ layout: post
 
 <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML'></script>
 
-  <script type="text/javascript" src="/js/lib/dummy.js"></script>
-  <link rel="stylesheet" type="text/css" href="/css/result-light.css">
-       <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/marked/0.2.9/marked.min.js"></script>
 
     
