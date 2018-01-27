@@ -81,8 +81,11 @@ than in the undirected case. Chu-Liu [CL65], Edmonds [Edm67], and Bock
 [Boc71] discovered this algorithm independently. We will follow Karp’s
 description of Edmonds' algorithm.
 
-The "boundary" edges of a vertex is usually denoted by $\partial(v)$ (or
-\partial(A)$); the set of edges leaving a vertex is denoted
-$\partial^+(v)$, and the edges entering a vertex is denoted
-$\partial^-(v)$. This notation is overloaded to also denote the set of
-edges entering or leaving a <i> set </i> of vertices as well.
+The "boundary" edges of a vertex is usually denoted by $\partial_v$;
+the set of edges leaving a vertex is denoted $\partial^+_v$, and the
+edges entering a vertex is denoted $\partial^-_v$. This notation is
+overloaded to also denote the set of edges entering or leaving a <i>
+set </i> of vertices as well.
+
+For a given vertex $v$, we'll keep track of the vertex's least
+expensive edges leaving $v$: define $M_v = \min_{a \partial^+_v} w_a$.
