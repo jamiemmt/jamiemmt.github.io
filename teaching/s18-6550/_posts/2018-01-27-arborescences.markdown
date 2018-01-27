@@ -9,4 +9,7 @@ layout: post
 This post describes the generalization of computing minimum spanning
 trees on undirected graphs to the setting of directed graphs. In this
 setting, we refer to edges as \emph{directed} rather than
-      
+
+
+
+$$ e^x $$
