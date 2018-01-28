@@ -92,14 +92,15 @@ set </i> of vertices as well.
 
 For a given vertex $v$, we'll keep track of the weight of the least
 expensive edge leaving $v$: define $M_v = \min_{a \partial^+_v} w_a$.
-Define a new weight function $w'_a = w_a - M_v$ for every $a \in
-\partial^+_v$; this guarantees every vertex has an outgoing arc of
-weight $0$. it's useful to think of $M_v$ as the weight that must be
-paid for any arborescence to contain $v$. The next lemma states that this tranformation doesn't change the problem in any real way.
+Define a graph $G'$ which is otherwise identical to $G$ but for a new
+weight function $w'_a = w_a - M_v$ for every $a \in \partial^+_v$;
+this guarantees every vertex has an outgoing arc of weight $0$. it's
+useful to think of $M_v$ as the weight that must be paid for any
+arborescence to contain $v$. The next lemma states that this
+tranformation doesn't change the problem in any real way.
 
-<div class="lemma"> $T$ is a min-weight $r$-arborescence for $(G,w)$
-$\Leftrightarrow$ $T$ is a min-weight $r$-arborescence for $(G,
-w')$. </div>
+<div class="lemma"> $T$ is a min-weight $r$-arborescence for $G$
+$\Leftrightarrow$ $T$ is a min-weight $r$-arborescence for $G'$. </div>
 
 Given the above lemma, we consider an algorithm that first includes
 some $0$-weight arc out of each vertex $v$; if this is an arborescence
@@ -111,4 +112,27 @@ $C$ into a single node, removing arcs inside $C$ and replacing any
 edges $(v, w)$ for $w\in C$ by the cheapest $(v,w') for $w'\in
 C$. Call this graph $G''$.
 
-<div class="claim"> Let $OPT(G)$ be the cost of the min-weight $r$-arborescence on $G$. Then $OPT(G) = OPT(G'')$. </div>
+<div class="claim"> Let $OPT(G)$ be the cost of the min-weight $r$-arborescence on $G$. Then $OPT(G') = OPT(G'')$. </div>
+
+<div class="proof"> First, we show $OPT(G') \leq OPT(G'')$. Given an
+arborescence for $G''$, some vertices correspond to cycles in
+$G'$. Expand these cycles and drop some $0$-weight edge along each;
+this is now an arborescence in $G'$ with the same weight as
+$OPT(G'')$. The min-weight arborescence for $G'$ can only have smaller
+weight.
+
+Now, we show $OPT(G'') \leq OPT(G')$. Given a min-weight arborescence
+$T'$ for $G'$, contracting $G'$ to $G''$ still connects all vertices
+to the root in $G''$. Therefore, this graph still contains a superset
+of the edges necessary to create an arborescence in $G''$.  </div>
+
+This gives us an algorithm for computing arborescences: take all
+$0$-weight edges in $G'$, contract all cycles this creates, then
+recurse on $G''$; as $G''$ has strictly fewer vertices and edges than
+$G'$, this is a well-founded recursion. Each contraction takes $O(m)$
+time and there are at most $O(n)$ of them, so in total this takes
+$O(mn)$ time. It's possible to implement this algorithm using better
+datastructures (Tarjan [Tar77] used priority queues to improve the
+runtime to $O(\min(m \log n, n^2))$ time, and Gabow, Galil, Spencer
+and Tarjan [GGST86] give an algorithm to solve the min-cost
+arborescence problem in $O(n \log n + m)$ time.
