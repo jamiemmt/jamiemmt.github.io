@@ -137,7 +137,7 @@ expensive edge leaving $v$: define $M_v = \min_{a \partial^+_v} w_a$.
 Define a new weight function $w'_a = w_a - M_v$ for every $a \in
 \partial^+_v$; this guarantees every vertex has an outgoing arc of
 weight $0$. it's useful to think of $M_v$ as the weight that must be
-paid for any arborescence to contain $v$.
+paid for any arborescence to contain $v$. The next lemma states that this tranformation doesn't change the problem in any real way.
 
 <div class="lemma">  $T$ is a min-weight $r$-arborescence for $(G,w)$ $\Leftrightarrow$
-$T$ is a min-weight $r$-arborescence for $(G, w')$ </div>
+$T$ is a min-weight $r$-arborescence for $(G, w')$. </div>
