@@ -104,7 +104,7 @@ dl dd {
     font-style: italic;
 }
 .theorem:before {
- content: "Theorem " counter(theorem) ".";
+ content: "Theorem " counter(theorem) ". ";
      font-weight: bold;
     font-style: normal;
 }
@@ -115,7 +115,7 @@ dl dd {
     font-style: italic;
 }
 .lemma:before {
-	content: "Lemma " counter(theorem) ".";
+	content: "Lemma " counter(theorem) ". ";
     font-weight: bold;
     font-style: normal;
 }
@@ -139,7 +139,7 @@ dl dd {
     font-style: normal;
 }
 .definition:before {
- content: "Definition " counter(definition) ".";
+ content: "Definition " counter(definition) ". ";
      font-weight: bold;
     font-style: normal;
 }
