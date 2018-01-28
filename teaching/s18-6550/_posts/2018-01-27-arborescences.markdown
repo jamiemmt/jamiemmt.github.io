@@ -97,5 +97,18 @@ Define a new weight function $w'_a = w_a - M_v$ for every $a \in
 weight $0$. it's useful to think of $M_v$ as the weight that must be
 paid for any arborescence to contain $v$. The next lemma states that this tranformation doesn't change the problem in any real way.
 
-<div class="lemma">  $T$ is a min-weight $r$-arborescence for $(G,w)$ $\Leftrightarrow$
-$T$ is a min-weight $r$-arborescence for $(G, w')$. </div>
+<div class="lemma"> $T$ is a min-weight $r$-arborescence for $(G,w)$
+$\Leftrightarrow$ $T$ is a min-weight $r$-arborescence for $(G,
+w')$. </div>
+
+Given the above lemma, we consider an algorithm that first includes
+some $0$-weight arc out of each vertex $v$; if this is an arborescence
+then it must be minimum weight. Otherwise, the resulting graph
+contains several connected components, each of which has a directed
+cycle (by a counting argument relating the number of edges and the
+number of vertices). For any $0$-weight cycle $C$, we will contract
+$C$ into a single node, removing arcs inside $C$ and replacing any
+edges $(v, w)$ for $w\in C$ by the cheapest $(v,w') for $w'\in
+C$. Call this graph $G''$.
+
+<div class="claim"> Let $OPT(G)$ be the cost of the min-weight $r$-arborescence on $G$. Then $OPT(G) = OPT(G'')$. </div>
