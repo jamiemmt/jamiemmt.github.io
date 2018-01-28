@@ -87,5 +87,12 @@ edges entering a vertex is denoted $\partial^-_v$. This notation is
 overloaded to also denote the set of edges entering or leaving a <i>
 set </i> of vertices as well.
 
-For a given vertex $v$, we'll keep track of the vertex's least
-expensive edges leaving $v$: define $M_v = \min_{a \partial^+_v} w_a$.
+For a given vertex $v$, we'll keep track of the weight of the least
+expensive edge leaving $v$: define $M_v = \min_{a \partial^+_v} w_a$.
+Define a new weight function $w'_a = w_a - M_v$ for every $a \in
+\partial^+_v$; this guarantees every vertex has an outgoing arc of
+weight $0$. it's useful to think of $M_v$ as the weight that must be
+paid for any arborescence to contain $v$.
+
+<div lem> $T$ a min-weight $r$-arborescence for $(G,w)$ $\Leftrightarrow$
+$T$ is a min-weight $r$-arborescence for $(G, w')$ </div>
