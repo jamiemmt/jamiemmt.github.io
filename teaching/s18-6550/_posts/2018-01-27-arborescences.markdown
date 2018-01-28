@@ -24,6 +24,51 @@ MathJax.Hub.Config({
     max-width: 140ex;
     margin: 0em auto;
 }
+
+
+.theorem {
+    display: block;
+    margin: 12px 0;
+    font-style: italic;
+}
+.theorem:before {
+    content: "Theorem.";
+    font-weight: bold;
+    font-style: normal;
+}
+.lemma {
+    display: block;
+    margin: 12px 0;
+    font-style: italic;
+}
+.lemma:before {
+    content: "Lemma.";
+    font-weight: bold;
+    font-style: normal;
+}
+.proof {
+    display: block;
+    margin: 12px 0;
+    font-style: normal;
+}
+.proof:before {
+    content: "Proof.";
+    font-style: italic;
+}
+.proof:after {
+    content: "\25FC";
+    float:right;
+}
+.definition {
+    display: block;
+    margin: 12px 0;
+    font-style: normal;
+}
+.definition:before {
+    content: "Definition.";
+    font-weight: bold;
+    font-style: normal;
+}
 </style>
 
 </head>
@@ -94,5 +139,5 @@ Define a new weight function $w'_a = w_a - M_v$ for every $a \in
 weight $0$. it's useful to think of $M_v$ as the weight that must be
 paid for any arborescence to contain $v$.
 
-<div lem> $T$ a min-weight $r$-arborescence for $(G,w)$ $\Leftrightarrow$
+<div class="lem"> $T$ a min-weight $r$-arborescence for $(G,w)$ $\Leftrightarrow$
 $T$ is a min-weight $r$-arborescence for $(G, w')$ </div>
