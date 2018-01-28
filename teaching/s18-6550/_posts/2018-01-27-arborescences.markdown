@@ -139,5 +139,5 @@ Define a new weight function $w'_a = w_a - M_v$ for every $a \in
 weight $0$. it's useful to think of $M_v$ as the weight that must be
 paid for any arborescence to contain $v$.
 
-<div class="lem"> $T$ a min-weight $r$-arborescence for $(G,w)$ $\Leftrightarrow$
+<div class="lemma"> $T$ a min-weight $r$-arborescence for $(G,w)$ $\Leftrightarrow$
 $T$ is a min-weight $r$-arborescence for $(G, w')$ </div>
