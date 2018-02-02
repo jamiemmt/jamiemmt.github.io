@@ -111,7 +111,7 @@ window.onload = function(){
 
 </textarea>
 <div id="result" style="display:none;"></div>
-</div>  
+
 
 
 
