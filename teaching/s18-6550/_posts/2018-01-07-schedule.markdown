@@ -21,7 +21,6 @@ table {
     width: 200%;
 }
 textarea {
-    width:200%;
     max-width:200%;
     min-height: 0em;
     padding: .5em;
