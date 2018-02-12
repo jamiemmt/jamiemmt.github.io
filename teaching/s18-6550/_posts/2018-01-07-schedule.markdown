@@ -123,7 +123,7 @@ window.onload = function(){
 |  1/24 <br> Wednesday      | Randomized MSTs     |  <a href ="/teaching/s18-6550/notes/notes-lec3-mst.pdf">  My notes</a>  ||
 |  1/29 <br> Monday      |    Dynamic Graph Connectivity | <a href="/teaching/s18-6550/notes/notes-lec4-dgc.pdf"> My notes </a>      ||
 1/31 <br> Wednesday      |    Shortest Paths | <a href="/teaching/s18-6550/notes/notes-lec5-apsp.pdf"> My notes </a> | |
-|  2/5 <br> Monday      |    Low-stretch Trees    |    |||
+|  2/5 <br> Monday      |    Low-stretch Trees    | <a href="/teaching/s18-6550/notes/notes-lec6-lsst.pdf"> My notes </a>   |||
 |  2/7 <br> Wednesday      |  Matchings in General Graphs: combinatorial algorithms | | |
 |  2/12 <br> Monday      |  Matchings in General Graphs: linear programming.   |    ||
 |  2/14 <br> Wednesday      |  Max-Weight Matchings in Graphs: A Pricing algorithm | | |
