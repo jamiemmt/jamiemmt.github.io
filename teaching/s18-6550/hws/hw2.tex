@@ -1,0 +1,444 @@
+\documentclass{article}
+
+\usepackage{fancyhdr}
+\usepackage{extramarks}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usepackage[plain]{algorithm}
+\usepackage{algpseudocode}
+
+\newcommand{\I}{\mathcal{I}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\R}{\mathbb{R}}
+\renewcommand{\P}{\mathbb{P}}
+\usetikzlibrary{automata,positioning}
+
+%
+% Basic Document Settings
+%
+
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\linespread{1.1}
+
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName}
+\chead{\hmwkClass\ (\hmwkClassInstructor\ \hmwkClassTime): \hmwkTitle}
+\rhead{\firstxmark}
+\lfoot{\lastxmark}
+\cfoot{\thepage}
+
+\renewcommand\headrulewidth{0.4pt}
+\renewcommand\footrulewidth{0.4pt}
+
+\setlength\parindent{0pt}
+
+
+\newtheorem{theorem}{Theorem}
+% 
+% Create Problem Sections
+%
+
+
+\newcommand{\enterProblemHeader}[1]{
+    \nobreak\extramarks{}{}\nobreak{}
+    \nobreak\extramarks{}\nobreak{}
+}
+
+\newcommand{\exitProblemHeader}[1]{
+    \nobreak\extramarks{}\nobreak{}
+    \stepcounter{#1}
+    \nobreak\extramarks{}\nobreak{}
+  }
+
+  
+\newcommand{\enterExerciseHeader}[1]{
+    \nobreak\extramarks{}{}\nobreak{}
+    \nobreak\extramarks{}\nobreak{}
+}
+
+\newcommand{\exitExerciseHeader}[1]{
+    \nobreak\extramarks{}\nobreak{}
+    \stepcounter{#1}
+    \nobreak\extramarks{}\nobreak{}
+}
+
+\setcounter{secnumdepth}{0}
+\newcounter{partCounter}
+\newcounter{homeworkProblemCounter}
+\setcounter{homeworkProblemCounter}{1}
+
+\newcounter{homeworkExerciseCounter}
+\setcounter{homeworkExerciseCounter}{1}
+\nobreak\extramarks{}\nobreak{}
+\nobreak\extramarks{}\nobreak{}
+
+%
+% Homework Problem Environment
+%
+% This environment takes an optional argument. When given, it will adjust the
+% problem counter. This is useful for when the problems given for your
+% assignment aren't sequential. See the last 3 problems of this template for an
+% example.
+%
+\newenvironment{homeworkProblem}[1][-1]{
+    \ifnum#1>0
+        \setcounter{homeworkProblemCounter}{#1}
+    \fi
+    \section{Problem \arabic{homeworkProblemCounter}}
+    \setcounter{partCounter}{1}
+    \enterProblemHeader{homeworkProblemCounter}
+}{
+    \exitProblemHeader{homeworkProblemCounter}
+}
+
+  \newenvironment{homeworkExercise}[1][-1]{
+    \ifnum#1>0
+        \setcounter{homeworkExerciseCounter}{#1}
+    \fi
+    \section{Exercise \arabic{homeworkExerciseCounter}}
+    \setcounter{partCounter}{1}
+    \enterExerciseHeader{homeworkExerciseCounter}
+}{
+    \exitExerciseHeader{homeworkExerciseCounter}
+}
+
+%
+% Homework Details
+%   - Title
+%   - Due date
+%   - Class
+%   - Section/Time
+%   - Instructor
+%   - Author
+%
+
+\newcommand{\hmwkTitle}{Homework\ \#2}
+\newcommand{\hmwkAssignedDate}{February 12, 2017}
+\newcommand{\hmwkDueDate}{February 26, 2017, before class}
+\newcommand{\hmwkClass}{Design and Analysis of Algorithms, CS 6550}
+\newcommand{\hmwkClassTime}{}%Section A}
+\newcommand{\hmwkClassInstructor}{Professor Jamie Morgenstern}
+\newcommand{\hmwkAuthorName}{}%\textbf{Josh Davis} \and \textbf{Davis Josh}}
+
+%
+% Title Page
+%
+
+\title{
+    \vspace{2in}
+    \textmd{\textbf{\hmwkClass:\ \hmwkTitle}}\\
+    \normalsize\vspace{0.1in}\small{Due\ on\ \hmwkDueDate\ at 3:10pm}\\
+    \vspace{0.1in}\large{\textit{\hmwkClassInstructor\ \hmwkClassTime}}
+    \vspace{3in}
+}
+
+\author{\hmwkAuthorName}
+\date{}
+
+\renewcommand{\part}[1]{\textbf{\large Part \Alph{partCounter}}\stepcounter{partCounter}\\}
+
+%
+% Various Helper Commands
+%
+
+% Useful for algorithms
+\newcommand{\alg}[1]{\textsc{\bfseries \footnotesize #1}}
+
+% For derivatives
+\newcommand{\deriv}[1]{\frac{\mathrm{d}}{\mathrm{d}x} (#1)}
+
+% For partial derivatives
+\newcommand{\pderiv}[2]{\frac{\partial}{\partial #1} (#2)}
+
+% Integral dx
+\newcommand{\dx}{\mathrm{d}x}
+
+% Alias for the Solution section header
+\newcommand{\solution}{\textbf{\large Solution}}
+
+% Probability commands: Expectation, Variance, Covariance, Bias
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\Cov}{\mathrm{Cov}}
+\newcommand{\Bias}{\mathrm{Bias}}
+
+\begin{document}
+
+% \maketitle
+
+\pagebreak
+
+{\bf Homework Out: \hmwkAssignedDate}\\
+{\bf Due Date:  \hmwkDueDate}\\
+
+The HW contains some exercises (fairly simple problems to check you
+are on board with the concepts; don’t submit your solutions), and
+problems (for which you should submit your solutions, and which will
+be graded). Some problems have sub-parts that are exercises.  For this
+problem set, it’s OK to work with others. (Groups of 2, maybe 3 max.)
+That being said, please think about the problems yourself before
+talking to others. Please cite all sources you use, and people you
+work with. The expectation is that you try and solve these problems
+yourself, rather than looking online explicitly for
+answers. Submissions due at beginning of class on the due date.
+Please check the Piazza for details on submitting your \emph{LaTeXed}
+solutions.
+
+
+\begin{homeworkExercise}{Simple Samplers.}
+  Suppose $X$ is a random variable which takes on values in the
+  interval $[0, 1]$; let $\E[X] = c$. Initially, you don’t know
+  anything about $c$, or about the probability distribution of
+  $X$. However, you are given a black-box that every time you query
+  it, it gives you an independent random sample drawn according to
+  $X$. You want to estimate $c$.  A natural scheme is: sample from the
+  black-box $N$ times—call these samples $X_1, X_2, \ldots, X_n$— and
+  return the empirical mean
+  $\hat{c} := \frac{1}{N}\sum_{i = 1}^N X_i$.  The natural question
+  is: how big does the number of samples $N$ have to be so that
+  \begin{align}\P[|\hat{c}− c| \leq \epsilon] \geq 1 − \delta \label{eqn:conf}\end{align}
+  I.e., you
+  want to be within error $\epsilon$ with confidence $1 − \delta$.  
+  
+  \begin{enumerate}[label=\alph*.]
+    \item  Use
+      Chebyshev's inequality to show that $N = O\left(\frac{ 1}{ \epsilon^2\delta} \right)$
+  samples suffice to Ensure ~\ref{eqn:conf}.
+  Hence, to get $\delta = \frac{1}{n^k}$ for some value $n$, we would
+  take $O\left(\frac{n^k}{\epsilon^2}\right)$ samples.
+  \item Hoeffding's bound says the following
+    (you don’t have to prove this, of course):
+
+    \begin{theorem}  Suppose $Y_1,
+  Y_2,\ldots Y_T$ are independent $[0, M]$-bounded random variables, and
+  define $Y := \sum^T_{ t=1} Y_t$ be their sum. Let $\mu = \E[Y ]$. Then
+  \[\P[Y \geq \mu + \lambda] \leq \exp( -\frac{ \lambda^2}{  M(2\mu+\lambda)})\]
+  \[\P[Y \leq \mu - \lambda] \leq \exp(\frac{ − \lambda^ 2}{ 2M \mu}).\]
+  \end{theorem}
+  Use
+  Hoeffding's bound to show that $N = O\left(\frac{1}{\epsilon^2}\ln \frac{1}{\delta} \right)2$ samples are
+  sufficient. Hence, to get $\delta = 1/n^k$ we would take $O\left( \frac{k \log n}{\epsilon^2}\right )$
+  samples.
+\end{enumerate}
+\end{homeworkExercise}
+
+\begin{homeworkExercise}{Matrix Multiplication is Useful.}
+  Given an undirected simple graph $G = (V, E)$, a triangle is just a
+  clique of size $3$; i.e., $3$ vertices such that all $3$ edges are
+  present. Give algorithms for the following problems:
+    \begin{enumerate}[label=\alph*.]
+    \item Find a triangle in $G$ in time $n^\omega$
+      \item Find a $3k$-clique in a graph in time $n^{k \omega}$.
+      \item (Bonus) Find a triangle in $G$ in time $m^{1.5}$. (This
+        one is slightly harder—not an exercise— and does not use
+        matrix multiplication.)
+    \end{enumerate}
+    
+    \end{homeworkExercise}
+
+    \begin{homeworkExercise}      {Low-Diameter Decompositions for Simple Graphs.}
+      Recall the concept of a $\beta$-low-diameter
+decomposition, which given graph $G$ and distance $D$, randomly breaks the graph
+into pieces of max-distance $D$, such that each pair $x, y$ is separated with probability at most
+$\beta \cdot \frac{d_G(x,y)}{D}$
+\begin{enumerate}[label=\alph*.]
+\item Show that if each edge $(x, y) \in E(G)$ is cut with probability $\beta \cdot \frac{d_G(x,y)}{D}$, , then so is any pair
+$x, y \in V$ . Hence, if the graph only has unit-weight edges, each edge can be cut with
+probability at most $\beta/D$.
+\item  Show that (i) any path graph has an LDD with $\beta = 1$, (ii) any tree with $\beta = 2$, and (iii)
+the standard $k$-dimensional $\left( n^{\frac{1}{k}} \times \ldots \times n^{\frac{1}{k}}\right)$-grid  with $\beta = k$.
+\end{enumerate}   
+      \end{homeworkExercise}
+
+      
+      \begin{homeworkExercise}{Approximation via Randomized Simplification}
+        In Lecture \#5 we encountered low-stretch spanning trees. Now
+        we use this to solve the following $k$-median problem on
+        general metrics: given an $n$-point metric $(X, d)$, and a
+        number $k$, find a set $C$ of size $k$ that minimizes
+        $\Phi_d(C) : = \sum_{v\in X}d(v, C)$.We outlined an algorithm
+        for the case of distances $d_T$ on a tree $T$. We now show now
+        to solve this problem (approximately) on a general $n$-point
+        metric $(X, d)$.
+\begin{enumerate}[label=\alph*.]
+\item Use a low-stretch spanning tree
+        constuction on metric $(X, d)$ to sample a tree $T$ from $D$.  Show
+        that if $C_X$ is the optimal solution on metric $X$, and $C_T$ is the
+        optimal solution on the tree $T$, then \[\E[\Phi_{d_T} (C_T )] \leq \E[\Phi_{d_T}
+          (C_X)] \leq \alpha \times  \Phi_d(C_X).\]
+        \item Observe that you can solve the
+        clustering problem optimally on $T$ to find the centers $C_T$ using
+        HW1. (Nothing to show here.)
+      \item Show that $\Phi_d(C_T ) \leq \Phi_{d_T} (C_T )$.
+        \item
+        Deduce that the expected cost of the solution $C_T$ is at most
+        $O(\log n)$ times $\Phi_d(C_X)$, the cost of the optimal
+        solution. (Hence you have output an “$O(\log n)$-approximate
+        solution” to this NP-hard problem.)
+        \item Look at your analysis
+        in the previous part and outline for what kinds of problems on
+        metrics does this method apply. E.g., does it work for the TSP
+        on a metric? How about the  $K$-center problem? Or the $K$-means
+        problem which wants to minimize $\Psi_d(C) := \sum_{v\in X}(d(v, C))^2$ . Why
+        or why not?
+        \end{enumerate}
+\end{homeworkExercise}
+
+
+
+\begin{homeworkExercise}({Approximate MSTs and Shortest Paths} Show
+  that the expected weight of a low-stretch spanning tree as above is
+  at most $O(\alpha)$ times the MST.
+\end{homeworkExercise}
+
+\begin{homeworkProblem}{Another Halving Trick.}
+  Suppose you have an algorithm $A$ that, given a directed graph
+$G$ with integer edge lengths we satisfying $w_e \geq −1$, returns feasible potentials $\Phi : V \to \R$
+in time $T$ (or shows there is a negative cycle). We will show that you can use this to find
+feasible potentials for graphs with integer weights $w_e \geq −M$ in time $O((T + m) \log M)$ (or
+shows there is a negative cycle).
+\begin{enumerate}[label=\alph*.]
+\item Define weights $w^{'}_e = \lceil w_e/2\rceil $. Show that if there are no negative cycles with respect to
+  $w$, there are none w.r.t. $w'$.
+  \item Suppose $\Phi': 
+ V \to \R$ gives feasible potentials w.r.t. $w'$. Then show that the reduced cost
+
+ $\hat{w}_{uv} := 2\Phi'_u + w_{uv} − 2\Phi'_v$ satisfies
+ $\hat{w}_e \geq −1$ for all edges $e$.
+ \item Now use $A$ to find
+ feasible potentials w.r.t. $\hat{w}$. How does this give feasible potentials
+ w.r.t. $w$? Show that if $w_e \geq −M$, we take $O((T + m)\log M)$ time.
+ \end{enumerate}
+\end{homeworkProblem}
+
+\begin{homeworkProblem}{ Short on Average.}
+  Given a directed graph $G =
+    (V, A)$ with possibly negative edge-weights ${w_a}_{a\in A}$, define the
+    weight-ratio of a directed cycle $C$ to be $\rho(C) = \sum a\in C w_a |C|$ .  We
+    want to find a cycle $C$ with minimum weight-ratio. Denote this by $\rho
+    \times (G) := \min_{\textrm{cycles }C} \rho(C)$.  (You may assume that edge-weights are
+    integers in the range $[−M, M]$.)
+    \begin{enumerate}[label=\alph*.]
+      \item  (Nothing to submit.) Observe
+    that you can check if a graph has a negative-weight cycle, using
+    Bellman-Ford-Moore. (If all vertices are reachable from s this is
+    immediate, else what will you do?)
+    \item Show how to use
+    Bellman-Ford-Moore to find a cycle of zero weight assuming there
+    is no negative-weight cycle. (Hint: Recall how you used B-F to
+    compute feasible potentials in Johnson’s algorithm from Lecture
+    \#4.)
+  \item
+    Observe:$ \rho \times (G) = max\{\alpha \in Q | G\textrm{ with arc
+      weights $(w_a − \alpha)$ has no negative cycle }\}$.  Use this
+    observation to compute $\rho \times (G)$, and also find a cycle
+    $C$ of this weight ratio. Your algorithm should run in time
+    $O(mn(\log M + \log n))$ time.  Caveat: binary search over a range
+    of $K$ integers takes $O(\log K)$ time. But binary search over
+    rationals or reals may not terminate.
+    \end{enumerate}
+  \end{homeworkProblem}
+
+  \begin{homeworkProblem}{Sparsification in Dynamic Algorithms.}
+    In this problem we develop an approach to
+transform an $O(m^{2/3}
+)$ update time algorithm for dynamic connectivity into an $O(n^{
+2/3}\log n)$
+one. For all parts, assume all edge sets are over vertex set $V$ with $|V | = n$, and all graphs are
+simple. Let $K = \lceil \frac{n − 1}{2}\rceil$.
+\begin{enumerate}[label=\alph*]
+\item For two edge sets $E, E0'$ with spanning forests $F, F'$
+respectively, show that any spanning
+forest $F''$
+ of $F \cup F'$
+is also a spanning forest of $E \cup E'$.
+\item A sparse partition of edge set $E$ is a partition into $K$ sets
+  ($E^1 , E^2 , \ldots, E^K$), where some prefix $E^1 ,\ldots, E^k$
+  all have exactly $n$ edges, $E^{k+1}$ is potentially partially full,
+  and $E^{k+2}$ onwards are empty.  Suppose $E$ has sparse partition
+  ($E^1, E^2, \ldots E^K)$. Suppose $E'$ is obtained from $E$ by
+  either adding or removing one edge. Show how to get a sparse
+  partition for $E'$ such that $(E')^i = E^i$ for all but (at most)
+  two indices $i$, and for these two indices $i$ the size of the
+  symmetric difference $|(E' )^i\Delta E^i | \leq 2$.
+\item Define a complete binary tree with leaves $\{1, 2, . . . ,
+  K\}$. Each internal node corresponds to some interval $i \ldots j$,
+  define $E^{ij} := \cup_{s = i }^j E^s$ , and $F^{ij}$ be a spanning
+  forest on $E^{ij}$ . This defines a collection of $O(K)$ spanning
+  forests.  Given a sparse partition $(E^1 , E^2 , . . . , E^K)$ for
+  $E$, and an associated collection of spanning forests, suppose we
+  add or remove a single edge from one of the $E^i$ s. Show how to
+  maintain the resulting collection of spanning forests with total
+  update time $O(n^{ 2/3} \log n)$.  Infer that we can maintain
+  dynamic connectivity in $O(n^{ 2/3}\log n)$ time.
+  \end{enumerate}
+\end{homeworkProblem}
+
+    \begin{homeworkProblem}{Sparse Spanners.} Given a graph $G$ with edge lengths $\ell_e$, a subgraph $H$ is a spanner with
+stretch $\gamma\geq 1$ if for every edge $(x, y) \in E(G),
+d_H(x, y) \leq\gamma \cdot d_G(x, y)$.
+\begin{enumerate}[label=\alph*.]
+\item Use the triangle inequality to show that for all $x, y \in V$ , even if $(x, y)$ is not an edge,
+$d_H(x, y) \leq\gamma \cdot d_G(x, y)$.
+Clearly if $H = G$, we can set $\gamma = 1$. The goal is to find $H$ with few edges, such that $\gamma$ is also
+small. Let’s give two different constructions of good spanners.
+\item \emph{Approach \#1}. Consider the following randomized process: sample $t = 4 \log n$ trees
+$T_1, T_2,\ldots, T_t$ from an $\alpha$-stretch probabilistic embedding into subtrees. Let $H$ be the
+union of all these edges.
+\begin{enumerate}
+  \item
+ Show that for any fixed edge $(x, y) \in E(G)$,
+\[P[d_H(x, y)\geq 2\alpha d_G(x, y)] \leq 2^{-t}.\]
+
+(Hint: for any single value of $i$, bound $\P[d_{T_i}
+(x, y)\geq 2\alpha d_G(x, y)]$.)
+\item Use the results quoted in Lecture to show that with probability $1 −\frac{1}{
+n^2}$ , the graph
+$H$ is an $O(\log n \log \log n)$-stretch spanner with $O(n \log n)$ edges.
+
+\end{enumerate}
+\item\emph{Large-girth graphs are Sparse.} On a seemingly different
+  note, here is a useful graphtheoretic fact. Define the girth of a
+  graph $G$ is the length of the shortest cycle in $G$. We will show
+  that any graph $G$ with $m$ edges and $n$ nodes, and girth strictly
+  more than $g$ must have $m \leq O(n + n^{ 1+\frac{1}{\lfloor g/2\rfloor}})$.
+  \begin{enumerate}
+    \item
+  $G$ has average degree $\hat{d} := \frac{2m}{n}$ . Show that there exists a subset $S\subseteq V$ such that the induced subgraph $H := G[S]$ has minimum degree at
+  least $\hat{d}/2$. [Hint: drop some low-degree vertices.]
+  \item . For this
+  graph $H$ and any vertex $v \in H$, show that the number of distinct
+  vertices at distance at most $\lfloor g/2\rfloor$ from $v$ is at least $( \hat{d}/2 −
+  1)^{\lfloor g/2\rfloor}$ .
+  \item Show that the number of edges in the original graph
+    $G$, i.e., $m \leq O(n + n^{ 1+\frac{1}{\lfloor g/2\rfloor}} )$.
+  \end{enumerate}
+  \item (d) \emph{Approach \#2}. Now consider
+  a variant of Kruskal’s algorithm for $\alpha\geq 1$. Consider the
+  edges of $G$ in increasing order of lengths $e_1, e_2, \ldots,
+  e_m$. Initialize $H_0 = \emptyset$. When considering edge $e_i = (x, y) \in E(G)$,
+  if the current distance $d_{H_{i−1}} (x, y) \leq\alpha d_G(x, y)$, then
+  discard $e$ (i.e., set $H_i \gets H_{i−1}$, else set $H_i \gets H_{i−1} \cup \{e_i\}$.
+  \begin{enumerate}
+    \item  (Do
+  not submit.) Show that if we set $\alpha = n − 1$, then you will get
+  Kruskal’s algorithm. Also, observe that by construction, the graph $H$
+  at the end of the process is an $(n − 1)$-stretch spanner. (In fact,
+  an $(n − 1)$-stretch spanning tree.)
+  \item  If we set $\alpha = O(\log n)$,
+  use (c) with $g = O(\log n)$ to show the final graph $H$ is a $O(\log
+  n)$-stretch spanner with $O(n)$ edges.
+\end{enumerate}
+\end{enumerate}
+    \end{homeworkProblem}
+
+\end{document}
