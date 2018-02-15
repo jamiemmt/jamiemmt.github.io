@@ -302,9 +302,9 @@ the standard $k$-dimensional $\left( n^{\frac{1}{k}} \times \ldots \times n^{\fr
 
 \begin{homeworkProblem}{Another Halving Trick.}
   Suppose you have an algorithm $A$ that, given a directed graph
-$G$ with integer edge lengths we satisfying $w_e \geq −1$, returns feasible potentials $\Phi : V \to \R$
+$G$ with integer edge lengths we satisfying $w_e \geq -1$, returns feasible potentials $\Phi : V \to \R$
 in time $T$ (or shows there is a negative cycle). We will show that you can use this to find
-feasible potentials for graphs with integer weights $w_e \geq −M$ in time $O((T + m) \log M)$ (or
+feasible potentials for graphs with integer weights $w_e \geq -M$ in time $O((T + m) \log M)$ (or
 shows there is a negative cycle).
 \begin{enumerate}[label=\alph*.]
 \item Define weights $w^{'}_e = \lceil w_e/2\rceil $. Show that if there are no negative cycles with respect to
@@ -312,11 +312,11 @@ shows there is a negative cycle).
   \item Suppose $\Phi': 
  V \to \R$ gives feasible potentials w.r.t. $w'$. Then show that the reduced cost
 
- $\hat{w}_{uv} := 2\Phi'_u + w_{uv} − 2\Phi'_v$ satisfies
- $\hat{w}_e \geq −1$ for all edges $e$.
+ $\hat{w}_{uv} := 2\Phi'_u + w_{uv} - 2\Phi'_v$ satisfies
+ $\hat{w}_e \geq -1$ for all edges $e$.
  \item Now use $A$ to find
  feasible potentials w.r.t. $\hat{w}$. How does this give feasible potentials
- w.r.t. $w$? Show that if $w_e \geq −M$, we take $O((T + m)\log M)$ time.
+ w.r.t. $w$? Show that if $w_e \geq -M$, we take $O((T + m)\log M)$ time.
  \end{enumerate}
 \end{homeworkProblem}
 
@@ -326,7 +326,7 @@ shows there is a negative cycle).
     weight-ratio of a directed cycle $C$ to be $\rho(C) = \sum a\in C w_a |C|$ .  We
     want to find a cycle $C$ with minimum weight-ratio. Denote this by $\rho
     \times (G) := \min_{\textrm{cycles }C} \rho(C)$.  (You may assume that edge-weights are
-    integers in the range $[−M, M]$.)
+    integers in the range $[-M, M]$.)
     \begin{enumerate}[label=\alph*.]
       \item  (Nothing to submit.) Observe
     that you can check if a graph has a negative-weight cycle, using
@@ -339,7 +339,7 @@ shows there is a negative cycle).
     \#4.)
   \item
     Observe:$ \rho \times (G) = max\{\alpha \in Q | G\textrm{ with arc
-      weights $(w_a − \alpha)$ has no negative cycle }\}$.  Use this
+      weights $(w_a - \alpha)$ has no negative cycle }\}$.  Use this
     observation to compute $\rho \times (G)$, and also find a cycle
     $C$ of this weight ratio. Your algorithm should run in time
     $O(mn(\log M + \log n))$ time.  Caveat: binary search over a range
@@ -354,7 +354,7 @@ transform an $O(m^{2/3}
 )$ update time algorithm for dynamic connectivity into an $O(n^{
 2/3}\log n)$
 one. For all parts, assume all edge sets are over vertex set $V$ with $|V | = n$, and all graphs are
-simple. Let $K = \lceil \frac{n − 1}{2}\rceil$.
+simple. Let $K = \lceil \frac{n - 1}{2}\rceil$.
 \begin{enumerate}[label=\alph*]
 \item For two edge sets $E, E0'$ with spanning forests $F, F'$
 respectively, show that any spanning
@@ -401,7 +401,7 @@ union of all these edges.
 
 (Hint: for any single value of $i$, bound $\P[d_{T_i}
 (x, y)\geq 2\alpha d_G(x, y)]$.)
-\item Use the results quoted in Lecture to show that with probability $1 −\frac{1}{
+\item Use the results quoted in Lecture to show that with probability $1 -\frac{1}{
 n^2}$ , the graph
 $H$ is an $O(\log n \log \log n)$-stretch spanner with $O(n \log n)$ edges.
 
@@ -417,7 +417,7 @@ $H$ is an $O(\log n \log \log n)$-stretch spanner with $O(n \log n)$ edges.
   least $\hat{d}/2$. [Hint: drop some low-degree vertices.]
   \item . For this
   graph $H$ and any vertex $v \in H$, show that the number of distinct
-  vertices at distance at most $\lfloor g/2\rfloor$ from $v$ is at least $( \hat{d}/2 −
+  vertices at distance at most $\lfloor g/2\rfloor$ from $v$ is at least $( \hat{d}/2 -
   1)^{\lfloor g/2\rfloor}$ .
   \item Show that the number of edges in the original graph
     $G$, i.e., $m \leq O(n + n^{ 1+\frac{1}{\lfloor g/2\rfloor}} )$.
@@ -426,14 +426,14 @@ $H$ is an $O(\log n \log \log n)$-stretch spanner with $O(n \log n)$ edges.
   a variant of Kruskal’s algorithm for $\alpha\geq 1$. Consider the
   edges of $G$ in increasing order of lengths $e_1, e_2, \ldots,
   e_m$. Initialize $H_0 = \emptyset$. When considering edge $e_i = (x, y) \in E(G)$,
-  if the current distance $d_{H_{i−1}} (x, y) \leq\alpha d_G(x, y)$, then
-  discard $e$ (i.e., set $H_i \gets H_{i−1}$, else set $H_i \gets H_{i−1} \cup \{e_i\}$.
+  if the current distance $d_{H_{i-1}} (x, y) \leq\alpha d_G(x, y)$, then
+  discard $e$ (i.e., set $H_i \gets H_{i-1}$, else set $H_i \gets H_{i-1} \cup \{e_i\}$.
   \begin{enumerate}
-    \item  (Do
-  not submit.) Show that if we set $\alpha = n − 1$, then you will get
-  Kruskal’s algorithm. Also, observe that by construction, the graph $H$
-  at the end of the process is an $(n − 1)$-stretch spanner. (In fact,
-  an $(n − 1)$-stretch spanning tree.)
+  \item (Do not submit.) Show that if we set $\alpha = n - 1$, then
+    you will get Kruskal’s algorithm. Also, observe that by
+    construction, the graph $H$ at the end of the process is an
+    $(n - 1)$-stretch spanner. (In fact, an $(n - 1)$-stretch spanning
+    tree.)
   \item  If we set $\alpha = O(\log n)$,
   use (c) with $g = O(\log n)$ to show the final graph $H$ is a $O(\log
   n)$-stretch spanner with $O(n)$ edges.

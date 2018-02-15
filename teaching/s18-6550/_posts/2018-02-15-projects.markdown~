@@ -1,0 +1,49 @@
+---
+title:  Project ideas, outline, and groups
+layout: post
+---
+
+
+<head>
+
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML'></script>
+
+       <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/marked/0.2.9/marked.min.js"></script>
+
+    
+  <style type="text/css">
+    body {
+    max-width: 400ex;
+    margin: 0em auto;
+}
+table {
+    max-width: 200%;
+}
+textarea {
+    max-width:200%;
+    min-height: 0em;
+    padding: .5em;
+    border: #ccc solid 1px;
+    border-radius: 5px;
+    font-family: Lucida Console, monospace;
+    background-color: rgba(128,128,128,.1);
+    color: rgba(0,0,0,.5);}
+  </style>
+
+
+
+For the course project, the goal will be for individuals and teams to
+read some recent research papers, and either do
+(a) a survey of the related work on a problem:
+-- A summary of the most important recent work and advances on the problem
+-- Presenting several open questions or directions for attacking this problem
+
+(b) do the above, with less of an emphasis on summarizing the most
+relevant work and more focus on working through some possible
+techniques for solving some open problems
+
+(c) propose a new algorithmic problem
+-- Motivate it
+-- Describe its relationship to other problems in the field
+-- Talk about techniques for making progress on the problem
