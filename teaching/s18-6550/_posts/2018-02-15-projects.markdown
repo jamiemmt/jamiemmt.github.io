@@ -4,8 +4,6 @@ layout: post
 ---
 
 
-<head>
-
 
 
 
@@ -13,14 +11,14 @@ layout: post
 For the course project, the goal will be for individuals and teams to
 read some recent research papers, and either do
 (a) a survey of the related work on a problem:
--- A summary of the most important recent work and advances on the problem
--- Presenting several open questions or directions for attacking this problem
+* A summary of the most important recent work and advances on the problem
+* Presenting several open questions or directions for attacking this problem
 
 (b) do the above, with less of an emphasis on summarizing the most
 relevant work and more focus on working through some possible
 techniques for solving some open problems
 
 (c) propose a new algorithmic problem
--- Motivate it
--- Describe its relationship to other problems in the field
--- Talk about techniques for making progress on the problem
+* Motivate it
+* Describe its relationship to other problems in the field
+* Talk about techniques for making progress on the problem
