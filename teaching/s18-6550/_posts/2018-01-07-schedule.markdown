@@ -15,7 +15,7 @@ layout: post
   <style type="text/css">
     body {
     max-width: 200ex;
-    margin: 0em auto;
+    margin: 10em auto;
 }
 table {
     max-width: 150%;
@@ -114,7 +114,7 @@ window.onload = function(){
 <div id="result" style="display:none;"></div>
 
 
-| Date        | Subject           | Notes  | References |
+|Date        |Subject           |Notes  |References |
 |------------|-------------|-------------|-------------|
 |   1/8 <br> Monday      |  CLASS CANCELLED |||
 |  1/10 <br> Wednesday     |  Course Policies, Procedures <br>  **Probability Basics** | <a href ="/teaching/s18-6550/notes/notes-lec1-probability.pdf">  My notes</a>||
