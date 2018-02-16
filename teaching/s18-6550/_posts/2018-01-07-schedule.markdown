@@ -127,7 +127,7 @@ window.onload = function(){
 |  2/5 <br> Monday      |    Low-stretch Trees    | <a href="/teaching/s18-6550/notes/notes-lec6-lsst.pdf"> My notes </a>   |||
 |  2/7 <br> Wednesday      |  Matchings in General Graphs: combinatorial algorithms | <a href="/teaching/s18-6550/notes/notes-lec7-match.pdf"> My notes </a>  | |
 |  2/12 <br> Monday      |  Matchings in General Graphs: linear programming.   |    ||
-|  2/14 <br> Wednesday      |  Max-Weight Matchings in Graphs: A Pricing algorithm | | |
+|  2/14 <br> Wednesday      |  Max-Weight Matchings in Graphs: A Pricing algorithm | <a href="/teaching/s18-6550/notes/notes-lec9-pricing.pdf"> My notes </a>  | |
 |  2/19 <br> Monday      |    Matchings in Graphs: Algebraic Algorithms    |    ||
 |  2/21 <br> Wednesday      |  Smoothed Analysis  | | |
 |  2/26 <br> Monday      | Online Learning and the Multiplicative Weights Framework   |    ||
