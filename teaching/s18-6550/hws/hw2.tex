@@ -321,22 +321,21 @@ shows there is a negative cycle).
 \end{homeworkProblem}
 
 \begin{homeworkProblem}{ Short on Average.}
-  Given a directed graph $G =
-    (V, A)$ with possibly negative edge-weights ${w_a}_{a\in A}$, define the
-    weight-ratio of a directed cycle $C$ to be $\rho(C) = \sum a\in C w_a |C|$ .  We
-    want to find a cycle $C$ with minimum weight-ratio. Denote this by $\rho
-    \times (G) := \min_{\textrm{cycles }C} \rho(C)$.  (You may assume that edge-weights are
-    integers in the range $[-M, M]$.)
+  Given a directed graph $G = (V, A)$ with possibly negative
+  edge-weights ${w_a}_{a\in A}$, define the weight-ratio of a directed
+  cycle $C$ to be $\rho(C) = \frac{\sum_{ a\in C} w_a}{ |C|}$ .  We want to
+  find a cycle $C$ with minimum weight-ratio. Denote this by
+  $\rho \times (G) := \min_{\textrm{cycles }C} \rho(C)$.  (You may
+  assume that edge-weights are integers in the range $[-M, M]$.)
     \begin{enumerate}[label=\alph*.]
       \item  (Nothing to submit.) Observe
     that you can check if a graph has a negative-weight cycle, using
     Bellman-Ford-Moore. (If all vertices are reachable from s this is
     immediate, else what will you do?)
-    \item Show how to use
-    Bellman-Ford-Moore to find a cycle of zero weight assuming there
-    is no negative-weight cycle. (Hint: Recall how you used B-F to
-    compute feasible potentials in Johnson’s algorithm from Lecture
-    \#4.)
+  \item Show how to use Bellman-Ford-Moore to find a cycle of zero
+    weight assuming there is no negative-weight cycle. (Hint: Recall
+    how you used B-F to compute feasible potentials in Johnson’s
+    algorithm from Lecture \#4.)
   \item
     Observe:$ \rho \times (G) = max\{\alpha \in Q | G\textrm{ with arc
       weights $(w_a - \alpha)$ has no negative cycle }\}$.  Use this
