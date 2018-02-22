@@ -325,7 +325,7 @@ shows there is a negative cycle).
   edge-weights ${w_a}_{a\in A}$, define the weight-ratio of a directed
   cycle $C$ to be $\rho(C) = \frac{\sum_{ a\in C} w_a}{ |C|}$ .  We want to
   find a cycle $C$ with minimum weight-ratio. Denote this by
-  $\rho \times (G) := \min_{\textrm{cycles }C} \rho(C)$.  (You may
+  $\rho^* (G) := \min_{\textrm{cycles }C} \rho(C)$.  (You may
   assume that edge-weights are integers in the range $[-M, M]$.)
     \begin{enumerate}[label=\alph*.]
       \item  (Nothing to submit.) Observe
@@ -337,9 +337,9 @@ shows there is a negative cycle).
     how you used B-F to compute feasible potentials in Johnson’s
     algorithm from Lecture \#4.)
   \item
-    Observe:$ \rho \times (G) = max\{\alpha \in Q | G\textrm{ with arc
+    Observe:$ \rho^* (G) = max\{\alpha \in Q | G\textrm{ with arc
       weights $(w_a - \alpha)$ has no negative cycle }\}$.  Use this
-    observation to compute $\rho \times (G)$, and also find a cycle
+    observation to compute $\rho^* (G)$, and also find a cycle
     $C$ of this weight ratio. Your algorithm should run in time
     $O(mn(\log M + \log n))$ time.  Caveat: binary search over a range
     of $K$ integers takes $O(\log K)$ time. But binary search over
