@@ -205,9 +205,9 @@ solutions.
   return the empirical mean
   $\hat{c} := \frac{1}{N}\sum_{i = 1}^N X_i$.  The natural question
   is: how big does the number of samples $N$ have to be so that
-  \begin{align}\P[|\hat{c}− c| \leq \epsilon] \geq 1 − \delta \label{eqn:conf}\end{align}
+  \begin{align}\P[|\hat{c} - c| \leq \epsilon] \geq 1 - \delta \label{eqn:conf}\end{align}
   I.e., you
-  want to be within error $\epsilon$ with confidence $1 − \delta$.  
+  want to be within error $\epsilon$ with confidence $1 - \delta$.  
   
   \begin{enumerate}[label=\alph*.]
     \item  Use
@@ -222,7 +222,7 @@ solutions.
   Y_2,\ldots Y_T$ are independent $[0, M]$-bounded random variables, and
   define $Y := \sum^T_{ t=1} Y_t$ be their sum. Let $\mu = \E[Y ]$. Then
   \[\P[Y \geq \mu + \lambda] \leq \exp( -\frac{ \lambda^2}{  M(2\mu+\lambda)})\]
-  \[\P[Y \leq \mu - \lambda] \leq \exp(\frac{ − \lambda^ 2}{ 2M \mu}).\]
+  \[\P[Y \leq \mu - \lambda] \leq \exp(\frac{ - \lambda^ 2}{ 2M \mu}).\]
   \end{theorem}
   Use
   Hoeffding's bound to show that $N = O\left(\frac{1}{\epsilon^2}\ln \frac{1}{\delta} \right)2$ samples are
