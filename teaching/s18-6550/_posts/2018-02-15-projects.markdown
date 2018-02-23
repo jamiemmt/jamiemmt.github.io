@@ -60,13 +60,12 @@ ideas to get you going.
   compared to prior work on the algorithmic problem.
 
 
-* Fair and Diverse sampling, based on [this paper]
-  (https://arxiv.org/abs/1610.07183). It's short, but students would
-  need to learn enough background on DPP, k-DPP, and algorithm (both
-  in theory and practice, in section 3.2) anyway. 
+* Fair and Diverse sampling, based on [this
+  paper](https://arxiv.org/abs/1610.07183). One would need to learn
+   background on DPP, k-DPP. 
 
-* If someone likes more on algorithmic side of sampling of that paper,
-  they can just focus on https://arxiv.org/abs/1607.03559 . It's MCMC
+*  On the algorithmic side of sampling of the previous paper,
+  they can just focus on [this work](https://arxiv.org/abs/1607.03559). It's MCMC
   technique + log submodular concepts in there.
 
 * If someone likes more statistical side of diversity sampling (for
@@ -74,9 +73,9 @@ ideas to get you going.
   algorithmic focus there is a pretty nice exercise (not too hard) to
   grasp too.
 
-* MW update is used for differential privacy: PMW
-   http://mrtz.org/papers/HR10mult.pdf or the more ambitious
-   generalization here https://arxiv.org/abs/1107.3731
+* MW update is used for differential privacy: [private
+   MW](http://mrtz.org/papers/HR10mult.pdf) or the more [ambitious
+   generalization](https://arxiv.org/abs/1107.3731).
 
 * If you have some idea of an area you're interested in, please meet
   with Tao or Jamie to discuss if you need some pointers.
