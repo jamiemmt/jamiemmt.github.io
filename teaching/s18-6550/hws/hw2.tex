@@ -205,9 +205,9 @@ solutions.
   return the empirical mean
   $\hat{c} := \frac{1}{N}\sum_{i = 1}^N X_i$.  The natural question
   is: how big does the number of samples $N$ have to be so that
-  \begin{align}\P[|\hat{c}− c| \leq \epsilon] \geq 1 − \delta \label{eqn:conf}\end{align}
+  \begin{align}\P[|\hat{c} - c| \leq \epsilon] \geq 1 - \delta \label{eqn:conf}\end{align}
   I.e., you
-  want to be within error $\epsilon$ with confidence $1 − \delta$.  
+  want to be within error $\epsilon$ with confidence $1 - \delta$.  
   
   \begin{enumerate}[label=\alph*.]
     \item  Use
@@ -222,7 +222,7 @@ solutions.
   Y_2,\ldots Y_T$ are independent $[0, M]$-bounded random variables, and
   define $Y := \sum^T_{ t=1} Y_t$ be their sum. Let $\mu = \E[Y ]$. Then
   \[\P[Y \geq \mu + \lambda] \leq \exp( -\frac{ \lambda^2}{  M(2\mu+\lambda)})\]
-  \[\P[Y \leq \mu - \lambda] \leq \exp(\frac{ − \lambda^ 2}{ 2M \mu}).\]
+  \[\P[Y \leq \mu - \lambda] \leq \exp(\frac{ - \lambda^ 2}{ 2M \mu}).\]
   \end{theorem}
   Use
   Hoeffding's bound to show that $N = O\left(\frac{1}{\epsilon^2}\ln \frac{1}{\delta} \right)2$ samples are
@@ -321,26 +321,25 @@ shows there is a negative cycle).
 \end{homeworkProblem}
 
 \begin{homeworkProblem}{ Short on Average.}
-  Given a directed graph $G =
-    (V, A)$ with possibly negative edge-weights ${w_a}_{a\in A}$, define the
-    weight-ratio of a directed cycle $C$ to be $\rho(C) = \sum a\in C w_a |C|$ .  We
-    want to find a cycle $C$ with minimum weight-ratio. Denote this by $\rho
-    \times (G) := \min_{\textrm{cycles }C} \rho(C)$.  (You may assume that edge-weights are
-    integers in the range $[-M, M]$.)
+  Given a directed graph $G = (V, A)$ with possibly negative
+  edge-weights ${w_a}_{a\in A}$, define the weight-ratio of a directed
+  cycle $C$ to be $\rho(C) = \frac{\sum_{ a\in C} w_a}{ |C|}$ .  We want to
+  find a cycle $C$ with minimum weight-ratio. Denote this by
+  $\rho^* (G) := \min_{\textrm{cycles }C} \rho(C)$.  (You may
+  assume that edge-weights are integers in the range $[-M, M]$.)
     \begin{enumerate}[label=\alph*.]
       \item  (Nothing to submit.) Observe
     that you can check if a graph has a negative-weight cycle, using
     Bellman-Ford-Moore. (If all vertices are reachable from s this is
     immediate, else what will you do?)
-    \item Show how to use
-    Bellman-Ford-Moore to find a cycle of zero weight assuming there
-    is no negative-weight cycle. (Hint: Recall how you used B-F to
-    compute feasible potentials in Johnson’s algorithm from Lecture
-    \#4.)
+  \item Show how to use Bellman-Ford-Moore to find a cycle of zero
+    weight assuming there is no negative-weight cycle. (Hint: Recall
+    how you used B-F to compute feasible potentials in Johnson’s
+    algorithm from Lecture \#4.)
   \item
-    Observe:$ \rho \times (G) = max\{\alpha \in Q | G\textrm{ with arc
+    Observe:$ \rho^* (G) = max\{\alpha \in Q | G\textrm{ with arc
       weights $(w_a - \alpha)$ has no negative cycle }\}$.  Use this
-    observation to compute $\rho \times (G)$, and also find a cycle
+    observation to compute $\rho^* (G)$, and also find a cycle
     $C$ of this weight ratio. Your algorithm should run in time
     $O(mn(\log M + \log n))$ time.  Caveat: binary search over a range
     of $K$ integers takes $O(\log K)$ time. But binary search over
@@ -356,7 +355,7 @@ transform an $O(m^{2/3}
 one. For all parts, assume all edge sets are over vertex set $V$ with $|V | = n$, and all graphs are
 simple. Let $K = \lceil \frac{n - 1}{2}\rceil$.
 \begin{enumerate}[label=\alph*]
-\item For two edge sets $E, E0'$ with spanning forests $F, F'$
+\item For two edge sets $E, E'$ with spanning forests $F, F'$
 respectively, show that any spanning
 forest $F''$
  of $F \cup F'$

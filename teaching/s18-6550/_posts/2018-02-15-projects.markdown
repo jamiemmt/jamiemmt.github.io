@@ -31,8 +31,10 @@ about these details once people pick groups and projects.
 I would like for everyone to do this project either in pairs or
 individually; please use Piazza to help find a partner if you don't
 have one. When you have a partner, or have decided to work
-individually, please send Tao and Jamie emails with the subject
-"Project for 6550 Team" with your names, user IDs, and a brief summary
+individually, please
+fill in this [google form](https://goo.gl/forms/Wnmyx9Dt7TmzIiuh1).
+
+with a brief summary
 of what you'd like to do your project on. <bold> Please do this by
 February 28, so that we can plan how many days we need to allocate for
 presentations.</bold>
@@ -41,25 +43,39 @@ Here's a list of a few topics that whoever emails us first is welcome
 to present upon. Feel free to invent your own, these are just a few
 ideas to get you going.
 
-* We briefly talked about the complexity of min-sum products. There are some interesting average-case results, e.g.
-
-https://www.sciencedirect.com/science/article/pii/S0304397515008105
-
-Describe some of the (recent) average-case results. What makes this
-problem substantially easier than the worst case? What are some other
-useful applications (besides finding short paths) of using min-sum
-products?
-
-
-* Pick one of the recent accepted STOC papers or SODA papers
-
-http://acm-stoc.org/stoc2018/STOC-2018-Accepted.html
-http://www.dcs.warwick.ac.uk/~czumaj/SODA_2018_List_of_accepted_papers.htm
-
-and present the main ideas/breakthroughs in the paper as compared to
-prior work on the algorithmic problem.
+* We briefly talked about the complexity of min-sum products. There
+  are some interesting [average-case results]
+  (https://www.sciencedirect.com/science/article/pii/S0304397515008105).
+  Describe some of the (recent) average-case results. What makes this
+  problem substantially easier than the worst case? What are some
+  other useful applications (besides finding short paths) of using
+  min-sum products?
 
 
+* Pick one of the recent accepted
+  [STOC](http://acm-stoc.org/stoc2018/STOC-2018-Accepted.html) papers
+  or
+  [SODA](http://www.dcs.warwick.ac.uk/~czumaj/SODA_2018_List_of_accepted_papers.htm)
+  papers and present the main ideas/breakthroughs in the paper as
+  compared to prior work on the algorithmic problem.
+
+
+* Fair and Diverse sampling, based on [this
+  paper](https://arxiv.org/abs/1610.07183). One would need to learn
+   background on DPP, k-DPP. 
+
+*  On the algorithmic side of sampling of the previous paper,
+  they can just focus on [this work](https://arxiv.org/abs/1607.03559). It's MCMC
+  technique + log submodular concepts in there.
+
+* If someone likes more statistical side of diversity sampling (for
+  statistical efficiency): https://arxiv.org/abs/1710.05110 . The
+  algorithmic focus there is a pretty nice exercise (not too hard) to
+  grasp too.
+
+* MW update is used for differential privacy: [private
+   MW](http://mrtz.org/papers/HR10mult.pdf) or the more [ambitious
+   generalization](https://arxiv.org/abs/1107.3731).
 
 * If you have some idea of an area you're interested in, please meet
   with Tao or Jamie to discuss if you need some pointers.
