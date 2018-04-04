@@ -131,7 +131,7 @@ Some notes on Fibonacci heaps
    Sleator</a> and <a href="https://www.cs.princeton.edu/~wayne/kleinberg-tardos/pdf/FibonacciHeaps.pdf">Kevin Wayne</a>
    (with figures).<br/ >
 Notes by <a href="http://cgi.di.uoa.gr/~ewcg06/invited/Seidel.pdf">Raimund
-       Seidel</a> and <a href="http://www.gabrielnivasch.org/fun/inverse-ackermann">Gabriel Nivasch</a> on the inverse Ackermann function.
+       Seidel</a> and <a href="http://www.gabrielnivasch.org/fun/inverse-ackermann">Gabriel Nivasch</a> on the inverse Ackermann function.|
        
 |  1/24 <br> Wednesday      | Randomized MSTs     |  <a href ="/teaching/s18-6550/notes/notes-lec3-mst.pdf">  My notes</a>  ||
 |  1/29 <br> Monday      |    Dynamic Graph Connectivity | <a href="/teaching/s18-6550/notes/notes-lec4-dgc.pdf"> My notes </a>      ||
