@@ -116,7 +116,7 @@ window.onload = function(){
 |  1/10 <br> Wednesday     |  Course Policies, Procedures <br>  **Probability Basics** | <a href ="/teaching/s18-6550/notes/notes-lec1-probability.pdf">  My notes</a>||
 |    1/15 <br> Monday  (MLK Day) | No class | ||
 |     1/17 <br> Wednesday  | CLASS CANCELLED || |
-|     1/22 <br> Monday  |     Deterministic MST algorithms |<a href ="/teaching/s18-6550/notes/notes-lec2-mst.pdf">  My notes</a> |  <ul><li>item1</li><li>item2</li></ul> |
+|     1/22 <br> Monday  |     Deterministic MST algorithms |<a href ="/teaching/s18-6550/notes/notes-lec2-mst.pdf">  My notes</a> |  item1<br>item2<br> |
 |  1/24 <br> Wednesday      | Randomized MSTs     |  <a href ="/teaching/s18-6550/notes/notes-lec3-mst.pdf">  My notes</a>  ||
 |  1/29 <br> Monday      |    Dynamic Graph Connectivity | <a href="/teaching/s18-6550/notes/notes-lec4-dgc.pdf"> My notes </a>      ||
 | 1/31 <br> Wednesday      |    Shortest Paths | <a href="/teaching/s18-6550/notes/notes-lec5-apsp.pdf"> My notes </a> | |
