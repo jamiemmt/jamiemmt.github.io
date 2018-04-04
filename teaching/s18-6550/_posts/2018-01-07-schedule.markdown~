@@ -137,7 +137,7 @@ window.onload = function(){
 |  3/26 <br> Monday      |   Ellipsoid Algorithm and Overview of Interior-point Methods.      |    ||| 
 |  3/28 <br> Wednesday      | Concentration of Measure: "Chernoff-Hoeffding" Bounds | <a href="/teaching/s18-6550/notes/notes-lec18-chernoff.pdf"> My notes (coming soon!) </a>| |
 |  4/2 <br> Monday      |   Dimension Reduction: JL and related topics    |   <a href="/teaching/s18-6550/notes/notes-lec19-jl.pdf"> My notes </a>| |
-|  4/4 <br> Wednesday      |  Streaming I: Computing Frequency Moments and JL      |    ||
+|  4/4 <br> Wednesday      |  Streaming I: Computing Frequency Moments and JL      |<a href="/teaching/s18-s6550/notes/notes-lec20-streaming.pdf"> My notes</a>    ||
 |  4/9 <br> Monday      |  Dimension Reduction: Singular Value Decompositions  | | |
 |    4/11 <br> Wednesday   |  Online Algorithms: Rent-or-Buy and Paging, Online Primal-Dual     |    ||
 |   4/16 <br> Monday    | Approximation Algorithms     |    ||
