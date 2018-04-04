@@ -104,7 +104,7 @@ window.onload = function(){
 
 
 <textarea id="code" style="display:none;"  width="800%">
-|:------------|:----------|:-----------------|------|
+|:------------|:----------|:-----------------|-------------|
 
 </textarea>
 <div id="result" style="display:none;"></div>
