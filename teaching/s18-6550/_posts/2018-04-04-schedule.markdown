@@ -117,12 +117,12 @@ window.onload = function(){
 |    1/15 <br> Monday  (MLK Day) | No class | ||
 |     1/17 <br> Wednesday  | CLASS CANCELLED || |
 |     1/22 <br> Monday  |     Deterministic MST algorithms |<a href ="/teaching/s18-6550/notes/notes-lec2-mst.pdf">  My notes</a> |    Surveys on MSTs by <a href="http://www.cs.jhu.edu/~jason/papers/eisner.mst-tutorial.pdf">
-   Jason Eisner</a>
+   Jason Eisner</a><br />
    and <a href="http://www.sciencedirect.com/science/article/pii/S1574013708000270">Martin
-   Mares</a>. An
+   Mares</a>.<br/> An
    older one
    by <a href="http://www.cs.cmu.edu/afs/cs.cmu.edu/academic/class/15859-f09/www/handouts/cmuonly/graham-hell.pdf">Graham
-   and Hell</a>.<br/ >
+   and Hell</a>.<br/>
  The
    Fredman-Tarjan <a href="https://www.cs.princeton.edu/courses/archive/fall03/cs528/handouts/fibonacci%20heaps.pdf">paper</a>
    about Fibonacci heaps.<br/ >
