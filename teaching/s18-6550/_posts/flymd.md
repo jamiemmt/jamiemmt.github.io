@@ -36,7 +36,7 @@ textarea {
 var VanillaRunOnDomReady = function() {
 marked.setOptions({
   gfm: true,
-  tables: true,
+  tables: true,fLyMd-mAkEr
   breaks: false,
   pedantic: false,
   sanitize: true,
