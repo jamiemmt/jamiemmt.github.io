@@ -1,0 +1,148 @@
+---
+title: Tentative Schedule for Spring 6550
+layout: post
+---
+
+
+<head>
+
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML'></script>
+
+       <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/marked/0.2.9/marked.min.js"></script>
+
+    
+  <style type="text/css">
+    body {
+    max-width: 200ex;
+    margin: 5em auto;
+}
+table {
+    max-width: 150%;
+}
+textarea {
+    max-width:150%;
+    min-height: 0em;
+    padding: .5em;
+    border: #ccc solid 1px;
+    border-radius: 5px;
+    font-family: Lucida Console, monospace;
+    background-color: rgba(128,128,128,.1);
+    color: rgba(0,0,0,.5);}
+  </style>
+
+
+<script type='text/javascript'>//<![CDATA[
+var VanillaRunOnDomReady = function() {
+marked.setOptions({
+  gfm: true,
+  tables: true,fLyMd-mAkEr
+  breaks: false,
+  pedantic: false,
+  sanitize: true,
+  smartLists: true,
+  smartypants: false,
+  langPrefix: 'lang-'
+});
+var result = document.getElementById('result');
+var code = document.getElementById('code');
+
+code.onchange = function(){
+    result.innerHTML = marked(code.value);
+    
+    var o = [];
+    code.value.match(/^(\|([^\|]-+[^\|])+)(.*)$/gim).forEach(function(t,tn){
+        o[tn] = [];
+        o[tn]['rw'] = 0;
+        t.match(/\|([^\|]-+[^\|])?/gim).forEach(function(c,cn,tc){
+            o[tn]['rw'] += o[tn][cn] = c.length;
+        });
+        o[tn].forEach(function(cw,cn){
+            !cw*1||(o[tn][cn] = Math.round(100 / o[tn]['rw'] * o[tn][cn]) + '%');
+        });
+        delete o[tn]['rw'];
+        o[tn].length--;
+    });
+    
+    [].forEach.call(document.getElementsByTagName('table'),function(rt,rtn){
+      rt.setAttribute('class','table');
+      [].forEach.call(rt.children[0].children[0].children,function(rtr,rtrn){
+          console.log(rtr);
+            rtr.style.width = o[rtn][rtrn];
+      });
+    });
+    console.log('Cell sizes of each table:',o);
+}
+
+code.onchange();
+}
+
+var alreadyrunflag = 0;
+
+If (document.addEventListener)
+    document.addEventListener("DOMContentLoaded", function(){
+        alreadyrunflag=1; 
+        VanillaRunOnDomReady();
+    }, false);
+else if (document.all && !window.opera) {
+    document.write('<script type="text/javascript" id="contentloadtag" defer="defer" src="javascript:void(0)"><\/script>');
+    var contentloadtag = document.getElementById("contentloadtag")
+    contentloadtag.onreadystatechange=function(){
+        if (this.readyState=="complete"){
+            alreadyrunflag=1;
+            VanillaRunOnDomReady();
+        }
+    }
+}
+
+window.onload = function(){
+  setTimeout("if (!alreadyrunflag){VanillaRunOnDomReady}", 0);
+}//]]> 
+
+</script>
+</head>
+
+
+<textarea id="code" style="display:none;"  width="800%">
+|:------------|:----------|:--------|---------------------|
+</textarea>
+
+<div id="result" style="display:none;"></div>
+
+
+|Date        |Subject           |Notes  |References |
+|:------------|:-----------|:--------|:---------------------------|
+|   1/8 <br> Monday      |  CLASS CANCELLED |||
+|  1/10 <br> Wednesday     |  Course Policies, Procedures <br>  **Probability Basics** | <a href ="/teaching/s18-6550/notes/notes-lec1-probability.pdf">  My notes</a>||
+|    1/15 <br> Monday  (MLK Day) | No class | ||
+|     1/17 <br> Wednesday  | CLASS CANCELLED || |
+|     1/22 <br> Monday  |     Deterministic MST algorithms |<a href ="/teaching/s18-6550/notes/notes-lec2-mst.pdf">  My notes</a> |   Surveys on MSTs     by <a href="http://www.cs.jhu.edu/~jason/papers/eisner.mst-tutorial.pdf">   Jason Eisner</a>      and <a href="http://www.sciencedirect.com/science/article/pii/S1574013708000270">Martin   Mares</a>. <br/>     An   older one   by <a href="http://www.cs.cmu.edu/afs/cs.cmu.edu/academic/class/15859-f09/www/handouts/cmuonly/graham-hell.pdf">Graham   and Hell</a>. <br/>   The   Fredman-Tarjan <a href="https://www.cs.princeton.edu/courses/archive/fall03/cs528/handouts/fibonacci%20heaps.pdf">paper</a>   about Fibonacci heaps.<br/>   Some notes on Fibonacci heaps   from <a href="handouts/fib-heaps.txt">Danny   Sleator</a> and <a href="https://www.cs.princeton.edu/~wayne/kleinberg-tardos/pdf/FibonacciHeaps.pdf">Kevin Wayne</a>   (with figures).<br/>   Notes by <a href="http://cgi.di.uoa.gr/~ewcg06/invited/Seidel.pdf">Raimund       Seidel</a> and <a href="http://www.gabrielnivasch.org/fun/inverse-ackermann">Gabriel Nivasch</a> on the inverse Ackermann function.  | 
+|  1/24 <br> Wednesday      | Randomized MSTs     |  <a href ="/teaching/s18-6550/notes/notes-lec3-mst.pdf">  My notes</a>  | The <a href="http://cs.brown.edu/research/pubs/pdfs/1995/Karger-1995-RLT.pdf">Karger-Klein-Tarjan</a>   paper. Timothy Chan has a <a href="http://dx.doi.org/10.1016/S0020-0190(98)00129-X">different proof</a> of the sampling lemma.<br/>The <a href="http://dx.doi.org/10.1007/BF02579443">Komlos</a>, <a href="http://dx.doi.org/10.1007/BF02526037">King</a>,   and <a href="http://link.springer.com/chapter/10.1007%2F978-3-642-11409-0_16#page-1">Hagerup</a>   papers on MST verification. Uri Zwick's <a href="http://www.cs.tau.ac.il/~zwick/grad-algo-0910/mst-verify.pdf">notes</a> on MST verification.<br/> References on arborescences:<br/>Edmonds, <a href="http://nvlpubs.nist.gov/nistpubs/jres/71b/jresv71bn4p233_a1b.pdf">Optimal	 Branchings</a>, 1966. (I couldn't find the Chu-Liu '65 and Bock	 '71 papers.) Our proof	 follows <a href="http://onlinelibrary.wiley.com/doi/10.1002/net.3230010305/abstract">Karp</a>	 '71.<br/>R. Tarjan, <a href="https://cw.fel.cvut.cz/wiki/_media/courses/a4m33pal/cviceni/tarjan-finding-optimum-branchings.pdf">Finding       optimal branchings</a>: an $O(m log n)$ time algorithm. (and       errata       by <a href="https://cw.fel.cvut.cz/wiki/_media/courses/a4m33pal/cviceni/carmerini-a-note-on-finding-optimum-branchings.pdf">Carmerini       et al.</a>) <br/>Current       best: <a href="http://portal.acm.org/citation.cfm?doid=1198513.1198517">Mendelson, Tarjan, Thorup, Zwick</a>, gave an $O(m log log n)$ algorithm in  2004.|
+|  1/29 <br> Monday      |    Dynamic Graph Connectivity | <a href="/teaching/s18-6550/notes/notes-lec4-dgc.pdf"> My notes </a>      |Worst-case update times: <br/>Greg Frederickson, <a href="http://epubs.siam.org/doi/pdf/10.1137/0214055">Data  Structures for On-Line Updating of Minimum Spanning Trees, with Applications</a>, 1985. (and <a href="https://resources.mpi-inf.mpg.de/departments/d1/teaching/ss12/AdvancedGraphAlgorithms/Slides09.pdf">slides by Ran Duan</a>)<br/>Kapron, King, and Mountjoy, <a href="http://dl.acm.org/citation.cfm?id=2627898">Dynamic graph  connectivity in polylogarithmic worst case time</a>, 2012. (and <a href="handouts/kapron-king-mountjoy-slides.pdf">slides</a>)<br/>some recent developments by <a  href="https://arxiv.org/abs/1611.03745">Nanongkai and     Saranurak</a> and by <a     href="https://arxiv.org/abs/1611.02864">Wulff-Nilsen</a>, 2016<br/> And for amortized update times which we did not go over: <br/>the <a href="http://dl.acm.org/citation.cfm?id=502095">Holm, de Lichtenberg, Thorup</a> paper (and slides by <a href="handouts/italiano-talk-extract.pdf">Pino Italiano</a> and <a href="https://resources.mpi-inf.mpg.de/departments/d1/teaching/ss12/AdvancedGraphAlgorithms/Slides08.pdf">Ran Duan</a>) <br/>and a lower bound by <a href="https://arxiv.org/pdf/cs/0502041.pdf">Patrascu and Demaine</a>.|
+| 1/31 <br> Wednesday      |    Shortest Paths | <a href="/teaching/s18-6550/notes/notes-lec5-apsp.pdf"> My notes </a> | Basic notes on shortest-paths from <a href="http://www.cs.cmu.edu/afs/cs/academic/class/15210-s12/www/lectures/lecture11.pdf">210</a>, <a href="http://www.cs.cmu.edu/afs/cs.cmu.edu/academic/class/15451-f14/www/lectures/lec9.pdf">451</a>, and from Jeff Erickson <a href="http://web.engr.illinois.edu/~jeffe/teaching/algorithms/notes/21-sssp.pdf">SSSP</a>, <a href="http://web.engr.illinois.edu/~jeffe/teaching/algorithms/notes/22-apsp.pdf">APSP</a>)<br/>R. Seidel. <a href="http://portal.acm.org/citation.cfm?id=129784">On the all-pairs-shortest-path problem</a>, STOC 1992.<br/>Alon, Galil, Margalit, Naor. <a href="http://www.math.tau.ac.il/~nogaa/PDFS/witness1.pdf">Witnesses for Boolean Matrix Multiplication and for Shortest Paths</a>, FOCS 92.|
+|  2/5 <br> Monday      |    Low-stretch Trees    | <a href="/teaching/s18-6550/notes/notes-lec6-lsst.pdf"> My notes </a>   |<a href="http://www.cs.cmu.edu/afs/cs.cmu.edu/academic/class/15859m-s11/www/lectures/lect0302.pdf">Lecture      notes</a> from our randomized algorithms course (S11).      <br/>Alon, Karp, Peleg, West: <a href="http://www.icsi.berkeley.edu/ftp/global/pub/techreports/1991/tr-91-066.pdf">A Graph-Theoretic Game and its      Application to the k-Server Problem</a>, SICOMP.      <br/>Bartal:  <a href="http://www.cs.huji.ac.il/~yair/pubs/B-prob-approx.ps">Probabilistic Approximation of Metric Spaces and its      Algorithmic Applications</a>, FOCS 96<br/>     Our presentation pretty much followed his general construction.      <br/>Fakcharoenphol, Rao,	Talwar, <a href="http://www.iitg.ernet.in/cse/rana2013/material/day1part1/lgndist-FRT.pdf">A	tight bound on approximating arbitrary metrics by tree	metrics</a>, STOC 03.<br/>This paper gives the best possible algorithm    for the metric graph case. 	<br/>Abraham, Neiman: <a href="http://www.cs.bgu.ac.il/~neimano/spanning-full1.pdf">Using Petal-Decompositions to Build a Low Stretch    Spanning Tree</a>.<br/>This paper gives the current best algorithm    for the general graph case.      Some other low-diameter decomposition schemes:   <br/>Miller, Peng, Xu:  <a href="http://arxiv.org/abs/1307.3692">Parallel Graph Decompositions Using Random     Shifts</a>, SPAA.    The <a href="http://epubs.siam.org/doi/pdf/10.1137/S0097539701395978">Calinescu-Karloff-Rabani</a>/<a href="http://www.sciencedirect.com/science/article/pii/S0022000004000637">Fakchareonphol-Rao-Talwar</a> schemes, the <a href="http://arxiv.org/abs/1307.3692">Miller Peng Xu</a> scheme.      And applications of low-stretch spanning trees to some problems:        <br/>Approximation Algorithms (a <a href="http://www.cs.cmu.edu/~anupamg/papers/network-survey.pdf">survey</a>), solving linear systems     (<a href="https://arxiv.org/pdf/cs/0607105.pdf">Speilman-Teng</a>, <a href="https://arxiv.org/abs/1003.2958">KMP</a>, <a href="https://arxiv.org/abs/1301.6628">KOSZ</a>).|
+|  2/7 <br> Wednesday      |  Matchings in General Graphs: combinatorial algorithms | <a href="/teaching/s18-6550/notes/notes-lec7-match.pdf"> My notes </a>  | |
+|  2/12 <br> Monday      |  Matchings in General Graphs: linear programming.   |    <a href="/teaching/s18-6550/notes/notes-lec8-lp.pdf"> My notes </a>  | |
+|  2/14 <br> Wednesday      |  Max-Weight Matchings in Graphs: A Pricing algorithm | <a href="/teaching/s18-6550/notes/notes-lec9-pricing.pdf"> My notes </a>  | |
+|  2/19 <br> Monday      |    Matchings in Graphs: Algebraic Algorithms    |    <a href="/teaching/s18-6550/notes/notes-lec10-algebra.pdf"> My notes </a>  | |
+|  2/21 <br> Wednesday      |  Smoothed Analysis  | <a href="https://www.cs.cmu.edu/~anupamg/advalgos17/scribes/lec10.pdf"> Anupam's scribed notes</a> | |
+|  2/26 <br> Monday      | Online Learning and the Multiplicative Weights Framework   |  <a href="https://www.cs.cmu.edu/~anupamg/advalgos17/scribes/lec11.pdf"> Anupam's scribed notes</a>    ||
+|  2/28 <br> Wednesday      |     Applications of MW: zero-sum-games, solving LPs.  | <a href="/teaching/s18-6550/notes/notes-lec13-minmax.pdf"> My notes </a>  | |
+|  3/5 <br> Monday      |    Applications of MW: max-flows using electrical flows   |     <a href="/teaching/s18-6550/notes/notes-lec14-flow.pdf"> My notes </a>  | |
+|  3/7 <br> Wednesday      | Gradient Descent. Yet another low-regret algorithm.  |  <a href="/teaching/s18-6550/notes/notes-lec15-gd.pdf"> My notes </a>  | |
+|  3/12 <br> Monday      | Mirror Descent: generalizing MW and GD |   <a href="/teaching/s18-6550/notes/notes-lec16-mirror.pdf"> My notes </a>  | |
+| 3/14 <br> Wednesday      | Class Cancelled | | |
+|  3/19 <br> Monday      |   Spring break! | | |
+|  3/21 <br> Wednesday      | Spring break!      |    ||
+|  3/26 <br> Monday      |   Ellipsoid Algorithm and Overview of Interior-point Methods.      |    ||| 
+|  3/28 <br> Wednesday      | Concentration of Measure: "Chernoff-Hoeffding" Bounds | <a href="/teaching/s18-6550/notes/notes-lec18-chernoff.pdf"> My notes (coming soon!) </a>| |
+|  4/2 <br> Monday      |   Dimension Reduction: JL and related topics    |   <a href="/teaching/s18-6550/notes/notes-lec19-jl.pdf"> My notes </a>| |
+|  4/4 <br> Wednesday      |  Streaming I: Computing Frequency Moments and JL      |<a href="/teaching/s18-6550/notes/notes-lec20-streaming.pdf"> My notes</a>    ||
+|  4/9 <br> Monday      |  Dimension Reduction: Singular Value Decompositions  | | |
+|    4/11 <br> Wednesday   |  Online Algorithms: Rent-or-Buy and Paging, Online Primal-Dual     |    ||
+|   4/16 <br> Monday    | Approximation Algorithms     |    ||
+|  4/18 <br> Wednesday | Matroids and Matroid Intersection <br> OR <br>Submodularity  <br>OR Fixed-Parameter Tractable Algorithms       <br> OR <br> Final Project Presentations | | |
+|  4/20 <br> Monday      |       Final Project Presentations| ||
+|  4/25 <br> Wednesday      | Reading period  | | |
+|  4/30 <br> Monday      |       |    ||
+| 5/2 <br> Wednesday <br> Final exam slot 2:50-5:40 pm      | Final Project Presentations  | | |

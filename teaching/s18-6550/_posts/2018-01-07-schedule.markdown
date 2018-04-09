@@ -116,7 +116,7 @@ window.onload = function(){
 |  1/10 <br> Wednesday     |  Course Policies, Procedures <br>  **Probability Basics** | <a href ="/teaching/s18-6550/notes/notes-lec1-probability.pdf">  My notes</a>||
 |    1/15 <br> Monday  (MLK Day) | No class | ||
 |     1/17 <br> Wednesday  | CLASS CANCELLED || |
-|     1/22 <br> Monday  |     Deterministic MST algorithms |<a href ="/teaching/s18-6550/notes/notes-lec2-mst.pdf">  My notes</a> | | 
+|     1/22 <br> Monday  |     Deterministic MST algorithms |<a href ="/teaching/s18-6550/notes/notes-lec2-mst.pdf">  My notes</a> |  | 
 |  1/24 <br> Wednesday      | Randomized MSTs     |  <a href ="/teaching/s18-6550/notes/notes-lec3-mst.pdf">  My notes</a>  ||
 |  1/29 <br> Monday      |    Dynamic Graph Connectivity | <a href="/teaching/s18-6550/notes/notes-lec4-dgc.pdf"> My notes </a>      ||
 | 1/31 <br> Wednesday      |    Shortest Paths | <a href="/teaching/s18-6550/notes/notes-lec5-apsp.pdf"> My notes </a> | |
@@ -135,9 +135,9 @@ window.onload = function(){
 |  3/19 <br> Monday      |   Spring break! | | |
 |  3/21 <br> Wednesday      | Spring break!      |    ||
 |  3/26 <br> Monday      |   Ellipsoid Algorithm and Overview of Interior-point Methods.      |    ||| 
-|  3/28 <br> Wednesday      | Concentration of Measure: "Chernoff-Hoeffding" Bounds | | |
-|  4/2 <br> Monday      |   Dimension Reduction: JL and related topics    |    ||
-|  4/4 <br> Wednesday      |  Streaming I: Computing Frequency Moments and JL      |    ||
+|  3/28 <br> Wednesday      | Concentration of Measure: "Chernoff-Hoeffding" Bounds | <a href="/teaching/s18-6550/notes/notes-lec18-chernoff.pdf"> My notes (coming soon!) </a>| |
+|  4/2 <br> Monday      |   Dimension Reduction: JL and related topics    |   <a href="/teaching/s18-6550/notes/notes-lec19-jl.pdf"> My notes </a>| |
+|  4/4 <br> Wednesday      |  Streaming I: Computing Frequency Moments and JL      |<a href="/teaching/s18-6550/notes/notes-lec20-streaming.pdf"> My notes</a>    ||
 |  4/9 <br> Monday      |  Dimension Reduction: Singular Value Decompositions  | | |
 |    4/11 <br> Wednesday   |  Online Algorithms: Rent-or-Buy and Paging, Online Primal-Dual     |    ||
 |   4/16 <br> Monday    | Approximation Algorithms     |    ||
