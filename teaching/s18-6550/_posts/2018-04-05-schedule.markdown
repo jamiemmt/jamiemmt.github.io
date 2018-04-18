@@ -141,8 +141,8 @@ window.onload = function(){
 |  4/9 <br> Monday      |  Dimension Reduction: Singular Value Decompositions  | | |
 |    4/11 <br> Wednesday   |  Online Algorithms: Rent-or-Buy and Paging, Online Primal-Dual     |    ||
 |   4/16 <br> Monday    | Approximation Algorithms     |    ||
-|  4/18 <br> Wednesday | Matroids and Matroid Intersection <br> OR <br>Submodularity  <br>OR Fixed-Parameter Tractable Algorithms       <br> OR <br> Final Project Presentations | | |
-|  4/20 <br> Monday      |       Final Project Presentations| ||
-|  4/25 <br> Wednesday      | Reading period  | | |
+|  4/18 <br> Wednesday |  Fixed-Parameter Tractable Algorithms | ||
+|  4/23 <br> Monday      |       Final Project Presentations| ||
+|  4/25 <br> Wednesday      | Final Project Presentations  | | |
 |  4/30 <br> Monday      |       |    ||
 | 5/2 <br> Wednesday <br> Final exam slot 2:50-5:40 pm      | Final Project Presentations  | | |
