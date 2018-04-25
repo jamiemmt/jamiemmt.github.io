@@ -214,10 +214,10 @@ solutions.
   \litem{(A Counter, and the Median-of-Means Estimator.)} Here is a
   way of maintaining an approximate counter. (Call this the basic
   counter.)  Start with $X \gets 0$. When an element arrives, increment $X$ by
-  $1$ with probability $2^{-X}$. When queried, return $N := 2^X − 1$.
+  $1$ with probability $2^{-X}$. When queried, return $N := 2^X - 1$.
   \begin{enumerate}
   \item Suppose the actual count is $n$, show that $\E[N] = n$, and
-    $\textrm{Var}(N) = \frac{n(n−1)}{ 2}$ .
+    $\textrm{Var}(N) = \frac{n(n-1)}{ 2}$ .
 
     Since its variance is large, average $k$ independent basic
     counters $N_1, N_2, \ldots, N_k$, and output the sample average
@@ -254,7 +254,7 @@ solutions.
    Consider the following algorithm:
 
    Keep a global hash function $g : [D] \to [d]$, and also $d$ counters $C_1, C_2,\ldots, C_d$
-(initially zero), each with its own hash function $h_i: [D] \to \{−1, +1\}$. If you see
+(initially zero), each with its own hash function $h_i: [D] \to \{-1, +1\}$. If you see
 element $e \in [D]$, first hash it using the global hash function $g$ to get the bucket
 number $g(e)$, and then update
 
@@ -265,7 +265,7 @@ Assume that $g$ and the $h_i$s are all independently picked, and each hash funct
 $2$-universal.
 \begin{enumerate}
 \item  Show that $E[A(q)] = x_q$.
-\item  Show that the variance of the estimate $A(q) = \frac{1}{d}(F_2 − x^2_q) \leq F^2/d.$
+\item  Show that the variance of the estimate $A(q) = \frac{1}{d}(F_2 - x^2_q) \leq F_2/d.$
 \item  Show that if we set $d =\frac{1}{\epsilon^2 \delta}$, our estimate $A(q)$ satisfies
 \[\P[A(q) \in x_q \pm \epsilon \sqrt{F_2}] \geq 1 -\delta.\]
 Recall that $F_2 := \sum_i x^2_i = || x||^2_2$  and hence the error term is $\epsilon||x||_2$.
