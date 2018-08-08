@@ -1,0 +1,316 @@
+\documentclass{article}
+
+\usepackage{fancyhdr}
+\usepackage{extramarks}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{tikz}
+\usepackage[plain]{algorithm}
+\usepackage{algpseudocode}
+\usepackage{fullpage, url, hyperref}
+
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{definition}{Definition}
+
+\newcommand{\I}{\mathcal{I}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\tr}{\mathrm{tr}}
+\renewcommand{\P}{\mathbb{P}}
+\usetikzlibrary{automata,positioning}
+
+%
+% Basic Document Settings
+%
+
+\topmargin=-0.45in
+\evensidemargin=-.50in
+\oddsidemargin=-.5in
+\textwidth=7in
+\textheight=9.5in
+\headsep=0.25in
+
+\linespread{1.1}
+
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName}
+\chead{\hmwkClass\ (\hmwkClassInstructor\ \hmwkClassTime): \hmwkTitle}
+\rhead{\firstxmark}
+\lfoot{\lastxmark}
+\cfoot{\thepage}
+
+\newcommand{\w}[2]{w_{#1}^{(#2)}}
+\newcommand{\loss}[2]{\vec{\ell}_{#2}^{(#1)}}
+\newcommand{\losst}[1]{\vec{\ell}^{(#1)}}
+  \newcommand{\pt}[1]{\vec{p}^{(#1)}}
+\renewcommand\headrulewidth{0.4pt}
+\renewcommand\footrulewidth{0.4pt}
+
+\setlength\parindent{0pt}
+
+
+% 
+% Create Problem Sections
+%
+
+
+\newcommand{\enterProblemHeader}[1]{
+    \nobreak\extramarks{}{}\nobreak{}
+    \nobreak\extramarks{}\nobreak{}
+}
+
+\newcommand{\exitProblemHeader}[1]{
+    \nobreak\extramarks{}\nobreak{}
+    \stepcounter{#1}
+    \nobreak\extramarks{}\nobreak{}
+  }
+
+  
+\newcommand{\enterExerciseHeader}[1]{
+    \nobreak\extramarks{}{}\nobreak{}
+    \nobreak\extramarks{}\nobreak{}
+}
+
+\newcommand{\exitExerciseHeader}[1]{
+    \nobreak\extramarks{}\nobreak{}
+    \stepcounter{#1}
+    \nobreak\extramarks{}\nobreak{}
+}
+
+\setcounter{secnumdepth}{0}
+\newcounter{partCounter}
+\newcounter{homeworkProblemCounter}
+\setcounter{homeworkProblemCounter}{1}
+
+\newcounter{homeworkExerciseCounter}
+\setcounter{homeworkExerciseCounter}{1}
+\nobreak\extramarks{}\nobreak{}
+\nobreak\extramarks{}\nobreak{}
+
+%
+% Homework Problem Environment
+%
+% This environment takes an optional argument. When given, it will adjust the
+% problem counter. This is useful for when the problems given for your
+% assignment aren't sequential. See the last 3 problems of this template for an
+% example.
+%
+\newenvironment{homeworkProblem}[1][-1]{
+%    \ifnum#1>0
+   %     \setcounter{homeworkProblemCounter}{#1}
+   % \fi
+    \section{Problem \arabic{homeworkProblemCounter}}
+    \setcounter{partCounter}{1}
+    \enterProblemHeader{homeworkProblemCounter}
+}{
+    \exitProblemHeader{homeworkProblemCounter}
+}
+
+  \newenvironment{homeworkExercise}[1][-1]{
+    \ifnum#1>0
+        \setcounter{homeworkExerciseCounter}{#1}
+    \fi
+    \section{Exercise \arabic{homeworkExerciseCounter}}
+    \setcounter{partCounter}{1}
+    \enterExerciseHeader{homeworkExerciseCounter}
+}{
+    \exitExerciseHeader{homeworkExerciseCounter}
+}
+
+%
+% Homework Details
+%   - Title
+%   - Due date
+%   - Class
+%   - Section/Time
+%   - Instructor
+%   - Author
+%
+
+\newcommand{\hmwkTitle}{Homework\ \#5}
+\newcommand{\hmwkAssignedDate}{April 18}
+\newcommand{\hmwkDueDate}{April 25, midnight}
+\newcommand{\hmwkClass}{Design and Analysis of Algorithms, CS 6550}
+\newcommand{\hmwkClassTime}{}%Section A}
+\newcommand{\hmwkClassInstructor}{Professor Jamie Morgenstern}
+\newcommand{\hmwkAuthorName}{}%\textbf{Josh Davis} \and \textbf{Davis Josh}}
+
+%
+% Title Page
+%
+
+\title{    \vspace{2in}
+    \textmd{\textbf{\hmwkClass:\ \hmwkTitle}}\\
+    \normalsize\vspace{0.1in}\small{Due\ on\ \hmwkDueDate\ at 3:10pm}\\
+    \vspace{0.1in}\large{\textit{\hmwkClassInstructor\ \hmwkClassTime}}
+    \vspace{3in}
+}
+
+\author{\hmwkAuthorName}
+\date{}
+
+\renewcommand{\part}[1]{\textbf{\large Part \Alph{partCounter}}\stepcounter{partCounter}\\}
+
+%
+% Various Helper Commands
+%
+
+% Useful for algorithms
+\newcommand{\alg}[1]{\textsc{\bfseries \footnotesize #1}}
+
+% For derivatives
+\newcommand{\deriv}[1]{\frac{\mathrm{d}}{\mathrm{d}x} (#1)}
+
+% For partial derivatives
+\newcommand{\pderiv}[2]{\frac{\partial}{\partial #1} (#2)}
+
+% Integral dx
+\newcommand{\dx}{\mathrm{d}x}
+
+% Alias for the Solution section header
+\newcommand{\solution}{\textbf{\large Solution}}
+
+% Probability commands: Expectation, Variance, Covariance, Bias
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\Cov}{\mathrm{Cov}}
+\newcommand{\Bias}{\mathrm{Bias}}
+\usepackage{enumitem}
+\newcommand\litem[1]{\item{\bfseries#1.\space}}
+
+\newcommand{\Z}{\mathbb{Z}}
+
+\begin{document}
+
+% \maketitle
+
+\pagebreak
+
+{\bf Homework Out: \hmwkAssignedDate}\\
+{\bf Due Date:  \hmwkDueDate}\\
+{\bf Reminder: this homework is for extra credit! No late days.}
+The HW contains some exercises (fairly simple problems to check you
+are on board with the concepts; don’t submit your solutions), and
+problems (for which you should submit your solutions, and which will
+be graded). Some problems have sub-parts that are exercises.  For this
+problem set, it’s OK to work with others. (Groups of 2, maybe 3 max.)
+That being said, please think about the problems yourself before
+talking to others. Please cite all sources you use, and people you
+work with. The expectation is that you try and solve these problems
+yourself, rather than looking online explicitly for
+answers. Submissions due at beginning of class on the due date.
+Please check the Piazza for details on submitting your \emph{LaTeXed}
+solutions.
+
+\newcommand{\poly}{\textrm{poly}}
+\paragraph{Problems}
+
+
+\begin{enumerate}
+  \litem{(A Counter, and the Median-of-Means Estimator.)} Here is a
+  way of maintaining an approximate counter. (Call this the basic
+  counter.)  Start with $X \gets 0$. When an element arrives, increment $X$ by
+  $1$ with probability $2^{-X}$. When queried, return $N := 2^X - 1$.
+  \begin{enumerate}
+  \item Suppose the actual count is $n$, show that $\E[N] = n$, and
+    $\textrm{Var}(N) = \frac{n(n-1)}{ 2}$ .
+
+    Since its variance is large, average $k$ independent basic
+    counters $N_1, N_2, \ldots, N_k$, and output the sample average
+    $\hat{N} := \frac{1}{k}\sum_i N_i$ . Call this the $k$-mean counter.
+  \item (Do not submit) Show that
+   \[\P[\hat{N} \notin  (1 \pm \epsilon)n] \leq \frac{1}{2\epsilon^2 k}.\]
+   Hence using $k = \frac{1}{P 2\epsilon^2 \delta}$ counters can make
+     the failure probability at most $\delta$. (Said in other words,
+     your error is less than $\epsilon n$ with “confidence”
+     $1 -\delta$.) Here’s a way to use only
+     $K = O( \frac{1}{ \epsilon^2}\log\frac{ 1}{\delta})$ counters to
+     get the same answer (and the approach is useful in many different
+     contexts beyond this one):
+
+     Take a collection of $\ell = 10 log\frac{ 1 }{\delta}$
+     independent $k_0$-mean counters, where $k_0 =\frac{4}{ \epsilon^ 2}$ .  Output the
+     median $M$ of these $\ell$ counters.
+
+   \item Prove that $\P[M \notin (1 \pm \epsilon ε)n] \leq
+     \delta$. {\it Hint: what must happen for the the median to be too
+       high?  What is the chance of that?}
+   \end{enumerate}
+
+   \litem{(I Stream, You Stream.)} In data streaming model, suppose we
+   denote frequency vector by
+   $x = (x_1, x_2, . . . , x_D) \in \Z^D_{\geq 0}$ where $x_i$ counts
+   the number of occurences of element $i \in [D]$ seen so far. We
+   want a streaming algorithm that stores information about the stream
+   so that when it is eventually queried with some index $q \in [D]$,
+   returns a value $\hat{x}_q$ that is $\approx x_q$ with probability
+   at least $1 -\delta$. We don’t want to store $x$ explicitly, we want
+   to use less space.
+
+   Consider the following algorithm:
+
+   Keep a global hash function $g : [D] \to [d]$, and also $d$ counters $C_1, C_2,\ldots, C_d$
+(initially zero), each with its own hash function $h_i: [D] \to \{-1, +1\}$. If you see
+element $e \in [D]$, first hash it using the global hash function $g$ to get the bucket
+number $g(e)$, and then update
+
+\[C_{g(e)}\gets   C_{g(e)} + h_{g(e)}(e).\]
+When faced with the query $q$, output $A(q) := h_{g(q)}(q) · C_{g(q)}$.
+
+Assume that $g$ and the $h_i$s are all independently picked, and each hash function is itself
+$2$-universal.
+\begin{enumerate}
+\item  Show that $E[A(q)] = x_q$.
+\item  Show that the variance of the estimate $A(q) = \frac{1}{d}(F_2 - x^2_q) \leq F_2/d.$
+\item  Show that if we set $d =\frac{1}{\epsilon^2 \delta}$, our estimate $A(q)$ satisfies
+\[\P[A(q) \in x_q \pm \epsilon \sqrt{F_2}] \geq 1 -\delta.\]
+Recall that $F_2 := \sum_i x^2_i = || x||^2_2$  and hence the error term is $\epsilon||x||_2$.
+
+\item Finally, consider an extension of this idea: maintain $t$
+  independent copies of the above data structure. On a query for $q$,
+  if the answers from the individual copies of the data structure are
+  $A_1(q), A_2(q), . . . , A_t(q)$, return the median $M(q)$ of these
+  $t$ answers.  Show that with $t = c_1 \log \frac{1+}{\delta}$, and
+  $d = \frac{c_2}{\epsilon^2}$, where $c_1, c_2$ are constants you can
+  choose, you get $M(q) \in x_q \pm \epsilon || x ||_2$ with
+  probability $1-\delta$.
+\end{enumerate}
+
+\litem{(Chernoff meets Matrices)} In Lecture 18 we mentioned a very
+general theorem about matrix-valued Chernoff bounds for symmetric
+matrices. In this problem we’ll take the first steps towards
+it. Assume eigenvalues are numbered so that
+$\lambda_1 \geq \ldots \lambda_n$. We’ll prove:
+\begin{theorem}
+  Let $X_1, X_2, \ldots, X_n$ be independent symmetric $d \times t$ matrices, and $S_n= \sum_i X_)i$. Then, for any $t \geq 0$ and $\ell \in \R$,
+  \[\P[\lambda_1(S_n) \geq \ell] \leq d \cdot e^{-t\ell} \cdot \prod_{i=1}^n \lambda_1 (\E[e^{tX_i}]).\]
+    \[\P[\lambda_d(S_n) \leq -\ell] \leq d \cdot e^{-t\ell} \cdot \prod_{i=1}^n \lambda_1 (\E[e^{-tX_i}]).\]
+  \end{theorem}
+  Recall that $\tr(A) = \sum_{i=1}^n a_{ii}$. You may use the following without proof:
+\begin{enumerate}
+
+  \begin{enumerate}
+  \item $\tr(A) = \sum_i \lambda_i (A)$
+  \item $\lambda_i (e^A) = e^{\lambda_i(A)}$
+  \item The Golden-Thompson inequality: $\tr(e^{A+B}) \leq \tr(e^A \cdot e^B)$.
+  \item For PSD matrices $A$ and $B$, $\tr(AB) \leq \tr(A)\cdot \tr(B)$.\
+  \item Expectations and trace commute: $\E[\tr(A)] = \tr(\E[A])$.
+  \end{enumerate}
+\item Show that for any $t \geq 0$,
+  \[\P[\lambda_1(S_n) \geq \ell] \leq \P[\tr(e^{tS_n}) \geq e^{t\ell}] \leq e^{-t\ell} \cdot \E[\tr(s^{tS_n}].\]
+\item Show that
+  \[\E_{X_1, \ldots, X_n}[\tr(e^{tS_n})]\leq \E_{X_1, \ldots, X_{n-1}} [\tr(e^{tS_{n-1}})]\cdot \lambda_1 (\E[e^{tX_n}]).\]
+  Hint: why can you use $(iv)$ above even if $X_n$ isn't PSD?
+\item Use the previous two parts to prove the first statement of the theorem.
+  \item Use the same arguments on $(-S_n) = \sum_i (-X_i)$ to prove the other part.
+\end{enumerate}
+\end{enumerate}
+
+
+
+
+\end{document}

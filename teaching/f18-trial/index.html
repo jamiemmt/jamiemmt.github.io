@@ -1,0 +1,197 @@
+---
+---
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name=viewport content="width=device-width,initial-scale=1.0">
+    <title>CS 6550, Spring 2018</title>
+    <link href="{{ site.baseurl }}/favicon.ico" rel="shortcut icon" type="image/ico">
+    <style type="text/css">
+      html {
+        background: #222222;
+        color: #ffffff;
+        font-family: "Georgia", "Times New Roman", serif;
+        font-size: 18px;
+        line-height: 30px;
+      }
+
+      body {
+        margin: 0 2%;
+      }
+
+      
+      h1 {
+      background: url("./buzz-dream.jpeg") top center no-repeat;
+      background-size:contain;
+      width: 300px;
+      height: 300px;
+      margin: 0 auto 37px auto;
+      display: block;
+      }
+
+      
+      @media only screen and (min-width: 481px) {
+        body {
+          margin: 75px auto;
+          width: 90%;
+        }
+      }
+
+      @media (max-width : 400px) {
+      div.main-text {
+      margin-left: 20px;
+      margin-bottom: 20px;
+      width: 150px;
+      }
+      div.myphoto {
+      height: 200px;
+      width: 100px;
+      background-size: 300px;
+      }
+      h1 {
+      height: 200px;
+      width: 100px;
+      }
+      }
+
+
+      h1 > span {
+#        display: none;
+      }
+
+      h2 {
+      align: left
+      }
+      
+      a {
+        color: #ebffb4;
+        text-decoration: underline;
+      }
+
+      a:hover,
+      a:focus,
+      a:active {
+        color: #222222;
+        background: #ebffb4;
+        text-decoration: none;
+      }
+
+      p,
+      ul,
+      .hr{
+        margin: 0;
+        margin-bottom: 37px;
+      }
+
+      ul {
+        padding: 0;
+      }
+
+      ul > li {
+        margin-left: 20px;
+      }
+
+      .hr {
+        background: transparent;
+        border-bottom: 1px solid #444444;
+        border-top: 1px solid #111111;
+      }
+
+
+      div.myphoto {
+#      height: 400px;
+      width: 30%;
+      float:left;
+      margin:0;
+      padding:0;
+#      margin-bottom: 20px;
+}
+
+div.hello {
+      margin-left: 100px;
+  #    margin-bottom: 20px;
+    }
+    </style>
+    <script type="text/javascript"
+            src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+
+
+  </head>
+  <body>
+    <div class="myphoto">
+      <noindent> GT CS 6550
+	<br>
+	Design and Analysis of Algorithms
+      <br>
+      Spring 2018
+      <br> Instructor: <a href = "mailto:jmorgenstern7ATgatechDOTedu" 
+   onclick = "this.href=this.href
+              .replace(/AT/,'&#64;')
+              .replace(/DOT/,'&#46;')"
+>Jamie Morgenstern</a> 
+    </div>
+
+
+    <div class="hello"><strong> </strong><br>
+    <h1> </h1>
+
+          </div>
+
+    <p>This is the course website for the Spring 2018 rendition of CS
+    6550 (Design and Analysis of Algorithms). The course is designed
+    for students already well-versed in topics covered by a first
+    algorithms course (dynamic programming, basic datastructures, max
+    flow/min cut, and so forth).  This rendition is cribbed
+    predominantly from <a href="http://cs.cmu.edu/~anupamg/"> Anupam
+    Gupta's</a> <a href="http://cs.cmu.edu/~anupamg/advalgos17">
+	excellent course</a>.
+
+    <p>
+      <br>
+      <a href="syllabus.pdf"> Syllabus</a>
+
+      <ul>
+<!--      <li>.</li>
+-->
+    </ul>
+
+          <ul>
+	<li> Course Project
+	</li>
+</u>
+<a href="hws/project-rubric.pdf"> Project Grading Rubric</a>
+<br>
+      <ul>
+	<li> Homeworks
+	</li>
+</u>
+<a href="hws/hw1.pdf"> Homework 1 (due February 5).</a> <a href="hws/hw1.tex">TeX </a>
+<br>
+<p>
+  <a href="hws/hw2.pdf"> Homework 2 (due February 26).</a> <a href="hws/hw2.tex">TeX </a>
+  <br>
+    <a href="hws/hw3.pdf"> Homework 3 (due March 16).</a> <a href="hws/hw3.tex">TeX </a>
+<br>
+<a href="hws/hw4.pdf"> Homework 4 (due Monday April 9).</a> <a href="hws/hw4.tex">TeX </a>
+<br>
+    <a href="hws/hw5.pdf"> Homework 5: Extra Credit, no late days! (due Wednesday, April 25).</a> <a href="hws/hw5.tex">TeX </a>
+
+  
+      <ul>
+<!--      <li>.</li>
+-->
+      </ul>
+      
+
+    <div class="hr"></div>
+    <ul>
+      {% for post in site.posts %}
+        <li>
+          <a href="{{ post.url }}">{{ post.title }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+  </body>
+</html>

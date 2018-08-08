@@ -1,0 +1,6 @@
+---
+exclude: ['Gemfile', 'Gemfile.lock', 'README.markdown']
+permalink: pretty
+
+
+markdown: kramdown

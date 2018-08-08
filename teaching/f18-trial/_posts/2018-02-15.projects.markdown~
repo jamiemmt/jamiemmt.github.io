@@ -1,0 +1,168 @@
+---
+title: Ideas for projects
+layout: post
+---
+
+
+<head>
+
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML'></script>
+
+       <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/marked/0.2.9/marked.min.js"></script>
+
+    
+  <style type="text/css">
+    body {
+    max-width: 400ex;
+    margin: 0em auto;
+}
+table {
+    max-width: 200%;
+}
+textarea {
+    max-width:200%;
+    min-height: 0em;
+    padding: .5em;
+    border: #ccc solid 1px;
+    border-radius: 5px;
+    font-family: Lucida Console, monospace;
+    background-color: rgba(128,128,128,.1);
+    color: rgba(0,0,0,.5);}
+  </style>
+
+      
+
+
+
+
+<script type='text/javascript'>//<![CDATA[
+var VanillaRunOnDomReady = function() {
+marked.setOptions({
+  gfm: true,
+  tables: true,
+  breaks: false,
+  pedantic: false,
+  sanitize: true,
+  smartLists: true,
+  smartypants: false,
+  langPrefix: 'lang-'
+});
+var result = document.getElementById('result');
+var code = document.getElementById('code');
+
+code.onchange = function(){
+    result.innerHTML = marked(code.value);
+    
+    var o = [];
+    code.value.match(/^(\|([^\|]-+[^\|])+)(.*)$/gim).forEach(function(t,tn){
+        o[tn] = [];
+        o[tn]['rw'] = 0;
+        t.match(/\|([^\|]-+[^\|])?/gim).forEach(function(c,cn,tc){
+            o[tn]['rw'] += o[tn][cn] = c.length;
+        });
+        o[tn].forEach(function(cw,cn){
+            !cw*1||(o[tn][cn] = Math.round(100 / o[tn]['rw'] * o[tn][cn]) + '%');
+        });
+        delete o[tn]['rw'];
+        o[tn].length--;
+    });
+    
+    [].forEach.call(document.getElementsByTagName('table'),function(rt,rtn){
+      rt.setAttribute('class','table');
+      [].forEach.call(rt.children[0].children[0].children,function(rtr,rtrn){
+          console.log(rtr);
+            rtr.style.width = o[rtn][rtrn];
+      });
+    });
+    console.log('Cell sizes of each table:',o);
+}
+
+code.onchange();
+}
+
+var alreadyrunflag = 0;
+
+if (document.addEventListener)
+    document.addEventListener("DOMContentLoaded", function(){
+        alreadyrunflag=1; 
+        VanillaRunOnDomReady();
+    }, false);
+else if (document.all && !window.opera) {
+    document.write('<script type="text/javascript" id="contentloadtag" defer="defer" src="javascript:void(0)"><\/script>');
+    var contentloadtag = document.getElementById("contentloadtag")
+    contentloadtag.onreadystatechange=function(){
+        if (this.readyState=="complete"){
+            alreadyrunflag=1;
+            VanillaRunOnDomReady();
+        }
+    }
+}
+
+window.onload = function(){
+  setTimeout("if (!alreadyrunflag){VanillaRunOnDomReady}", 0);
+}//]]> 
+
+</script>
+</head>
+
+<textarea id="code" style="display:none;"  width="800%">
+|------------|----------|-----------------
+
+</textarea>
+<div id="result" style="display:none;"></div>
+
+
+| Date        | Subject           | Notes  | References |
+|------------|-------------|-------------|-------------|
+|   1/8 <br> Monday      |  CLASS CANCELLED |||
+|  1/10 <br> Wednesday     |  Course Policies, Procedures <br>  **Probability Basics** | <a href ="/teaching/s18-6550/notes/notes-lec1-probability.pdf">  My notes</a>||
+|    1/15 <br> Monday  (MLK Day) | No class | ||
+|     1/17 <br> Wednesday  | CLASS CANCELLED || |
+|     1/22 <br> Monday  |     Deterministic MST algorithms |<a href ="/teaching/s18-6550/notes/notes-lec2-mst.pdf">  My notes</a> | | 
+|  1/24 <br> Wednesday      | Randomized MSTs     |  <a href ="/teaching/s18-6550/notes/notes-lec3-mst.pdf">  My notes</a>  ||
+<<<<<<< Updated upstream
+|  1/29 <br> Monday      |    Dynamic Graph Connectivity | <a href="/teaching/s18-6550/notes/notes-lec4-dgc.pdf"> My notes </a>      ||
+1/31 <br> Wednesday      |    Shortest Paths | <a href="/teaching/s18-6550/notes/notes-lec5-apsp.pdf"> My notes </a> | |
+|  2/5 <br> Monday      |    Low-stretch Trees    | <a href="/teaching/s18-6550/notes/notes-lec6-lsst.pdf"> My notes </a>   |||
+|  2/7 <br> Wednesday      |  Matchings in General Graphs: combinatorial algorithms | <a href="/teaching/s18-6550/notes/notes-lec7-match.pdf"> My notes </a>  | |
+|  2/12 <br> Monday      |  Matchings in General Graphs: linear programming.   |    ||
+|  2/14 <br> Wednesday      |  Max-Weight Matchings in Graphs: A Pricing algorithm | | |
+|  2/19 <br> Monday      |    Matchings in Graphs: Algebraic Algorithms    |    ||
+|  2/21 <br> Wednesday      |  Smoothed Analysis  | | |
+|  2/26 <br> Monday      | Online Learning and the Multiplicative Weights Framework   |    ||
+|  2/28 <br> Wednesday      |     Applications of MW: zero-sum-games, solving LPs.  | | |
+|  3/5 <br> Monday      |    Applications of MW: max-flows using electrical flows   |    ||
+|  3/7 <br> Wednesday      | Gradient Descent. Yet another low-regret algorithm.  | | |
+|  3/12 <br> Monday      | Mirror Descent: generalizing MW and GD | ||
+3/14 <br> Wednesday      | The Ellipsoid Algorithm: an overview | | |
+=======
+|  1/29 <br> Monday      |    Shortest Paths   |    ||
+1/31 <br> Wednesday      |   Low-stretch Trees | | |
+|  2/5 <br> Monday      |    Matchings in General Graphs: combinatorial algorithms    |    |||
+|  2/7 <br> Wednesday      |  Matchings in General Graphs: linear programming | | |
+|  2/12 <br> Monday      |   Max-Weight Matchings in Graphs: A Pricing algorithm.   | <a href ="/teaching/s18-6550/notes/notes-lec9-price.pdf">  My notes</a>     ||
+|  2/14 <br> Wednesday      |  Matchings in Graphs: Algebraic Algorithms | | |
+|  2/19 <br> Monday      |    Smoothed Analysis    |    ||
+|  2/21 <br> Wednesday      |Online Learning and the Multiplicative Weights Framework  | | |
+|  2/26 <br> Monday      | Applications of MW: zero-sum-games, solving LPs   |    ||
+|  2/28 <br> Wednesday      |     Applications of MW: max-flows using electrical flows.  | | |
+|  3/5 <br> Monday      |    Gradient Descent. Yet another low-regret algorithm   |    ||
+|  3/7 <br> Wednesday      | Mirror Descent: generalizing MW and GD.  | | |
+|  3/12 <br> Monday      | The Ellipsoid Algorithm: an overview | ||
+3/14 <br> Wednesday      | Ellipsoid wrap-up. Interior-point Methods: an overview | | |
+>>>>>>> Stashed changes
+|  3/19 <br> Monday      |   Spring break! | | |
+|  3/21 <br> Wednesday      | Spring break!      |    ||
+|  3/26 <br> Monday      |   Ellipsoid wrap-up. Interior-point Methods: an overview.      |    ||| 
+|  3/28 <br> Wednesday      | Concentration of Measure: "Chernoff-Hoeffding" Bounds | | |
+|  4/2 <br> Monday      |   Dimension Reduction: JL and related topics    |    ||
+|  4/4 <br> Wednesday      |  Streaming I: Computing Frequency Moments and JL      |    ||
+|  4/9 <br> Monday      |  Dimension Reduction: Singular Value Decompositions  | | |
+|    4/11 <br> Wednesday   |  Online Algorithms: Rent-or-Buy and Paging, Online Primal-Dual     |    ||
+|   4/16 <br> Monday    | Approximation Algorithms     |    ||
+|  4/18 <br> Wednesday | Matroids and Matroid Intersection <br> OR <br>Submodularity  <br>OR Fixed-Parameter Tractable Algorithms       <br> OR <br> Final Project Presentations | | |
+|  4/20 <br> Monday      |       Final Project Presentations| ||
+|  4/25 <br> Wednesday      | Reading period  | | |
+|  4/30 <br> Monday      |       |    ||
+| 5/2 <br> Wednesday <br> Final exam slot 2:50-5:40 pm      | Final Project Presentations  | | |
