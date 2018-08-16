@@ -58,4 +58,4 @@ questions and allow everyone to learn from each other!
 
 Please read the assigned readings before attending lecture and lab.
 
-
+{% include schedule.html %}
