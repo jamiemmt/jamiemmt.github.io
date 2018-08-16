@@ -21,6 +21,7 @@ techniques for solving some open problems
 (c) propose a new algorithmic problem
 * Motivate it
 * Describe its relationship to other problems in the field
+<<<<<<< Updated upstream
 * Talk about techniques for making progress on the problem
 
 We're looking for a 5-10 page writeup, presumably on the longer end if
@@ -79,3 +80,6 @@ ideas to get you going.
 
 * If you have some idea of an area you're interested in, please meet
   with Tao or Jamie to discuss if you need some pointers.
+=======
+* Talk about techniques for making progress on the problem
+>>>>>>> Stashed changes

@@ -321,12 +321,21 @@ shows there is a negative cycle).
 \end{homeworkProblem}
 
 \begin{homeworkProblem}{ Short on Average.}
+<<<<<<< Updated upstream
   Given a directed graph $G = (V, A)$ with possibly negative
   edge-weights ${w_a}_{a\in A}$, define the weight-ratio of a directed
   cycle $C$ to be $\rho(C) = \frac{\sum_{ a\in C} w_a}{ |C|}$ .  We want to
   find a cycle $C$ with minimum weight-ratio. Denote this by
   $\rho^* (G) := \min_{\textrm{cycles }C} \rho(C)$.  (You may
   assume that edge-weights are integers in the range $[-M, M]$.)
+=======
+  Given a directed graph $G =
+    (V, A)$ with possibly negative edge-weights ${w_a}_{a\in A}$, define the
+    weight-ratio of a directed cycle $C$ to be $\rho(C) = \sum a\in C w_a |C|$ .  We
+    want to find a cycle $C$ with minimum weight-ratio. Denote this by $\rho
+    \times (G) := \min_{\textrm{cycles }C} \rho(C)$.  (You may assume that edge-weights are
+    integers in the range $[-M, M]$.)
+>>>>>>> Stashed changes
     \begin{enumerate}[label=\alph*.]
       \item  (Nothing to submit.) Observe
     that you can check if a graph has a negative-weight cycle, using
@@ -337,9 +346,15 @@ shows there is a negative cycle).
     how you used B-F to compute feasible potentials in Johnson’s
     algorithm from Lecture \#4.)
   \item
+<<<<<<< Updated upstream
     Observe:$ \rho^* (G) = max\{\alpha \in Q | G\textrm{ with arc
       weights $(w_a - \alpha)$ has no negative cycle }\}$.  Use this
     observation to compute $\rho^* (G)$, and also find a cycle
+=======
+    Observe:$ \rho \times (G) = max\{\alpha \in Q | G\textrm{ with arc
+      weights $(w_a - \alpha)$ has no negative cycle }\}$.  Use this
+    observation to compute $\rho \times (G)$, and also find a cycle
+>>>>>>> Stashed changes
     $C$ of this weight ratio. Your algorithm should run in time
     $O(mn(\log M + \log n))$ time.  Caveat: binary search over a range
     of $K$ integers takes $O(\log K)$ time. But binary search over

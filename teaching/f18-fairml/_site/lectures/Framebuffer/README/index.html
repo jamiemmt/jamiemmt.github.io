@@ -1,0 +1,147 @@
+<p>GPU and CPU</p>
+<ul>
+  <li>split memory</li>
+  <li>share memory</li>
+  <li>memory management unit</li>
+  <li>gpu maps address “physical address” 0x20xxxxxx to “bus address” 0x7exxxxxx
+    <ul>
+      <li>peripheral addresses in the document are bus addresses</li>
+    </ul>
+  </li>
+</ul>
+
+<p>CPU</p>
+<ul>
+  <li>accesses to the same peripheral will always arrive and return inorder</li>
+  <li>when switching from one peripheral to another need access may arrive out of order</li>
+  <li>to guarantee in-order access
+    <ul>
+      <li>memory write barrier before the first write to a peripheral</li>
+      <li>memory read barrier before the first read from a peripheral</li>
+    </ul>
+  </li>
+</ul>
+
+<p>GPU framebuffer</p>
+<ul>
+  <li>different formats</li>
+  <li>see screen01</li>
+  <li>use these examples to illustrate pointers and casts</li>
+</ul>
+
+<p>Bit fields in the following descriptions are little-endian.</p>
+
+<p>32bpp mode:</p>
+
+<p>bits 24-31: 0 or transparency
+bits 16-23: blue
+bits 8-15: green
+bits 0-7: red</p>
+
+<p>16bpp mode:</p>
+
+<p>bit 15: 0 or transparency
+bits 10-14: blue
+bits 5-9: green
+bits 0-4: red</p>
+
+<p>Mailbox</p>
+<ul>
+  <li>mailbox_write
+    <ul>
+      <li>read data is a combination of the address of the packet and the channel</li>
+      <li>there are 16 channels
+        <ul>
+          <li>channel 1 is to the GPU</li>
+          <li>this means that the address must be aligned to 16</li>
+        </ul>
+      </li>
+      <li>write the address + 0x40000000
+ this ensures that the GPU will not cache the result</li>
+    </ul>
+  </li>
+  <li>mailbox_read
+    <ul>
+      <li>returns 0 when it is happy</li>
+    </ul>
+  </li>
+  <li>memory problems
+    <ul>
+      <li>problem1
+        <ul>
+          <li>make sure that the data is actually written to memory
+            <ul>
+              <li>use volatile or GET32/SET32 to make sure the data is stored</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>problem2
+        <ul>
+          <li>memory system may not actually write the data
+            <ul>
+              <li>cache</li>
+              <li>write buffers</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>problem3
+        <ul>
+          <li>compiler can reoder code
+            <ul>
+              <li>reorder around volatile</li>
+              <li>not reorder around GET32/SET32</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>problem4
+        <ul>
+          <li>gpu contains a 128KB L2 cache
+            <ul>
+              <li>diagram of the actual memory system</li>
+              <li>find a good explanation of how caching works
+                <ul>
+                  <li>make sure that GPU does not cache values</li>
+                </ul>
+              </li>
+              <li>SDRAM is mapped into physical addresses in 4 places
+                <ul>
+                  <li>use memory address trick
+ 0x00xxxxxx L1 and L2 cache
+ 0x40xxxxxx L2 cache coherent (non allocating)
+ 0x80xxxxxx L2 cached (only)
+ 0xC0xxxxxx uncached</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>see Dawson code</li>
+    </ul>
+  </li>
+</ul>
+
+<p>Framebuffer
+struct{</p>
+<ul>
+  <li>physical width</li>
+  <li>physical height</li>
+  <li>virtual width</li>
+  <li>virtual height
+  &lt;= 4096</li>
+  <li>GPU - returns pitch (bytes per row)</li>
+  <li>depth - bits per pixel
+ 16 - high color mode (Red=5, Green=6, Blue=5)
+ 24 - RGB mode
+ 32 - RGBA mode
+ &lt;= 32</li>
+  <li>x offset</li>
+  <li>y offset</li>
+  <li>GPU - returns pointer to framebuffer</li>
+  <li>GPU - returns size of framebuffer
+}
+write a program that prints out what happens</li>
+</ul>
