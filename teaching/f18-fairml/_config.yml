@@ -1,3 +1,4 @@
+source: .
 markdown: kramdown
 kramdown:
   input: GFM
