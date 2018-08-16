@@ -3,10 +3,21 @@ kramdown:
   input: GFM
   hard_wrap: false
 permalink: pretty
-exclude:
-  - /cs107e/
 collections:
   assignments:
     output: true
   labs:
     output: true
+ plugins:
+   - jekyll-mentions
+   - jemoji
+   - jekyll-redirect-from
+   - jekyll-sitemap
+   - jekyll-feed
+    - jekyll-redirect-from
+    - jekyll-seo-tag
+     - jekyll-sitemap
+     - jekyll-avatar
+     - jemoji
+     - jekyll-mentions
+     - jekyll-include-cache
