@@ -24,7 +24,7 @@ rigorous proofs to answer, and an analysis/writing component.
 ### Rough Outline of Topics
 
 This class will cover several different perspectives on fairness in
-machine learning. Topics will include:
+machine learning. Topics will nclude:
 
 
 - Statistical vs Individual definitions of fairness
