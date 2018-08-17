@@ -1,4 +1,4 @@
-source: .
+source: jamiemorgenstern.com/teaching/f18-fairml
 markdown: kramdown
 kramdown:
   input: GFM
