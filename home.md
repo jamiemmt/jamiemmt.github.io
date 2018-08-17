@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Foundations of Fairness in ML
-permalink: teaching/f18-fairml/whaaaaat.html
+permalink: teaching/f18-fairml/index.html
 ---
 
 ### Welcome to Foundations of Fairness in ML, offered Fall 2018!
@@ -58,4 +58,4 @@ questions and allow everyone to learn from each other!
 
 Please read the assigned readings before attending lecture and lab.
 
-
+{% include schedule.html %}
