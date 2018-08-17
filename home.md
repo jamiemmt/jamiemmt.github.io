@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Foundations of Fairness in ML
-permalink: whaaaaat.html
+permalink: teaching/f18-fairml/whaaaaat.html
 ---
 
 ### Welcome to Foundations of Fairness in ML, offered Fall 2018!
