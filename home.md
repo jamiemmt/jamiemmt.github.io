@@ -49,7 +49,7 @@ those about homework or course material or due dates) should not be
 emailed to the TA or the instructor, but instead posted to
 Piazza. This will allow us to give fast responses to your technical
 questions and allow everyone to learn from each other!
-  -   **Lectures:** Mon & Fri 3:00PM-4:15PM, Classroom TBD
+  -   **Lectures:** Mon & Fri 3:00PM-4:15PM, Classroom ES&T L1105
   -   **Lecturers**: Jamie Morgenstern
   -   **TA**: Samira Samadi
   -   **Office Hours**: After Class Monday
