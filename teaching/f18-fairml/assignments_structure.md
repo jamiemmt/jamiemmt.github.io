@@ -1,7 +1,7 @@
 ---
 layout: page
 title: 'JM FIX Assignment Directory Structure'
-permalink: /assignments/dir_structure/
+permalink: teaching/f18-fairml/assignments/dir_structure/
 ---
 
 JM FIX

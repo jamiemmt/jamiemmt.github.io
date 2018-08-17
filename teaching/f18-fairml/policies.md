@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Course Policies
-permalink: /policies/
+permalink: teaching/f18-fairml/policies.html
 toc: true
 ---
 

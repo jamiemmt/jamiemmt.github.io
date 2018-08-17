@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Foundations of Fairness in Machine Learning
-permalink: /about/
+permalink: teaching/f18-fairml/about.html
 ---
 
 This course serves as an introduction to the study of fairness in machine learning.

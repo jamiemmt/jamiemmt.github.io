@@ -40,7 +40,7 @@ machine learning. Topics will nclude:
 ### Announcements
 
 All class announcements will be posted on
-[Piazza](piazza.com/gatech/fall2018/cs8803ffm/home).
+[Piazza](https://piazza.com/gatech/fall2018/cs8803ffm/home).
 
 ### Course Info
 
@@ -58,4 +58,4 @@ questions and allow everyone to learn from each other!
 
 Please read the assigned readings before attending lecture and lab.
 
-
+{% include schedule.html %}
