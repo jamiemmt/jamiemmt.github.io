@@ -1,4 +1,3 @@
-source: /teaching/f18-fairml
 markdown: kramdown
 kramdown:
   input: GFM
