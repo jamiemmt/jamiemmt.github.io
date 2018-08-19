@@ -5,8 +5,6 @@ permalink: teaching/f18-fairml/index.html
 ---
 
 ### Welcome to Foundations of Fairness in ML, offered Fall 2018!
-Does this work?
-
 
 
 This course will study the sources and measures of unfairness stemming
