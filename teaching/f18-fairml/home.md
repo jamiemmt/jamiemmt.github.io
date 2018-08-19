@@ -1,12 +1,12 @@
 ---
 layout: page
 title: Foundations of Fairness in ML
-permalink: teaching/f18-fairml/index.html
+permalink: index.html
 ---
 
 ### Welcome to Foundations of Fairness in ML, offered Fall 2018!
 
-hi 
+
 This course will study the sources and measures of unfairness stemming
 from machine learning, as well as possible interventions to alleviate
 said unfairness. The class will contain a mix of assignments: there
@@ -22,7 +22,6 @@ rigorous proofs to answer, and an analysis/writing component.
 
 ### Rough Outline of Topics
 
-Test
 
 This class will cover several different perspectives on fairness in
 machine learning. Topics will nclude:
