@@ -23,6 +23,8 @@ rigorous proofs to answer, and an analysis/writing component.
 
 ### Rough Outline of Topics
 
+Test
+
 This class will cover several different perspectives on fairness in
 machine learning. Topics will nclude:
 
