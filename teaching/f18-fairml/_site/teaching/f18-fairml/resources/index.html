@@ -1,4 +1,59 @@
-<p>Coming soon!</p>
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="/assets/site.css" rel="stylesheet">
+
+
+    <title>CS107E Other resources </title>
+  </head>
+
+<body>
+  <nav class="navbar navbar-inverse" role="navigation">
+  <div class="navbar-header">
+  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+    <!-- hamburger -->
+    <span class="sr-only">Toggle navigation</span>
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+  </button>
+
+  <img class="navbar-brand navbar-brand-image" src="/assets/berry.png" >
+  <a class="navbar-brand" href="/">Foundations of Fair ML, Fall 2018</a>
+  </div>
+
+  <div class="navbar-collapse collapse">
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+            Admin
+          <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="/teaching/f18-fairml/about">Course description</a></li>
+            <li><a href="/teaching/f18-fairml/policies">Policies</a></li>
+          </ul>
+        </li>
+      <li><a href="/teaching/f18-fairml/assignments">Assignments</a></li>
+      <li> <a href="/teaching/f18-fairml/resources">Resources</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+
+  <div class="container">
+
+    <h1 class="title">Other resources</h1>
+    <hr>
+
+    
+            <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12" id="main_for_toc">
+        <p>Coming soon!</p>
 
 <h2 id="papers">Papers</h2>
 
@@ -14,3 +69,37 @@
 
 <h3 id="fairness-tools">Fairness Tools</h3>
 
+
+
+      </div>
+      <div class="toc-column col-lg-2 col-md-2 col-sm-2 hidden-xs">
+        <div id="toc" class="toc" data-spy="affix" data-offset-top="0"></div>
+      </div> 
+    </div>
+
+      <script src="/assets/tocbot.min.js"></script>
+      <link rel="stylesheet" href="/assets/tocbot.css">
+
+      <script>
+        tocbot.init({
+          // Where to render the table of contents.
+          tocSelector: '#toc',
+          // Where to grab the headings to build the table of contents.
+          contentSelector: '#main_for_toc',
+          // Which headings to grab inside of the contentSelector element.
+          headingSelector: 'h2, h3, h4',
+        });
+      </script>
+
+    
+  
+  </div>
+</body>
+
+  <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+  <!-- Latest compiled JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  
+</html>
