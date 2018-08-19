@@ -4,7 +4,7 @@ title: Foundations of Fairness in ML
 permalink: index.html
 ---
 
-### Welcome to Foundations of Fairness in ML, offered Fall 2018!
+### Hmmm Welcome to Foundations of Fairness in ML, offered Fall 2018!
 
 
 This course will study the sources and measures of unfairness stemming
@@ -28,6 +28,7 @@ machine learning. Topics will nclude:
 
 
 - Statistical vs Individual definitions of fairness
+
 - Sources of Unfairness in ML
 - Tensions between different fairness notions
 - Fairness interventions and long-term effects of those interventions
