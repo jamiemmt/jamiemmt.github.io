@@ -1,7 +1,7 @@
 ---
 layout: page
-title: Other resources
-permalink: teaching/f18-fairml/resources
+title: Assignments
+permalink: teaching/f18-fairml/assignments
 toc: true
 ---
 
