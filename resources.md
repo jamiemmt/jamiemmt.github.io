@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Other resources
-permalink: teaching/f18-fairml/resources/
+permalink: teaching/f18-fairml/resources
 toc: true
 ---
 
@@ -23,4 +23,6 @@ Coming soon!
 
 
 ### Fairness Tools
+
+Rando stuff
 
