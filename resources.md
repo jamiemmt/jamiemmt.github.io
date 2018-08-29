@@ -24,5 +24,4 @@ Coming soon!
 
 ### Fairness Tools
 
-Rando stuff
 
