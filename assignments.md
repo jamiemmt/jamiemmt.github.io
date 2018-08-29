@@ -1,6 +1,7 @@
 ---
 layout: page
 title: Assignments
+teaching/f18-fairml/assignments.html
 ---
 
 ### List of assignments
