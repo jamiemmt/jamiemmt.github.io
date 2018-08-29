@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Other resources
-permalink: teaching/f18-fairml/resources
+permalink: teaching/f18-fairml/resourcest
 toc: true
 ---
 
