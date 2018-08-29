@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Assignments
-teaching/f18-fairml/assignments.html
+teaching/f18-fairml/assignments
 toc: true
 ---
 
@@ -13,7 +13,7 @@ toc: true
 {% endunless %}
 {% endfor %}
 
-[Homework 1](/assignments/hw1.pdf), [TeX Source] (/assignments/hw1.tex), due Friday Sept 10
+[Homework 1](/assignments/hw1.pdf), [TeX Source](/assignments/hw1.tex), due Friday Sept 10
 
 ### Common questions about assignments
 ---
