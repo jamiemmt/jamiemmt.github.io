@@ -11,6 +11,8 @@ title: Assignments
 {% endunless %}
 {% endfor %}
 
+[Homework 1](/assignments/hw1.pdf), [TeX Source] (/assignments/hw1.tex), due Friday Sept 10
+
 ### Common questions about assignments
 ---
 *Written by Jamie Morgenstern*

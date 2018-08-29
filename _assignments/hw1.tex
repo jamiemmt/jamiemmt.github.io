@@ -1,0 +1,322 @@
+\documentclass{article}
+
+\usepackage{fancyhdr}
+\usepackage{extramarks}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{tikz}
+\usepackage[plain]{algorithm}
+\usepackage{algpseudocode}
+\usepackage{fullpage, url, hyperref}
+\newcommand{\dotcup}{\ensuremath{\mathaccent\cdot\cup}}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{definition}{Definition}
+
+\newcommand{\I}{\mathcal{I}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\tr}{\mathrm{tr}}
+\renewcommand{\P}{\mathbb{P}}
+\usetikzlibrary{automata,positioning}
+
+%
+% Basic Document Settings
+%
+
+\topmargin=-0.45in
+\evensidemargin=-.50in
+\oddsidemargin=-.5in
+\textwidth=7in
+\textheight=9.5in
+\headsep=0.25in
+
+\linespread{1.1}
+
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName}
+\chead{\hmwkClass\ (\hmwkClassInstructor\ \hmwkClassTime): \hmwkTitle}
+\rhead{\firstxmark}
+\lfoot{\lastxmark}
+\cfoot{\thepage}
+
+\newcommand{\w}[2]{w_{#1}^{(#2)}}
+\newcommand{\loss}[2]{\vec{\ell}_{#2}^{(#1)}}
+\newcommand{\losst}[1]{\vec{\ell}^{(#1)}}
+  \newcommand{\pt}[1]{\vec{p}^{(#1)}}
+\renewcommand\headrulewidth{0.4pt}
+\renewcommand\footrulewidth{0.4pt}
+
+\setlength\parindent{0pt}
+
+
+% 
+% Create Problem Sections
+%
+
+
+\newcommand{\enterProblemHeader}[1]{
+    \nobreak\extramarks{}{}\nobreak{}
+    \nobreak\extramarks{}\nobreak{}
+}
+
+\newcommand{\exitProblemHeader}[1]{
+    \nobreak\extramarks{}\nobreak{}
+    \stepcounter{#1}
+    \nobreak\extramarks{}\nobreak{}
+  }
+
+  
+\newcommand{\enterExerciseHeader}[1]{
+    \nobreak\extramarks{}{}\nobreak{}
+    \nobreak\extramarks{}\nobreak{}
+}
+
+\newcommand{\exitExerciseHeader}[1]{
+    \nobreak\extramarks{}\nobreak{}
+    \stepcounter{#1}
+    \nobreak\extramarks{}\nobreak{}
+}
+
+\setcounter{secnumdepth}{0}
+\newcounter{partCounter}
+\newcounter{homeworkProblemCounter}
+\setcounter{homeworkProblemCounter}{1}
+
+\newcounter{homeworkExerciseCounter}
+\setcounter{homeworkExerciseCounter}{1}
+\nobreak\extramarks{}\nobreak{}
+\nobreak\extramarks{}\nobreak{}
+
+%
+% Homework Problem Environment
+%
+% This environment takes an optional argument. When given, it will adjust the
+% problem counter. This is useful for when the problems given for your
+% assignment aren't sequential. See the last 3 problems of this template for an
+% example.
+%
+\newenvironment{homeworkProblem}[1][-1]{
+%    \ifnum#1>0
+   %     \setcounter{homeworkProblemCounter}{#1}
+   % \fi
+    \section{Problem \arabic{homeworkProblemCounter}}
+    \setcounter{partCounter}{1}
+    \enterProblemHeader{homeworkProblemCounter}
+}{
+    \exitProblemHeader{homeworkProblemCounter}
+}
+
+  \newenvironment{homeworkExercise}[1][-1]{
+    \ifnum#1>0
+        \setcounter{homeworkExerciseCounter}{#1}
+    \fi
+    \section{Exercise \arabic{homeworkExerciseCounter}}
+    \setcounter{partCounter}{1}
+    \enterExerciseHeader{homeworkExerciseCounter}
+}{
+    \exitExerciseHeader{homeworkExerciseCounter}
+}
+
+%
+% Homework Details
+%   - Title
+%   - Due date
+%   - Class
+%   - Section/Time
+%   - Instructor
+%   - Author
+%
+
+\newcommand{\hmwkTitle}{Homework\ \#1}
+\newcommand{\hmwkAssignedDate}{Aug 28}
+\newcommand{\hmwkDueDate}{Sept 10, midnight}
+\newcommand{\hmwkClass}{Foundations of Fairness in Machine Learning, Fall 2018}
+\newcommand{\hmwkClassTime}{}%Section A}
+\newcommand{\hmwkClassInstructor}{Professor Jamie Morgenstern}
+\newcommand{\hmwkAuthorName}{}%\textbf{Josh Davis} \and \textbf{Davis Josh}}
+
+%
+% Title Page
+%
+
+\title{    \vspace{2in}
+    \textmd{\textbf{\hmwkClass:\ \hmwkTitle}}\\
+    \normalsize\vspace{0.1in}\small{Due\ on\ \hmwkDueDate\ at 3:10pm}\\
+    \vspace{0.1in}\large{\textit{\hmwkClassInstructor\ \hmwkClassTime}}
+    \vspace{3in}
+}
+
+\author{\hmwkAuthorName}
+\date{}
+
+\renewcommand{\part}[1]{\textbf{\large Part \Alph{partCounter}}\stepcounter{partCounter}\\}
+
+%
+% Various Helper Commands
+%
+
+% Useful for algorithms
+\newcommand{\alg}[1]{\textsc{\bfseries \footnotesize #1}}
+
+% For derivatives
+\newcommand{\deriv}[1]{\frac{\mathrm{d}}{\mathrm{d}x} (#1)}
+
+% For partial derivatives
+\newcommand{\pderiv}[2]{\frac{\partial}{\partial #1} (#2)}
+
+% Integral dx
+\newcommand{\dx}{\mathrm{d}x}
+
+% Alias for the Solution section header
+\newcommand{\solution}{\textbf{\large Solution}}
+
+% Probability commands: Expectation, Variance, Covariance, Bias
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\Cov}{\mathrm{Cov}}
+\newcommand{\Bias}{\mathrm{Bias}}
+\usepackage{enumitem}
+\newcommand\litem[1]{\item{\bfseries#1.\space}}
+
+\newcommand{\Z}{\mathbb{Z}}
+
+\newcommand{\poly}{\textrm{poly}}
+\begin{document}
+
+% \maketitle
+
+\pagebreak
+
+{\bf Homework Out: \hmwkAssignedDate}\\
+{\bf Due Date:  \hmwkDueDate}\\
+{\bf Reminder: }
+
+To submit your homework, please go to
+\url{https://classroom.github.com/a/7rslWmMd}, accept the assignment,
+and submit your LaTex, PDF, and any code you use for the
+assignment. Please name your files ``hw1-USERNAME-writeup.{tex,pdf}''
+``hw1-USERNAME-code.{appropriate file type}''. You will need a github
+account, and to add, commit, and push your homework.
+
+Please cite all sources you use, and people you work with. The
+expectation is that you try and solve these problems yourself, rather
+than looking online explicitly for answers. Submissions due at 23:00
+of the due date.
+
+{\bf You may use $O$-notation unless explicitly noted somewhere in the homework.}
+
+
+\newcommand{\X}{\mathcal{X}}
+\newcommand{\Y}{\mathcal{Y}}
+\newcommand{\D}{\mathcal{D}}
+
+\paragraph{Problems}
+\begin{enumerate}
+\litem{(Statistical Guarantees aren't Created Equal.)}
+
+
+Consider some $f : \X \to [0,1]$ and distributions $\D_1, \D_2$ over
+$\X$ such that
+
+\[\E_{x \sim \D_1} [f(x)] = \E_{x \sim \D_2} [f(x)]\]
+
+Consider two datasets $X_1, X_2$ drawn independently as
+$ x \sim \D_i, x \in X_i$, with $|X_1| = n_1 > n_2 = |X_2|$.
+
+\begin{enumerate}
+  \item
+As a
+function of $n_1, n_2$, give an upper bound on
+
+\[ |\frac{1}{n_1} \sum_{x \in X_1} f(x) - \frac{1}{n_2}\sum_{x \in X_2} f(x)|\]
+%
+which holds with probability $1-\delta$ over the draw of $X_1,
+X_2$. You can use ``known'' concentration bounds (e.g., Chernoff-Hoeffding).
+
+\item Lower bound the probability with which
+  \[\frac{1}{n_1} \sum_{x \in X_1} f(x)   \geq  \frac{1}{n_2}\sum_{x \in X_2} f(x) + \frac{1}{\sqrt{n_2}}. \]
+
+  Notice this describes the probability that two empirical averages differ by the \emph{larger} of their variances.
+\end{enumerate}
+
+
+\litem{(Distortion vs Information Theory.)}
+
+
+The paper we read (``On the (Im)possibility of Fairness'') for the
+first class suggested we consider distortion as a measure of WYSIWYG
+(how much our observed features represent the construct space for
+different groups). Let $\X, d_{\X}$ represent the construct space and
+its metric, and $\Y, d_{\Y}$ the observed space and metric,
+respectively.
+
+\begin{enumerate}
+  \item Describe some $\X\subseteq \R^n$ and $f$ comprised of some linear
+  measurements of $\X$, $f$ transforming $\X$ to $\Y \subseteq \R^{n'}$ such that the
+  distortion of $f$ is of order $\max_{x \in \X}||x ||_2$, but the
+  accuracy of the \emph{best} linear classifier is no worse in $\Y$
+  than in $\X$.
+
+  You can assume $d_x = d_y$ is the $\ell_2$ metric. 
+
+  \item Find some $\X$, $f$, and two groups $\X_1\dotcup \X_2 = \X$
+  such that the distortion of $f$ on $\X_1$ (ignoring points in $\X_2$) and
+  the distortion of $\X_2$ (ignoring points in $\X_1$) are equal, but
+  the best linear classifier for $\X$ has $0$ error, the best linear
+  classifier for $f(\X_1)$ has error $\frac{1}{2}$, and the best
+  linear classifier for $f(\X_2)$ has error $0$.
+  \end{enumerate}
+
+
+
+\litem{(Coding: Training
+  together, training apart.)}
+
+Find a human-centric dataset\footnote{A dataset such that each entry
+  represents one measurement of one person.} which is publicly
+available with demographic information (age, gender, race, sexual
+orientation, country of origin, etc).
+
+\begin{enumerate}
+\item 
+
+Please include a link to the dataset you used, as well as any
+documentation that accompanied its release. Clearly describe any
+``cleaning'', binning, bucketing, or discrete-to-continuous feature
+transformation you did in this process.
+
+\item For one way of splitting the dataset into different demographic
+  groups, write down the size of the groups, the average value for
+  each (numeric) feature, the variance of each (numeric) feature, the
+  mode for each categorical feature, and the three most frequent
+  values for each categorical feature, each computed on the different demographic subgroups.
+
+  If your dataset has more than 20 features, you can report this information only for 20 features.
+
+  Do you observe any interesting differences between the different subgroups' statistics?
+
+\item Now, randomly subsample half of the dataset. That is, include
+  each row in the database in some new dataset with probability
+  $\frac{1}{2}$ independently.  Report the same statistics as above.
+
+  Do you observe some of the statistics are more ``stable'' than others (namely, that their values
+  changed little from the previous question)? Do some subgroups have more stable statistics than others?
+
+  
+
+  \end{enumerate}
+
+
+
+  \end{enumerate}
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
