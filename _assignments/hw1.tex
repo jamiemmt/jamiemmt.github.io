@@ -134,7 +134,7 @@
 
 \newcommand{\hmwkTitle}{Homework\ \#1}
 \newcommand{\hmwkAssignedDate}{Aug 28}
-\newcommand{\hmwkDueDate}{Sept 10, midnight}
+\newcommand{\hmwkDueDate}{Sept 7, midnight}
 \newcommand{\hmwkClass}{Foundations of Fairness in Machine Learning, Fall 2018}
 \newcommand{\hmwkClassTime}{}%Section A}
 \newcommand{\hmwkClassInstructor}{Professor Jamie Morgenstern}
@@ -237,7 +237,11 @@ function of $n_1, n_2$, give an upper bound on
 which holds with probability $1-\delta$ over the draw of $X_1,
 X_2$. You can use ``known'' concentration bounds (e.g., Chernoff-Hoeffding).
 
-\item Lower bound the probability with which
+\item
+ { \color{red} Define two distributions $D_1, D_2$ and a function $f$ such that the expected value of $f$ on a draw from either distribution is equal. Define these such that you can get a large  lower bound on the probability below.}
+  
+  
+  Lower bound the probability with which
   \[\frac{1}{n_1} \sum_{x \in X_1} f(x)   \geq  \frac{1}{n_2}\sum_{x \in X_2} f(x) + \frac{1}{\sqrt{n_2}}. \]
 
   Notice this describes the probability that two empirical averages differ by the \emph{larger} of their variances.
