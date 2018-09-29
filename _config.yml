@@ -8,6 +8,8 @@ exclude:
 collections:
   assignments:
     output: true
+  readings:
+    output: true
   labs:
     output: true
 
