@@ -12,7 +12,7 @@ from machine learning, as well as possible interventions to alleviate
 said unfairness. The class will contain a mix of assignments: there
 will be 5 assignments. Each assignment will contain 3 parts: a
 programming task, several mathematical questions which will require
-rigorous proofs to answer, and an analysis/writing component.
+rigorous proofs to answer, and an analysis/writing component. Update. 
 
 
 **This course is open to graduate students with background in machine
