@@ -10,7 +10,7 @@ permalink: teaching/f18-fairml/index.html
 This course will study the sources and measures of unfairness stemming
 from machine learning, as well as possible interventions to alleviate
 said unfairness. The class will contain a mix of assignments: there
-will be 5 assignments. Each assignment will contain 3 parts: a
+will be 3 assignments. Each assignment will contain 3 parts: a
 programming task, several mathematical questions which will require
 rigorous proofs to answer, and an analysis/writing component. Update. 
 

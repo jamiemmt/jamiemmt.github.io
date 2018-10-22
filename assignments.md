@@ -9,6 +9,7 @@ toc: true
 
 
 [Homework 1](/assignments/hw1.pdf), [TeX Source](/assignments/hw1.tex), due Friday Sept 10
+[Homework 2](/assignments/hw2.pdf), [TeX Source](/assignments/hw2.tex), due Monday, Nov 5
 
 ### Common questions about assignments
 ---
@@ -16,7 +17,7 @@ toc: true
 
 **What will the course's workload look like?**
 
-This course will have 5 problem sets (each containing some
+This course will have 3 problem sets (each containing some
 programming, some writing, and some formal argument), weekly required
 reading and discussion, and a course project which will be accompanied
 by a presentation.  The final project is more open-ended than the
