@@ -9,6 +9,7 @@ toc: true
 
 
 [Homework 1](/assignments/hw1.pdf), [TeX Source](/assignments/hw1.tex), due Friday Sept 10
+
 [Homework 2](/assignments/hw2.pdf), [TeX Source](/assignments/hw2.tex), due Monday, Nov 5
 
 ### Common questions about assignments
