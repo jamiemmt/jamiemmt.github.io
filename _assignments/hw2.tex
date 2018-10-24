@@ -1,0 +1,272 @@
+\documentclass{article}
+
+\usepackage{fancyhdr}
+\usepackage{extramarks}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{tikz}
+\usepackage[plain]{algorithm}
+\usepackage{algpseudocode}
+\usepackage{fullpage, url, hyperref}
+\newcommand{\dotcup}{\ensuremath{\mathaccent\cdot\cup}}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{definition}{Definition}
+
+\newcommand{\I}{\mathcal{I}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\tr}{\mathrm{tr}}
+\renewcommand{\P}{\mathbb{P}}
+\usetikzlibrary{automata,positioning}
+
+%
+% Basic Document Settings
+%
+
+\topmargin=-0.45in
+\evensidemargin=-.50in
+\oddsidemargin=-.5in
+\textwidth=7in
+\textheight=9.5in
+\headsep=0.25in
+
+\linespread{1.1}
+
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName}
+\chead{\hmwkClass\ (\hmwkClassInstructor\ \hmwkClassTime): \hmwkTitle}
+\rhead{\firstxmark}
+\lfoot{\lastxmark}
+\cfoot{\thepage}
+
+\newcommand{\w}[2]{w_{#1}^{(#2)}}
+\newcommand{\loss}[2]{\vec{\ell}_{#2}^{(#1)}}
+\newcommand{\losst}[1]{\vec{\ell}^{(#1)}}
+  \newcommand{\pt}[1]{\vec{p}^{(#1)}}
+\renewcommand\headrulewidth{0.4pt}
+\renewcommand\footrulewidth{0.4pt}
+
+\setlength\parindent{0pt}
+
+
+% 
+% Create Problem Sections
+%
+
+
+\newcommand{\enterProblemHeader}[1]{
+    \nobreak\extramarks{}{}\nobreak{}
+    \nobreak\extramarks{}\nobreak{}
+}
+
+\newcommand{\exitProblemHeader}[1]{
+    \nobreak\extramarks{}\nobreak{}
+    \stepcounter{#1}
+    \nobreak\extramarks{}\nobreak{}
+  }
+
+  
+\newcommand{\enterExerciseHeader}[1]{
+    \nobreak\extramarks{}{}\nobreak{}
+    \nobreak\extramarks{}\nobreak{}
+}
+
+\newcommand{\exitExerciseHeader}[1]{
+    \nobreak\extramarks{}\nobreak{}
+    \stepcounter{#1}
+    \nobreak\extramarks{}\nobreak{}
+}
+
+\setcounter{secnumdepth}{0}
+\newcounter{partCounter}
+\newcounter{homeworkProblemCounter}
+\setcounter{homeworkProblemCounter}{1}
+
+\newcounter{homeworkExerciseCounter}
+\setcounter{homeworkExerciseCounter}{1}
+\nobreak\extramarks{}\nobreak{}
+\nobreak\extramarks{}\nobreak{}
+
+%
+% Homework Problem Environment
+%
+% This environment takes an optional argument. When given, it will adjust the
+% problem counter. This is useful for when the problems given for your
+% assignment aren't sequential. See the last 3 problems of this template for an
+% example.
+%
+\newenvironment{homeworkProblem}[1][-1]{
+%    \ifnum#1>0
+   %     \setcounter{homeworkProblemCounter}{#1}
+   % \fi
+    \section{Problem \arabic{homeworkProblemCounter}}
+    \setcounter{partCounter}{1}
+    \enterProblemHeader{homeworkProblemCounter}
+}{
+    \exitProblemHeader{homeworkProblemCounter}
+}
+
+  \newenvironment{homeworkExercise}[1][-1]{
+    \ifnum#1>0
+        \setcounter{homeworkExerciseCounter}{#1}
+    \fi
+    \section{Exercise \arabic{homeworkExerciseCounter}}
+    \setcounter{partCounter}{1}
+    \enterExerciseHeader{homeworkExerciseCounter}
+}{
+    \exitExerciseHeader{homeworkExerciseCounter}
+}
+
+%
+% Homework Details
+%   - Title
+%   - Due date
+%   - Class
+%   - Section/Time
+%   - Instructor
+%   - Author
+%
+
+\newcommand{\hmwkTitle}{Homework\ \#2}
+\newcommand{\hmwkAssignedDate}{October 24}
+\newcommand{\hmwkDueDate}{Novemer 9, midnight}
+\newcommand{\hmwkClass}{Foundations of Fairness in Machine Learning, Fall 2018}
+\newcommand{\hmwkClassTime}{}%Section A}
+\newcommand{\hmwkClassInstructor}{Professor Jamie Morgenstern}
+\newcommand{\hmwkAuthorName}{}%\textbf{Josh Davis} \and \textbf{Davis Josh}}
+
+%
+% Title Page
+%
+
+\title{    \vspace{2in}
+    \textmd{\textbf{\hmwkClass:\ \hmwkTitle}}\\
+    \normalsize\vspace{0.1in}\small{Due\ on\ \hmwkDueDate\ at 3:10pm}\\
+    \vspace{0.1in}\large{\textit{\hmwkClassInstructor\ \hmwkClassTime}}
+    \vspace{3in}
+}
+
+\author{\hmwkAuthorName}
+\date{}
+
+\renewcommand{\part}[1]{\textbf{\large Part \Alph{partCounter}}\stepcounter{partCounter}\\}
+
+%
+% Various Helper Commands
+%
+
+% Useful for algorithms
+\newcommand{\alg}[1]{\textsc{\bfseries \footnotesize #1}}
+
+% For derivatives
+\newcommand{\deriv}[1]{\frac{\mathrm{d}}{\mathrm{d}x} (#1)}
+
+% For partial derivatives
+\newcommand{\pderiv}[2]{\frac{\partial}{\partial #1} (#2)}
+
+% Integral dx
+\newcommand{\dx}{\mathrm{d}x}
+
+% Alias for the Solution section header
+\newcommand{\solution}{\textbf{\large Solution}}
+
+% Probability commands: Expectation, Variance, Covariance, Bias
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\Cov}{\mathrm{Cov}}
+\newcommand{\Bias}{\mathrm{Bias}}
+\usepackage{enumitem}
+\newcommand\litem[1]{\item{\bfseries#1.\space}}
+
+\newcommand{\Z}{\mathbb{Z}}
+
+\newcommand{\poly}{\textrm{poly}}
+\begin{document}
+
+% \maketitle
+
+\pagebreak
+
+{\bf Homework Out: \hmwkAssignedDate}\\
+{\bf Due Date:  \hmwkDueDate}\\
+{\bf Reminder: }
+
+To submit your homework, please go to
+\url{https://classroom.github.com/a/7rslWmMd}, accept the assignment,
+and submit your LaTex, PDF, and any code you use for the
+assignment. Please name your files ``hw2-USERNAME-writeup.{tex,pdf}''
+``hw2-USERNAME-code.{appropriate file type}''. You will need a github
+account, and to add, commit, and push your homework.
+
+Please cite all sources you use, and people you work with. The
+expectation is that you try and solve these problems yourself, rather
+than looking online explicitly for answers. Submissions due at 23:00
+of the due date.
+
+{\bf You may use $O$-notation unless explicitly noted somewhere in the homework.}
+
+
+\newcommand{\X}{\mathcal{X}}
+\newcommand{\Y}{\mathcal{Y}}
+\newcommand{\D}{\mathcal{D}}
+
+\paragraph{Problems}
+\begin{enumerate}
+\litem{(Uniform Noise Won't Help You.)}
+
+
+One of the suggested ``solutions'' for a dataset with far more
+positive labels for group $g_1$ than group $g_2$ suggested by ``Data
+preprocessing techniques for classification without discrimination'',
+\emph{massaging}, suggests flipping some fraction of the labels of the
+datapoints in $g_1$ from negative to positive.
+
+Suppose the current dataset is \emph{linearly separable} (namely,
+there is some linear classifier with accuracy $1$ in training).
+
+\begin{enumerate}
+\item Describe a set of points in $\R^2$, broken into groups
+  $g_1, g_2$:
+  \begin{itemize}
+    \item with equally sized groups $g_1, g_2$
+    \item with 50\% positive and negative labels for group $g_1$
+    \item  40\% positive labels for $g_2$
+    \item which is linearly separable
+    \end{itemize}
+
+    Then, find a subset of $g_2$'s negative labels (large enough give
+    the groups have equal number of positive labels if flipped) that,
+    if swapped, would not change the set of accuracy-maximizing linear
+    separators in training.
+  \item Do the same, but rather than picking a carefully designed set
+    of points in $g_2$, argue that a \emph{uniformly random} subset of
+    negatively labeled points in $g_2$ (of the appropriate size) has
+    low probability of changing the set of accuracy-maximizing linear
+    classifiers. Give an estimate of this probability.
+
+ 
+  \end{enumerate}
+
+\litem{(Project Outline.)}
+
+Please describe what you'd like to do for your course
+project. Describe the motivation for this project, what concrete tasks
+you plan to do, and what the final work product of these tasks will
+be. Is there a particular context you're thinking about (e.g., hiring,
+advertising) as you formulate this question?  If you're planning to do
+an empirical project, list the dataset(s) you will use or gather.
+
+It isn't necessary that you do precisely what you outline above for
+the final project, but it should help you start thinking about your
+work to answer these questions.
+\end{enumerate}
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
