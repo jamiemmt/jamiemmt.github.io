@@ -5,7 +5,7 @@ div.maintable {
     position: absolute;
     top: 0px;
     left: 200px;
-    width: 90%;
+    width: 70%;
 }
 
 div.myphoto {
@@ -29,7 +29,7 @@ div.hello {
 div.main-text {
       margin-left: 250px;
       margin-bottom: 20px;
-	width: 850px;
+	width: 80%;
     }
 
 @media (max-width : 450px) {
