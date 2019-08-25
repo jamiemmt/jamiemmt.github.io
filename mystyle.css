@@ -29,7 +29,7 @@ div.hello {
 div.main-text {
       margin-left: 250px;
       margin-bottom: 20px;
-	width: 80%;
+	width: 60%;
     }
 
 @media (max-width : 450px) {
