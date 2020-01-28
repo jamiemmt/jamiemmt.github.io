@@ -11,7 +11,7 @@ div.maintable {
 div.myphoto {
     height: 400px;
     width: 250px;
-    background-image:url('mypic.jpg');%  no-repeat;
+    background-image:url('photos/color-headshot.jpg');%  no-repeat;
     background-size: 200px;
      background-repeat: no-repeat;
      float:left;
