@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Issues of Equity in High-Stakes targeted advertising
-style: layouts/blog.html
+style: assets/blog.html
 permalink: blog.html
 ---
 
