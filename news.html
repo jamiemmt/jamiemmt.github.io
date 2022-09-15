@@ -1,0 +1,54 @@
+<html>
+  <head>
+    <script>
+          $(document).on("click", "[data-column]", function () {
+      var button = $(this),
+          header = $(button.data("column")),
+          table = header.closest("table"),
+          index = header.index() + 1, // convert to CSS's 1-based indexing
+          selector = "tbody tr td:nth-child(" + index + ")",
+          column = table.find(selector).add(header);
+
+      column.toggleClass("hidden");
+	  });
+	  </script>
+
+    </head>
+  <body>
+
+    <css>
+      .hidden { display: none }
+      </css>
+    
+<table>
+  <thead>
+    <th id="column-a">1</th>
+    <th id="column-b">2</th>
+    <th id="column-c">3</th>
+    <th id="column-d">4</th>
+    <th id="column-e">5</th>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>2</td>
+      <td>3</td>
+      <td>4</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>2</td>
+      <td>3</td>
+      <td>4</td>
+      <td>5</td>
+    </tr>
+  </tbody>
+</table>
+
+<button type="button" data-column="#column-a">Hide/show 1st</button>
+<button type="button" data-column="#column-c">Hide/show 3rd</button>
+<button type="button" data-column="#column-e">Hide/show last</button>
+
+  </body>
+  </html>

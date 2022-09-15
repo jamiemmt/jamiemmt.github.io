@@ -1,0 +1,31 @@
+<style type="text/css">
+
+
+  table.t2 {
+    width: 90%;
+    border-collapse: collapse;
+    font-family: Georgia;
+  }
+  .t2 caption {
+    padding-bottom: 0.5em;
+    font-weight: bold;
+    font-size: 14px;
+  }
+  .t2 th, .t2 td {
+    padding: 4px 4px;
+    border: 2px solid #fff;
+    background: #FFF7EA;
+  }
+
+ .t2 th, .t2 td {
+    padding: 4px 4px;
+    background: #FFF7EA;
+	 width: 20%;
+  }
+
+  .t2 tbody tr:nth-child(odd) *:nth-child(even), .t2 tbody tr:nth-child(even) *:nth-child(odd):not(a) {
+    background: #F3FFEF;
+  } 
+
+ 
+</style>

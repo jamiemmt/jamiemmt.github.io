@@ -1,0 +1,46 @@
+
+body { font-family: sans-serif; }
+
+div.maintable {
+    position: absolute;
+    top: 0px;
+    left: 200px;
+    width: 70%;
+}
+
+div.myphoto {
+    height: 400px;
+    width: 250px;
+    background-image:url('photos/color-headshot.jpg');%  no-repeat;
+    background-size: 200px;
+     background-repeat: no-repeat;
+     float:left;
+    margin:0;
+    padding:0;
+ 
+}
+
+div.hello {
+      margin-left: 250px;
+      margin-bottom: 20px;
+    }
+
+
+div.main-text {
+      margin-left: 250px;
+      margin-bottom: 20px;
+	width: 60%;
+    }
+
+@media (max-width : 450px) {
+	div.main-text {
+      margin-left: 20px;
+      margin-bottom: 20px;
+	  width: 90%
+    }
+	div.myphoto {
+    height: 300px;
+    width: 200px;
+    background-size: 200px;
+	}
+}
