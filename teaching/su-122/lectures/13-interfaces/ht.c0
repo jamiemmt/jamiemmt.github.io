@@ -1,0 +1,147 @@
+/* Hash tables (fixed size)
+ * 15-122 Principles of Imperative Computation, Spring 2011
+ * Frank Pfenning
+ */
+
+#use <string>
+#use "hash-string.c0"
+
+/******************************/
+/* client-side implementation */
+/******************************/
+struct wcount {
+  string word;
+  int count;
+};
+
+int hash(string s, int m) {
+  return hash_string(s, m);	/* from hash-string.c0 */
+}
+
+bool key_equal(string s1, string s2) {
+  return string_equal(s1, s2);
+}
+
+string elem_key(struct wcount* wc) {
+  return wc->word;
+}
+
+/*************************/
+/* client-side interface */
+/*************************/
+typedef struct wcount* elem;
+typedef string key;
+
+int hash(key k, int m)
+//@requires m > 0;
+//@ensures 0 <= \result && \result < m;
+  ;
+
+bool key_equal(key k1, key k2);
+
+key elem_key(elem e)
+//@requires e != NULL;
+  ;
+
+/**************************/
+/* library side interface */
+/**************************/
+struct ht;
+typedef struct ht* ht;
+
+ht ht_new(int m)
+//@requires m > 0;
+  ;
+elem ht_search(ht H, key k);	/* O(1) avg. */
+void ht_insert(ht H, elem e)	/* O(1) avg. */
+//@requires e != NULL;
+  ;
+
+/*******************************/
+/* library-side implementation */
+/*******************************/
+struct list {
+  elem data;			/* data != NULL */
+  struct list* next;
+};
+typedef struct list* list;
+
+list list_new(elem e, list tail) {
+  list lnew = alloc(struct list);
+  lnew->data = e;
+  lnew->next = tail;
+  return lnew;
+}
+
+struct ht {
+  int size;			/* 0 < size */
+  list[] A;			/* \length(A) == size */
+};
+
+bool is_chain(list l, int i, int m) {
+  while (l != NULL) {
+    if (l->data == NULL) return false;
+    if (hash(elem_key(l->data), m) != i) return false;
+    l = l->next;
+  }
+  return true;
+}
+
+bool is_ht(ht H) {
+  if (H == NULL) return false;
+  if (!(H->size > 0)) return false;
+  //@assert H->size == \length(H->A);
+  for (int i = 0; i < H->size; i++)
+    //@loop_invariant 0 <= i && i <= H->size;
+    if (!(is_chain(H->A[i], i, H->size))) return false;
+  return true;
+}
+
+ht ht_new(int m)
+//@requires m > 0;
+//@ensures is_ht(\result);
+{
+  ht H = alloc(struct ht);
+  H->size = m;
+  H->A = alloc_array(list, m);
+  return H;
+}
+
+/* ht_search(H, k) returns NULL if key k not present in H */
+elem ht_search(ht H, key k)
+//@requires is_ht(H);
+{
+  int h = hash(k, H->size);
+  list l = H->A[h];
+  while (l != NULL)
+    //@loop_invariant is_chain(l, h, H->size);
+    {
+      if (key_equal(elem_key(l->data), k))
+	return l->data;
+      l = l->next;
+    }
+  return NULL;
+}
+
+void ht_insert(ht H, elem e)
+//@requires is_ht(H);
+//@ensures is_ht(H);
+{
+  assert(e != NULL);		/* cannot insert NULL element */
+  key k = elem_key(e);
+  int h = hash(k, H->size);
+  list l = H->A[h];
+  while (l != NULL)
+    //@loop_invariant is_chain(l, h, H->size);
+    {
+      if (key_equal(elem_key(l->data), k)) {
+	l->data = e;		/* modify in place if k already there */
+	return;
+      }
+      l = l->next;
+    }
+  /* k is not already in the hash table */
+  /* insert at the beginning of the chain at A[h] */
+  H->A[h] = list_new(e, H->A[h]);
+  return;
+}

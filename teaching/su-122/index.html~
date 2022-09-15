@@ -1,0 +1,265 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+     "http://www.w3.org/TR/REC-html40/loose.dtd">
+<HTML>
+<HEAD>
+<TITLE>15-122 Principles of Imperative Computation</TITLE>
+<!-- Changed by: Jamie Morgenstern, May 7 2012 -->
+<META name="description" content="Principles of Imperative Computation">
+<META name="keywords" content="Principles of Imperative Computation">
+<LINK REL="stylesheet" HREF="course.css" TYPE="text/css">
+</HEAD>
+<BODY MARGINWIDTH=0 MARGINHEIGHT=0>
+<TABLE WIDTH="100%" BORDER=0 CELLSPACING=0 CELLPADDING=10>
+<TR>
+<TD CLASS="sidebar">&nbsp;</TD>
+<TD CLASS="main">&nbsp;</TD>
+<TD CLASS="main">&nbsp;</TD>
+</TR>
+<TR>
+<TD CLASS="sidebar" VALIGN="top">
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=2>
+  <TR><TD CLASS="menu"><B CLASS="here">Home</B></TD></TR>
+  <TR><TD CLASS="menu"><A HREF="schedule.html">Schedule</A></TD></TR>
+  <TR><TD CLASS="menu"><A HREF="assignments.html">Assignments</A></TD></TR>
+  <TR><TD CLASS="menu"><A HREF="resources.html">Resources</A></TD></TR>
+  <TR><TD>&nbsp;</TD></TR>
+  <TR><TD CLASS="menu"><A HREF="http://www.cmu.edu/blackboard">Blackboard</A></TD></TR>
+  <TR><TD>&nbsp;</TD></TR>
+  <TR><TD CLASS="menu"><A HREF="http://piazza.com/class_profile#summer2012/15122">Piazza</A> for Bboard</TD></TR>
+  <TR><TD>&nbsp;</TD></TR>
+  <TR><TD CLASS="menu" ALIGN="left">jamiemmt@cs</TD></TR>
+  <TR><TD CLASS="menu" ALIGN="left"><A HREF="http://www.cs.cmu.edu/~jamiemmt/">Jamie&nbsp;Morgenstern</A></TD></TR>
+</TABLE>
+</TD>
+<TD CLASS="main">&nbsp;</TD>
+<TD CLASS="main" VALIGN="top">
+<H1>
+  15-122 Principles of Imperative Computation
+</H1>
+
+<TABLE BORDER=0>
+  <TR><TD> Summer 2012 </TD></TR>
+  <TR><TD> Jamie Morgenstern </TD></TR>
+  <TR><TD> Lecture, MTuWThF 10:30-11:50, GHC 5222 </TD></TR>
+  <TR><TD> Recitation, TuWTh 3:00-4:20, GHC 5206 </TD></TR>
+  <TR><TD> 10 units </TD></TR>
+</TABLE>
+
+<P>
+ For students with a basic understanding of programming (variables,
+expressions, loops, arrays, functions). Teaches imperative programming
+and methods for ensuring the correctness of programs. Students will
+learn the process and concepts needed to go from high-level
+descriptions of algorithms to correct imperative implementations, with
+specific application to basic data structures and algorithms. Much of
+the course will be conducted in a subset of C amenable to
+verification, with a transition to full C near the end. This course
+prepares students for 15-213 and 15-210.
+</P>
+
+<P><HR></P>
+
+<H3>What's New?</H3>
+<UL>
+  <LI> <A HREF="http://www.andrew.cmu.edu/course/15-122">Fall 2011</A>
+  version of this course. </LI>
+  <LI> <A HREF="http://www.cs.cmu.edu/~fp/courses/15122-f10/">Fall 2010</A>
+  version of this course. </LI>
+  <LI> <A HREF="http://www.cs.cmu.edu/~fp/courses/15122-f10/">Fall 2010</A>
+  version of this course </LI>
+</UL>
+
+
+
+<H3>Course Material</H3>
+
+<TABLE BORDER=0>
+ <TR>
+   <TH ALIGN="right" WIDTH=100> <A HREF="schedule.html">Schedule</A> </TH>
+   <TD> Lecture and recitation schedule, readings, and code </TD>
+ </TR>
+ <TR>
+   <TH ALIGN="right"> <A HREF="assignments.html">Assignments</A> </TH>
+   <TD> Details of assignments, due dates, and policies </TD>
+ </TR>
+ <TR>
+   <TH ALIGN="right"> <A HREF="resources.html">Resources</A> </TH>
+   <TD> Additional course resources </TD>
+ </TR>
+</TABLE>
+
+<H3>Course Information</H3>
+
+<TABLE BORDER=0>
+ <TR>
+   <TH ALIGN="right" WIDTH=100> Lectures </TH>
+   <TD> Mon Tue Wed Thur Fri 10:30-11:50, GHC 5222</TD>
+ </TR>
+ <TR>
+   <TH ALIGN="right"> Textbook </TH>
+   <TD VALIGN="top">
+     There is no course textbook <BR>
+     Lecture notes and other resources will be provided
+   </TD>
+ </TR>
+ <TR>
+   <TH ALIGN="right" WIDTH=100> Recitations </TH>
+   <TD>
+     Tue Wed Thur 3:00-4:20 GHC 5205
+   </TD>
+ </TR>
+ </TR>
+ <TR>
+   <TH ALIGN="right"> Credit </TH>
+   <TD> 10 units </TD>
+ </TR>
+ <TR>
+   <TH ALIGN="right"> Grading </TH>
+   <TD>
+     10% Quizzes, 15% for each of 3 exams, 45% Assignments
+   </TD>
+ </TR>
+ <TR>
+   <TH ALIGN="right"> Assignments </TH>
+   <TD>
+     There are 8 assignments worth a total of 450 points
+  </TD>
+ </TR>
+ <TR>
+   <TH ALIGN="right"> Quizzes </TH>
+   <TD>
+     There are 8 quizzes worth a total of 10% of your final grade<BR>
+     Quizzes will be taken online on Blackboard <BR> The lowest quiz
+     score will be dropped
+   </TD>
+ </TR>
+ <TR>
+   <TH ALIGN="right"> Midterm 1 </TH>
+   <TD>
+     15% <STRONG> Friday, June 1 </STRONG> during lecture time <BR>
+     Closed book, one double-sided sheet of notes permitted <BR>
+<!--     <A HREF="misc/mt1.pdf">Midterm 1</A>, <A
+     HREF="misc/mt1-sol.pdf">sample solution</A>
+-->
+  </TD>
+ </TR>
+ <TR>
+   <TH ALIGN="right"> Midterm 2 </TH>
+   <TD>
+     15% <STRONG>Friday, June 15</STRONG> during lecture time <BR>
+     Closed book, one double-sided sheet of notes permitted
+   </TD>
+ </TR>
+ <TR>
+   <TH ALIGN="right"> Final </TH>
+   <TD>
+     15% <STRONG>Friday, June 29, 10:30am-12:00pm, Location TBD<STRONG> <BR>
+There will also be a short oral component to the final exam <BR>
+    Closed book, one double-sided sheet of notes permitted <BR>
+ <!--    <A HREF="misc/final.pdf">Final</A>, <A
+     HREF="misc/final-sol.pdf">sample solution</A>
+-->
+   </TD>
+ </TR>
+ <TR>
+   <TH ALIGN="right"> Home </TH>
+   <TD> <A HREF="index.html">http://www.cs.cmu.edu/~jamiemmt/teaching/su-122/</A> </TD>
+ </TR>
+ <TR>
+   <TH ALIGN="right"> Blackboard </TH>
+   <TD> <A HREF="http://www.cmu.edu/blackboard">http://www.cmu.edu/blackboard/</A> <BR>
+     Used only for tracking of grades and quizzes
+   </TD>
+ </TR>
+ <TR>
+   <TH ALIGN="right"> Newsgroup </TH>
+   <TD CLASS="menu"><A HREF="http://piazza.com/class_profile#summer2012/15122">Piazza</A> for Bboard</TD></TR>
+ </TR>
+ <TR>
+   <TH ALIGN="right"> Directory </TH>
+   <TD> /afs/andrew.cmu.edu/course/15/122/ </TD>
+ </TR>
+</TABLE>
+
+<H3>Instructor</H3>
+<TABLE BORDER=0>
+<TR>
+  <TH ALIGN="right" WIDTH=100> &nbsp; </TH>
+  <TD> Jamie Morgenstern </TD>
+</TR>
+<TR>
+  <TH ALIGN="right"> Contact </TH>
+  <TD> jamiemmt@cs </TD>
+</TR>
+<TR>
+  <TH ALIGN="right"> Office </TH>
+  <TD> GHC 9221 </TD>
+</TR>
+<TR>
+  <TH ALIGN="right"> Office Hours </TH>
+  <TD> Every day, 12:00-1:30, by appt, or stop by anytime; I'm here a lot </TD>
+</TR>
+<TR>
+  <TH> &nbsp; </TH>
+  <TD> &nbsp; </TD>
+</TR>
+</TABLE>
+
+<H3>Teaching Assistants</H3>
+
+<BLOCKQUOTE>
+<TABLE BORDER=1 RULES="all" CELLPADDING=4>
+  <TR>
+    <TH> TA </TH>
+    <TH> Contact </TH>
+    <TH> Office Hours </TH>
+    <TH> Location </TH>
+  </TR>
+  <TR>
+    <TD> General  </TD> <TD>  </TD>
+    <TD>
+      M/F 3:00-4:20 <BR>
+    </TD>
+    <TD> 5206 </TD>
+  </TR>
+  <TR>
+    <TD> 	 Anand Subramanian  </TD> <TD> asubrama@andrew.cmu.edu </TD>
+    <TD>
+      TBD <BR>
+      TBD
+    </TD>
+    <TD> TBD </TD>
+  </TR>
+  <TR>
+    <TD> Kristina Sojakova </TD> <TD> ksojakov@cs.cmu.edu </TD>
+    <TD>
+      TBD <BR>
+      TBD
+    </TD>
+    <TD> TBD </TD>
+  </TR>
+
+</TABLE>
+</BLOCKQUOTE>
+
+<HR>
+<P CLASS="bottom" ALIGN="center">
+  [ <B CLASS="here">Home</B>
+  | <A HREF="schedule.html">Schedule</A>
+  | <A HREF="assignments.html">Assignments</A>
+  | <A HREF="resources.html">Resources</A>
+  ] <BR>
+  [ 
+    <A HREF="http://www.cmu.edu/blackboard">Blackboard</A>
+  | <A HREF=""http://piazza.com/class_profile#summer2012/15122""> Piazza </A>
+  ]
+</P>
+<P CLASS="bottom">
+  jamiemmt@cs <BR>
+  <A HREF="http://www.cs.cmu.edu/~jamiemmt/">Jamie&nbsp;Morgenstern</A>
+</P>
+</TD>
+</TR>
+</TABLE>
+</BODY>
+</HTML>

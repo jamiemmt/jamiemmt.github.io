@@ -1,0 +1,40 @@
+/* Testing heaps
+ * 15-122 Principles of Imperative Computation, Fall 2010
+ * Frank Pfenning
+ */
+
+#use <conio>
+#use <rand>
+
+bool is_sorted(int[] A, int lower, int upper)
+//@requires 0 <= lower && lower <= upper && upper <= \length(A);
+{
+  for (int i = lower; i < upper-1; i++)
+    //@loop_invariant lower == upper || (lower <=  i && i <= upper-1);
+    if (!(A[i] <= A[i+1])) return false;
+  return true;
+}
+
+int main() {
+  int n = (1<<9)-1;		// 1<<9 for -d; 1<<13 for timing
+  int num_tests = 10;		// 10 for -d;  100 for timing
+  int seed = 0xc0c0ffee;
+  rand_t gen = init_rand(seed);
+  int[] A = alloc_array(int, n);
+  heap H = heap_new(n);
+
+  print("Testing heap of size "); printint(n);
+  print(" "); printint(num_tests); print(" times\n");
+  for (int j = 0; j < num_tests; j++) {
+    for (int i = 0; i < n; i++) {
+      heap_insert(H, rand(gen));
+    }
+    for (int i = 0; i < n; i++) {
+      A[i] = heap_delmin(H);
+    }
+    assert(heap_empty(H)); /* heap not empty */
+    assert(is_sorted(A, 0, n)); /* heapsort failed */
+  }
+  print("Passed all tests!\n");
+  return 0;
+}

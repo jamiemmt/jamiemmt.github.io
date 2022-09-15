@@ -1,0 +1,203 @@
+/* Interface to path_stack */
+
+typedef struct path_stack * path_stack;
+
+bool ps_empty(path_stack p);
+path_stack ps_new();
+void ps_push(path_stack p, string s);
+string ps_pop(path_stack p);
+string ps_peek_top(path_stack p);
+string ps_peek_bottom(path_stack p);
+path_stack ps_copy(path_stack p);
+
+
+
+
+
+
+
+
+
+
+/* Implementation of path_stack */
+/* Uses unbounded arrays */
+
+/* Unbounded arrays
+ * 15-122 Principles of Imperative Computation
+ * Fall 2010
+ * Frank Pfenning
+ */
+
+/* Unbounded arrays of strings */
+/* interface section */
+struct ubarray;
+typedef struct ubarray* uba;
+uba uba_new(int initial_limit);          /* create new unbounded array L */
+int uba_size(uba L);  /* current size of L */
+string uba_get(uba L, int index);  /* "L[index]", 0 <= index < uba_size(L) */
+void uba_set(uba L, int index, string s); /* "L[index] = s", 0 <= index < uba_size(L) */
+void addend(uba L, string s);  /* add s at the end of L */
+string remend(uba L);  /* remove last element in L, uba_size(L) > 0 */
+
+/* Unbounded arrays of string */
+/* implementation section */
+struct ubarray {
+  int limit;/* limit > 0 */
+  int size;/* 0 <= size && size <= limit */
+  string[] strings;/* \length(strings) == limit */
+};
+
+bool is_uba (uba L)
+//@requires L->limit == \length(L->strings);
+{
+  return L->limit > 0 && 0 <= L->size && L->size <= L->limit;
+}
+
+uba uba_new (int initial_limit)
+//@requires 1 <= initial_limit;
+//@ensures is_uba(\result);
+{
+  //assert(1 <= initial_limit, "unbounded array must be of initial limit 1 or more");
+  { uba L = alloc(struct ubarray);
+    string[] Ls = alloc_array(string, initial_limit);
+    L->limit = initial_limit;
+    L->size = 0;
+    L->strings = Ls;
+    return L;
+  }
+}
+
+int uba_size(uba L)
+//@requires is_uba(L);
+//@ensures \result == L->size;
+{
+  return L->size;
+}
+
+/* uba_resize(L, new_limit) resizes L to new_limit */
+/* copies old values between 0 and L->size to new array */
+void uba_resize(uba L, int new_limit)
+//@requires is_uba(L);
+//@requires new_limit > L->size;
+//@ensures is_uba(L);
+//@ensures L->limit == new_limit && L->size == \old(L->size);
+//@ensures L->size < L->limit;
+{
+  string[] Ks = alloc_array(string, new_limit);
+  int i;
+  for (i = 0; i < L->size; i++)
+    Ks[i] = L->strings[i];
+  // L-> size remains unchanged
+  L->limit = new_limit;
+  L->strings = Ks;
+}
+
+string uba_get(uba L, int index)
+//@requires is_uba(L);
+//@requires 0 <= index && index < L->size;  /* always check dynamically */
+{ //assert (0 <= index && index < L->size, "unbounded array index out of bounds");
+  return L->strings[index];
+}
+
+void uba_set(uba L, int index, string s)
+//@requires is_uba(L);
+//@requires 0 <= index && index < L->size;  /* always check dynamically */
+{ //assert (0 <= index && index < L->size, "unbounded array index out of bounds");
+  L->strings[index] = s;
+}
+
+void addend(uba L, string s)
+//@requires is_uba(L);
+//@ensures is_uba(L);
+{
+  if (L->size == L->limit) uba_resize(L, 2*L->limit);
+  //@assert L->size < L->limit;
+  L->strings[L->size] = s;
+  L->size++;
+}
+
+string remend(uba L)
+//@requires is_uba(L);
+//@requires L->size > 0;  /* always check dynamically */
+//@ensures is_uba(L);
+{ string s;
+  //assert (L->size > 0, "cannot remove element from empty unbounded array");
+  L->size--;
+  s = L->strings[L->size];
+  L->strings[L->size] = "";/* avoids a space leak */
+  if (4*L->size <= L->limit && L->limit > 1) uba_resize(L, L->limit/2);
+  return s;
+}
+
+
+
+
+
+
+
+
+struct path_stack {
+	uba u;
+};
+
+
+//creates a new path_stack
+path_stack ps_new()
+//@ensures ps_empty(\result);
+{
+	path_stack ps = alloc(struct path_stack);
+	ps->u = uba_new(1);
+	return ps;
+}
+
+
+//returns if the stack is empty
+bool ps_empty(path_stack p){
+	return uba_size(p->u)==0;
+}
+
+
+//pushes a string onto the stack
+void ps_push(path_stack p,string s){
+	addend(p->u,s);
+}
+
+
+//pops a string off the stack
+string ps_pop(path_stack p)
+//@requires p!=NULL;
+//@requires !ps_empty(p);
+{
+	return remend(p->u);
+}
+
+
+//looks at the top string in the stack, without removing it
+string ps_peek_top(path_stack p)
+//@requires p!=NULL;
+//@requires !ps_empty(p);
+{
+	return uba_get(p->u,uba_size(p->u)-1);
+}
+
+
+//looks at the bottom string in the stack, without removing it
+string ps_peek_bottom(path_stack p)
+//@requires p!=NULL;
+//@requires !ps_empty(p);
+{
+	return uba_get(p->u,0);
+}
+
+
+//copies a stack, returning a new stack that contains the
+//same elements as the given stack
+path_stack ps_copy(path_stack p)
+//@requires p!=NULL;
+{
+	path_stack n = ps_new();
+	for(int i=0;i<uba_size(p->u);i++){
+		ps_push(n,uba_get(p->u,i));
+	}
+	return n;
+}

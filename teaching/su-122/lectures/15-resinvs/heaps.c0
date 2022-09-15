@@ -1,0 +1,165 @@
+/* Priority queues, implemented as heaps
+ * 15-122 Principles of Imperative Computation, Spring 2011
+ * Frank Pfenning
+ */
+
+typedef struct heap* heap;
+heap heap_new(int capacity)    /* create new heap of given capacity */
+//@requires capacity >= 0;
+  ;
+bool heap_empty(heap H);        /* is H empty? */
+bool heap_full(heap H);         /* is H full? */
+void heap_insert(heap H, int x) /* insert x into H */
+//@requires !heap_full(H);
+  ;
+int heap_min(heap H)            /* find minimum */
+//@requires !heap_empty(H);
+  ;
+int heap_delmin(heap H)         /* delete minimum */
+//@requires !heap_empty(H);
+  ;
+
+struct heap {
+  int limit;
+  int next;
+  int[] heap;
+};
+
+/* iterative version, checking parents */
+bool is_heap(heap H) {
+  if (H == NULL) return false;
+  //@assert \length(H->heap) == H->limit;
+  if (!(1 <= H->next && H->next <= H->limit)) return false;
+  /* check parent <= node for all nodes except root (i = 1) */
+  for (int i = 1; i < H->next; i++)
+    //@loop_invariant 1 <= i && i <= H->next;
+    if (!(i == 1 || H->heap[i/2] <= H->heap[i])) return false;
+  return true;
+}
+
+heap heap_new(int capacity)
+//@ensures is_heap(\result);
+//@ensures heap_empty(\result);
+{
+  assert(0 <= capacity);	/* min capacity is 0 */
+  heap H = alloc(struct heap);
+  H->limit = capacity+1;
+  H->next = 1;
+  H->heap = alloc_array(int, H->limit);
+  return H;
+}
+
+bool heap_full(heap H)
+//@requires is_heap(H);
+{
+  return H->next >= H->limit;
+}
+
+bool heap_empty(heap H)
+//@requires is_heap(H);
+{
+  return H->next == 1;
+}
+
+/* is_heap_except_up(H, 1) == is_heap(H); */
+bool is_heap_except_up(heap H, int n) {
+  if (H == NULL) return false;
+  //@assert \length(H->heap) == H->limit;
+  if (!(1 <= H->next && H->next <= H->limit)) return false;
+  /* check parent <= node for all nodes except root (i = 1) and n */
+  for (int i = 1; i < H->next; i++)
+    //@loop_invariant 1 <= i && i <= H->next;
+    if (!(i == 1 || i == n || H->heap[i/2] <= H->heap[i])) return false;
+  return true;
+}
+
+/* If 2*n >= H->next then is_heap_except_down(H, n) == is_heap(H) */
+bool is_heap_except_down(heap H, int n) {
+  if (H == NULL) return false;
+  //@assert \length(H->heap) == H->limit;
+  if (!(1 <= H->next && H->next <= H->limit)) return false;
+  /* check parent <= node for all nodes except root (i = 1) */
+  /* and children of n (i/2 = n) */
+  for (int i = 1; i < H->next; i++)
+    //@loop_invariant 1 <= i && i <= H->next;
+    if (!(i == 1 || i/2 == n || H->heap[i/2] <= H->heap[i])) return false;
+  return true;
+}
+
+void swap(int[] A, int i, int j)
+//@requires 0 <= i && i < \length(A);
+//@requires 0 <= j && j < \length(A);
+{
+  int tmp = A[i];
+  A[i] = A[j];
+  A[j] = tmp;
+}
+
+void sift_up(heap H, int n)
+//@requires 1 <= n && n < H->limit;
+//@requires is_heap_except_up(H, n);
+//@ensures is_heap(H);
+{ int i = n;
+  while (i > 1)
+    //@loop_invariant is_heap_except_up(H, i);
+    {
+      if (H->heap[i/2] <= H->heap[i]) return;
+      swap(H->heap, i/2, i);	/* swap i with parent */
+      i = i/2;			/* consider parent next */
+    }
+  //@assert i == 1;
+  //@assert is_heap_except_up(H, 1);
+  return;
+}
+
+void heap_insert(heap H, int x)
+//@requires is_heap(H);
+//@ensures is_heap(H);
+{
+  assert(!heap_full(H)); /* cannot insert into full heap */
+  H->heap[H->next] = x;
+  H->next++;
+  sift_up(H, H->next-1);
+}
+
+void sift_down(heap H, int n)
+//@requires 1 <= n && n < H->next;
+//@requires is_heap_except_down(H, n);
+//@ensures is_heap(H);
+{ int i = n;
+  while (2*i < H->next)
+    //@loop_invariant is_heap_except_down(H, i);
+    {
+      if (H->heap[i] <= H->heap[2*i] &&
+          (2*i+1 >= H->next || H->heap[i] <= H->heap[2*i+1]))
+        return;
+      if (2*i+1 >= H->next || H->heap[2*i] <= H->heap[2*i+1]) {
+        swap(H->heap, i, 2*i);
+        i = 2*i;
+      } else {
+        swap(H->heap, i, 2*i+1);
+        i = 2*i+1;
+      }
+    }
+  //@assert 2*i >= H->next;
+  //@assert is_heap_except_down(H, i);
+  return;
+}
+
+int heap_delmin(heap H)
+//@requires is_heap(H);
+//@ensures is_heap(H);
+{ assert(!heap_empty(H)); /* cannot delete from empty heap */
+  int x = H->heap[1];
+  swap(H->heap, 1, H->next-1);
+  H->next--;
+  if (H->next > 1) sift_down(H, 1);
+  return x;
+}
+
+int heap_min(heap H)
+//@requires is_heap(H);
+//@ensures is_heap(H);
+{ assert(!heap_empty(H)); /* cannot read minimum from empty heap */
+  return H->heap[1];
+}

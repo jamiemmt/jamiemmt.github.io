@@ -1,0 +1,49 @@
+/* Mystery function with a bug or two
+ * revealed as the exponentiation function
+ *
+ * 15-122 Principles of Imperative Computation, Spring 2011
+ * Frank Pfenning
+ */
+
+#use <conio>
+
+/* pow(x,y) = x to the yth power */
+int pow (int x, int y)
+//@requires y >= 0;
+{
+  if (y == 0)
+    return 1;
+  else
+    return x * pow(x, y-1);
+}
+
+/* An ostensibly faster version of pow(x,y) */
+int fastpow (int x, int y)
+//@requires y >= 0;
+//@ensures \result == pow(x, y);
+{
+  int r = 1;
+  int b = x;
+  int e = y;
+  while (e > 0)
+    //@loop_invariant r * pow(b,e) == pow(x,y);
+    //@loop_invariant e >= 0;
+    {
+      if (e % 2 == 1) r = b * r;
+      b = b * b;
+      e = e / 2;
+    }
+  //@assert e == 0;
+  return r;
+}
+
+int main () {
+  assert(fastpow(2,3) == 8);
+  assert(fastpow(3,4) == 81);
+  assert(fastpow(2,0) == 1);
+  assert(fastpow(2,32) == 0);	/* due to modular arithmetic */
+  assert(fastpow(2,31) == -2147483648);
+				/* due to two's complement arithmetic */
+  print("all tests passed!\n");
+  return 0;
+}

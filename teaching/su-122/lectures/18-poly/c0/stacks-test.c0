@@ -1,0 +1,15 @@
+#use <string>
+#use <conio>
+
+int main () {
+  stack S = stack_new();
+  push(S, "1");
+  assert(is_stack(S));
+  push(S, "2");
+  assert(is_stack(S));
+  assert(string_compare(pop(S),"2") == 0);
+  assert(string_compare(pop(S),"1") == 0);
+  assert(stack_empty(S));
+  print("All tests passed!\n");
+  return 0;
+}

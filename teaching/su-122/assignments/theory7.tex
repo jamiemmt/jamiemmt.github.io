@@ -1,0 +1,421 @@
+\documentclass[12pt]{exam}
+\usepackage{amsmath}
+\usepackage[left=1in, right=1in, top=1in, bottom=1in]{geometry}
+\usepackage{graphicx}
+
+\newcommand\Cnought{C$_0$}
+\newcommand\modulo{\ \texttt{\%}\ }
+\newcommand\lshift{\ \texttt{<<}\ }
+\newcommand\rshift{\ \texttt{>>}\ }
+\newcommand\cgeq{\ \texttt{>=}\ }
+
+\newcommand{\answerbox}[1]{
+\begin{framed}
+\hspace{5.65in}
+\vspace{#1}
+\end{framed}}
+
+
+\pagestyle{head}
+
+\headrule \header{\textbf{15-122 Assignment 7}}{}{\textbf{Page
+\thepage\ of \numpages}}
+
+\pointsinmargin \printanswers
+
+\setlength\answerlinelength{2in} \setlength\answerskip{0.3in}
+
+\begin{document}
+\addpoints
+\begin{center}
+\textbf{\large{15-122 : Principles of Imperative Computation
+\\ \vspace{0.2in} Summer 1 2012
+\\  \vspace{0.2in} Assignment 7
+}}
+
+ \vspace{0.2in}
+ (\large{Theory Part})
+
+ \vspace{0.2in}
+
+ \large{Due: Friday, June 22, 2012 in class}
+\end{center}
+
+\vspace{0.5in}
+
+\hbox to \textwidth{Name:\enspace\hrulefill}
+
+
+\vspace{0.2in}
+
+\hbox to \textwidth{Andrew ID:\enspace\hrulefill}
+
+\vspace{0.2in}
+
+\hbox to \textwidth{Recitation:\enspace\hrulefill}
+
+
+\vspace{0.5in}
+
+\noindent The written portion of this week's homework will give you some practice in transitioning from C0 to C programming basics.
+You can either type up your solutions or write them
+\textit{neatly} by hand, and you should submit your work in class on the
+due date just before lecture begins. Please remember to \textit{staple}
+your written homework before submission.
+\vspace{0.2in}
+
+
+\begin{center}
+\gradetable[v][questions]
+\end{center}
+
+
+\newpage
+\begin{questions}
+
+
+\pagebreak
+
+\question{\textbf{Programming in C}}
+
+
+
+\begin{parts}
+
+For each of the following problems,
+\begin{parts}
+\part state what is wrong with the code and
+\part how to correct it.
+\end{parts}
+Do not just try to compile it and write down the error message. You can look for errors such as unallocated or uninitialized memory, array index out of bounds, dereference of an invalid pointer, mixing pointer and reference types etc.
+
+\part[1]  $ $
+\begin{verbatim}
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+  char *w;
+  strcpy(w,"C programming");
+  printf("%s\n", w);
+  return 0;
+}
+\end{verbatim}
+\begin{solution}
+\vspace{1in}
+\end{solution}
+
+\part[1]   $ $
+
+\begin{verbatim}
+#include <stdio.h>
+#define MULT(X,Y) (X*Y)
+
+int main() {
+  int c = MULT(2+3,3+4);
+  printf("(2+3)*(3+4) is = %d\n", c);
+  return 0;
+}
+\end{verbatim}
+
+\begin{solution}
+\vspace{1in}
+\end{solution}
+
+\newpage
+
+\part[1]   $ $
+\begin{verbatim}
+#include <stdlib.h>
+#include <stdio.h>
+
+int main() {
+  int *a = malloc(100);
+  for (int i=0; i<100; i++)
+    a[i]=i;
+  return 0;
+}
+\end{verbatim}
+\begin{solution}
+\vspace{1.4in}
+\end{solution}
+
+\part[1]  $ $
+
+\begin{verbatim}
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+  char *name = malloc(strlen("wordpress" + 1));
+  strcpy(name,"wordpress");
+  return 0;
+}
+\end{verbatim}
+\begin{solution}
+\vspace{1.4in}
+\end{solution}
+
+\newpage
+
+\part[1] The standard string library function \texttt{strncpy(dest, src, n)} copies the specified number of characters \texttt{n} from the source string \texttt{src} to the destination string \texttt{dest}.
+
+\begin{verbatim}
+#include <string.h>
+#include <stdlib.h>
+#include <stdio.h>
+
+int main() {
+  char *letter_data = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  char a[16];
+  strncpy(a, letter_data, sizeof(a));
+  printf("The first sixteen letters are: %s\n", a);
+  return 0;
+}
+\end{verbatim}
+\begin{solution}
+\vspace{1.4in}
+\end{solution}
+
+
+
+\part[1]This code fragment shows a C function that is called from another function.
+
+\begin{verbatim}
+#include "xalloc.h"
+#include <stdlib.h>
+#define TABLESIZE 100
+int *table = NULL;
+
+int insert_in_table(int pos, int value) {
+  if (table == NULL)
+    table = (int *)xcalloc(TABLESIZE, sizeof(int));
+  if (pos >= TABLESIZE)  return -1;
+  table[pos] = value;
+  return 0;
+}
+\end{verbatim}
+\begin{solution}
+\vspace{1.1in}
+\end{solution}
+
+\part[1] $ $
+\begin{verbatim}
+#include <stdlib.h>
+#include <stdio.h>
+
+int main() {
+  int a[] = {1,1,2,3,5,8,13,21,34,55};
+  printf("%d\n", *(a+2)+*(a+5));
+  free(a);
+  return 0;
+}
+\end{verbatim}
+\begin{solution}
+\vspace{1.1in}
+\end{solution}
+
+\part[1] $ $
+\begin{verbatim}
+#include <stdio.h>
+
+int main() {
+  int a[50];
+  int *i;
+
+  for (i = &a[0]; i < &a[51]; i++) {
+    *i = 0;
+  }
+  return 0;
+}
+\end{verbatim}
+\begin{solution}
+\vspace{1.1in}
+\end{solution}
+
+
+\end{parts}
+
+\newpage
+\question{\textbf{More Programming in C}}
+
+\begin{parts}
+Answer the following questions briefly and clearly. Your answers should not be more than few lines of explanation. Provide a simple example when appropriate to support your explanation.
+\part  State precisely what the variable \texttt{A} points to in this statements
+\begin{subparts}
+
+
+\subpart[1]\texttt{char *A[10];}
+
+\begin{solution}
+\vspace{0.3in}
+\end{solution}
+
+\subpart[1] \texttt{char (*A)[10];}
+
+\begin{solution}
+\vspace{0.3in}
+\end{solution}
+
+\subpart[1]\texttt{char *(*A)[10];}
+
+\begin{solution}
+\vspace{0.3in}
+\end{solution}
+
+\end{subparts}
+
+\vspace{0.2in}
+\part  Which of the following is legal and which one is illegal? Why? Justify your answer.
+\begin{subparts}
+\subpart[1] $ $
+\begin{verbatim}
+#define banana int
+unsigned banana i;
+\end{verbatim}
+\begin{solution}
+\vspace{0.8in}
+\end{solution}
+
+\subpart[1] $ $
+\begin{verbatim}
+typedef int banana;
+unsigned banana i;
+\end{verbatim}
+
+\begin{solution}
+\vspace{0.8in}
+\end{solution}
+
+\end{subparts}
+
+\newpage
+\part[2] The first 14 bytes of a bitmap file are reserved for
+some header information that is defined by the following
+struct.
+\begin{verbatim}
+   struct bmp_header
+   {
+     unsigned short int type; /* BMP type identifier */
+     unsigned int size;    /* size of the image file in bytes*/
+     unsigned short int reserved1, reserved2;
+     unsigned int offset;   /* starting address of the byte */
+   };
+\end{verbatim}
+Assume that \verb"unsigned short" values are 2 bytes and \verb"unsigned int"
+values are 4 bytes. Suppose we read the first 14 bytes of a bitmap file
+into a header that is defined as below.
+\begin{verbatim}
+  char header[14];
+\end{verbatim}
+Assuming that struct fields are laid out contiguously in memory, how would
+you extract the size of the image from the given data?  Write a line of code that will find the size of the image in bytes.
+\begin{solution}
+\vspace{1in}
+\end{solution}
+
+\end{parts}
+
+%\newpage
+%\question{\textbf{ Abstract Data Type in C}}
+%
+%\begin{parts}
+%
+%A polynomial of degree $n$, $n \ge 0$, can be expressed as follows:
+%\begin{center}
+%$a_n x^n + a_{n-1}x^{n-1} + ... + a_1 x^1 + a_0$
+%\end{center}
+%where $a_n, a_{n-1}, ..., a_1, a_0$ are integer coefficients.
+%
+%Consider a C struct definition for a polynomial of degree $n$, $n \ge 0$, as shown below:
+%
+%\begin{verbatim}
+%   struct poly {
+%       int *a;      // array of coefficients
+%       int n;       // degree of polynomial
+%   };
+%typedef struct poly *poly;
+%\end{verbatim}
+%
+%Also assume that you can specify preconditions and postconditions for functions using the following annotation macros in C:
+%\begin{verbatim}
+%   #define REQUIRES(X) assert(X)
+%   #define ENSURES(X) assert(X)
+%\end{verbatim}
+%
+%For each of the following exercises, include appropriate preconditions and postconditions (as necessary) using the macros above.
+%
+%
+%%\part[1] Write a C function \verb"is_poly(poly p)" that returns true if polynomial $p$ is a ``valid" polynomial. You may assume \texttt{stdbool.h} is included in the same file.
+%%
+%%
+%%\begin{solution}
+%%\begin{verbatim}
+%%bool is_poly(poly p) {
+%%\end{verbatim}
+%%\vspace{3in}
+%%\end{solution}
+%%
+%%\newpage
+%\part[1] Write a C function \verb"poly new_poly(int d)" that allocates and returns a new polynomial of degree $d$ with all coefficients
+%set to 0:
+%
+%\begin{solution}
+%\begin{verbatim}
+%poly new_poly(int d) {
+%\end{verbatim}
+%\vspace{3.3in}
+%\end{solution}
+%
+%
+%
+%\part[1] Write a C function \verb"void free_poly(poly p)"  that frees a given polynomial.
+%\begin{solution}
+%\begin{verbatim}
+%void free_poly(poly p){
+%\end{verbatim}
+%\vspace{1.8in}
+%\end{solution}
+%
+%%\newpage
+%%\part[1] Write a C function \verb"void set_coeff(poly p, int i, int val)" that sets the coefficient of the $i$th coefficient of a polynomial $p$ to $val$.
+%%\begin{solution}
+%%\begin{verbatim}
+%%void set_coeff(poly p, int i, int c) {
+%%\end{verbatim}
+%%\vspace{3in}
+%%\end{solution}
+%
+%%\newpage
+%%\part[1] Write a C function \verb"poly add_poly(poly p, poly q)" that allocates and returns a new polynomial equal to the sum of two polynomials.
+%%To add two polynomials, simply add the coefficients of like-powered terms. The degree of the
+%%resulting polynomial should be equal to the larger of the degrees of the two polynomials being added. Do not check for overflow.
+%%
+%%\begin{solution}
+%%\begin{verbatim}
+%%poly add_poly(poly p, poly q) {
+%%\end{verbatim}
+%%\vspace{6.7in}
+%%\end{solution}
+%
+%%\newpage
+%%\part[3] Write a C function \verb"int eval_poly(poly p, int x)"  that computes the value of a polynomial $p$ at the given value $x$ and returns the result.
+%%Your function should
+%%have a worst-case runtime complexity of O($n$) for a polynomial of degree $n$. (Hint: Look up Horner's rule.) Do not check for overflow.
+%%
+%%\begin{solution}
+%%\begin{verbatim}
+%%int eval_poly(poly p, int x) {
+%%\end{verbatim}
+%%\vspace{5in}
+%%\end{solution}
+%
+%
+%
+%
+%
+%\end{parts}
+
+\end{questions}
+\end{document}
+

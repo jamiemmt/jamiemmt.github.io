@@ -1,0 +1,27 @@
+/*
+ * 15-122 Principles of Imperative Computation, Spring 2011
+ * Hash function on strings
+ * Uses pseudo-random number generation, deterministically
+ */
+
+#use <string>
+
+int hash_string(string s, int m)
+//@requires m > 1;
+//@ensures 0 <= \result && \result < m;
+{
+  int a = 1664525; int b = 1013904223; /* inlined random number generator */
+  int r = 0x1337beef;		       /* initial seed */
+  int len = string_length(s);
+  int h = 0;			/* empty string maps to 0 */
+  for (int i = 0; i < len; i++)
+    //@loop_invariant 0 <= i && i <= len;
+    {
+      h = r*h + char_ord(string_charat(s, i)); /* mod 2^32 */
+      r = r*a + b;	        /* mod 2^32, linear congruential random no */
+    }
+  h = h % m;			/* reduce to range */
+  //@assert -m < h && h < m;
+  if (h < 0) h += m;		/* make positive, if necessary */
+  return h;
+}

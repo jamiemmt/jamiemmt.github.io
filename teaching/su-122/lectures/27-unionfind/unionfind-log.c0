@@ -1,0 +1,129 @@
+/* Union-Find
+ * 15-122 Principles of Imperative Computation, Spring 2011
+ * Frank Pfenning
+ *
+ * This version balances, but does not do path compression, so it
+ * it should only be of complexity O(n*log(n)) for n unions.
+ */
+
+/*************/
+/* Interface */
+/*************/
+
+typedef struct ufs* ufs;
+
+ufs singletons(int n)
+//@requires n >= 0;
+  ;
+bool ufs_elem(ufs eqs, int i);
+int find(ufs eqs, int i)
+//@requires ufs_elem(eqs, i);
+//@ensures ufs_elem(eqs, \result);
+  ;
+void union(ufs eqs, int i, int k)
+//@requires ufs_elem(eqs, i) && ufs_elem(eqs, k);
+  ;
+
+/******************/
+/* Implementation */
+/******************/
+
+struct ufs {
+  int size;
+  int[] A;			/* \length(A) == size */
+};
+
+bool ufs_elem(ufs eqs, int i) {
+  if (eqs == NULL) return false;
+  return 0 <= i && i < eqs->size;
+}
+
+/* ufs_rep(eqs, i) if i is the representative of an equivalence class */
+bool ufs_rep(ufs eqs, int i)
+//@requires ufs_elem(eqs, i);
+{
+  return (eqs->A)[i] < 0;
+}
+
+bool depth_bounded(ufs eqs, int i)
+{
+  int[] A = eqs->A;
+  int size = eqs->size;
+  int k = i;
+  int d = 1;
+  while (ufs_elem(eqs, k) && A[k] >= 0 && d <= size) {
+    d++;
+    k = A[k];
+  }
+  /* !ufs_elem(eqs, k) means index k out of range */
+  /* A[k] > -d means path exceeds depth bound */
+  /* d > size we must be in loop */
+  return ufs_elem(eqs, k) && A[k] <= -d && d <= size;
+}
+
+bool is_ufs (ufs eqs)
+{
+  if (eqs == NULL) return false;
+  if (!(eqs->size >= 0)) return false;
+  //@assert eqs->size == \length(eqs->A);
+  for (int i = 0; i < eqs->size; i++)
+    if (!depth_bounded(eqs,i))
+      return false;
+  return true;
+}
+
+ufs singletons (int n)
+//@requires 0 <= n;
+//@ensures is_ufs(\result);
+{
+  assert(n >= 0);
+  int[] A = alloc_array(int, n);
+  ufs eqs = alloc(struct ufs);
+  for (int i = 0; i < n; i++) {
+    A[i] = -1;
+  }
+  eqs->size = n;
+  eqs->A = A;
+  return eqs;
+}
+
+int find (ufs eqs, int i)
+//@requires is_ufs(eqs);
+//@ensures is_ufs(eqs) && ufs_rep(eqs, \result);
+{
+  assert(ufs_elem(eqs, i));
+  int[] A = eqs->A;
+  int k = i;
+  while (A[k] >= 0) 
+    //@loop_invariant ufs_elem(eqs, k);
+    k = A[k];
+  //@assert ufs_rep(eqs, k);
+  /* if (i != k) A[i] = k; */  /* weak path compression */
+  /* strong path compression would change all indices
+   * along path from i to k.  But we would have to update
+   * the depth index if we wanted it to be accurate
+   */
+  return k;
+}
+
+void union (ufs eqs, int i, int k)
+//@requires is_ufs(eqs);
+//@ensures is_ufs(eqs);
+//@ensures find(eqs, i) == find(eqs, k);
+{
+  assert(ufs_elem(eqs, i));
+  assert(ufs_elem(eqs, k));
+  int irep = find(eqs, i);
+  int krep = find(eqs, k);
+  int[] A = eqs->A;
+  if (irep == krep) return;
+  if (A[irep] < A[krep]) {	/* i has greater depth */
+    A[krep] = irep;		/* depth remains the same */
+  } else if (A[irep] == A[krep]) {
+    A[krep] = irep;		/* direction is arbitrary */
+    A[irep]--;			/* depth increases by one */
+  } else {			/* k has greater depth */
+    A[irep] = krep;		/* depth remains the same */
+  }
+  return;
+}

@@ -1,0 +1,41 @@
+/* Second mystery function
+ * Challenge: debug if necessary and find contract and invariant
+ *
+ * 15-122 Principles of Imperative Computation, Spring 2011
+ * Frank Pfenning
+ * Solution due to Prasanth Samasundar
+ *
+ * Warning: this still has a bug!  Find it first for extra credit!
+ */
+
+#use <conio>
+
+/* pow(x,y) = x to the yth power */
+int pow (int x, int y)
+//@requires y >= 0;
+{
+  if (y == 0)
+    return 1;
+  else
+    return x * pow(x, y-1);
+}
+
+/* integer cubic root */
+int icbrt (int x)
+//@requires 0 <= x;
+//@ensures pow(\result-1, 3) < x && x <= pow(\result, 3);
+{
+  int i = 0;
+  int j = 0;
+  int k = 0;
+  while (j < x)
+    //@loop_invariant 0 <= i;
+    //@loop_invariant k == 3*i*i;
+    //@loop_invariant j == i*i*i;
+    {
+      j = j+k+3*i+1;
+      k = k+6*i+3;
+      i = i+1;
+    }
+  return i;
+}

@@ -1,0 +1,21 @@
+/* Union-find testing
+ * 15-122 Principles of Imperative Computation, Fall 2010
+ * Frank Pfenning
+ */
+
+#use <conio>
+
+int main () {
+  int n = 6;
+  ufs eqs = singletons(n);
+  union(eqs, 0, 1);
+  union(eqs, 1, 2);
+  union(eqs, 0, 2);
+  union(eqs, 3, 4);
+  union(eqs, 2, 3);
+  union(eqs, 3, 5);
+  for (int i = 0; i < n-1; i++)
+    assert(find(eqs,i) == find(eqs,i+1)); // a spanning tree?
+  print("All tests passed!\n");
+  return 0;
+}

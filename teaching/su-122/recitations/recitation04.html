@@ -1,0 +1,229 @@
+<HTML>
+<TITLE>
+15-122 Principles of Imperative Computation - Recitation
+</TITLE>
+<BODY>
+<H1>15-122 Principles of Imperative Computation<BR>
+Recitation 4 - Fri Jan 21
+</H1>
+<P>
+<a href="#operators">Reviewing operators</a><br>
+<a href="#multiplication">Multiplication algorithm</a><br>
+<P>
+<a name="operators">
+<H2>Reviewing C0 operators</H2>
+<P>
+When you left shift an int by 1 bit, what is this equivalent to mathematically?
+<P>
+Since each 1 bit moves up one position, it represents the next highest power of 2,
+so it makes sense that shifting left 1 bit multiplies an int by 2.  But remember
+that this is modulo 2<sup>32</sup>.  For example, consider the value 122 represented in two's complement notation using 8 bits:
+<P>
+<PRE>
+binary         decimal equivalent
+01111010       122
+</PRE>
+<P>
+As we left shift one bit at a time, you will see that int does change sign depending on what is in the leftmost bit:
+<P>
+<PRE>
+binary         decimal equivalent
+01111010       +122
+11110100       -12  (Think: +122*2 = +244 which is equivalent to -12 using 8 bits)
+11101000       -24
+11010000       -48
+10100000       -96
+01000000       +64  (Think: -96*2 = -192 which is equivalent to +64 using 8 bits)
+10000000       -128 
+00000000       0
+</PRE>
+<P>
+When you shift right on bit position, you are dividing by 2 (using integer
+division, no remainder). Remember that when you shift an int right, the
+sign bit is duplicated.  For example, shifting the value +122 right one bit
+at a time yields:
+<P>
+<PRE>
+binary         decimal equivalent
+01111010       +122
+00111101       +61
+00011110       +30
+00001111       +15
+00000111       +7
+00000011       +3
+00000001       +1
+00000000       0
+00000000       0     (shifting right doesn't change anything anymore)
+00000000       0
+</PRE>
+<P>
+For negative numbers, remember that the sign bit duplicates when you shift right:
+<P>
+<PRE>
+binary         decimal equivalent
+10000110       -122
+11000011       -61
+11100001       -31   (not -30 as you might expect!)
+11110000       -16   (not -15 as you might expect!)
+11111000       -8
+11111100       -4
+11111110       -2
+11111111       -1
+11111111       -1    (shifting right doesn't change anything anymore)
+11111111       -1
+</PRE>
+<P>
+This shows that shifting right one bit is integer division by 2 
+as you probably have seen before as long as the
+value you're shifting is positive. For negative numbers,
+if you shift right and a 1 bit shifts off the right end,
+then the "rounding" is done toward -infinity, not toward 0.
+<P>
+<a name="multiplication">
+<H2>An example using invariants: Multiplication Algorithm</H2>
+<P>
+Consider the problem of multiplying two integers x and y and returning the result.
+The way we can approach this is by thinking about expressing one of the integers as the sum of a sequence of powers of 2. For example,
+<P>
+x * 37 = x * (32 + 4 + 1) = x * 32 + x * 4 + x * 1 
+= x * 2<sup>5</sup> + x * 2<sup>2</sup> + x * 2<sup>0</sup>
+<P>
+If we think about 37 in binary (shown with 8 bits here for simplicity): 
+<P>
+00100101
+<P>
+we see that there is a 1 for each power of 2 we need to use in our
+computation.  Starting with an overall result of 0,
+we see that the right most bit (representing 2<sup>0</sup>) is 1, 
+so we need to add x to our overall result. 
+If we shift 37 to the right one position, the next bit to consider
+is again in the rightmost position but it now represents 2<sup>1</sup>
+so we should shift x left one position to take this into account so if
+the rightmost bit is 1 again, we can add the correct x value to the
+result (that is, 2 * the original x). We repeat this process until
+we've processed all the bits in 37.
+<P>
+Here is a function that performs this computation:
+<P>
+<PRE>
+int mult(int x, int y)
+//@requires x >= 0 && y >= 0;
+//@ensures \result == x*y;
+{
+  int n = x; int k = y;
+  int res = 0;
+  while (n != 0)
+    //@loop_invariant __________________
+    { if ((k & 1) == 1) res = res + n;
+      k = k >> 1;
+      n = n << 1;
+    }
+  return res;
+}
+</PRE>
+<P>
+One thing you should notice is that we don't alter the values of x and y.
+Instead, we create local variables with copies of these values so we can
+alter them without changing the initial parameters. This is useful so we
+can use the initial parameters in our annotations and know that they
+represent the original values passed to the function.
+<P>
+Let's trace this with the example above to see how it works, with x = 2
+and y = 37.  Recall that <TT>k & 1</TT> determines the value of the last bit
+of k to determine if we add in y or not.  
+Let's assuming we're dealing with 8 bits values for simplicity (the results
+generalize to 32 bits easily):
+<P>
+<PRE>
+n      k      res
+2      37     0
+4      18     2
+8      9      2
+16     4      10
+32     2      10
+64     1      10
+-128   0      74
+0      0      74
+</PRE>
+<P>
+Based on this trace, we conjecture that the loop invariant is:
+<P>
+<PRE>
+x*y == k*n + res
+</PRE>
+<P>
+Looking at the loop invariant, it says that our current result plus k * n is 
+always equal to x * y. That is, if we stopped part way through the loop
+with some partial result, the remaining k and n multiplied together would
+complete the total product. 
+<P>
+Let's show that the invariant holds for this loop.
+<P>
+<PRE>
+   1. Before the loop condition is tested for the first time, 
+      k = x and n = y and res = 0:
+      x*y = k*n + res
+      x*y = x*y + 0
+      x*y = x*y
+   2. Assume x*y = k*n+res at the start of an iteration. 
+      We wish to show that x*y = k'*n' + res' at the end of that iteration
+      (just before the loop condition is tested again).
+      We consider two cases.
+      a. k is even, so k & 1 = 0.
+         Then k' = k>>1 = k/2 and n' = n*2 and res' = res.
+         Hence k'*n' + res' 
+             = (k/2)*n*2 + res 
+             = k*n+res 
+             = x*y.
+      b. k is odd, so k & 1 = 1.
+         Then k' = k>>1 = (k-1)/2 and n' = n*2 and res' = res + n.
+         Hence k'*n' + res'
+             = (k-1)/2*n*2 + res + n
+             = (k-1)*n + res + n
+             = k*n - n + res + n
+             = k*n+res 
+             = x*y
+      (So the loop invariant holds at the end of this iteration,
+       which means it also holds for the start of the next iteration
+       since the loop condition does not change the values of any variables.)
+</PRE>
+<P>
+Our reasoning show that the invariant holds for EVERY iteration, since we
+know it holds at the start of iteration #1. Step 2 above shows
+that if it holds for iteration #1, it must at the start of
+iteration #2. If it holds at the start of iteration #2, by step 2
+again, it must hold at the start of iteration #3, etc.
+<P>
+When reasoning with loop invariants, we 
+also need to show that the loop must terminate. That is, we could get into
+an infinite loop where the loop invariant is always true, but we'd never
+return a result from our computation.  For this example,
+after at most 32
+left shifts on n, n must be 0 causing the loop to terminate. This is because
+each left shift inserts a 0 into the right end of the integer and drops off
+the leftmost bit. After at most 32 shifts, the entire integer must be all 0's.
+<P>
+We're shown that the loop invariant is valid for the loop and that the loop 
+will terminate. 
+<P>
+Now, what do we know immediately after
+the loop terminates? We know the loop invariant is true (since the loop condition
+doesn't change any values in our function) and n == 0. Thus:
+<P>
+<PRE>
+    (x*y == k*n + res) && n == 0   ===>    x*y = res
+</PRE>
+<P>
+Since the only thing we do after the loop terminates is return the result, 
+we have shown that we will always return x*y as indicated by the postcondition.
+So one of the reasons to have a strong loop invariant is to be able to show
+that the result of the computation after the loop terminates is the 
+postcondition you're expecting from your function.
+<P>
+<I>Exercise:</I> Does this function work if x or y is negative?
+
+<HR>
+<I>written by Tom Cortina, 1/21/11</I>
+
+</BODY>
+</HTML>

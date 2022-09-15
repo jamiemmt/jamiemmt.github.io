@@ -1,0 +1,16 @@
+/* Stacks interface
+ * 15-122 Principles of Imperative Computation, Fall 2010
+ */
+
+/* Client-side interface */
+typedef string elem;
+
+/* Library-side interface */
+
+typedef struct stack* stack;
+bool stack_empty(stack S);	/* O(1) */
+stack stack_new();		/* O(1) */
+void push(stack S, elem e);	/* O(1) */
+elem pop(stack S)		/* O(1) */
+//@requires !stack_empty(S);
+  ;

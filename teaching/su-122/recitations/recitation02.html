@@ -1,0 +1,299 @@
+<HTML>
+<TITLE>
+15-122 Principles of Imperative Computation - Recitation
+</TITLE>
+<BODY>
+<H1>15-122 Principles of Imperative Computation<BR>
+Recitation 2 - Fri Jan 14
+</H1>
+<P>
+<a href="#website">Course website</a><br>
+<a href="#bboard">Bulletin Board</a><br>
+<a href="#invariants">Reasoning with Loop Invariants</a><br>
+<P>
+<a name="website">
+
+<H2>Course Website</H2>
+<P>
+Our course website is
+<a href="http://www.cs.cmu.edu/~jamiemmt/courses/15122-s11/">
+http://www.cs.cmu.edu/~jamiemmt/courses/15122-s11/</a>.
+<P>
+Look at the course website for assignments, schedule of topics, 
+notes from previous classes and recitations, and sample code
+completed in class. The website also has references for the
+C0 language and for the C0 libraries, along with additional
+resources you may need.
+<P>
+<a name="bboard">
+<H2>Bulletin Board</H2>
+<P>
+Remember that there is a bulletin board for this course so you can 
+ask general questions to the course staff and others in the class. 
+Please remember to use the bulletin board appropriately and do not 
+post homework answers or inappropriate messages.
+<P>
+To access the bulletin board, access your andrew mail using 
+SquirrelMail by going to <TT>webmail.andrew.cmu.edu</TT>. 
+Once you're there, click the Folders link and then go to the 
+Subscribe section. Highlight <TT>academic.cs.15-122</TT> 
+
+and click Subscribe. You should then see the bboard listed 
+in your folders on the left side of the webpage. You can read 
+messages and post messages just like you would for email.
+<P>
+If you want to post a new message, send email to 
+<TT>post+academic.cs.15-122@andrew.cmu.edu</TT>
+or if you want to reply to a message on the board, 
+use Reply All to send to the board and the person
+who posted that message.
+<P>
+<a name="invariants">
+<H2>Reasoning with Invariants</H2>
+<P>
+In class, we discussed how to implement a exponentiation function as follows:
+<P>
+<PRE>
+int fastpow (int x, int y)
+//@requires y >= 0;
+//@ensures \result == pow(x, y);
+{
+  int r = 1;
+  int b = x;
+  int e = y;
+  while (e > 0)
+    //@loop_invariant r * pow(b,e) == pow(x,y);
+    //@loop_invariant e >= 0;
+    {
+      if (e % 2 == 1) r = r * b;
+      b = b * b;
+      e = e / 2;
+    }
+  //@assert e == 0;
+  return r;
+}
+</PRE>
+<P>
+
+Recall that a loop invariant is a condition that is true immediately
+before a loop condition is tested, both before you enter the loop
+and at the end of each iteration (if the loop runs). 
+<P>
+Let's show that this function does return the correct result
+given its precondition (requires) and its loop invariants.
+<P>
+<OL>
+<LI>
+<B>Show that the loop invariants hold before the loop condition is
+tested for the first time.</B>
+<P>
+Just before the loop condition is tested for the first time, we know
+that r = 1, b = x, e = y, and y >= 0. 
+<P>
+Looking at the first invariant, we need to show
+<TT>r * pow(b,e) == pow(x,y)</TT>.
+We prove this by transforming the left side into the right side
+using what we know to be true about the values of variables
+and mathematical identities.
+
+<P>
+<PRE>
+r * pow(b,e) == 1 * pow(x,y)    (by substitution)	
+1 * pow(x,y) == pow(x,y)        (1 * x = x (multiplicative identity))
+</PRE>
+<P>
+
+The second invariant we need to show is <TT> e >= 0</TT>.  For this proof
+we use the information we know about <TT>y</TT> from the precondition
+<P>
+<PRE>
+y >= 0  (@REQUIRES)
+e >= 0  (since e = y)
+</PRE>
+<P>
+<LI>
+<B> Show that the loop invariants hold just before the loop condition is tested
+after each iteration. Equivalently: if the loop invariants hold at the start
+of an iteration, show that they hold at the end of that iteration.</B> (Consider
+only one iteration or pass through the loop, not the entire execution of the loop.)
+<P>
+Looking at the first invariant, assume at the start of an iteration that:
+<P>
+<PRE>
+r * pow(b,e) == pow(x,y)
+</PRE>
+
+<P>
+There are two cases to consider here. 
+<OL>
+<LI>
+Consider the case where <TT>e</TT> is even. If <TT>e</TT> is even, we can 
+say that <TT>e = 2f</TT> for some integer <TT>f</TT>.  (That is, <TT>e</TT>
+
+is two times some other integer for it to be even.) 
+<P>
+Show that <TT>r' * pow(b',e') == pow(x',y')</TT> where variables with
+primes (') indicate the new values of the variables at the end of that 
+iteration. 
+<P>
+Since <TT>e</TT> is even, the <TT>if</TT> statement does not change <TT>r</TT>
+so at the end of the iteration, we know that:
+
+<P>
+<PRE>
+r' = r
+b' = b * b
+e' = e / 2 = 2f / 2 = f
+x' = x
+y' = y
+</PRE>
+<P>
+Now we show that the invariant after the loop runs is true after one iteration
+if we assume it is true before that iteration runs:
+<P>
+<PRE>
+r' * pow(b',e') == r * pow(b*b,f)    (by substitution)
+r * pow(b*b,f)  == r * pow(b,2f)     (by definition of a^b)
+r * pow(b,2f) == r * pow(b,e)        (by substitution)
+r * pow(b,e) == pow(x,y)             (from loop invariant)
+pow(x,y) = pow(x',y')                (by substitution)
+</PRE>
+<P>
+What we're showing is that the invariant after the iteration is true as long
+as the invariant holds before that iteration.
+<P>
+Looking at the other invariant (when <TT>e</TT> is even), we need to show
+that <TT>e' >= 0</TT> assuming <TT>e >= 0</TT>.
+
+<P>
+<PRE>
+e >= 0    (from loop invariant)
+2f >= 0   (by substitution)
+f >= 0    (by definition of integer division)
+e' >= 0   (by substitution)
+</PRE>
+<P>
+So we've shown that the loop invariants hold at the end of an iteration if they
+hold at the start of an iteration and <TT>e</TT> is even.
+<LI>
+Consider the case where <TT>e</TT> is odd. If <TT>e</TT> is odd, we can
+say that <TT>e = 2f + 1</TT> for some integer <TT>f</TT>.  (That is, <TT>e</TT>
+
+is two times some other integer plus 1 for it to be odd.)
+<P>
+Show that <TT>r' * pow(b',e') == pow(x',y')</TT>.
+Since <TT>e</TT> is odd, the <TT>if</TT> statement does change <TT>r</TT>
+this time so at the end of the iteration, we know that:
+<P>
+<PRE>
+r' = r * b
+b' = b * b
+e' = e / 2 = (2f + 1)/ 2 = f     (WHY?)
+x' = x
+y' = y
+
+</PRE>
+<P>
+Now we show that the invariant after the loop runs is true after one iteration
+if we assume it is true before that iteration runs:
+<P>
+<PRE>
+r' * pow(b',e') == r * b * pow(b*b,f)    (by substitution)
+r * b * pow(b*b,f)  == r * b * pow(b,2f) (by definition of a^b)
+r * b * pow(b,2f) == r * pow(b,2f+1)     (by definition of a^b)
+r * pow(b,2f+1) == r * pow(b,e)          (by substitution)
+r * pow(b,e) == pow(x,y)                 (from loop invariant)
+pow(x,y) = pow(x',y')                    (by substitution)
+</PRE>
+<P>
+We also have to show that <TT>e' >= 0</TT> if <TT>e >= 0</TT> when <TT>e</TT>
+
+is odd.
+<P>
+<PRE>
+e >= 0      (from loop invariant)
+2f+1 >= 0   (by substitution)
+f >= 0      (by definition of integer division)
+e' >= 0     (by substitution)
+</PRE>
+<P>
+So we've shown that the loop invariants hold at the end of an iteration if they
+hold at the start of an iteration and <TT>e</TT> is odd.
+</OL>
+<P>
+Before we move on, what have we shown so far? The invariants hold just before
+you enter the loop. They also hold at the end of each iteration if they hold at 
+the start of each iteration. This implies that the invariants hold at the
+end of the first iteration (since the loop condition doesn't change anything
+in the invariant). But since the invariants hold at the end of the first iteration,
+they must hold at the start of the second iteration (again since the loop
+condition doesn't change any variable values). Thus, they must also hold
+at the end of the second iteration, and so on. What we've shown is that the
+loop invariant holds at the start and end of EVERY iteration.
+<P>
+<LI>
+<B>
+Show that if the loop terminates, we achieve our desired postcondition (given
+in the <TT>ensures</TT> annotation).
+
+</B>
+<P>
+If the loop terminates, the loop invariants 
+<P>
+<PRE>
+r * pow(b,e) == pow(x,y)  &&  e >= 0
+</PRE>
+<P>
+should still hold (why?). 
+What else holds?  The negation of the loop condition must also be true.
+That is, <TT>!(e > 0) == e <= 0</TT>.
+What can we infer from this?
+<P>
+<PRE>
+r * pow(b,e) == pow(x,y) && e >= 0 && e <= 0
+r * pow(b,e) == pow(x,y) && e == 0
+r * pow(b,0) == pow(x,y)
+r * 1 == pow(x,y)
+r == pow(x,y)
+
+</PRE>
+<P>
+This says that immediately after the loop terminates, <TT>r</TT> is equal to
+<TT>pow(x,y)</TT>. But this is exactly what the function returns as specified
+by our <TT>ensures</TT> annotation, and the function performs no other operations
+after the loop terminates (other than returning the answer), so we've shown that
+the function does return the correct answer... <B>if the loop terminates</B>.
+<P>
+<LI><B>Argue that the loop terminates.</B>
+<P>
+
+
+To prove that the function terminates, we need to convince ourselves
+that <TT>e <= 0</TT> after a finite number of loop iterations.  One way
+to show this is to prove that <TT>e</TT> is <I>strictly decreasing</I>
+on each execution of the loop.  In this example, <TT>e</TT> is divided by 2
+each time through the loop, so we need to prove <TT>e/2 < e</TT>.  Since
+integer division rounds down, we know this is true.  Formally, we can prove
+this by analyzing the even and odd cases:
+<P>
+In either case, we know that we entered the loop, so <TT>e > 0</TT>
+<OL>
+<LI>
+<TT>e</TT> is even, so <TT>e = 2f</TT> for <TT>f < e</TT> (strictly greater
+because <TT>e > 0</TT>).  Then <TT>e/2 = 2f/2 = f < e</TT>.
+<LI>
+<TT>e</TT> is odd, so <TT>e = 2f+1</TT> for <TT>f < e</TT> (strictly greater
+because <TT>e > 0</TT>).  Then <TT>e/2 = (2f+1)/2 = f < e</TT>.
+</OL>
+
+<P>
+</OL>
+So we've shown that given the precondition, we can use
+the loop invariants to show that the postcondition follows and that
+the function is correct.
+
+<HR>
+<I>written by Tom Cortina, 1/14/11</I>
+
+</BODY>
+</HTML>

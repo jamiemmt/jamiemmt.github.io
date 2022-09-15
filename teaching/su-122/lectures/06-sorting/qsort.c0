@@ -1,0 +1,79 @@
+/* Quicksort
+ * 15-122 Principles of Imperative Computation, Spring 2011
+ * Frank Pfenning
+ * main qsort function and interface to partition function
+ */
+
+bool is_sorted(int[] A, int lower, int upper)
+//@requires 0 <= lower && lower <= upper && upper <= \length(A);
+{ int i;
+  for (i = lower; i < upper-1; i++)
+    //@loop_invariant lower == upper || (lower <= i && i <= upper-1);
+    if (!(A[i] <= A[i+1])) return false;
+  return true;
+}
+
+bool leq(int x, int[] A, int lower, int upper)
+//@requires 0 <= lower && lower <= upper && upper <= \length(A);
+{ 
+  for (int i = lower; i < upper; i++)
+    //@loop_invariant lower <= i && i <= upper;
+    if (!(x <= A[i])) return false;
+  return true;
+}
+
+bool geq(int x, int[] A, int lower, int upper)
+//@requires 0 <= lower && lower <= upper && upper <= \length(A);
+{ 
+  for (int i = lower; i < upper; i++)
+    //@loop_invariant lower <= i && i <= upper;
+    if (!(x >= A[i])) return false;
+  return true;
+}
+
+bool gt(int x, int[] A, int lower, int upper)
+//@requires 0 <= lower && lower <= upper && upper <= \length(A);
+{ 
+  for (int i = lower; i < upper; i++)
+    //@loop_invariant lower <= i && i <= upper;
+    if (!(x > A[i])) return false;
+  return true;
+}
+
+bool lt(int x, int[] A, int lower, int upper)
+//@requires 0 <= lower && lower <= upper && upper <= \length(A);
+{ 
+  for (int i = lower; i < upper; i++)
+    //@loop_invariant lower <= i && i <= upper;
+    if (!(x < A[i])) return false;
+  return true;
+}
+
+void swap(int[] A, int i, int j)
+//@requires 0 <= i && i < \length(A);
+//@requires 0 <= j && j < \length(A);
+//@ensures A[i] == \old(A[j]) && A[j] == \old(A[i]);
+{ int tmp = A[i];
+  A[i] = A[j];
+  A[j] = tmp;
+}
+
+int partition(int[] A, int lower, int upper)
+//@requires 0 <= lower && lower < upper && upper <= \length(A);
+//@ensures lower <= \result && \result < upper;
+//@ensures gt(A[\result], A, lower, \result);
+//@ensures leq(A[\result], A, \result+1, upper);
+/* to be written in the next lecture */
+  ;
+
+void qsort(int[] A, int lower, int upper)
+//@requires 0 <= lower && lower <= upper && upper <= \length(A);
+//@ensures is_sorted(A, lower, upper);
+/* can you prove this correct using only the contract for partition? */
+{
+  if (upper-lower <= 1) return;
+  int i = partition(A, lower, upper);
+  qsort(A, lower, i);
+  qsort(A, i+1, upper);
+  return;
+}

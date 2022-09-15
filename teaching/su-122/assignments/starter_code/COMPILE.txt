@@ -1,0 +1,17 @@
+Compile command:
+
+cc0 path-stack.c0 elem.c0 lists.c0 queue.c0 readfile.c0 path-util.c0 path-search.c0 path-main.c0 -d
+
+
+DO NOT MODIFY
+path-stack.c0
+elem.c0
+lists.c0
+queue.c0
+readfile.c0
+
+
+DO MODIFY
+path-util.c0
+path-search.c0
+path-main.c0

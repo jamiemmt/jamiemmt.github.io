@@ -1,0 +1,45 @@
+/* Linear and binary search
+ * 15-122 Principle of Imperative Computation, Spring 2010
+ * Frank Pfenning
+ */
+
+bool is_sorted(int[] A, int n)
+//@requires 0 <= n && n <= \length(A);
+{
+  for (int i = 0; i < n-1; i++)
+    //@loop_invariant n == 0 || (0 <= i && i <= n-1);
+    {
+      if (!(A[i] <= A[i+1])) return false;
+    }
+  return true;
+}
+
+bool is_in(int x, int[] A, int n)
+//@requires 0 <= n && n <= \length(A);
+{
+  for (int i = 0; i < n; i++)
+    //@loop_invariant 0 <= i && i <= n;
+    if (A[i] == x) return true;
+  return false;
+}
+
+int linsearch(int x, int[] A, int n)
+//@requires 0 <= n && n <= \length(A);
+//@requires is_sorted(A, n);
+//@ensures -1 <= \result && \result < n;
+/*@ensures (-1 == \result && !is_in(x, A, n))
+        || ((0 <= \result && \result < n) && A[\result] == x);
+  @*/
+{
+  for (int i = 0; i < n; i++)
+    //@loop_invariant 0 <= i && i <= n;
+    /* This loop invariant is too weak to prove
+     * the postcondition if the loop exits normally.
+     * What is missing?
+     */
+    {
+      if (A[i] == x) return i;
+      else if (A[i] > x) return -1;
+    }
+  return -1;
+}

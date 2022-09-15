@@ -1,0 +1,54 @@
+#use <string>
+
+/* holds a word list and the count */
+struct words_record {
+  int count;
+  string[] wordlist;
+};
+
+typedef struct words_record* word_rec;
+
+int word_distance(string s1, string s2);
+
+
+word_rec n_letter_apart(string target, string[] dictionary, int dict_length, int n){
+  // asserts and loop invariants
+  return NULL;
+}
+
+
+
+word_rec find_words_of_length_n(string[] dictionary, int dict_length, int n){
+  // asserts and loop invariants 
+  return NULL;
+}
+
+
+int word_distance(string s1,string s2)
+/* your annotations goes here */  
+{
+  // asserts and loop invariants
+	return 0;
+}
+
+int count_words(string[] dictionary,int dict_length,int n)
+/* your annotations */
+{
+  // asserts and loop invarinats
+	return 0;
+}
+
+bool check_dictionary(string[] dictionary,int dict_length,int n)
+// your annoations goes here 
+{
+  // asserts and loop invariants
+	return false;
+}
+
+void copy_words(string[] dictionary,int dict_length,string[] new_dict,int new_length,int n)
+// your annotations goes here
+{
+	
+  // asserts and loop invariants
+}
+

@@ -1,0 +1,189 @@
+<HTML>
+<TITLE>
+15-122 Principles of Imperative Computation - Recitation
+</TITLE>
+<BODY>
+<H1>15-122 Principles of Imperative Computation<BR>
+Recitation 6 - Fri Jan 28
+</H1>
+<P>
+<a href="#binsearch">Reviewing binary search</a><br>
+<a href="#invariant">Analyzing the invariant</a><br>
+<P>
+<a name="binsearch">
+<H2>Reviewing binary search</H2>
+<P>
+Recall the code for binary search given in lecture:
+<P>
+<PRE>
+int binsearch(int x, int[] A, int n)
+//@requires 0 <= n && n <= \length(A);
+//@requires is_sorted(A, n);
+/*@ensures (-1 == \result && !is_in(x, A, n))
+        || ((0 <= \result && \result < n) && A[\result] == x);
+  @*/
+{
+  int lower = 0;
+  int upper = n;
+  while (lower < upper)
+    //@loop_invariant 0 <= lower && lower <= upper && upper <= n;
+    //@loop_invariant (lower == 0 || A[lower-1] < x);
+    //@loop_invariant (upper == n || A[upper] > x);
+    {
+      int mid = lower + (upper-lower)/2;
+      //@assert lower <= mid && mid < upper;
+      if (A[mid] == x) 
+           return mid;
+      else if (A[mid] > x) 
+           upper = mid;
+      else //@assert A[mid] < x;
+           lower = mid+1;
+    }
+  return -1;
+}
+</PRE>
+<P>
+Note in the postcondition (<TT>ensures</TT>) that if <TT>A[\result]==x</TT>,
+we can't also say that <TT>!is_in(x, A, \result)</TT> like we could using 
+linear search. Why? Remember that there can be duplicates in an array so
+there could be more than one value that matches <TT>x</TT> in the array.
+Since binary search does not search linearly from the beginning of the 
+array, the first match it encounters (if any) might not be the <I>first</I>
+occurrence of <TT>x</TT> starting from the beginning of the array.
+<P>
+If an array has <I>n</I> integers in it, how many times will the loop
+iterate in the worst case? If you examine the binary search algorithm,
+you see that after each iteration, our search range (from <TT>lower</TT>
+to <TT>upper</TT>-1) halves.  So how many times can we divide <TT>n</TT> 
+by 2 before we reach a search range of size 1?  Call this <TT>i</TT>.
+We want <I>n</I>/2<SUP><I>i</I></SUP> to be 1. So <I>n</I>=2<SUP><I>i</I></SUP>
+and <I>i</I> = log<SUB>2</SUB><I>n</I>. This is a <I>logarithmic</I> 
+algorithm since the execution time depends on the log of the number
+of items in the array. Using Big O notation, we'd say that binary search
+is O(log n).
+<P>
+Remember that we can only use binary search if the data in the array
+is already sorted. If it wasn't sorted, would it pay to use binary
+search to find a data value in the array? If you need to find a
+sequence of values, then it pays to sort first, and then use
+binary search which is faster in the worst case than linear search.
+But if you only have to look for one element and never look at the
+data again, it doesn't pay to sort, since it has been shown that sorts
+that depend on comparing two items at a time can't do better than
+O(n log n) in the worst case. Doing a simple linear search (without sorting)
+if you only need to search for only one item would be faster
+in the worst case, but not by much since the difference between n
+and n log n isn't that significant due to the log n factor. Remember that
+as n increases, log n grows very slowly.
+<P>
+
+<a name="invariant">
+<H2>Analyzing the invariants</H2>
+<P>
+Let's analyze each of the invariants to see that they hold for the loop
+in binary search.
+<P>
+Clearly, the invariants are true just before the loop condition is 
+tested for the first time:
+<P>
+<PRE>
+Know: lower = 0, upper = n, and 0 <= n (from precondition).
+
+Invariants:
+
+0 <= lower && lower <= upper && upper <= n
+0 <= 0     &&    0  <=  n    &&   n   <= n
+ true      &&     true       &&    true     = true
+
+lower == 0 || A[lower-1] < x
+0 == 0     || A[lower-1] < x
+true, using short circuit evaluation
+
+upper == n || A[upper] > x
+n == n     || A[upper] > x
+true, using short circuit evaluation
+</PRE>
+<P>
+Now, if the invariants are true at the start of an iteration, are they
+true at the end of an iteration?
+<P>
+Assume:
+0 <= lower && lower <= upper && upper <= n;
+(lower == 0 || A[lower-1] < x);
+(upper == n || A[upper] > x);
+
+Know:
+mid' = lower + (upper-lower)/2;
+
+Show:
+0 <= lower' && lower' <= upper' && upper' <= n;
+(lower' == 0 || A[lower'-1] < x);
+(upper' == n || A[upper'] > x);
+</PRE>
+<P>
+<I>Case 1</I>: <TT>A[mid] > x</TT>
+<P>
+<PRE>
+Also know:  
+A[mid'] > x
+upper' = mid'
+lower' = lower
+lower <= mid' && mid' < upper
+
+0 <= lower' && lower' <= upper' && upper' <= n;
+0 <= lower  && lower  <= mid'   && mid' <= n;
+true        &&    true          && true        (since mid' < upper <= n)
+
+lower' == 0 || A[lower'-1] < x
+Since lower doesn't change in this iteration:
+lower == 0 || A[lower-1] < x which is true by our assumption.
+
+upper' == n || A[upper'] > x
+mid' == n || A[mid'] > x == true since we only have to satisfy one condition
+in an or condition to get true as a result
+</PRE>
+<P>
+<I>Exercise</I>: <I>Case 2</I>: Show that the invariants hold if A[mid] < x.
+<P>
+Assuming the invariants hold, how can we show that we get the desired
+postcondition as specified?  
+<P>
+Case 1: x is not in the array
+<P>
+This means that when the loop terminates and returns -1, we know that
+lower >= upper. But the loop invariant says lower <= upper also. 
+Thus, lower == upper. So plugging into the other invariants:
+<P>
+<PRE>
+(lower == 0 || A[lower-1 < x]) && (upper == n || A[upper] > x)
+(upper == 0 || A[upper-1 < x]) && (upper == n || A[upper] > x)
+If upper == 0, then A[0] > x which means x is not in the array
+(since the array is sorted).
+If upper == n, then A[n-1] < x which means x is not in the array (same reason).
+If upper is not equal to 0 or n, then:
+A[upper-1 < x] && A[upper] > x
+Since the array is sorted, x is not in the array.
+So we return -1 correctly.
+</PRE>
+<P>
+Case 2: x is in the array
+<P>
+If x is in the array, A[mid] == x and we return mid, 
+satisfying A[\result] == x. Also, we should make sure mid
+satisfies (0 <= \result && \result < n). This can be shown
+since right before we return mid, we know:
+<P>
+<PRE>
+0 <= lower && lower <= upper && upper <= n
+and
+lower <= mid && mid < upper
+</PRE>
+<P>
+So <TT>mid</TT> must also be in the range [0,n).
+<P>
+
+<HR>
+<I>written by Tom Cortina, 1/27/11</I>
+
+</BODY>
+</HTML>

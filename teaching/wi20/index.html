@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>CSE 599</title>
+  <meta name="description" content="Foundations of Fairness in  Machine Learning">
+
+  <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400italic,600' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/main.css">
+
+</head>
+
+  <body>
+    <header class="site-header">
+
+<div class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand">CSE 599: Foundations of Fairness in  Machine Learning</a>
+    </div>
+    <div class="collapse navbar-collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a>18wi</a></li>
+      </ul>
+    </div><!-- /.nav-collapse -->
+  </div><!-- /.container -->
+</div><!-- /.navbar -->
+
+</header>
+
+
+<div class="container">
+
+<div class="panel-footer clearfix">
+<h1>CSE 599,  Winter 2020<br> Foundations of Fairness in Machine Learning </h1>
+
+<p class="lead">Lecture: Wed, Fri 11:00-12:20  Room: COURSE WILL MEET IN ROOM
+CSE2 387 (GATES CENTER)  </p>
+<p class="lead">Instructor: <A HREF="http://jamiemorgenstern.com">Professor Jamie Morgenstern</A></p>
+
+<p class="lead">Instructor office hours: TBD</p>
+</div>
+<hr>
+
+<h2>About the Course and Prerequisites</h2>
+<p>
+The standard approach to machine learning uses a training set of labeled examples to learn a prediction rule that will predict the labels of new examples. Collecting such training sets can be expensive and time-consuming. This course will explore methods that leverage already-collected data to guide future measurements, in a closed loop, to best serve the task at hand. We focus on two paradigms: i) in pure-exploration we desire algorithms that identify or learn a good model using as few measurements as possible (e.g., classification, drug discovery, science), and ii) in regret minimization we desire algorithms that balance taking measurements to learn a model with taking measurements to exploit the model to obtain high reward outcomes (e.g., content recommendation, medical treatment design, ad-serving).</p>
+
+<p>The literature on adaptive methods for machine learning has exploded in the past few years and can be overwhelming.
+  This course will classify different adaptive machine learning problems by characteristics such as the hypothesis space, the available actions, the measurement model, and the available side information.
+  We will identify general adaptive strategies and cover common proof techniques.
+</p>
+
+<p>Tentative list of topics (a (!) indicates that the topic may not be covered):
+  <ul>
+    <li>Online learning</li>
+    <ul>
+      <li>Exponential weights for finite and continuous action spaces (e.g., [Bubeck Ch. 2])</li>
+      <li>Incremental gradient descent (e.g., [Bubeck Ch. 4])</li>
+    </ul>
+    <li>Stochastic Multi-armed Bandits</li>
+    <ul>
+      <li>Regret minimization (e.g., UCB strategy of [BubeckCesaBianchi Ch. 2], Thompson Sampling [RussoEtAl])</li>
+      <li>Pure Exploration (e.g., [JamiesonNowak], [SimchowitzEtAl], [KarninKorenSomekh])</li>
+    </ul>
+    <li>Non-stochastic Multi-armed Bandits</li>
+    <ul>
+      <li>Regret minimization (e.g., EXP3 strategy of [SzepesvariLattimore <i>Adversarial Bandits</i>])</li>
+      <li>Pure Exploration (e.g., [LiEtAl])</li>
+    </ul>
+    <li>Regression</li>
+    <ul>
+      <li>Linear experimental design (e.g., [RaskuttiMahoney], [Pukelsheim])</li>
+      <li>Pure-Exploration for linear bandits (e.g., [SoareLazaricMunos])</li>
+      <li>Non-linear active regression/MLE (e.g., [CastroWillettNowak], [ChaudhuriMykland])
+    </ul>
+    <li>Stochastic Linear Bandits</li>
+    <ul>
+      <li>Regret minimization for linear bandits (e.g., [AbbasiyadkoriEtAl])</li>
+      <li>Bayesian methods: Thompson Sampling, Information-directed sampling (e.g., [RussoEtAl], [RussoVanroy])</li>
+      <li>Contextual Bandits (e.g., [BubeckCesaBianchi Ch. 4], [LiChuEtAl])</li>
+    </ul>
+    <li>Continuous Optimization with Bandit feedback</li>
+    <ul>
+      <li>(Non)-Convex optimization (e.g., [ConnEtAl], [FlaxmanKalaiMcmahan], [BubeckEldanLee])</li>
+      <li>Gaussian Process Optimization (e.g., [SrinivasEtAl])</li>
+    </ul>
+    <li>Binary classification</li>
+    <ul>
+      <li>Streaming, disagreement-based methods (e.g., [Dasgupta], [DasguptaHsuMonteleoni])</li>
+      <li>Pool-based, greedy information gain (e.g., [Dasgupta2], [Nowak])</li>
+      <li>Connection to pure Exploration for combinatorial bandits (e.g., [CaoKrishnamurthy])</li>
+    </ul>
+    <li>Reinforcement Learning, Markov Decision Processes</li>
+    <ul>
+      <li>Discrete state spaces (e.g., [Szepesvari])</li>
+      <li>Monte Carlo Tree Search (e.g., [KocsisSzepesvari])</li>
+      <li>Linear dynamics, LQG (e.g., [AbbasiyadkoriSzepesvari], [DeanEtAl])</li>
+    </ul>
+    <li>(!) Non-stochastic Bandits with side information</li>
+    <ul>
+      <li>Regret minimization for combinatorial optimization (e.g., [BubeckCseaBianchi])</li>
+      <li>Contextual Bandits (e.g., [BubeckCesaBianchi])</li>
+    </ul>
+    <li>(!) Lower Bounds</li>
+    <ul>
+      <li>Regression, Classification, Optimization (e.g., [CastroNowak], [Tsybakov Ch. 2])</li>
+      <li>Bandits (e.g., [BubeckCesaBianchi], [KaufmannEtAl], [SimchowitzEtAl])
+    </ul>
+  </ul>
+</p>
+
+<p>For more, see the resources in the class materials.</p>
+
+ <p>Prerequisites: The course will assume introductory machine learning (e.g., CSE 546) and maturity in topics like linear algebra, statistics, and calculus. The course will be analysis heavy, with a focus on methods that work well in practice.</p>
+
+<h2>Class materials</h2>
+<p>There will not be a textbook for the course.
+Our discussion will be guided by papers, monographs, and lecture notes that are available online.
+An incomplete list that will grow:</p>
+
+  <!-- <li><a href="https://arxiv.org/pdf/1210.1136.pdf">Kullback-Leibler upper confidence bounds for optimal sequ
+
+</ul>
+<br>
+<!-- <hr> -->
+
+
+<h2>Discussion Forum and Email Communication</h2>
+<p>
+  There will be a Slack channel (first day of class). This is your first resource for questions. For private or confidential questions email the instructor.
+</p>
+
+<h2>Grading and Evaluation</h2>
+<p>Your grade will be based on scribing and potentially presenting a subset of a single lecture (e.g., a technical proof in the work following an overview by the instructor).
+You are expected to prepare for the lecture you are assigned to well before the lecture occurs by reading and understanding not only the assigned papers but supporting materials and concepts as well (i.e. if the paper uses a lemma from a different paper, you should understand that lemma and where it comes from).
+Scribing a lecture means summarizing the assigned papers and the lecture itself (with main theorems and proofs) as well as how this work fits into the context of the class so far and why it matters (e.g., linear bandits is a multi-armed bandit game with a given feature vector, a setting with applications to X, Y, Z).
+You are expected to put several hours into preparing these notes, a mere summary of what was presented in lecture without context or applications is unacceptable.
+You must come to the instructor's office hours (or by appointment) days preceding the lecture to discuss the plan for that lecture presentation and notes.
+Instructions will be sent out on how to submit your preferences over lectures -- the plan is to have each innermost bullet point be a single lecture.
+</p>
+
+<p>Scribe notes should be prepared using the Latex <a href="resources/template.tex">template</a>. The final notes should be turned in within a few days following lecture with the understanding that the majority of the notes should be completed before lecture.</p>
+
+
+<h2>Schedule</h2>
+<ul>
+  <li> Lecture 1: Jan. 6</li>
+  <ul>
+    <li> Welcome, logistics, overview of course topics</li>
+    <li> </li>
+  </ul>
+
+  <li> Lecture 2: Jan. 8</li>
+  <ul>
+    <li> </li>
+    <li> </li>
+    <ul>
+      <li>Reading: </li>
+      <li>Concepts: </li>
+      <li>Examples: </li>
+      <li>Characteristics:</li>
+    </ul>
+ <!--  <li>Notes: <a href="resources/lecture2/lecture2.pdf">Lecture notes</a></li> -->
+  </ul>
+
+ <!--  <i> Lecture 3: Jan. 10</li>
+  <ul>
+    <li> Stochastic Multi-armed bandits, regret minimization</li>
+    <ul>
+      <li>Reading: [BubeckCesaBianchi Chapter 1, 2.1-2.2], [Duchi Sections 1-2] (or [BoucheronEtAl Ch. 2]) </li>
+      <li>Techniques: Chernoff Bound, Hoeffding's inequality</li>
+      <li>Algorithms: UCB1, Thompson Sampling</li>
+      <li>Examples: Explore versus exploit different treatments for patients</li>
+      <li>Characteristics: bandit feedback, stochastic, regret-minimization, finite action space</li>
+    </ul>
+    <li>Notes: <a href="resources/lecture3/lecture3.pdf">Lecture notes</a></li>
+  </ul>
+
+  <li> Lecture 4: Jan. 12</li>
+  <ul>
+    <li> Stochastic Multi-armed bandits, pure exploration</li>
+    <ul>
+      <li>Reading: [JamiesonNowak], [Simchowitz Sec. 4], [KarninKorenSomekh Sec. 4]</li>
+      <li>Techniques: Law of the Iterated Logarithm (LIL), top-k identification in fixed confidence and fixed budget settings</li>
+      <li>Algorithms: Successive Elimination, LUCB++, Successive Halving</li>
+      <li>Examples: Caption contest: find the 3 best captions using crowdsourced votes</li>
+      <li>Characteristics: bandit feedback, stochastic, pure-exploration, finite action space</li>
+    </ul>
+    <li>Notes: <a href="resources/lecture4/lecture4.pdf">Lecture notes</a></li>
+  </ul>
+
+  <li> Lecture 5: Jan. 17</li>
+  <ul>
+    <li> Non-stochastic Multi-armed bandits, regret minimization</li>
+    <ul>
+      <li>Reading: [SzepesvariLattimore <i>Adversarial Bandits</i>]</li>
+      <li>Techniques: Importance Sampling</li>
+      <li>Algorithms: EXP3, EXP3.P</li>
+      <li>Examples: Planning your commute: train, bus, drive, or walk?</li>
+      <li>Characteristics: bandit feedback, non-stochastic, regret-minimization, finite action space</li>
+    </ul>
+    <li>Notes: <a href="resources/lecture5/lecture5.pdf">Lecture notes</a></li>
+  </ul>
+
+  <li> Lecture 6: Jan. 19</li>
+  <ul>
+    <li> Non-stochastic Multi-armed bandits, pure exploration</li>
+    <ul>
+      <li>Reading: [LiEtAl]</li>
+      <li>Techniques: Infinite-armed bandits</li>
+      <li>Algorithms: Successive Halving, Hyperband</li>
+      <li>Examples: Non-convex optimization with random restarts, hyperparameter tuning</li>
+      <li>Characteristics: bandit feedback, non-stochastic, pure exploration, infinite action space</li>
+    </ul>
+    <li>Notes: <a href="resources/lecture6/lecture6.pdf">Lecture notes</a></li>
+  </ul>
+
+  <li> Lecture 7: Jan. 24</li>
+  <ul>
+    <li> Linear regression, linear sequential experimental design</li>
+    <ul>
+      <li>Reading: [RaskuttiMahoney], <a href="https://en.wikipedia.org/wiki/Optimal_design">Optimal Design</a>, [SoareLazaricMunos]</li>
+      <li>Techniques: Leverage scores, linear optimal experimental design</li>
+      <li>Algorithms: Least squares regression, best-arm identification for linear bandits</li>
+      <li>Examples: Science, search problems</li>
+      <li>Characteristics: stochastic and adversarial, linear least squares, stochastic pure-exploration, finite action space with side information</li>
+    </ul>
+    <li>Notes: <a href="resources/lecture7/lecture7.pdf">Lecture notes</a></li>
+  </ul>
+
+  <li> Lecture 8: Jan. 26</li>
+  <ul>
+    <li> Nonlinear sequential experimental design</li>
+    <ul>
+      <li>Reading: [ChaudhuriMykland], [ChaudhuriKakadeEtAl]</li>
+      <li>Techniques: Maximum likelihood estimation(MLE), Fisher information, Laplace approximation</li>
+      <li>Algorithms: Sequential MLE with feedback</li>
+      <li>Examples: Science, search problems, classification, regression</li>
+      <li>Characteristics: stochastic pure-exploration, (in)finite action space with side information</li>
+    </ul>
+    <li>Notes: <a href="resources/lecture8/lecture8.pdf">Lecture notes</a></li>
+  </ul>
+
+  <li> Lecture 9: Jan. 31</li>
+  <ul>
+    <li> Linear Bandits, Thompson Sampling</li>
+    <ul>
+      <li>Reading: [AbbasiyadkoriEtAl]</li>
+      <li>Techniques: Confidence ellipsoids for linear predictors</li>
+      <li>Algorithms: Linear bandits</li>
+      <li>Examples: Path routing with edge weight feedback, recommendation systems</li>
+      <li>Characteristics: bandit feedback, stochastic, regret-minimization, (in)finite action space with side information</li>
+    </ul>
+    <li>Notes: <a href="resources/lecture9/lecture9.pdf">Lecture notes</a></li>
+  </ul>
+
+  <li> Lecture 10: Feb. 2</li>
+  <ul>
+    <li> Contextual Bandits</li>
+    <ul>
+      <li>Reading: [LiChuEtAl], [BubeckCesaBianchi Ch. 4], [LangfordZhang]</li>
+      <li>Techniques: Confidence ellipsoids for linear predictors, Bayesian posterior sampling</li>
+      <li>Algorithms: EXP4, LinUCB, tau-Greedy</li>
+      <li>Examples: recommending articles to users</li>
+      <li>Characteristics: bandit feedback, adversarial, linear, exponential weights</li>
+    </ul>
+    <li>Notes: <a href="resources/lecture10/lecture10.pdf">Lecture notes</a></li>
+  </ul>
+
+  <li> Lecture 11: Feb. 7</li>
+  <ul>
+    <li> Convex optimization with bandit feedback</li>
+    <ul>
+      <li>Reading: [FlaxmanKalaiMcmahan], [BubeckEldanLee]</li>
+      <li>Techniques: One-point gradient estimation</li>
+      <li>Algorithms: GP-UCB, Thompson Sampling</li>
+      <li>Examples: Recommendation systems over continuous spaces</li>
+      <li>Characteristics: bandit feedback, stochastic, regret-minimization, (in)finite action space with metric space</li>
+    </ul>
+    <li>Notes: TBD</li>
+  </ul>
+
+  <li> Lecture 12: Feb. 9</li>
+  <ul>
+    <li> Bayesian Bandits</li>
+    <ul>
+      <li>Reading: [RussoEtAl]</li>
+      <li>Techniques: Posterior inference, Bayesian posterior sampling</li>
+      <li>Algorithms: Thompson Sampling</li>
+      <li>Examples: Maximize click through rate with known dependencies</li>
+      <li>Characteristics: bandit feedback, stochastic, regret-minimization, (in)finite action space with metric space</li>
+    </ul>
+  </ul>
+
+  <li> Lecture 13: Feb. 14</li>
+  <ul>
+    <li> Kernelized and Gaussian Process Bandits</li>
+    <ul>
+      <li>Reading: [SrinivasEtAl], [RasmussenWilliams Ch.2]</li>
+      <li>Techniques: Gaussian priors, dependent arms</li>
+      <li>Algorithms: GP-UCB</li>
+      <li>Examples: Recommendation systems over continuous spaces</li>
+      <li>Characteristics: bandit feedback, stochastic, regret-minimization, (in)finite action space with metric space</li>
+    </ul>
+    <li>Notes: <a href="resources/lecture13/lecture13.pdf">Lecture notes</a></li>
+  </ul>
+
+  <li> No class: Feb. 16</li>
+
+  <li> Lecture 14: Feb. 21</li>
+  <ul>
+    <li> Binary classification, Streaming Active Learning</li>
+    <ul>
+      <li>Reading: [Dasgupta], <a href="resources/RealizableActiveLearning.pdf">CAL Notes</a>, [DasguptaHsuMonteleoni]</li>
+      <li>Techniques: Active learning for binary classificaiton in streaming setting.</li>
+      <li>Algorithms: CAL</li>
+      <li>Examples: Learning a spam filter</li>
+      <li>Characteristics: stochastic-sampling with deterministic outcomes, pure-exploration</li>
+    </ul>
+    <li>Notes: <a href="resources/lecture14/lecture14.pdf">Lecture notes</a></li>
+  </ul>
+
+  <li> Lecture 15: Feb. 23</li>
+  <ul>
+    <li> Binary classification, Pool-based Active Learning</li>
+    <ul>
+      <li>Reading: [Dasgupta2], [GolovinKrause], [Nowak]</li>
+      <li>Techniques: Active learning for binary classificaiton in pool-based setting. Adaptive submodularity optimization. Combinatorial bandits.</li>
+      <li>Algorithms: Generalized binary search</li>
+      <li>Examples: Learning a classifier with pool of unlabeled examples (e.g., google images)</li>
+      <li>Characteristics: stochastic-sampling with deterministic outcomes, pure-exploration</li>
+    </ul>
+    <li>Notes: <a href="resources/lecture15/lecture15.pdf">Lecture notes</a></li>
+  </ul>
+
+  <li> Lecture 16: Feb. 28</li>
+  <ul>
+    <li> Pool-based Active Learning, Combinatorial bandits</li>
+    <ul>
+      <li>Reading: [CaoKrishnamurthy]</li>
+      <li>Techniques: Reduction of binary classification to combinatorial bandits.</li>
+      <li>Algorithms: Action elimination</li>
+      <li>Examples: Top-K arm identification, Learning a classifier with pool of unlabeled examples (e.g., google images)</li>
+      <li>Characteristics: stochastic-sampling with deterministic outcomes, pure-exploration</li>
+    </ul>
+  </ul>
+
+  <li> Lecture 17: Mar. 2</li>
+  <ul>
+    <li> Finite Markov Decision Processes (MDPs)</li>
+    <ul>
+      <li>Reading: [Szepesvari Ch. 1, 2]</li>
+      <li>Techniques: Value, Q function learning by dynamic programming</li>
+      <li>Algorithms: Value iteration, Q-learning</li>
+      <li>Examples: Reinforcement learning</li>
+      <li>Characteristics: stochastic state dependent actions, stochastic state transitions, regret-minimization, finite action space</li>
+    </ul>
+    <li>Notes: <a href="resources/lecture17/lecture17.pdf">Lecture notes</a></li>
+  </ul>
+
+  <li> Lecture 18: Mar. 7</li>
+  <ul>
+    <li> Infinite Markov Decision Processes (MDPs)</li>
+    <ul>
+      <li>Reading: [Szepesvari Ch. 4]</li>
+      <li>Techniques: Learning with rollouts</li>
+      <li>Algorithms: parameterized Q-learning, policy gradient</li>
+      <li>Examples: Reinforcement learning</li>
+      <li>Characteristics: stochastic state dependent actions, stochastic state transitions, regret-minimization, (in)finite action space</li>
+    </ul>
+  </ul>
+
+  <li> Lecture 19: Mar. 9</li>
+  <ul>
+    <li> Monte Carlo Tree Search (MCTS)</li>
+    <ul>
+      <li>Reading: [SuttonBarto Ch. 8], [KocsisSzepesvari]</a></li>
+      <li>Techniques: MDPs with large branching factors</li>
+      <li>Algorithms: UCT</li>
+      <li>Examples: Playing strategy games and Go</li>
+      <li>Characteristics: stochastic state dependent actions, stochastic state transitions, regret-minimization, countable state space, finite action space (per state)</li>
+    </ul>
+    <li>Notes: <a href="resources/lecture19/lecture19.pdf">Lecture notes</a></li>
+  </ul>
+
+  <li> Lecture 20: Mar. 12 11:00 AM in EEB 045 (<b>Note special location and date</b>)</li>
+  <ul>
+    <li> Linear Quadratic Regulator (LQR)</li>
+    <ul>
+      <li>Reading: <a href="http://stanford.edu/class/ee363/lectures/dlqr-ss.pdf">Boyd's notes on LQR</a>, [AbbasiyadkoriSzepesvari]</li>
+      <li>Techniques: Automatic control in linear systems </li>
+      <li>Algorithms: LQR/LQG</li>
+      <li>Examples: Going to the moon and maintaining temperature</li>
+      <li>Characteristics: stochastic state dependent actions, stochastic state transitions, regret-minimization, continuous state and action space</li>
+    </ul>
+    <li>Notes: <a href="resources/lecture20/lecture20.pdf">Lecture notes</a></li>
+  </ul>
+-->
+</ul>
+
+</div>
+<br>
+
+<footer class="site-footer">
+    <div class="cse-wordmark"><img src="img/CSEWordmark_sm.png" alt="CSE Wordmark" /></div>
+    <div class="site-footer-right">
+        <a href="//www.washington.edu/online/terms/">UW Site Use Agreement</a>
+    </div>
+</footer>
+
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+</script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_CHTML'></script>
+
+  </body>
+
+</html>
