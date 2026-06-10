@@ -1,0 +1,1858 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cascadia Fast Race Tracker</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #17202a;
+      --muted: #5d6978;
+      --line: #d8dee7;
+      --surface: #ffffff;
+      --band: #f4f7fb;
+      --accent: #006e8f;
+      --accent-2: #9a4d14;
+      --good: #1f7a4d;
+      --warn: #946200;
+      --shadow: 0 1px 2px rgba(23, 32, 42, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--band);
+      color: var(--ink);
+      letter-spacing: 0;
+    }
+
+    header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .wrap {
+      width: min(1260px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .top {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 18px;
+      align-items: end;
+      padding: 28px 0 20px;
+    }
+
+    h1 {
+      margin: 0 0 6px;
+      font-size: clamp(1.45rem, 2vw, 2.1rem);
+      line-height: 1.1;
+      font-weight: 760;
+    }
+
+    .lede {
+      margin: 0;
+      color: var(--muted);
+      max-width: 780px;
+      line-height: 1.45;
+    }
+
+    .actions {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    button, .button {
+      border: 1px solid var(--line);
+      background: var(--surface);
+      color: var(--ink);
+      min-height: 36px;
+      border-radius: 6px;
+      padding: 7px 11px;
+      font: inherit;
+      cursor: pointer;
+      text-decoration: none;
+      box-shadow: var(--shadow);
+      white-space: nowrap;
+    }
+
+    button.primary {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: white;
+    }
+
+    button:hover, .button:hover {
+      border-color: #a9b5c4;
+    }
+
+    main {
+      padding: 18px 0 34px;
+    }
+
+    .controls {
+      display: grid;
+      grid-template-columns: minmax(220px, 1.5fr) repeat(6, minmax(120px, 1fr));
+      gap: 10px;
+      align-items: end;
+      margin: 0 0 14px;
+    }
+
+    label {
+      display: grid;
+      gap: 5px;
+      color: var(--muted);
+      font-size: 0.82rem;
+      font-weight: 650;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      min-height: 38px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: var(--surface);
+      color: var(--ink);
+      padding: 8px 9px;
+      font: inherit;
+    }
+
+    textarea {
+      min-height: 72px;
+      resize: vertical;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      margin: 0 0 14px;
+    }
+
+    .stat {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 12px;
+      box-shadow: var(--shadow);
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 1.4rem;
+      line-height: 1.1;
+    }
+
+    .stat span {
+      color: var(--muted);
+      font-size: 0.82rem;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 330px;
+      gap: 14px;
+      align-items: start;
+    }
+
+    .table-shell, .panel {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+    }
+
+    .table-scroll {
+      overflow: auto;
+      max-height: calc(100vh - 270px);
+      min-height: 420px;
+      border-radius: 8px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 1220px;
+    }
+
+    th, td {
+      border-bottom: 1px solid var(--line);
+      padding: 10px;
+      text-align: left;
+      vertical-align: top;
+      line-height: 1.35;
+    }
+
+    th {
+      position: sticky;
+      top: 0;
+      z-index: 1;
+      background: #eef3f8;
+      color: #334050;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    tr {
+      min-height: 58px;
+    }
+
+    tbody tr:hover {
+      background: #f8fbfd;
+    }
+
+    .race-name {
+      font-weight: 720;
+      color: var(--ink);
+    }
+
+    .sub {
+      display: block;
+      color: var(--muted);
+      font-size: 0.84rem;
+      margin-top: 2px;
+    }
+
+    .pill-row {
+      display: flex;
+      gap: 5px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      min-height: 24px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      padding: 2px 8px;
+      background: #f8fafc;
+      color: #334050;
+      font-size: 0.78rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .score {
+      border-color: #b7dcc9;
+      background: #ecf7f1;
+      color: var(--good);
+    }
+
+    .watch {
+      border-color: #ead79a;
+      background: #fff9e8;
+      color: var(--warn);
+    }
+
+    .links {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      min-width: 150px;
+    }
+
+    a {
+      color: var(--accent);
+      font-weight: 650;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .panel {
+      padding: 14px;
+    }
+
+    .panel h2 {
+      font-size: 1rem;
+      margin: 0 0 10px;
+    }
+
+    .form-grid {
+      display: grid;
+      gap: 10px;
+    }
+
+    .two {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .note {
+      color: var(--muted);
+      font-size: 0.84rem;
+      line-height: 1.4;
+      margin: 10px 0 0;
+    }
+
+    .empty {
+      padding: 28px;
+      color: var(--muted);
+      display: none;
+    }
+
+    .sources {
+      margin-top: 14px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+      padding: 14px;
+    }
+
+    .sources-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .sources h2 {
+      margin: 0;
+      font-size: 1rem;
+    }
+
+    .source-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .source {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 11px;
+      background: #fbfcfe;
+      min-height: 154px;
+    }
+
+    .source strong {
+      display: block;
+      margin-bottom: 3px;
+    }
+
+    .source p {
+      margin: 8px 0 0;
+      color: var(--muted);
+      font-size: 0.84rem;
+      line-height: 1.4;
+    }
+
+    @media (max-width: 980px) {
+      .top, .layout, .controls, .stats {
+        grid-template-columns: 1fr;
+      }
+
+      .source-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .actions {
+        justify-content: flex-start;
+      }
+
+      .table-scroll {
+        max-height: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap top">
+      <div>
+        <h1>Cascadia Fast Race Tracker</h1>
+        <p class="lede">A queryable list of upcoming fast road, track, and cross-country races from 800m through the marathon, focused on the Seattle-Portland-Eugene-Vancouver corridor. Last seeded on June 10, 2026.</p>
+      </div>
+      <div class="actions">
+        <button type="button" id="resetBtn">Reset Seed Data</button>
+        <button type="button" id="jsonBtn">Export JSON</button>
+        <button type="button" id="csvBtn" class="primary">Export CSV</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="wrap">
+      <section class="controls" aria-label="Race filters">
+        <label>Search
+          <input id="q" type="search" placeholder="Race, city, note, result time">
+        </label>
+        <label>Distance
+          <select id="distanceFilter">
+            <option value="">Any distance</option>
+            <option value="800m">800m</option>
+            <option value="1500m">1500m</option>
+            <option value="1M">1 mile</option>
+            <option value="Mile">Mile</option>
+            <option value="3000m">3000m</option>
+            <option value="4K">4K</option>
+            <option value="5K">5K</option>
+            <option value="5000m">5000m</option>
+            <option value="6K">6K</option>
+            <option value="8K">8K</option>
+            <option value="10K">10K</option>
+            <option value="15K">15K / under 10 miles</option>
+            <option value="10000m">10000m</option>
+            <option value="12K">12K / under 10 miles</option>
+            <option value="Half Marathon">Half marathon</option>
+            <option value="Marathon">Marathon</option>
+          </select>
+        </label>
+        <label>Surface
+          <select id="surfaceFilter">
+            <option value="">Any surface</option>
+            <option value="Road">Road</option>
+            <option value="Track">Track</option>
+            <option value="XC">XC</option>
+            <option value="Trail">Trail</option>
+          </select>
+        </label>
+        <label>Status
+          <select id="statusFilter">
+            <option value="">Any status</option>
+            <option value="tentative">Tentative next-year listing</option>
+            <option value="submitted">Submitted / needs review</option>
+            <option value="verified">Verified fast result</option>
+            <option value="watchlist">Watchlist</option>
+            <option value="needs-check">Needs more checking</option>
+          </select>
+        </label>
+        <label>Minimum Fast Score
+          <select id="scoreFilter">
+            <option value="0">Any score</option>
+            <option value="3">3+</option>
+            <option value="4">4+</option>
+            <option value="5">5 only</option>
+          </select>
+        </label>
+        <label>Fast For Women
+          <select id="womenScoreFilter">
+            <option value="0">Any score</option>
+            <option value="3">3+</option>
+            <option value="4">4+</option>
+            <option value="5">5 only</option>
+          </select>
+        </label>
+        <label>Sort
+          <select id="sortSelect">
+            <option value="date">Soonest</option>
+            <option value="-score">Fast score</option>
+            <option value="-womenScore">Women's score</option>
+            <option value="city">City</option>
+            <option value="name">Race name</option>
+          </select>
+        </label>
+      </section>
+
+      <section class="stats" aria-label="Filtered summary">
+        <div class="stat"><strong id="countStat">0</strong><span>matching races</span></div>
+        <div class="stat"><strong id="verifiedStat">0</strong><span>with verified fast results</span></div>
+        <div class="stat"><strong id="nextStat">-</strong><span>next matching date</span></div>
+        <div class="stat"><strong id="bestStat">-</strong><span>highest fast score</span></div>
+      </section>
+
+      <section class="layout">
+        <div class="table-shell">
+          <div class="table-scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th data-sort="date">Date</th>
+                  <th data-sort="name">Race</th>
+                  <th data-sort="city">Area</th>
+                  <th>Surface</th>
+                  <th>Distances</th>
+                  <th data-sort="-score">Overall Signal</th>
+                  <th data-sort="-womenScore">Fast For Women</th>
+                  <th>Historical Evidence</th>
+                  <th>Links</th>
+                </tr>
+              </thead>
+              <tbody id="rows"></tbody>
+            </table>
+            <div id="empty" class="empty">No races match the current filters.</div>
+          </div>
+        </div>
+
+        <aside class="panel">
+          <h2>Add a Race Candidate</h2>
+          <form id="addForm" class="form-grid">
+            <label>Your name or initials
+              <input name="submittedBy" placeholder="Optional">
+            </label>
+            <label>Race name
+              <input name="name" required>
+            </label>
+            <div class="two">
+              <label>Date
+                <input name="date" type="date" required>
+              </label>
+              <label>City
+                <input name="city" required>
+              </label>
+            </div>
+            <label>Distances
+              <input name="distances" placeholder="5K, 10K">
+            </label>
+            <label>Surface
+              <select name="surface">
+                <option value="Road">Road</option>
+                <option value="Track">Track</option>
+                <option value="XC">XC</option>
+                <option value="Trail">Trail</option>
+              </select>
+            </label>
+            <div class="two">
+              <label>Fast score
+                <select name="score">
+                  <option value="5">5</option>
+                  <option value="4">4</option>
+                  <option value="3">3</option>
+                  <option value="2">2</option>
+                  <option value="1">1</option>
+                </select>
+              </label>
+              <label>Status
+                <select name="status">
+                  <option value="submitted">Submitted / needs review</option>
+                  <option value="tentative">Tentative next-year listing</option>
+                  <option value="watchlist">Watchlist</option>
+                  <option value="needs-check">Needs more checking</option>
+                  <option value="verified">Verified fast result</option>
+                </select>
+              </label>
+            </div>
+            <label>Fast-for-women score
+              <select name="womenScore">
+                <option value="5">5</option>
+                <option value="4">4</option>
+                <option value="3">3</option>
+                <option value="2">2</option>
+                <option value="1">1</option>
+                <option value="0">Unknown</option>
+              </select>
+            </label>
+            <label>Announcement URL
+              <input name="announcementUrl" type="url" placeholder="https://...">
+            </label>
+            <label>Result URL
+              <input name="resultUrl" type="url" placeholder="https://...">
+            </label>
+            <label>Evidence / notes
+              <textarea name="evidence" placeholder="Example: 2025 winner 16:10; 2022 winner 15:31."></textarea>
+            </label>
+            <label>Fast-for-women evidence
+              <textarea name="womenEvidence" placeholder="Example: 2025 women's winner 18:09; three women under 18:15."></textarea>
+            </label>
+            <button type="submit" class="primary">Add Race</button>
+          </form>
+          <p class="note" id="storageMode">Local draft mode: submissions save in this browser through localStorage. Configure a backend endpoint to collect team submissions.</p>
+          <p class="note">For a club webpage, put this tracker on a Wild Apricot member-only page and have the form post to a small race-submissions API. Keep moderation in the tracker so runner-added races can be reviewed before becoming verified.</p>
+        </aside>
+      </section>
+
+      <section class="sources" aria-label="Input collation webpages">
+        <div class="sources-head">
+          <div>
+            <h2>Input Collation Webpages</h2>
+            <p class="note">Keep this source list tight, then let the race table grow from it. These are starter upstream pages to revisit when refreshing the tracker.</p>
+          </div>
+          <span class="pill" id="sourceCount">0 sources</span>
+        </div>
+        <div class="source-grid" id="sourceGrid"></div>
+      </section>
+    </div>
+  </main>
+
+  <script>
+    const sourcePages = [
+      {
+        name: "RunSignup Seattle Radius Search",
+        scope: "Local / national",
+        url: "https://runsignup.com/Races?name=&distance=&max_distance=50&units=K&location=Seattle%2C+WA",
+        use: "Best structured source for current registration pages and result-set links."
+      },
+      {
+        name: "RunGuides Seattle",
+        scope: "Local",
+        url: "https://www.runguides.com/seattle/runs",
+        use: "Good broad local calendar; useful for spotting non-RunSignup races."
+      },
+      {
+        name: "Running in the USA - Washington",
+        scope: "State / national",
+        url: "https://runningintheusa.com/race/list/wa/upcoming",
+        use: "Large race-calendar coverage; good sanity check against missed events."
+      },
+      {
+        name: "RaceRaves Seattle Area",
+        scope: "Local / national",
+        url: "https://raceraves.com/races/?location=Seattle%2C%20WA",
+        use: "Discovery source with reviews and event pages; result depth varies."
+      },
+      {
+        name: "Athletic.net Washington Track & Field",
+        scope: "Track / national",
+        url: "https://www.athletic.net/TrackAndField/Washington/",
+        use: "Track meet discovery and results, especially useful for mile, 3000m, 5000m, and 10000m races."
+      },
+      {
+        name: "MileSplit Washington Calendar",
+        scope: "Track / national",
+        url: "https://wa.milesplit.com/calendar",
+        use: "High-school and open track calendar/results source; useful for fast women's fields at track distances."
+      },
+      {
+        name: "Club Northwest Bill Roe All-Comers",
+        scope: "Local track",
+        url: "https://clubnorthwest.org/all-comers-schedule",
+        use: "Week-by-week Seattle-area track series with 1500m, mile, 3000m, 5000m, and PR nights."
+      },
+      {
+        name: "GBRC Track Classic",
+        scope: "Local track",
+        url: "https://www.gbrc.net/races/the-gale-pfueller-track-classic/",
+        use: "Bellingham track meet source for seeded 800m and mile opportunities."
+      },
+      {
+        name: "Portland Track",
+        scope: "Portland / track",
+        url: "https://www.portlandtrack.com/",
+        use: "Best source for Portland Track Festival, high-performance track racing, and local track series."
+      },
+      {
+        name: "RUNVAN Events",
+        scope: "Vancouver BC",
+        url: "https://runvan.org/races/",
+        use: "Vancouver-area event source for road races and the Jerome Classic track meet."
+      },
+      {
+        name: "Oregon Track Club Events",
+        scope: "Eugene / track and road",
+        url: "https://www.oregontrackclub.com/upcomingevents",
+        use: "Eugene source for Butte to Butte and OTC/Hayward Field all-comers meets."
+      },
+      {
+        name: "Bowerman Track Club 5K",
+        scope: "Portland / road",
+        url: "https://www.bowermantc.com/bowerman-5k",
+        use: "Direct source for the Nike WHQ Bowerman 5K, including elite corral and course notes."
+      },
+      {
+        name: "VFAC Summerfast 10K",
+        scope: "Vancouver BC / road",
+        url: "https://www.summerfast.ca/",
+        use: "Direct source for the flat Stanley Park Seawall Summerfast 10K."
+      },
+      {
+        name: "Shamrock Run Portland",
+        scope: "Portland / road",
+        url: "https://www.shamrockrunportland.com/",
+        use: "Annual March Portland road-race source with 5K, 8K, and 15K options."
+      },
+      {
+        name: "Vancouver Sun Run",
+        scope: "Vancouver BC / road",
+        url: "https://www.vancouversunrun.com/",
+        use: "Annual spring 10K source for one of the region's largest and fastest road races."
+      },
+      {
+        name: "Eugene Marathon Weekend",
+        scope: "Eugene / road",
+        url: "https://www.eugenemarathon.com/",
+        use: "Spring Eugene source for the 5K and TrackTown-adjacent race weekend."
+      },
+      {
+        name: "Beat the Bridge",
+        scope: "Seattle / road",
+        url: "https://www.runguides.com/event/85/beat-the-bridge",
+        use: "Annual Seattle 8K/5-mile source, with Laurel/Brooksee result links for historical checks."
+      },
+      {
+        name: "Seattle St. Patrick's Day Dash",
+        scope: "Seattle / road",
+        url: "https://www.stpatsdash.com/",
+        use: "Annual March Seattle 5K/St. Patrick's race source."
+      },
+      {
+        name: "Portland Marathon",
+        scope: "Portland / road",
+        url: "https://www.portlandmarathon.com/",
+        use: "Annual fall Portland marathon and half marathon source."
+      },
+      {
+        name: "Seattle Marathon",
+        scope: "Seattle / road",
+        url: "https://www.seattlemarathon.org/",
+        use: "Annual late-fall Seattle marathon, half marathon, and shorter-race source."
+      },
+      {
+        name: "Stumptown Cross",
+        scope: "Portland / XC",
+        url: "https://www.stumptowncross.com/",
+        use: "Portland-area cross-country series source for fall XC opportunities."
+      },
+      {
+        name: "Ahotu Washington Running Calendar",
+        scope: "State / global",
+        url: "https://marathons.ahotu.com/calendar/running/united-states/washington",
+        use: "Global race database with Washington filtering; helpful for cross-checking."
+      },
+      {
+        name: "World Athletics Calendar",
+        scope: "Global",
+        url: "https://worldathletics.org/competition/calendar-results",
+        use: "Best for elite/global road-race context, less complete for small local races."
+      },
+      {
+        name: "USATF Pacific Northwest",
+        scope: "Regional",
+        url: "https://www.pntf.org/",
+        use: "Regional association source for sanctioned or championship-style events."
+      },
+      {
+        name: "Databar Events Results",
+        scope: "Regional timing",
+        url: "https://www.databarevents.com/events/search",
+        use: "Regional results/timing archive; useful for non-RunSignup historical times."
+      }
+    ];
+
+    const seedRaces = [
+      {
+        id: "sound-to-narrows-2026",
+        name: "Sound to Narrows",
+        date: "2026-06-13",
+        city: "Tacoma",
+        region: "South Sound",
+        surface: "Road",
+        distances: ["5K", "12K"],
+        score: 5,
+        womenScore: 5,
+        status: "verified",
+        announcementUrl: "https://runsignup.com/Race/WA/Tacoma/SoundtoNarrows",
+        resultUrl: "https://runsignup.com/Race/Results/122645/?resultSetId=558554",
+        evidence: "2025 12K: Colin Monaghan 39:12.5, Robby Webster 39:47.6, Cian Monaghan 39:55.5. First 5K splits around 15:32-15:41 for the top three.",
+        womenEvidence: "2025 12K women: Sara Lopez 43:19.3, Hannah Calvert 44:20.9, Kate Landau-Olmstead 45:10.2.",
+        notes: "12K is 7.81 miles, inside the requested 1-10 mile range. Hilly but historically competitive."
+      },
+      {
+        id: "fall-city-day-run-2026",
+        name: "Fall City Day Run",
+        date: "2026-06-13",
+        city: "Fall City",
+        region: "Eastside / Snoqualmie Valley",
+        surface: "Road",
+        distances: ["1K", "5K", "10K"],
+        score: 5,
+        womenScore: 4,
+        status: "verified",
+        announcementUrl: "https://runsignup.com/Race/WA/FallCity/FallCityDayRun",
+        resultUrl: "https://runsignup.com/Race/Results/72125/?resultSetId=558724",
+        evidence: "2025 5K: 16:38, 17:31, 17:35. 2025 10K: 35:20, 35:43, 35:49. 2024 5K winner 16:45.",
+        womenEvidence: "2025 5K women: Laura Breymann 18:24, Kristen Hemke 19:32.",
+        notes: "Strong recent winning times at both 5K and 10K."
+      },
+      {
+        id: "club-northwest-all-comers-w2-2026",
+        name: "Club Northwest Bill Roe All-Comers W2",
+        date: "2026-06-10",
+        city: "Shoreline",
+        region: "Shoreline Stadium",
+        surface: "Track",
+        distances: ["1500m", "3000m"],
+        score: 4,
+        womenScore: 4,
+        status: "watchlist",
+        announcementUrl: "https://clubnorthwest.org/all-comers-schedule",
+        resultUrl: "https://clubnorthwest.org/all-comers-results",
+        evidence: "2026 schedule: even weeks include open 1500m at 8:15pm and 3000m at 9:10pm.",
+        womenEvidence: "Open, electronically timed races with Athletic.net results; series history includes fast women's distance marks and occasional high-performance races.",
+        notes: "Week 2 of the Wednesday all-comers series."
+      },
+      {
+        id: "run-walk-with-pride-2026",
+        name: "Run & Walk with Pride",
+        date: "2026-06-19",
+        city: "Seattle",
+        region: "Seattle",
+        surface: "Road",
+        distances: ["4K", "8K"],
+        score: 5,
+        womenScore: 3,
+        status: "verified",
+        announcementUrl: "https://runsignup.com/Race/WA/Seattle/RunWalkwithPride",
+        resultUrl: "https://runsignup.com/Race/Results/129243/?resultSetId=555107",
+        evidence: "2025 8K: Gabriel Gunnink 26:48.91, Jonas Crimm 26:54.16, Asa Wilson 27:25.22.",
+        womenEvidence: "2025 8K women: Maria Cortner 36:50.32, Mandy Lozano 37:04.06.",
+        notes: "Fast 8K field with top finishers clustered under 5:32 pace."
+      },
+      {
+        id: "club-northwest-all-comers-w3-pr-800-2026",
+        name: "Club Northwest Bill Roe All-Comers W3 PR 800m",
+        date: "2026-06-17",
+        city: "Shoreline",
+        region: "Shoreline Stadium",
+        surface: "Track",
+        distances: ["800m"],
+        score: 4,
+        womenScore: 4,
+        status: "watchlist",
+        announcementUrl: "https://clubnorthwest.org/all-comers-schedule",
+        resultUrl: "https://clubnorthwest.org/all-comers-results",
+        evidence: "2026 special event: PR 800m on June 17 with pacers listed for 1:50-2:10; schedule notes no mile or 5K that night.",
+        womenEvidence: "Paced PR-night format is specifically useful for women seeking fast heat placement, though exact women's entries need week-of checking.",
+        notes: "Included because it is a paced track opportunity, even though it is not a 1500m/mile/3K/5K week."
+      },
+      {
+        id: "solstice-run-2026",
+        name: "Solstice Run",
+        date: "2026-06-20",
+        city: "Seattle",
+        region: "Seattle",
+        surface: "Road",
+        distances: ["5K", "10K"],
+        score: 4,
+        womenScore: 4,
+        status: "verified",
+        announcementUrl: "https://runsignup.com/Race/WA/Seattle/SolsticeRun2024",
+        resultUrl: "https://runsignup.com/Race/Results/166420/?resultSetId=557554",
+        evidence: "2025 5K: Zachary Szablewski 16:45.56; second 18:18.50. 2025 10K winner 40:03.59.",
+        womenEvidence: "2025 5K women: Iris Klein 19:11.64, Celina Kirschner 19:18.58.",
+        notes: "5K has a fast winning mark; 10K was less deep in 2025."
+      },
+      {
+        id: "snoqualmie-valley-10k-2026",
+        name: "Snoqualmie Valley Half 10K",
+        date: "2026-06-20",
+        city: "Carnation",
+        region: "Snoqualmie Valley",
+        surface: "Road",
+        distances: ["10K"],
+        score: 5,
+        womenScore: 5,
+        status: "verified",
+        announcementUrl: "https://runsignup.com/Race/WA/Carnation/SnoqualmieValley",
+        resultUrl: "https://runsignup.com/Race/Results/38818/?resultSetId=559922",
+        evidence: "2025 10K: Tyler Little 34:49.61, Mason Strasser 37:57.55, Griffin McLaughlin 38:32.66.",
+        womenEvidence: "2025 10K women: Bianca Tillman 39:23.52.",
+        notes: "The half marathon also showed a fast 1:09:49 winner, which suggests a competitive event environment."
+      },
+      {
+        id: "gale-pfueller-track-classic-2026",
+        name: "GBRC Gale Pfueller Track Classic",
+        date: "2026-06-20",
+        city: "Bellingham",
+        region: "Civic Stadium",
+        surface: "Track",
+        distances: ["800m", "Mile"],
+        score: 4,
+        womenScore: 5,
+        status: "verified",
+        announcementUrl: "https://www.gbrc.net/races/the-gale-pfueller-track-classic/",
+        resultUrl: "https://www.gbrc.net/wp-content/uploads/2025/06/2025-Gale-Pfueller-Track-Classic-Results-v3.pdf",
+        evidence: "Saturday, June 20, 2026 at Civic Stadium. 2026 meet includes seeded 800m and Gale Pfueller Mile; 2025 event record includes a 4:42.9 male mile/1600m.",
+        womenEvidence: "2025 event record: Haley Herberg 5:13.9 for the women's Mile/1600m; 2026 mile is a full 5,280 feet. Seeded events strongly encourage seed times for appropriate fast heats.",
+        notes: "Bellingham track meet on the following Saturday; not a 1500m/3K/5K meet, but a relevant fast women's mile opportunity."
+      },
+      {
+        id: "portland-track-festival-2026",
+        name: "Portland Track Festival",
+        date: "2026-06-20",
+        city: "Portland",
+        region: "Portland / Electric Forest",
+        surface: "Track",
+        distances: ["800m", "1500m", "Mile", "5000m", "10000m"],
+        score: 5,
+        womenScore: 5,
+        status: "verified",
+        announcementUrl: "https://www.portlandtrack.com/ptf",
+        resultUrl: "https://www.portlandtrack.com/results",
+        evidence: "June 20-21, 2026. Schedule includes open and high-performance 800m, 1500m, 5000m, 10000m, steeplechase, and mile events. Registration page lists entry standards and pacing for high-performance heats.",
+        womenEvidence: "The 2026 schedule has women's high-performance 800m, 1500m, 5000m, 10000m, and 3000m steeplechase sections; the registration page notes top heats paced to world standards and second heats to USA qualifying standards.",
+        notes: "Major corridor track target; continues Sunday June 21."
+      },
+      {
+        id: "club-northwest-all-comers-w4-2026",
+        name: "Club Northwest Bill Roe All-Comers W4",
+        date: "2026-06-24",
+        city: "Shoreline",
+        region: "Shoreline Stadium",
+        surface: "Track",
+        distances: ["1500m", "3000m"],
+        score: 4,
+        womenScore: 4,
+        status: "watchlist",
+        announcementUrl: "https://clubnorthwest.org/all-comers-schedule",
+        resultUrl: "https://clubnorthwest.org/all-comers-results",
+        evidence: "2026 schedule: even weeks include open 1500m at 8:15pm and 3000m at 9:10pm.",
+        womenEvidence: "Open, electronically timed races with Athletic.net results; check entries/results week-of for women's fast-pack depth.",
+        notes: "Week 4 of the Wednesday all-comers series."
+      },
+      {
+        id: "edmonds-4th-5k-2026",
+        name: "The Edmonds 4th of July 5K",
+        date: "2026-07-04",
+        city: "Edmonds",
+        region: "North Seattle / Edmonds",
+        surface: "Road",
+        distances: ["1K", "5K"],
+        score: 4,
+        womenScore: 3,
+        status: "verified",
+        announcementUrl: "https://runsignup.com/Race/WA/Edmonds/TheEdmonds4thOfJuly5K",
+        resultUrl: "https://runsignup.com/Race/Results/179026/?resultSetId=564148",
+        evidence: "2025 5K: Luca Hooks 17:19.36, Oscar Burns 17:29.20, Tommy Brennan 17:29.77.",
+        womenEvidence: "2025 5K women: Amy Sanchez 19:56.62, Joyce Zhang 20:13.60.",
+        notes: "Solid but not quite as sharp as the sub-16 and low-16 races."
+      },
+      {
+        id: "tacoma-independence-day-5k-2026",
+        name: "Tacoma Independence Day 5K",
+        date: "2026-07-04",
+        city: "Tacoma",
+        region: "South Sound",
+        surface: "Road",
+        distances: ["1K", "5K"],
+        score: 5,
+        womenScore: 5,
+        status: "verified",
+        announcementUrl: "https://runsignup.com/Race/WA/Tacoma/TacomaIndependenceDay5K",
+        resultUrl: "https://runsignup.com/Race/Results/129861/?resultSetId=561736",
+        evidence: "2025 5K: Spencer Head 14:07.44, Ari Gardner 15:37.68, Asa Wilson 15:39.30; top eight were 16:19.44 or faster. 2024 winner 15:42.0.",
+        womenEvidence: "2025 5K women: Charlotte Allen 18:24.35, Meghan Lyle 18:23.98, Rachel Taylor 18:35.11.",
+        notes: "Fast point-to-point course from north Tacoma toward the waterfront; one of the strongest fast signals in this tracker."
+      },
+      {
+        id: "vfac-summerfast-10k-2026",
+        name: "VFAC Summerfast 10K",
+        date: "2026-07-04",
+        city: "Vancouver",
+        region: "Stanley Park / Vancouver BC",
+        surface: "Road",
+        distances: ["10K"],
+        score: 5,
+        womenScore: 5,
+        status: "watchlist",
+        announcementUrl: "https://www.summerfast.ca/",
+        resultUrl: "https://www.summerfast.ca/results/",
+        evidence: "July 4, 2026. Vancouver Falcons describe the course as scenic, flat, and fast along the Stanley Park Seawall, with BC Athletics sanctioning and Lower Mainland Road Race Series placement.",
+        womenEvidence: "Club-hosted, sanctioned, PB-oriented 10K on a flat Vancouver course; likely one of the better corridor opportunities for women chasing a road 10K.",
+        notes: "Exact historical top times still need a results pull, but the course and club context are strong."
+      },
+      {
+        id: "otc-butte-to-butte-2026",
+        name: "OTC Butte To Butte",
+        date: "2026-07-04",
+        city: "Eugene",
+        region: "TrackTown / Eugene",
+        surface: "Road",
+        distances: ["5K", "10K"],
+        score: 4,
+        womenScore: 4,
+        status: "watchlist",
+        announcementUrl: "https://www.buttetobutte.com/",
+        resultUrl: "https://www.buttetobutte.com/results",
+        evidence: "Saturday, July 4, 2026. Oregon Track Club event with 10K run, 5K run/walk, and long local history in Eugene.",
+        womenEvidence: "Strong Eugene running-community signal and OTC event context; historical women's times need a dedicated result extraction before ranking as a top women-specific pick.",
+        notes: "Worth tracking for Eugene corridor coverage even if the course profile is not as cleanly PR-focused as Summerfast or Bowerman."
+      },
+      {
+        id: "club-northwest-all-comers-w5-pr-mile-2026",
+        name: "Club Northwest Bill Roe All-Comers W5 PR Mile",
+        date: "2026-07-01",
+        city: "Shoreline",
+        region: "Shoreline Stadium",
+        surface: "Track",
+        distances: ["Mile"],
+        score: 5,
+        womenScore: 5,
+        status: "watchlist",
+        announcementUrl: "https://clubnorthwest.org/all-comers-schedule",
+        resultUrl: "https://clubnorthwest.org/all-comers-results",
+        evidence: "2026 special event: PR Mile on July 1 with pacers listed from sub-4:10 through 6:30; schedule notes no 800m or 5K.",
+        womenEvidence: "Paced PR Mile structure is a strong women-specific fast-time opportunity because the event is designed around seed/pacer groupings rather than only general participation.",
+        notes: "High-priority all-comers week for a fast mile attempt."
+      },
+      {
+        id: "kent-cornucopia-2026",
+        name: "Kent Cornucopia Days 5K",
+        date: "2026-07-11",
+        city: "Kent",
+        region: "South King County",
+        surface: "Road",
+        distances: ["5K"],
+        score: 5,
+        womenScore: 3,
+        status: "verified",
+        announcementUrl: "https://runsignup.com/Race/WA/Kent/KentCornucopiaDays5K2018",
+        resultUrl: "https://runsignup.com/Race/Results/63925/?resultSetId=565851",
+        evidence: "2025 5K: 16:37.07, 17:08.55, 17:24.17. 2024 5K: 16:18.96, 16:27.24, 16:52.47.",
+        womenEvidence: "2025 5K women: Amanda Skrivanich 19:43.74.",
+        notes: "Good repeat signal across multiple years."
+      },
+      {
+        id: "club-northwest-all-comers-w6-2026",
+        name: "Club Northwest Bill Roe All-Comers W6",
+        date: "2026-07-08",
+        city: "Shoreline",
+        region: "Shoreline Stadium",
+        surface: "Track",
+        distances: ["1500m", "3000m"],
+        score: 4,
+        womenScore: 4,
+        status: "watchlist",
+        announcementUrl: "https://clubnorthwest.org/all-comers-schedule",
+        resultUrl: "https://clubnorthwest.org/all-comers-results",
+        evidence: "2026 schedule: even weeks include open 1500m at 8:15pm and 3000m at 9:10pm.",
+        womenEvidence: "Open, electronically timed races with Athletic.net results; check entries/results week-of for women's fast-pack depth.",
+        notes: "Week 6 of the Wednesday all-comers series."
+      },
+      {
+        id: "club-northwest-all-comers-w7-pr-5000-2026",
+        name: "Club Northwest Bill Roe All-Comers W7 PR 5000m",
+        date: "2026-07-15",
+        city: "Shoreline",
+        region: "Shoreline Stadium",
+        surface: "Track",
+        distances: ["5000m"],
+        score: 5,
+        womenScore: 5,
+        status: "watchlist",
+        announcementUrl: "https://clubnorthwest.org/all-comers-schedule",
+        resultUrl: "https://clubnorthwest.org/all-comers-results",
+        evidence: "2026 special event: paced PR 5000m on July 15; schedule notes no mile or 800m.",
+        womenEvidence: "Paced 5000m is specifically designed for fast attempts. Club Northwest HP results history includes Claire Manley running 17:10.0h for 5000m in the all-comers series.",
+        notes: "High-priority all-comers week for a fast track 5K."
+      },
+      {
+        id: "float-dodger-2026",
+        name: "Float Dodger 5K",
+        date: "2026-07-18",
+        city: "Seattle",
+        region: "West Seattle",
+        surface: "Road",
+        distances: ["5K"],
+        score: 5,
+        womenScore: 4,
+        status: "verified",
+        announcementUrl: "https://runsignup.com/Race/WA/Seattle/FloatDodger5K",
+        resultUrl: "https://runsignup.com/Race/Results/74085/?resultSetId=566919",
+        evidence: "2025 5K winner 16:10.16. 2023 winner 16:22.94. 2022 winner 15:31.37.",
+        womenEvidence: "2025 5K women: Megan Heuer 19:02.55, Adeline Roza 19:35.03, Lynelle Watson 19:38.63.",
+        notes: "One of the better repeated fast-finish signals in the current seed set."
+      },
+      {
+        id: "club-northwest-all-comers-w8-2026",
+        name: "Club Northwest Bill Roe All-Comers W8",
+        date: "2026-07-22",
+        city: "Shoreline",
+        region: "Shoreline Stadium",
+        surface: "Track",
+        distances: ["1500m", "3000m"],
+        score: 4,
+        womenScore: 4,
+        status: "watchlist",
+        announcementUrl: "https://clubnorthwest.org/all-comers-schedule",
+        resultUrl: "https://clubnorthwest.org/all-comers-results",
+        evidence: "2026 schedule: even weeks include open 1500m at 8:15pm and 3000m at 9:10pm.",
+        womenEvidence: "Open, electronically timed races with Athletic.net results; check entries/results week-of for women's fast-pack depth.",
+        notes: "Week 8 of the Wednesday all-comers series."
+      },
+      {
+        id: "seafair-torchlight-2026",
+        name: "Kaiser Permanente Seafair Torchlight Run",
+        date: "2026-07-25",
+        city: "Seattle",
+        region: "Downtown Seattle",
+        surface: "Road",
+        distances: ["5K"],
+        score: 5,
+        womenScore: 3,
+        status: "verified",
+        announcementUrl: "https://runsignup.com/Race/WA/Seattle/SeafairTorchlightRun",
+        resultUrl: "https://runsignup.com/Race/Results/105356/?resultSetId=265941",
+        evidence: "Published RunSignup 2021 live 5K result: Antonio Florcruz 15:16.10, Matthew Knight 16:24.37.",
+        womenEvidence: "2021 live result set has women finishers, but the public table appears mixed with legacy timing quirks; re-check before ranking highly for women.",
+        notes: "Newer RunSignup result sets were not visible in this pass, but the available live result is very fast."
+      },
+      {
+        id: "bowerman-5k-2026",
+        name: "Bowerman 5K",
+        date: "2026-07-25",
+        city: "Beaverton",
+        region: "Nike World Headquarters",
+        surface: "Road",
+        distances: ["1K", "5K"],
+        score: 5,
+        womenScore: 5,
+        status: "verified",
+        announcementUrl: "https://www.bowermantc.com/bowerman-5k",
+        resultUrl: "https://runsignup.com/Race/Results/OR/Beaverton/Bowerman5K",
+        evidence: "July 25, 2026 at Nike WHQ. Bowerman describes a closed-off smooth tarmac loop, elite corral, prize money, and a fast 5K course.",
+        womenEvidence: "Prize money goes to the top three men's and women's athletes, with a separate elite start corral; strong women-specific fast-race structure.",
+        notes: "One of the best-known fast Portland-area 5Ks, held on the Nike campus."
+      },
+      {
+        id: "club-northwest-all-comers-w9-blue-jeans-mile-2026",
+        name: "Club Northwest Bill Roe All-Comers W9 Blue Jeans Mile",
+        date: "2026-07-29",
+        city: "Shoreline",
+        region: "Shoreline Stadium",
+        surface: "Track",
+        distances: ["Mile", "5000m"],
+        score: 4,
+        womenScore: 4,
+        status: "watchlist",
+        announcementUrl: "https://clubnorthwest.org/all-comers-schedule",
+        resultUrl: "https://clubnorthwest.org/all-comers-results",
+        evidence: "2026 schedule: odd weeks normally include open mile at 8:15pm and 5000m at 9:10pm; July 29 adds the Blue Jeans Mile special heat.",
+        womenEvidence: "Good mile/5000m opportunity, though the Blue Jeans heat is more novelty than PR-focused; check regular heat entries for women's fast-pack depth.",
+        notes: "Week 9 of the Wednesday all-comers series."
+      },
+      {
+        id: "club-northwest-all-comers-w10-pr-10000-2026",
+        name: "Club Northwest Bill Roe All-Comers W10 PR 10000m",
+        date: "2026-08-05",
+        city: "Shoreline",
+        region: "Shoreline Stadium",
+        surface: "Track",
+        distances: ["10000m"],
+        score: 5,
+        womenScore: 4,
+        status: "watchlist",
+        announcementUrl: "https://clubnorthwest.org/all-comers-schedule",
+        resultUrl: "https://clubnorthwest.org/all-comers-results",
+        evidence: "2026 special event: PR 10,000m on August 5; schedule says the 10K replaces the 5K and there is no 1500m, 800m, or 3K.",
+        womenEvidence: "Paced PR format may be useful for women chasing a track 10K, but it is outside the specific 1500/mile/3K/5K all-comers query set.",
+        notes: "Inside the original 1-10 mile distance range, but not one of the requested all-comers distance targets."
+      },
+      {
+        id: "club-northwest-all-comers-w11-2026",
+        name: "Club Northwest Bill Roe All-Comers W11",
+        date: "2026-08-12",
+        city: "Shoreline",
+        region: "Shoreline Stadium",
+        surface: "Track",
+        distances: ["Mile", "5000m"],
+        score: 4,
+        womenScore: 4,
+        status: "watchlist",
+        announcementUrl: "https://clubnorthwest.org/all-comers-schedule",
+        resultUrl: "https://clubnorthwest.org/all-comers-results",
+        evidence: "2026 schedule: odd weeks include open mile at 8:15pm and 5000m at 9:10pm.",
+        womenEvidence: "Open, electronically timed races with Athletic.net results; check entries/results week-of for women's fast-pack depth.",
+        notes: "Week 11 of the Wednesday all-comers series."
+      },
+      {
+        id: "seattle-marathon-summer-5k-2026",
+        name: "Seattle Marathon Summer 5K/10K",
+        date: "2026-06-27",
+        city: "Seattle",
+        region: "Seward Park",
+        surface: "Road",
+        distances: ["5K", "10K"],
+        score: 5,
+        womenScore: 5,
+        status: "verified",
+        announcementUrl: "https://raceroster.com/events/2026/107529/2026-seattle-marathon-summer-5k10khalf-marathon-and-kids-fun-run",
+        resultUrl: "https://results.raceroster.com/v3/events/zf597gwm9hb7t54t/race/231944",
+        evidence: "2025 5K: William Thompson 16:00, Thomas Mikkelson 16:04, Gabriel Worthington 16:52.",
+        womenEvidence: "2025 5K women: Laura Breymann 18:31, Samantha Koski 18:52, Amy Sanchez 19:32, Rachel Taylor 20:10.",
+        notes: "Seward Park event with Race Roster/Brooksee results; good women-specific fast signal."
+      },
+      {
+        id: "club-northwest-all-comers-w12-finale-2026",
+        name: "Club Northwest Bill Roe All-Comers W12 Finale Night",
+        date: "2026-08-19",
+        city: "Shoreline",
+        region: "Shoreline Stadium",
+        surface: "Track",
+        distances: ["Mile"],
+        score: 3,
+        womenScore: 3,
+        status: "watchlist",
+        announcementUrl: "https://clubnorthwest.org/all-comers-schedule",
+        resultUrl: "https://clubnorthwest.org/all-comers-results",
+        evidence: "2026 schedule lists W12 as August 19 and Finale Night regular events include kids, 200m, mile, and field events, with other regular events cancelled.",
+        womenEvidence: "Finale format is more eventful than PR-focused, but the mile remains a possible women's fast opportunity if entries line up.",
+        notes: "Page's special-event text says August 29, but the week list says W12 is August 19; keep an eye on this date."
+      },
+      {
+        id: "lake-union-10k-2026",
+        name: "Lake Union 10K",
+        date: "2026-08-09",
+        city: "Seattle",
+        region: "Lake Union",
+        surface: "Road",
+        distances: ["10K"],
+        score: 3,
+        womenScore: 0,
+        status: "needs-check",
+        announcementUrl: "https://runsignup.com/Race/WA/Seattle/LakeUnion10K",
+        resultUrl: "https://runsignup.com/Race/Results/55653",
+        evidence: "RunSignup lists historical result sets, but the public JSON in this pass exposed placements without times for the 2022 set. Keep as a likely candidate pending external timing verification.",
+        notes: "Good announcement page and known 10K format; result-time evidence needs another source."
+      },
+      {
+        id: "oktoberfest-fly-away-2026",
+        name: "Oktoberfest Fly Away 10K Run & 5K Run/Walk",
+        date: "2026-09-12",
+        city: "Kenmore",
+        region: "North Lake Washington",
+        surface: "Road",
+        distances: ["5K", "10K"],
+        score: 5,
+        womenScore: 0,
+        status: "verified",
+        announcementUrl: "https://runsignup.com/Race/WA/Kenmore/OktoberfestFlyAway5K",
+        resultUrl: "https://runsignup.com/Race/Results/88641/?resultSetId=583521",
+        evidence: "2025 10K: Alex Vuyisich 33:14, Louis Brion 40:57, Kevin Kassing 41:00. 2025 5K winner 18:10.",
+        notes: "The 10K front-end mark is excellent; depth drops after first."
+      },
+      {
+        id: "dawg-dash-2026",
+        name: "Alaska Airlines Dawg Dash 5K/10K",
+        date: "2026-10-18",
+        city: "Seattle",
+        region: "University of Washington",
+        surface: "Road",
+        distances: ["5K", "10K"],
+        score: 5,
+        womenScore: 5,
+        status: "verified",
+        announcementUrl: "https://runsignup.com/Race/WA/Seattle/AlaskaAirlinesDawgDash",
+        resultUrl: "https://runsignup.com/Race/Results/177572/?resultSetId=593715",
+        evidence: "2025 5K: Samuel Ellis 15:48.26, James Stadler 16:18.11, Gabriel Kary 16:53.51. 2025 10K winner 34:00.51.",
+        womenEvidence: "2025 5K women: Caroline Subramoney 18:09.23, Amelia Keyser-Gibson 18:11.99. 2025 10K women: Maggie Mahoney 38:24.26, Abbie Hulst 39:14.33, Cassidy Burke 39:15.65.",
+        notes: "Strong campus field; good pick if October timing works."
+      },
+      {
+        id: "greenlake-5k-2026",
+        name: "Greenlake 5K and Wellness Festival",
+        date: "2026-10-24",
+        city: "Seattle",
+        region: "Green Lake",
+        surface: "Road",
+        distances: ["5K"],
+        score: 4,
+        womenScore: 0,
+        status: "watchlist",
+        announcementUrl: "https://runsignup.com/Race/WA/Seattle/Greenlake5KAndWellnessFestival",
+        resultUrl: "",
+        evidence: "Announcement includes a 5K Elite registration category for runners at 17 minutes or under. Historical result set not found in this pass.",
+        notes: "Worth tracking because the race is explicitly recruiting sub-17 runners."
+      },
+      {
+        id: "runvan-great-trek-2026",
+        name: "RUNVAN Great Trek",
+        date: "2026-10",
+        city: "Vancouver",
+        region: "UBC / Vancouver BC",
+        surface: "Road",
+        distances: ["5K", "10K"],
+        score: 3,
+        womenScore: 3,
+        status: "tentative",
+        announcementUrl: "https://runvan.org/event/greattrek-5km-10km-halfmarathon/",
+        resultUrl: "https://runvan.org/results/",
+        evidence: "RUNVAN describes Great Trek as an October UBC event with half marathon, 10K, and 5K races, and says runners can clock a PB time for the year.",
+        womenEvidence: "Useful Vancouver fall 5K/10K candidate; needs historical result extraction before ranking highly for women-specific speed.",
+        notes: "Month-only listing until the exact 2026 date is confirmed."
+      },
+      {
+        id: "shamrock-run-portland-2027",
+        name: "Shamrock Run Portland",
+        date: "2027-03-14",
+        city: "Portland",
+        region: "Downtown Portland",
+        surface: "Road",
+        distances: ["5K", "8K", "15K"],
+        score: 4,
+        womenScore: 4,
+        status: "tentative",
+        announcementUrl: "https://www.shamrockrunportland.com/",
+        resultUrl: "https://www.shamrockrunportland.com/",
+        evidence: "March 14, 2027. Event lists half marathon, 8K, 5K, 5K walk, and Leprechaun Lap. The 8K and 15K-equivalent half-adjacent festival context make it a useful Portland spring watch.",
+        womenEvidence: "Large annual Portland race weekend with competitive club participation; verify historical women's depth before ranking as a top women-specific fast pick.",
+        notes: "All-year 2027 placeholder. Half marathon exists but tracker row focuses on 5K/8K/15K-under-10-mile options."
+      },
+      {
+        id: "vancouver-sun-run-2027",
+        name: "Vancouver Sun Run",
+        date: "2027-04",
+        city: "Vancouver",
+        region: "Downtown Vancouver BC",
+        surface: "Road",
+        distances: ["10K"],
+        score: 5,
+        womenScore: 5,
+        status: "tentative",
+        announcementUrl: "https://www.vancouversunrun.com/",
+        resultUrl: "https://www.vancouversunrun.com/results/",
+        evidence: "Annual spring 10K and one of the largest road races in the region. Exact 2027 date still needs confirmation.",
+        womenEvidence: "Historically deep Vancouver 10K with strong elite and sub-elite participation; good women-specific fast-race candidate once 2027 details post.",
+        notes: "Month-only 2027 placeholder because the public site was not accessible from this pass."
+      },
+      {
+        id: "eugene-marathon-weekend-5k-2027",
+        name: "Eugene Marathon Weekend 5K",
+        date: "2027-04",
+        city: "Eugene",
+        region: "Hayward / TrackTown",
+        surface: "Road",
+        distances: ["5K"],
+        score: 4,
+        womenScore: 4,
+        status: "tentative",
+        announcementUrl: "https://www.eugenemarathon.com/",
+        resultUrl: "https://www.eugenemarathon.com/results",
+        evidence: "Eugene Marathon weekend is listed for April 23-25, 2027 and includes the Eugene 5K.",
+        womenEvidence: "TrackTown race weekend context makes this a useful women-specific watchlist race; historical 5K depth still needs checking.",
+        notes: "Month-only 2027 placeholder until the exact 5K race day is confirmed."
+      },
+      {
+        id: "bmo-vancouver-5k-8k-2027",
+        name: "BMO Vancouver Marathon Weekend 5K/8K",
+        date: "2027-05",
+        city: "Vancouver",
+        region: "Vancouver BC",
+        surface: "Road",
+        distances: ["5K", "8K"],
+        score: 4,
+        womenScore: 4,
+        status: "tentative",
+        announcementUrl: "https://runvan.org/event/bmo-vancouver-marathon/",
+        resultUrl: "https://runvan.org/results/",
+        evidence: "RUNVAN's BMO Vancouver Marathon weekend is a major annual event with shorter-distance race options in the corridor.",
+        womenEvidence: "Major Vancouver race weekend; add exact 2027 short-distance schedule and historical women's results when posted.",
+        notes: "Tentative 2027 placeholder for the under-10-mile race options, not the marathon/half."
+      },
+      {
+        id: "portland-track-festival-2027",
+        name: "Portland Track Festival",
+        date: "2027-06",
+        city: "Portland",
+        region: "Portland / Electric Forest",
+        surface: "Track",
+        distances: ["800m", "1500m", "Mile", "5000m", "10000m"],
+        score: 5,
+        womenScore: 5,
+        status: "tentative",
+        announcementUrl: "https://www.portlandtrack.com/ptf",
+        resultUrl: "https://www.portlandtrack.com/results",
+        evidence: "Annual Portland high-performance meet; 2026 schedule includes open and high-performance 800m, 1500m, 5000m, 10000m, steeplechase, and mile events.",
+        womenEvidence: "One of the corridor's strongest women-specific track opportunities because recent schedules include women's high-performance sections and paced heats.",
+        notes: "Tentative 2027 placeholder until next year's date and schedule are posted."
+      },
+      {
+        id: "jerome-classic-2027",
+        name: "The Jerome Classic",
+        date: "2027-07",
+        city: "Burnaby",
+        region: "Swangard Stadium / Vancouver BC",
+        surface: "Track",
+        distances: ["800m", "1500m", "5000m"],
+        score: 5,
+        womenScore: 5,
+        status: "tentative",
+        announcementUrl: "https://runvan.org/event/thejeromeclassic/",
+        resultUrl: "https://runvan.org/results/",
+        evidence: "RUNVAN describes the Jerome Classic as Canada's longest-running track and field event, part of Athletics Canada's National Track and Field Tour and the World Athletics Continental Tour.",
+        womenEvidence: "High-performance meet structure and World Athletics/National Tour context make this a strong women's fast-track candidate; exact 2027 date and event list still need confirmation.",
+        notes: "Tentative 2027 placeholder for the Vancouver-area elite track meet."
+      },
+      {
+        id: "vfac-summerfast-10k-2027",
+        name: "VFAC Summerfast 10K",
+        date: "2027-07",
+        city: "Vancouver",
+        region: "Stanley Park / Vancouver BC",
+        surface: "Road",
+        distances: ["10K"],
+        score: 5,
+        womenScore: 5,
+        status: "tentative",
+        announcementUrl: "https://www.summerfast.ca/",
+        resultUrl: "https://www.summerfast.ca/results/",
+        evidence: "Annual VFAC race on the flat Stanley Park Seawall course; 2026 page explicitly calls it scenic, flat, and fast.",
+        womenEvidence: "Club-hosted, sanctioned, PB-oriented 10K on a flat Vancouver course; strong annual women-specific watchlist race.",
+        notes: "Tentative 2027 placeholder."
+      },
+      {
+        id: "bowerman-5k-2027",
+        name: "Bowerman 5K",
+        date: "2027-07",
+        city: "Beaverton",
+        region: "Nike World Headquarters",
+        surface: "Road",
+        distances: ["1K", "5K"],
+        score: 5,
+        womenScore: 5,
+        status: "tentative",
+        announcementUrl: "https://www.bowermantc.com/bowerman-5k",
+        resultUrl: "https://runsignup.com/Race/Results/OR/Beaverton/Bowerman5K",
+        evidence: "Annual July 5K at Nike WHQ. 2026 page notes a fast closed-campus tarmac loop, elite corral, and prize money.",
+        womenEvidence: "Separate elite start corral and top-three women's prize money make this a strong women-specific 5K target.",
+        notes: "Tentative 2027 placeholder."
+      },
+      {
+        id: "otc-butte-to-butte-2027",
+        name: "OTC Butte To Butte",
+        date: "2027-07-04",
+        city: "Eugene",
+        region: "TrackTown / Eugene",
+        surface: "Road",
+        distances: ["5K", "10K"],
+        score: 4,
+        womenScore: 4,
+        status: "tentative",
+        announcementUrl: "https://www.buttetobutte.com/",
+        resultUrl: "https://www.buttetobutte.com/results",
+        evidence: "Annual July 4 Oregon Track Club event with 10K run, 5K run/walk, and long Eugene race history.",
+        womenEvidence: "TrackTown/OTC context makes this worth keeping on the annual corridor list; historical women's result depth still needs extraction.",
+        notes: "Tentative 2027 placeholder."
+      },
+      {
+        id: "seattle-st-patricks-day-dash-2027",
+        name: "Seattle St. Patrick's Day Dash",
+        date: "2027-03",
+        city: "Seattle",
+        region: "Seattle Center / Downtown Seattle",
+        surface: "Road",
+        distances: ["5K"],
+        score: 3,
+        womenScore: 3,
+        status: "tentative",
+        announcementUrl: "https://www.stpatsdash.com/",
+        resultUrl: "",
+        evidence: "Annual March Seattle St. Patrick's 5K-style race. Exact 2027 date and current result archive need confirmation.",
+        womenEvidence: "Large local race with potential club participation; keep as a watchlist row until recent women's result depth is checked.",
+        notes: "Added from user request; month-only 2027 placeholder."
+      },
+      {
+        id: "beat-the-bridge-2027",
+        name: "Beat the Bridge",
+        date: "2027-05",
+        city: "Seattle",
+        region: "Husky Stadium / University Bridge",
+        surface: "Road",
+        distances: ["1M", "5K", "8K"],
+        score: 4,
+        womenScore: 4,
+        status: "tentative",
+        announcementUrl: "https://www.runguides.com/event/85/beat-the-bridge",
+        resultUrl: "https://results.laurelt.com/btb/dashboard",
+        evidence: "RunGuides lists May 2027 TBD with 1 mile, 3 mile, and 8K/5 mile options. 2026 result dashboard lists Beat The Bridge on May 9, 2026.",
+        womenEvidence: "Established Seattle 8K with competitive local participation; use the Laurel/Brooksee dashboard to verify recent women's depth.",
+        notes: "Tentative 2027 placeholder with 2026 results source attached."
+      },
+      {
+        id: "portland-marathon-weekend-2027",
+        name: "Portland Marathon Weekend",
+        date: "2027-10",
+        city: "Portland",
+        region: "Downtown Portland",
+        surface: "Road",
+        distances: ["Half Marathon", "Marathon"],
+        score: 4,
+        womenScore: 4,
+        status: "tentative",
+        announcementUrl: "https://www.portlandmarathon.com/",
+        resultUrl: "https://www.portlandmarathon.com/results",
+        evidence: "Annual fall Portland marathon weekend; exact 2027 date and course/result details should be refreshed when posted.",
+        womenEvidence: "Large regional marathon/half with meaningful women's competition; not necessarily as fast as purpose-built elite races, but worth tracking.",
+        notes: "Tentative 2027 placeholder now that half/full marathon distances are in scope."
+      },
+      {
+        id: "seattle-marathon-weekend-2026",
+        name: "Seattle Marathon Weekend",
+        date: "2026-11",
+        city: "Seattle",
+        region: "Seattle",
+        surface: "Road",
+        distances: ["5K", "Half Marathon", "Marathon"],
+        score: 4,
+        womenScore: 4,
+        status: "tentative",
+        announcementUrl: "https://www.seattlemarathon.org/",
+        resultUrl: "https://www.seattlemarathon.org/results",
+        evidence: "Annual late-fall Seattle marathon weekend with marathon, half marathon, and shorter race options. Exact current-year schedule/result links need a dedicated refresh.",
+        womenEvidence: "Major Seattle race weekend with regular women's competition; add recent top times before ranking higher.",
+        notes: "Tentative month-only row after expanding scope to half/full marathons."
+      },
+      {
+        id: "eugene-marathon-weekend-2027",
+        name: "Eugene Marathon Weekend",
+        date: "2027-04",
+        city: "Eugene",
+        region: "Hayward / TrackTown",
+        surface: "Road",
+        distances: ["5K", "Half Marathon", "Marathon"],
+        score: 5,
+        womenScore: 5,
+        status: "tentative",
+        announcementUrl: "https://www.eugenemarathon.com/",
+        resultUrl: "https://www.eugenemarathon.com/results",
+        evidence: "Eugene Marathon weekend is listed for April 23-25, 2027 and includes marathon, half marathon, and Eugene 5K options.",
+        womenEvidence: "TrackTown setting and destination-race context make this one of the better corridor half/full marathon targets for women.",
+        notes: "Broader companion row to the existing 5K-only placeholder."
+      },
+      {
+        id: "bmo-vancouver-marathon-weekend-2027",
+        name: "BMO Vancouver Marathon Weekend",
+        date: "2027-05",
+        city: "Vancouver",
+        region: "Vancouver BC",
+        surface: "Road",
+        distances: ["5K", "8K", "Half Marathon", "Marathon"],
+        score: 5,
+        womenScore: 5,
+        status: "tentative",
+        announcementUrl: "https://runvan.org/event/bmo-vancouver-marathon/",
+        resultUrl: "https://runvan.org/results/",
+        evidence: "RUNVAN describes BMO Vancouver as a major destination marathon weekend with fast half marathon context and shorter-distance race options.",
+        womenEvidence: "Major Vancouver race weekend with strong women's depth potential; add exact 2027 schedule and recent top times when posted.",
+        notes: "Expanded half/full marathon row; keeps the shorter-distance placeholder too."
+      },
+      {
+        id: "first-half-vancouver-2027",
+        name: "RUNVAN First Half",
+        date: "2027-02",
+        city: "Vancouver",
+        region: "Stanley Park / Yaletown",
+        surface: "Road",
+        distances: ["Half Marathon"],
+        score: 5,
+        womenScore: 5,
+        status: "tentative",
+        announcementUrl: "https://firsthalf.ca/",
+        resultUrl: "https://firsthalf.ca/results/",
+        evidence: "RUNVAN calls First Half Canada's Fastest Half Marathon; annual February race.",
+        womenEvidence: "Explicitly fast half-marathon positioning makes this a strong women's half marathon target once 2027 registration/results are confirmed.",
+        notes: "Tentative 2027 placeholder."
+      },
+      {
+        id: "stumptown-xc-series-2026",
+        name: "Stumptown Cross Country Series",
+        date: "2026-09",
+        city: "Portland",
+        region: "Portland-area parks",
+        surface: "XC",
+        distances: ["5K", "6K", "8K"],
+        score: 4,
+        womenScore: 4,
+        status: "tentative",
+        announcementUrl: "https://www.stumptowncross.com/",
+        resultUrl: "https://www.stumptowncross.com/results",
+        evidence: "Annual Portland-area fall cross-country series; exact 2026 meet dates and distances need confirmation.",
+        womenEvidence: "XC series can be useful for women seeking competitive fall racing outside the roads; check meet-by-meet fields.",
+        notes: "XC placeholder added from expanded scope."
+      },
+      {
+        id: "pntf-xc-championships-2026",
+        name: "PNTF Cross Country Championships",
+        date: "2026-11",
+        city: "Seattle",
+        region: "Pacific Northwest",
+        surface: "XC",
+        distances: ["6K", "8K", "10K"],
+        score: 4,
+        womenScore: 4,
+        status: "tentative",
+        announcementUrl: "https://www.pntf.org/",
+        resultUrl: "https://www.pntf.org/",
+        evidence: "Regional USATF/PNTF cross-country championship-style event; exact 2026 date/location needs confirmation.",
+        womenEvidence: "Championship-style XC tends to concentrate competitive women's fields; add exact course and results when posted.",
+        notes: "Tentative XC row for championship calendar tracking."
+      }
+    ];
+
+    const storageKey = "cascadia-fast-race-tracker-v1";
+    const remoteApiUrl = window.RACE_TRACKER_API_URL || "";
+    let races = loadRaces();
+    let currentSort = "date";
+
+    const els = {
+      rows: document.getElementById("rows"),
+      empty: document.getElementById("empty"),
+      q: document.getElementById("q"),
+      distanceFilter: document.getElementById("distanceFilter"),
+      surfaceFilter: document.getElementById("surfaceFilter"),
+      statusFilter: document.getElementById("statusFilter"),
+      scoreFilter: document.getElementById("scoreFilter"),
+      womenScoreFilter: document.getElementById("womenScoreFilter"),
+      sortSelect: document.getElementById("sortSelect"),
+      countStat: document.getElementById("countStat"),
+      verifiedStat: document.getElementById("verifiedStat"),
+      nextStat: document.getElementById("nextStat"),
+      bestStat: document.getElementById("bestStat"),
+      addForm: document.getElementById("addForm"),
+      sourceGrid: document.getElementById("sourceGrid"),
+      sourceCount: document.getElementById("sourceCount"),
+      storageMode: document.getElementById("storageMode")
+    };
+
+    function hydrateRace(race) {
+      return {
+        surface: "Road",
+        womenScore: 0,
+        womenEvidence: "",
+        ...race
+      };
+    }
+
+    function loadRaces() {
+      const saved = localStorage.getItem(storageKey);
+      if (!saved) return seedRaces.map(hydrateRace);
+      try {
+        const parsed = JSON.parse(saved);
+        if (!Array.isArray(parsed)) return seedRaces.map(hydrateRace);
+        const seedIds = new Set(seedRaces.map(race => race.id));
+        const customRows = parsed.filter(race => !seedIds.has(race.id));
+        return seedRaces.concat(customRows).map(hydrateRace);
+      } catch {
+        return seedRaces.map(hydrateRace);
+      }
+    }
+
+    function saveRaces() {
+      localStorage.setItem(storageKey, JSON.stringify(races));
+    }
+
+    function normalize(value) {
+      return String(value || "").toLowerCase();
+    }
+
+    function matchesRace(race) {
+      const q = normalize(els.q.value);
+      const haystack = normalize([
+        race.name, race.city, race.region, race.distances.join(" "),
+        race.surface, race.evidence, race.womenEvidence, race.notes, race.status
+      ].join(" "));
+      const distance = els.distanceFilter.value;
+      const surface = els.surfaceFilter.value;
+      const status = els.statusFilter.value;
+      const score = Number(els.scoreFilter.value || 0);
+      const womenScore = Number(els.womenScoreFilter.value || 0);
+
+      return (!q || haystack.includes(q))
+        && (!distance || race.distances.includes(distance))
+        && (!surface || race.surface === surface)
+        && (!status || race.status === status)
+        && Number(race.score || 0) >= score
+        && Number(race.womenScore || 0) >= womenScore;
+    }
+
+    function sortRaces(list) {
+      const sort = currentSort;
+      return list.slice().sort((a, b) => {
+        if (sort === "-score") return Number(b.score || 0) - Number(a.score || 0) || a.date.localeCompare(b.date);
+        if (sort === "-womenScore") return Number(b.womenScore || 0) - Number(a.womenScore || 0) || a.date.localeCompare(b.date);
+        if (sort === "city") return a.city.localeCompare(b.city) || a.date.localeCompare(b.date);
+        if (sort === "name") return a.name.localeCompare(b.name);
+        return a.date.localeCompare(b.date);
+      });
+    }
+
+    function formatDate(iso) {
+      if (/^\d{4}-\d{2}$/.test(iso)) {
+        const date = new Date(`${iso}-01T12:00:00`);
+        return `${date.toLocaleDateString(undefined, { month: "short", year: "numeric" })} TBD`;
+      }
+      const date = new Date(`${iso}T12:00:00`);
+      return date.toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" });
+    }
+
+    function statusLabel(status) {
+      if (status === "verified") return "Verified";
+      if (status === "watchlist") return "Watchlist";
+      if (status === "submitted") return "Submitted";
+      if (status === "tentative") return "Tentative";
+      return "Needs check";
+    }
+
+    function rowHtml(race) {
+      const statusClass = race.status === "verified" ? "score" : race.status === "watchlist" || race.status === "tentative" ? "watch" : "";
+      const resultLink = race.resultUrl ? `<a href="${escapeAttr(race.resultUrl)}" target="_blank" rel="noopener">Results</a>` : `<span class="sub">No result link yet</span>`;
+      const announcementLink = race.announcementUrl ? `<a href="${escapeAttr(race.announcementUrl)}" target="_blank" rel="noopener">Announcement</a>` : `<span class="sub">No announcement link</span>`;
+      return `
+        <tr>
+          <td>${formatDate(race.date)}</td>
+          <td><span class="race-name">${escapeHtml(race.name)}</span><span class="sub">${escapeHtml(race.notes || "")}</span></td>
+          <td>${escapeHtml(race.city)}<span class="sub">${escapeHtml(race.region || "")}</span></td>
+          <td><span class="pill">${escapeHtml(race.surface || "Road")}</span></td>
+          <td><div class="pill-row">${race.distances.map(d => `<span class="pill">${escapeHtml(d)}</span>`).join("")}</div></td>
+          <td><div class="pill-row"><span class="pill score">${Number(race.score || 0)}/5</span><span class="pill ${statusClass}">${statusLabel(race.status)}</span></div></td>
+          <td><div class="pill-row"><span class="pill score">${Number(race.womenScore || 0)}/5</span></div><span class="sub">${escapeHtml(race.womenEvidence || "No women-specific evidence recorded yet.")}</span></td>
+          <td>${escapeHtml(race.evidence || "")}</td>
+          <td><div class="links">${announcementLink}${resultLink}</div></td>
+        </tr>
+      `;
+    }
+
+    function sourceHtml(source) {
+      return `
+        <article class="source">
+          <strong>${escapeHtml(source.name)}</strong>
+          <div class="pill-row"><span class="pill">${escapeHtml(source.scope)}</span></div>
+          <p>${escapeHtml(source.use)}</p>
+          <p><a href="${escapeAttr(source.url)}" target="_blank" rel="noopener">Open source page</a></p>
+        </article>
+      `;
+    }
+
+    function escapeHtml(value) {
+      return String(value || "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+    function escapeAttr(value) {
+      return escapeHtml(value).replaceAll("`", "&#096;");
+    }
+
+    function render() {
+      currentSort = els.sortSelect.value;
+      const filtered = sortRaces(races.filter(matchesRace));
+      els.rows.innerHTML = filtered.map(rowHtml).join("");
+      els.empty.style.display = filtered.length ? "none" : "block";
+      els.countStat.textContent = filtered.length;
+      els.verifiedStat.textContent = filtered.filter(r => r.status === "verified").length;
+      els.nextStat.textContent = filtered.length ? formatDate(filtered[0].date).replace(", 2026", "") : "-";
+      els.bestStat.textContent = filtered.length ? Math.max(...filtered.map(r => Number(r.score || 0))) + "/5" : "-";
+    }
+
+    function renderSources() {
+      els.sourceGrid.innerHTML = sourcePages.map(sourceHtml).join("");
+      els.sourceCount.textContent = `${sourcePages.length} sources`;
+      if (remoteApiUrl) {
+        els.storageMode.textContent = "Shared mode: new submissions post to the configured backend endpoint and are also shown locally after submission.";
+      }
+    }
+
+    function toCsv(list) {
+      const headers = ["name", "date", "city", "region", "surface", "distances", "score", "womenScore", "status", "submittedBy", "submittedAt", "announcementUrl", "resultUrl", "evidence", "womenEvidence", "notes"];
+      const lines = [headers.join(",")];
+      for (const race of list) {
+        lines.push(headers.map(key => {
+          const value = key === "distances" ? race.distances.join(" | ") : race[key];
+          return `"${String(value || "").replaceAll('"', '""')}"`;
+        }).join(","));
+      }
+      return lines.join("\n");
+    }
+
+    function download(filename, body, type) {
+      const blob = new Blob([body], { type });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = filename;
+      link.click();
+      URL.revokeObjectURL(url);
+    }
+
+    async function submitRemoteRace(race) {
+      if (!remoteApiUrl) return false;
+      const response = await fetch(remoteApiUrl, {
+        method: "POST",
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(race)
+      });
+      if (!response.ok) {
+        throw new Error(`Submission failed with ${response.status}`);
+      }
+      return true;
+    }
+
+    els.addForm.addEventListener("submit", async event => {
+      event.preventDefault();
+      const form = new FormData(els.addForm);
+      const submitButton = els.addForm.querySelector("button[type='submit']");
+      const race = {
+        id: `custom-${Date.now()}`,
+        name: form.get("name").trim(),
+        date: form.get("date"),
+        city: form.get("city").trim(),
+        region: "",
+        surface: form.get("surface"),
+        distances: String(form.get("distances") || "").split(",").map(x => x.trim()).filter(Boolean),
+        score: Number(form.get("score") || 1),
+        womenScore: Number(form.get("womenScore") || 0),
+        status: form.get("status"),
+        announcementUrl: form.get("announcementUrl").trim(),
+        resultUrl: form.get("resultUrl").trim(),
+        evidence: form.get("evidence").trim(),
+        womenEvidence: form.get("womenEvidence").trim(),
+        submittedBy: form.get("submittedBy").trim(),
+        submittedAt: new Date().toISOString(),
+        notes: "Runner-submitted race candidate."
+      };
+      submitButton.disabled = true;
+      try {
+        await submitRemoteRace(race);
+        races.push(race);
+        saveRaces();
+        els.addForm.reset();
+        render();
+      } catch (error) {
+        alert(`Could not submit this race yet. ${error.message}`);
+      } finally {
+        submitButton.disabled = false;
+      }
+    });
+
+    document.getElementById("resetBtn").addEventListener("click", () => {
+      races = seedRaces.map(hydrateRace);
+      saveRaces();
+      render();
+    });
+
+    document.getElementById("jsonBtn").addEventListener("click", () => {
+      download("cascadia-fast-race-tracker.json", JSON.stringify({ sourcePages, races }, null, 2), "application/json");
+    });
+
+    document.getElementById("csvBtn").addEventListener("click", () => {
+      download("cascadia-fast-races.csv", toCsv(races), "text/csv");
+    });
+
+    for (const el of [els.q, els.distanceFilter, els.surfaceFilter, els.statusFilter, els.scoreFilter, els.womenScoreFilter, els.sortSelect]) {
+      el.addEventListener("input", render);
+    }
+
+    for (const th of document.querySelectorAll("th[data-sort]")) {
+      th.addEventListener("click", () => {
+        els.sortSelect.value = th.dataset.sort;
+        render();
+      });
+    }
+
+    renderSources();
+    render();
+  </script>
+</body>
+</html>
